@@ -128,30 +128,6 @@ export default function Home() {
           <ReferralBanner />
         </div>
       </section>
-
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container max-w-5xl px-4">
-          <Card className="bg-gradient-to-r from-primary/80 to-accent/80 border-none">
-            <CardContent className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8">
-              <div className="text-center md:text-left">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold text-background">
-                  Ready for a Transformation?
-                </h2>
-                <p className="mt-2 text-lg text-background/80">
-                  Book your first at-home session today and step into a world of pure bliss.
-                </p>
-              </div>
-              <Button asChild size="lg" variant="outline" className="bg-transparent border-background text-background hover:bg-background hover:text-primary rounded-full font-bold text-base px-8 py-6 flex-shrink-0">
-                <Link href="/services">
-                  Book an Appointment <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
     </div>
   );
 }
-
-    
