@@ -9,6 +9,7 @@ export function Header() {
     { href: '/#services', label: 'Services' },
     { href: '/#professionals', label: 'Professionals' },
     { href: '/#recommendations', label: 'For You' },
+    { href: '/blog', label: 'Blog' },
   ];
 
   return (
