@@ -19,8 +19,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
 
-  const serviceCategories = [...new Set(services.map(s => s.category))];
-
   return (
     <div className="flex flex-col">
       <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-center text-white">
@@ -40,7 +38,7 @@ export default function Home() {
             Experience unparalleled luxury and wellness with our exclusive at-home services in Dubai.
           </p>
           <Button asChild size="lg" className="mt-8 rounded-full font-bold text-base px-8 py-6">
-            <Link href="#services">Explore Services</Link>
+            <Link href="/services">Explore Services</Link>
           </Button>
         </div>
       </section>
@@ -77,27 +75,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="services" className="py-16 md:py-24 bg-card">
-        <div className="container max-w-7xl px-4">
-          {serviceCategories.map(category => (
-            <div key={category} className="mb-16 last:mb-0">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-                {category}
-              </h2>
-              <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-                Indulge in our curated selection of {category.toLowerCase()} treatments, designed for ultimate relaxation and rejuvenation.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                {services.filter(s => s.category === category).map((service) => (
-                  <ServiceCard key={service.id} service={service} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="professionals" className="py-16 md:py-24 bg-background">
+      <section id="professionals" className="py-16 md:py-24 bg-card">
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Meet Our Elite Professionals
@@ -122,7 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-5xl px-4">
           <Card className="bg-gradient-to-r from-primary/80 to-accent/80 border-none">
             <CardContent className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8">
@@ -135,7 +113,7 @@ export default function Home() {
                 </p>
               </div>
               <Button asChild size="lg" variant="outline" className="bg-transparent border-background text-background hover:bg-background hover:text-primary rounded-full font-bold text-base px-8 py-6 flex-shrink-0">
-                <Link href="#services">
+                <Link href="/services">
                   Book an Appointment <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>

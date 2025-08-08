@@ -11,7 +11,7 @@ export function Footer() {
             <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm text-muted-foreground">
-            <Link href="/#services" className="hover:text-primary">Services</Link>
+            <Link href="/services" className="hover:text-primary">Services</Link>
             <Link href="/blog" className="hover:text-primary">Blog</Link>
             <Link href="/faq" className="hover:text-primary">FAQ</Link>
             <Link href="#" className="hover:text-primary">About Us</Link>
