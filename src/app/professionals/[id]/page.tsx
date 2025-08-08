@@ -19,9 +19,11 @@ function ProfessionalImage({ professional }: { professional: Professional }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
-      .then(url => setImageUrl(url))
-      .catch(console.error);
+    if (professional) {
+      generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
+        .then(url => setImageUrl(url))
+        .catch(console.error);
+    }
   }, [professional]);
 
   if (!imageUrl) return <Skeleton className="w-full h-full rounded-full" />;
@@ -43,77 +45,79 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
   const professionalServices = services.filter(s => s.professionals.includes(professional.id));
 
   return (
-    <div className="container max-w-5xl px-4 py-12">
+    <div className="container max-w-6xl px-4 py-12">
       <Button variant="ghost" onClick={() => router.back()} className="mb-8">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back
       </Button>
 
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-1 flex flex-col items-center">
+      <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+        <div className="md:col-span-4 flex flex-col items-center text-center">
           <Avatar className="w-48 h-48 border-4 border-primary mb-4">
              <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
                 <ProfessionalImage professional={professional} />
               </Suspense>
             <AvatarFallback>{professional.name.charAt(0)}</AvatarFallback>
           </Avatar>
-          <h1 className="font-headline text-3xl text-primary text-center">{professional.name}</h1>
-          <p className="text-lg text-muted-foreground font-semibold text-center mt-1">{professional.specialty}</p>
+          <h1 className="font-headline text-3xl text-primary">{professional.name}</h1>
+          <p className="text-lg text-muted-foreground font-semibold mt-1">{professional.specialty}</p>
           <div className="flex items-center gap-2 mt-4 text-sm text-muted-foreground">
             <Briefcase className="h-4 w-4 text-primary" />
             <span>{professional.experience} Years of Experience</span>
           </div>
-           <Button asChild className="mt-6 rounded-full w-full max-w-xs">
-            <Link href="/services">Book with {professional.name.split(' ')[0]}</Link>
-          </Button>
+          <Card className="mt-6 w-full">
+            <CardHeader>
+                <CardTitle className="font-headline text-xl flex items-center justify-center gap-2"><Star className="text-primary"/> Areas of Excellence</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-wrap gap-2 justify-center">
+                {professional.areasOfExcellence.map(area => (
+                    <Badge key={area} variant="default" className="text-base py-1 px-3 bg-primary/20 text-primary-foreground hover:bg-primary/30">{area}</Badge>
+                ))}
+            </CardContent>
+          </Card>
         </div>
-        <div className="md:col-span-2">
+
+        <div className="md:col-span-8">
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-2xl">About {professional.name.split(' ')[0]}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">{professional.bio}</p>
-                </CardContent>
-            </Card>
-
-            <Card className="mt-8">
-                <CardHeader>
-                    <CardTitle className="font-headline text-2xl flex items-center gap-2"><Star className="text-primary"/> Areas of Excellence</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-wrap gap-2">
-                    {professional.areasOfExcellence.map(area => (
-                        <Badge key={area} variant="secondary" className="text-base py-1 px-3">{area}</Badge>
-                    ))}
-                </CardContent>
-            </Card>
-
-            <Card className="mt-8">
-                <CardHeader>
-                    <CardTitle className="font-headline text-2xl flex items-center gap-2"><ThumbsUp className="text-primary"/> Services Offered</CardTitle>
-                </CardHeader>
                 <CardContent className="space-y-4">
-                    {professionalServices.map(service => (
-                       <Link key={service.id} href={`/services/${service.id}`} className="block">
-                         <div key={service.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
-                            <h4 className="font-semibold">{service.name}</h4>
-                            <p className="text-sm text-muted-foreground">{service.description}</p>
-                        </div>
-                       </Link>
-                    ))}
+                  {professional.bio.split('. ').map((sentence, index) => (
+                    <p key={index} className="text-muted-foreground leading-relaxed">
+                      {sentence}{sentence.endsWith('.') ? '' : '.'}
+                    </p>
+                  ))}
                 </CardContent>
             </Card>
 
              <Card className="mt-8">
                 <CardHeader>
-                    <CardTitle className="font-headline text-2xl flex items-center gap-2"><Calendar className="text-primary"/> Availability</CardTitle>
+                    <CardTitle className="font-headline text-2xl flex items-center gap-2"><Calendar className="text-primary"/> Availability & Booking</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-muted-foreground">To view {professional.name.split(' ')[0]}'s real-time availability, please select a service and proceed to the booking calendar.</p>
+                    <p className="text-muted-foreground mb-4">To view {professional.name.split(' ')[0]}'s real-time availability and book a session, please select a service below.</p>
+                     <Button asChild className="rounded-full">
+                      <Link href="/services">Explore Services to Book</Link>
+                    </Button>
                 </CardContent>
             </Card>
-
         </div>
+      </div>
+
+       <div className="mt-12 border-t pt-8">
+         <h2 className="font-headline text-3xl text-primary text-center mb-8">Services Offered by {professional.name.split(' ')[0]}</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {professionalServices.map(service => (
+                 <Link key={service.id} href={`/services/${service.id}`} className="block group h-full">
+                   <div key={service.id} className="p-6 border rounded-lg hover:bg-muted/50 transition-colors h-full flex flex-col">
+                      <h4 className="font-semibold text-lg group-hover:text-primary">{service.name}</h4>
+                      <p className="text-sm text-muted-foreground flex-grow mt-2">{service.description}</p>
+                      <Button variant="link" className="p-0 h-auto mt-4 self-start">View Details &rarr;</Button>
+                  </div>
+                 </Link>
+              ))}
+          </div>
       </div>
 
     </div>
