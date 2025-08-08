@@ -62,7 +62,7 @@ export default function Home() {
         </Suspense>
         <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
-          <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-primary">
+          <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-bold text-primary">
             Your Sanctuary, Delivered.
           </h1>
           <p className="mt-4 md:text-xl text-lg text-neutral-200 max-w-2xl mx-auto">
@@ -92,15 +92,15 @@ export default function Home() {
             >
               <CarouselContent>
                 {recommendedServices.map((service) => (
-                  <CarouselItem key={service.id} className="md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={service.id} className="sm:basis-1/2 lg:basis-1/3">
                     <div className="p-1 h-full">
                       <ServiceCard service={service} />
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
+              <CarouselPrevious className="hidden sm:flex" />
+              <CarouselNext className="hidden sm:flex" />
             </Carousel>
           </div>
         </div>
@@ -118,18 +118,18 @@ export default function Home() {
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Our certified and experienced therapists are dedicated to providing you with an exceptional wellness experience.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-12 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
                <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
                  <Card className="text-center border-transparent bg-card/80 backdrop-blur-sm shadow-lg max-w-xs mx-auto">
-                  <CardContent className="flex flex-col items-center p-4">
+                  <CardContent className="flex flex-col items-center p-6">
                     <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
                       <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
                         <ProfessionalImage professional={prof} />
                       </Suspense>
                       <AvatarFallback>{prof.name.charAt(0)}</AvatarFallback>
                     </Avatar>
-                    <h3 className="mt-4 text-lg font-bold font-body group-hover:text-primary transition-colors">{prof.name}</h3>
+                    <h3 className="mt-4 text-xl font-bold font-body group-hover:text-primary transition-colors">{prof.name}</h3>
                     <p className="text-primary font-semibold">{prof.specialty}</p>
                    </CardContent>
                 </Card>

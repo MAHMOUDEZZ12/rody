@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { ChevronDown, LogOut, Menu, User, Phone } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import {
@@ -18,6 +18,12 @@ import { useAuth } from '@/hooks/use-auth';
 import { auth } from '@/lib/firebase';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 export function Header() {
   const { user, loading } = useAuth();
@@ -36,7 +42,6 @@ export function Header() {
     { href: '/services/body-treatments', label: 'Body Treatments' },
     { href: '/services/nails', label: 'Nail Services' },
     { href: '/services/eyelashes', label: 'Eyelash Services' },
-    { href: '/services', label: 'All Services' },
   ];
 
   const mainLinks = [
@@ -44,6 +49,18 @@ export function Header() {
     { href: '/#recommendations', label: 'For You' },
     { href: '/blog', label: 'Blog' },
   ];
+  
+  const MobileLink = ({ href, children, onNavigate }: { href: string; children: React.ReactNode; onNavigate: () => void }) => {
+    const handleClick = () => {
+      onNavigate();
+      router.push(href);
+    }
+    return (
+      <Link href={href} onClick={handleClick} className="text-base transition-colors hover:text-primary py-2">
+        {children}
+      </Link>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -63,6 +80,10 @@ export function Header() {
                   <Link href={link.href}>{link.label}</Link>
                 </DropdownMenuItem>
               ))}
+               <DropdownMenuSeparator />
+               <DropdownMenuItem asChild>
+                  <Link href="/services">All Services</Link>
+                </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -86,7 +107,7 @@ export function Header() {
                   <Link href="/dashboard">My Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-500">
+                <DropdownMenuItem onClick={handleLogout} className="text-red-500 focus:text-red-500">
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Logout</span>
                 </DropdownMenuItem>
@@ -117,49 +138,58 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
-                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
-                <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
-              </Link>
-              <div className="flex flex-col gap-6">
-                <p className="text-lg font-semibold">Services</p>
-                <div className="flex flex-col gap-4 pl-4">
-                  {serviceLinks.map((link) => (
-                    <Link key={link.href} href={link.href} className="text-base transition-colors hover:text-primary">
-                      {link.label}
-                    </Link>
+              <div className="flex justify-between items-center mb-8">
+                 <Link href="/" className="mr-6 flex items-center space-x-2">
+                   <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
+                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
+                </Link>
+                <SheetClose asChild>
+                  <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>
+                </SheetClose>
+              </div>
+              <div className="flex flex-col h-[calc(100vh-8rem)]">
+                <div className="flex-grow">
+                   <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="services" className="border-b-0">
+                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Services</AccordionTrigger>
+                      <AccordionContent className="pl-4 flex flex-col items-start gap-1">
+                        {serviceLinks.map((link) => (
+                          <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
+                        ))}
+                        <SheetClose asChild><MobileLink href="/services" onNavigate={() => {}}>All Services</MobileLink></SheetClose>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  <Separator className="my-2"/>
+                  {mainLinks.map((link) => (
+                     <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                   ))}
+                  <Separator className="my-2" />
                 </div>
-                <Separator/>
-                {mainLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="text-lg transition-colors hover:text-primary">
-                    {link.label}
-                  </Link>
-                ))}
-                <Separator />
-                 <Button asChild className="w-full rounded-full">
-                  <Link href={whatsappLink} target="_blank">
-                    <Phone className="mr-2 h-4 w-4"/>
-                    Book on WhatsApp
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="w-full rounded-full">
-                  <Link href="/services">Book Online</Link>
-                </Button>
-                 {user ? (
-                   <>
-                    <Button asChild variant="outline" className="w-full rounded-full">
-                      <Link href="/dashboard">My Profile</Link>
-                    </Button>
-                     <Button onClick={handleLogout} variant="ghost" className="w-full rounded-full">
-                      Logout
-                    </Button>
-                   </>
-                 ) : (
-                    <Button asChild variant="outline" className="w-full rounded-full">
-                      <Link href="/login">Login / Sign Up</Link>
-                    </Button>
-                 )}
+                <div className="flex flex-col gap-4">
+                  <Button asChild className="w-full rounded-full">
+                    <Link href={whatsappLink} target="_blank">
+                      <Phone /> Book on WhatsApp
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" className="w-full rounded-full">
+                    <Link href="/services">Book Online</Link>
+                  </Button>
+                   {user ? (
+                     <>
+                      <Button asChild variant="outline" className="w-full rounded-full">
+                        <Link href="/dashboard">My Profile</Link>
+                      </Button>
+                       <Button onClick={handleLogout} variant="ghost" className="w-full rounded-full">
+                        Logout
+                      </Button>
+                     </>
+                   ) : (
+                      <Button asChild variant="outline" className="w-full rounded-full">
+                        <Link href="/login">Login / Sign Up</Link>
+                      </Button>
+                   )}
+                </div>
               </div>
             </SheetContent>
           </Sheet>

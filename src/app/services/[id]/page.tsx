@@ -25,7 +25,7 @@ const ServiceImage = async ({ service }: { service: Service }) => {
   );
 };
 
-export default function ServiceBookingPage({ params }: { params: { id: string } }) {
+export default function ServiceBookingPage({ params }: { params: { id:string } }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isGifting = searchParams.get('gift') === 'true';
@@ -84,24 +84,24 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
   return (
     <div className="container max-w-7xl px-4 py-12">
       <Button variant="ghost" onClick={() => router.back()} className="mb-8">
-        <ArrowLeft className="mr-2 h-4 w-4" />
+        <ArrowLeft />
         Back to Services
       </Button>
-      <div className="grid md:grid-cols-5 gap-12">
+      <div className="grid md:grid-cols-5 gap-8 md:gap-12">
         <div className="md:col-span-3">
-          <div className="relative w-full h-96 rounded-lg overflow-hidden">
+          <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
             <Suspense fallback={<Skeleton className="w-full h-full" />}>
               <ServiceImage service={service} />
             </Suspense>
              {isDiscounted && (
-              <Badge variant="destructive" className="absolute top-4 left-4 text-lg py-1 px-3">SALE</Badge>
+              <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3">SALE</Badge>
             )}
           </div>
-          <h1 className="font-headline text-4xl text-primary mt-8">{service.name}</h1>
-          <div className="flex items-center gap-8 mt-4 text-muted-foreground">
-            <div className="flex items-center gap-2"><Clock className="h-5 w-5" /> {service.duration} minutes</div>
+          <h1 className="font-headline text-3xl md:text-4xl text-primary mt-8">{service.name}</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-4 text-muted-foreground">
+            <div className="flex items-center gap-2"><Clock /> {service.duration} minutes</div>
             <div className="flex items-center gap-2 text-lg">
-                <DollarSign className="h-5 w-5 text-primary" />
+                <DollarSign className="text-primary" />
                 {isDiscounted ? (
                   <div className="flex items-baseline gap-2">
                     <span className="text-destructive font-bold">AED {service.price}</span>
@@ -117,7 +117,7 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
         </div>
 
         <div className="md:col-span-2">
-          <Card>
+          <Card className="shadow-lg">
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>
@@ -125,7 +125,7 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
               {!isGifting && (
                 <>
                   <div className="space-y-2">
-                    <Label className="font-bold flex items-center gap-2"><Users className="h-4 w-4" /> Select Professional</Label>
+                    <Label className="font-bold flex items-center gap-2"><Users /> Select Professional</Label>
                     <Select value={selectedProfessionalId} onValueChange={setSelectedProfessionalId}>
                       <SelectTrigger><SelectValue placeholder="Choose a professional" /></SelectTrigger>
                       <SelectContent>
@@ -137,13 +137,13 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="font-bold flex items-center gap-2"><CalendarIcon className="h-4 w-4" /> Select Date</Label>
+                    <Label className="font-bold flex items-center gap-2"><CalendarIcon /> Select Date</Label>
                     <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="rounded-md border" disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}/>
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="font-bold flex items-center gap-2"><Clock className="h-4 w-4" /> Select Time</Label>
-                    <RadioGroup value={selectedTime} onValueChange={setSelectedTime} className="grid grid-cols-3 gap-2">
+                    <Label className="font-bold flex items-center gap-2"><Clock /> Select Time</Label>
+                    <RadioGroup value={selectedTime} onValueChange={setSelectedTime} className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {timeSlots.map(time => (
                         <div key={time}>
                           <RadioGroupItem value={time} id={time} className="sr-only" />
@@ -160,7 +160,7 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
 
               {service.addons.length > 0 && (
                 <div className="space-y-2">
-                  <Label className="font-bold flex items-center gap-2"><Gem className="h-4 w-4" /> Service Add-ons</Label>
+                  <Label className="font-bold flex items-center gap-2"><Gem /> Service Add-ons</Label>
                   <div className="space-y-3 rounded-md border p-4 max-h-60 overflow-y-auto">
                     {service.addons.map(addon => (
                       <div key={addon.id} className="flex items-start">
@@ -190,13 +190,13 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
               
               {isGifting ? (
                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">
-                    Purchase Gift <Gift className="ml-2"/>
+                    Purchase Gift <Gift />
                   </Button>
               ) : (
-                <div className="flex flex-col sm:flex-row gap-2">
+                <div className="flex flex-col gap-2">
                   <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">Confirm Booking</Button>
                   <Button onClick={() => router.push(`/services/${service.id}?gift=true`)} size="lg" variant="outline" className="w-full rounded-full font-bold">
-                    Gift this <Gift className="ml-2" />
+                    Gift this <Gift />
                   </Button>
                 </div>
               )}
