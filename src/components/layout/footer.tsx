@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
+            <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={24} height={24} className="rounded-full" />
             <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm text-muted-foreground">

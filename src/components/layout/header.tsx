@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ChevronDown, Menu, Sparkles, User } from 'lucide-react';
+import { ChevronDown, Menu, User } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import {
   DropdownMenu,
@@ -31,7 +32,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Sparkles className="h-6 w-6 text-primary" />
+          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
           <span className="hidden sm:inline-block font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -71,7 +72,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
-                <Sparkles className="h-6 w-6 text-primary" />
+                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
                 <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
               </Link>
               <div className="flex flex-col gap-6">
