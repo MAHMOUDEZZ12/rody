@@ -6,7 +6,7 @@ import { Gift, ArrowRight } from 'lucide-react';
 
 export function ReferralBanner() {
   return (
-    <Card className="bg-gradient-to-r from-primary/10 to-accent/10">
+    <Card className="bg-gradient-to-r from-primary/10 to-accent/5">
       <CardContent className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8">
         <div className="flex items-center gap-6">
             <div className="hidden sm:block">

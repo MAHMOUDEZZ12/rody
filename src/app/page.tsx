@@ -92,7 +92,7 @@ export default function Home() {
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
            <HeroImage />
         </Suspense>
-        <div className="absolute inset-0 bg-black/60 -z-10" />
+        <div className="absolute inset-0 bg-black/70 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
           <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold text-primary">
             Your Sanctuary, Delivered.
@@ -101,7 +101,7 @@ export default function Home() {
             Experience unparalleled luxury and wellness with our exclusive at-home services in Dubai.
           </p>
           <Button asChild size="lg" className="mt-8 rounded-full font-bold text-base px-8 py-6">
-            <Link href="/services">Explore Services</Link>
+            <Link href="/services">Book Now</Link>
           </Button>
         </div>
       </section>

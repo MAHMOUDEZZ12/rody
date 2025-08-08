@@ -4,65 +4,65 @@
 
 @layer base {
   :root {
-    --background: 300 100% 99%; /* Very light pink/off-white */
-    --foreground: 300 10% 20%; /* Dark purple for text */
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 300 10% 20%;
+    --card-foreground: 224 71.4% 4.1%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 300 10% 20%;
+    --popover-foreground: 224 71.4% 4.1%;
  
-    --primary: 340 82% 75%; /* Rose Pink */
-    --primary-foreground: 340 100% 10%;
+    --primary: 45 90% 55%; /* Gold */
+    --primary-foreground: 224 71.4% 4.1%;
  
-    --secondary: 260 80% 96%; /* Light Lavender */
-    --secondary-foreground: 260 40% 30%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220 8.9% 46.1%;
  
-    --muted: 260 80% 97%;
-    --muted-foreground: 260 20% 45%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
  
-    --accent: 260 100% 85%; /* Soft Lavender */
-    --accent-foreground: 260 40% 15%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220 8.9% 46.1%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 40% 90%;
-    --input: 260 40% 92%;
-    --ring: 340 82% 75%; /* Rose Pink */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 45 90% 55%;
  
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
  
   .dark {
-    --background: 260 20% 12%; /* Dark Purple */
-    --foreground: 0 0% 98%;
+    --background: 224 71.4% 4.1%; /* Near Black */
+    --foreground: 210 20% 98%;
 
-    --card: 260 20% 14%;
-    --card-foreground: 0 0% 98%;
+    --card: 224 71.4% 6.1%;
+    --card-foreground: 210 20% 98%;
  
-    --popover: 260 20% 14%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
  
-    --primary: 340 82% 75%; /* Rose Pink */
-    --primary-foreground: 340 100% 10%;
+    --primary: 45 80% 60%; /* Gold */
+    --primary-foreground: 224 71.4% 4.1%;
  
-    --secondary: 260 100% 85%; /* Soft Lavender */
-    --secondary-foreground: 260 40% 15%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
  
-    --muted: 260 20% 20%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
  
-    --accent: 260 100% 85%; /* Soft Lavender */
-    --accent-foreground: 260 40% 15%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 25%;
-    --input: 260 20% 25%;
-    --ring: 340 82% 75%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 45 80% 60%;
   }
 }
  
