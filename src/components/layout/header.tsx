@@ -1,18 +1,33 @@
+
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ChevronDown, Menu, User } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+import { useAuth } from '@/hooks/use-auth';
+import { auth } from '@/lib/firebase';
+import { signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 export function Header() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push('/');
+  };
+
   const serviceLinks = [
     { href: '/services/massage', label: 'Massage Therapy' },
     { href: '/services/facials', label: 'Facial Treatments' },
@@ -56,13 +71,35 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="hidden md:inline-flex">
-            <User className="h-5 w-5" />
-            <span className="sr-only">Profile</span>
-          </Button>
+           {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="hidden md:inline-flex">
+                  <User className="h-5 w-5" />
+                  <span className="sr-only">Profile</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard">My Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-red-500">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+              <Link href="/login">Log In</Link>
+            </Button>
+          )}
+
           <Button asChild className="hidden md:inline-flex rounded-full">
             <Link href="/services">Book Now</Link>
           </Button>
+
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -94,9 +131,20 @@ export function Header() {
                 <Button asChild className="w-full rounded-full">
                   <Link href="/services">Book Now</Link>
                 </Button>
-                 <Button variant="outline" className="w-full rounded-full">
-                  My Profile
-                </Button>
+                 {user ? (
+                   <>
+                    <Button asChild variant="outline" className="w-full rounded-full">
+                      <Link href="/dashboard">My Profile</Link>
+                    </Button>
+                     <Button onClick={handleLogout} variant="ghost" className="w-full rounded-full">
+                      Logout
+                    </Button>
+                   </>
+                 ) : (
+                    <Button asChild variant="outline" className="w-full rounded-full">
+                      <Link href="/login">Login / Sign Up</Link>
+                    </Button>
+                 )}
               </div>
             </SheetContent>
           </Sheet>

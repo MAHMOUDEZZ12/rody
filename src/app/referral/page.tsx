@@ -1,14 +1,14 @@
 
+'use client';
+
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Link from 'next/link';
-import { Gift, Send, Star, UserPlus, Award } from 'lucide-react';
-
-export const metadata = {
-  title: 'Referral Program | Rody Wellness',
-  description: 'Share the sanctuary with your friends and earn rewards with the Rody Wellness Circle referral program.',
-};
+import { Gift, Send, Star, UserPlus, Award, Copy } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import { useToast } from '@/hooks/use-toast';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const referralFAQs = [
     {
@@ -34,6 +34,19 @@ const referralFAQs = [
 ];
 
 export default function ReferralPage() {
+  const { user, loading } = useAuth();
+  const { toast } = useToast();
+
+  const referralCode = user ? `RODY-${user.uid.substring(0, 6).toUpperCase()}` : '';
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(referralCode);
+    toast({
+      title: 'Copied to Clipboard!',
+      description: 'Your referral code is ready to be shared.',
+    });
+  };
+
   return (
     <div className="container max-w-5xl px-4 py-12">
       <header className="mb-12 text-center">
@@ -46,6 +59,34 @@ export default function ReferralPage() {
       </header>
       
       <main>
+        <section className="py-12">
+            <Card className="bg-card/50">
+              <CardHeader className="text-center">
+                <CardTitle className="font-headline text-2xl">Your Personal Referral Code</CardTitle>
+                <CardDescription>Share this code with friends. They get 50 AED off, you get 50 AED credit!</CardDescription>
+              </CardHeader>
+              <CardContent className="text-center">
+                {loading ? (
+                  <Skeleton className="h-12 w-64 mx-auto" />
+                ) : user ? (
+                  <div className="flex items-center justify-center gap-4 p-4 border-2 border-dashed border-primary rounded-lg max-w-md mx-auto">
+                    <span className="text-3xl font-bold tracking-widest text-primary">{referralCode}</span>
+                    <Button onClick={copyToClipboard} variant="ghost" size="icon">
+                      <Copy className="h-6 w-6" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <p className="text-lg text-muted-foreground mb-4">Log in to get your personal referral code.</p>
+                    <Button asChild size="lg" className="rounded-full font-bold">
+                        <Link href="/login">Login or Sign Up</Link>
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+        </section>
+
         <section id="how-it-works" className="py-12">
              <h2 className="font-headline text-3xl text-primary text-center mb-10">A Simple Path to Rewards</h2>
              <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -129,17 +170,7 @@ export default function ReferralPage() {
               ))}
             </Accordion>
         </section>
-        
-        <section className="text-center py-12">
-             <h2 className="font-headline text-3xl text-primary mb-4">Ready to Share the Wellness?</h2>
-            <p className="text-lg text-muted-foreground mb-8">Your friends deserve to be pampered. Log in to your profile now to find your unique code.</p>
-            <Button asChild size="lg" className="rounded-full font-bold">
-                <Link href="/login">Find My Referral Code</Link>
-            </Button>
-        </section>
-
       </main>
     </div>
   );
 }
-    
