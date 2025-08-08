@@ -5,25 +5,25 @@
 @layer base {
   :root {
     --background: 340 82% 98%; /* Soft Rose */
-    --foreground: 240 10% 3.9%;
+    --foreground: 330 40% 15%; /* Deep Plum for Text */
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 330 40% 15%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 330 40% 15%;
  
-    --primary: 260 60% 55%; /* Calming Purple */
+    --primary: 260 60% 55%; /* Calming Purple for Buttons/Interactive */
     --primary-foreground: 0 0% 98%;
  
     --secondary: 330 80% 96%; /* Soft Pink */
-    --secondary-foreground: 240 5% 26%;
+    --secondary-foreground: 330 40% 15%;
  
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
  
     --accent: 330 80% 96%; /* Soft Pink */
-    --accent-foreground: 240 5% 26%;
+    --accent-foreground: 330 40% 15%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
