@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 330 100% 98%; /* Very light pink */
+    --background: 260 100% 99%; /* Very light lavender */
     --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
@@ -13,24 +13,26 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
  
-    --primary: 340 82% 52%; /* Dusty Rose */
+    --primary: 260 60% 55%; /* Calming Purple */
     --primary-foreground: 0 0% 98%;
+
+    --beauty: 340 82% 52%; /* Dusty Rose Pink */
  
-    --secondary: 250 60% 96%; /* Soft Lavender */
+    --secondary: 330 80% 96%; /* Soft Pink */
     --secondary-foreground: 240 5% 26%;
  
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
  
-    --accent: 250 60% 96%; /* Soft Lavender */
+    --accent: 330 80% 96%; /* Soft Pink */
     --accent-foreground: 240 5% 26%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 340 20% 88%;
-    --input: 340 20% 92%;
-    --ring: 340 82% 52%;
+    --border: 260 20% 88%;
+    --input: 260 20% 92%;
+    --ring: 260 60% 55%;
  
     --radius: 0.5rem;
   }
@@ -45,24 +47,26 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
  
-    --primary: 340 82% 62%; /* Brighter Dusty Rose */
+    --primary: 260 70% 65%; /* Brighter Purple */
     --primary-foreground: 0 0% 98%;
+
+    --beauty: 340 82% 62%; /* Brighter Dusty Rose */
  
-    --secondary: 250 20% 15%; /* Dark Lavender */
+    --secondary: 330 20% 15%; /* Dark Pink */
     --secondary-foreground: 0 0% 98%;
  
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
  
-    --accent: 250 20% 15%; /* Dark Lavender */
+    --accent: 330 20% 15%; /* Dark Pink */
     --accent-foreground: 0 0% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 250 20% 25%;
-    --input: 250 20% 25%;
-    --ring: 340 82% 62%;
+    --border: 260 20% 25%;
+    --input: 260 20% 25%;
+    --ring: 260 70% 65%;
   }
 }
  

@@ -17,6 +17,7 @@ import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users } fr
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 function ServiceImage({ service }: { service: Service }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -72,6 +73,9 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
   }
 
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
+  const isBeauty = ['Nails', 'Facials', 'Eyelashes', 'Body Treatments'].includes(service.category);
+  const primaryColor = isBeauty ? 'hsl(var(--beauty))' : 'hsl(var(--primary))';
+  const ringColor = isBeauty ? 'hsl(var(--beauty))' : 'hsl(var(--ring))';
   
   const handleBooking = () => {
     if (!selectedDate || !selectedProfessionalId || !selectedTime) {
@@ -92,6 +96,11 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
 
   return (
     <div className="container max-w-7xl px-4 py-12">
+       <style>{`
+        .peer-data-\\[state\\=checked\\]\\:border-primary, .\\&\\[\\:has\\(\\[data-state\\=checked\\]\\)\\]\\:border-primary {
+          border-color: ${primaryColor} !important;
+        }
+      `}</style>
       <Button variant="ghost" onClick={() => router.back()} className="mb-8">
         <ArrowLeft />
         Back to Services
@@ -106,11 +115,11 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3">SALE</Badge>
             )}
           </div>
-          <h1 className="font-headline text-3xl md:text-4xl text-primary mt-8">{service.name}</h1>
+          <h1 className="font-headline text-3xl md:text-4xl mt-8" style={{ color: primaryColor }}>{service.name}</h1>
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-4 text-muted-foreground">
             <div className="flex items-center gap-2"><Clock /> {service.duration} minutes</div>
             <div className="flex items-center gap-2 text-lg">
-                <DollarSign className="text-primary" />
+                <DollarSign style={{ color: primaryColor }} />
                 {isDiscounted ? (
                   <div className="flex items-baseline gap-2">
                     <span className="text-destructive font-bold">AED {service.price}</span>
@@ -128,7 +137,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
         <div className="md:col-span-2">
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
+              <CardTitle className="font-headline text-2xl" style={{ color: primaryColor }}>{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {!isGifting && (
@@ -181,7 +190,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                         />
                         <div className="grid gap-1.5 leading-none">
                           <label htmlFor={addon.id} className="font-medium cursor-pointer">
-                            {addon.name} <span className="text-primary font-bold">(+AED {addon.price})</span>
+                            {addon.name} <span className="font-bold" style={{ color: primaryColor }}>(+AED {addon.price})</span>
                           </label>
                           <p className="text-sm text-muted-foreground">{addon.description}</p>
                         </div>
@@ -194,16 +203,16 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               <Separator />
               <div className="flex justify-between items-center font-bold text-xl">
                 <span>Total:</span>
-                <span className="text-primary">AED {totalPrice}</span>
+                <span style={{ color: primaryColor }}>AED {totalPrice}</span>
               </div>
               
               {isGifting ? (
-                 <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">
+                 <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold" style={{ backgroundColor: primaryColor }}>
                     Purchase Gift <Gift />
                   </Button>
               ) : (
                 <div className="flex flex-col gap-2">
-                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">Confirm Booking</Button>
+                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold" style={{ backgroundColor: primaryColor }}>Confirm Booking</Button>
                   <Button onClick={() => router.push(`/services/${service.id}?gift=true`)} size="lg" variant="outline" className="w-full rounded-full font-bold">
                     Gift this <Gift />
                   </Button>
