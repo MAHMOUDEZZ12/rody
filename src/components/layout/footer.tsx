@@ -16,7 +16,7 @@ export function Footer() {
             <Link href="/faq" className="hover:text-primary">FAQ</Link>
             <Link href="/about" className="hover:text-primary">About Us</Link>
             <Link href="#" className="hover:text-primary">Contact</Link>
-            <Link href="#" className="hover:text-primary">Privacy Policy</Link>
+            <Link href="/policy" className="hover:text-primary">Privacy Policy</Link>
           </div>
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
         </div>
