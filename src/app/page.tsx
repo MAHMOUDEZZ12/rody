@@ -209,6 +209,12 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container max-w-5xl px-4">
+          <ReferralBanner />
+        </div>
+      </section>
+
       <section id="testimonials" className="relative py-16 md:py-24 text-card-foreground">
          <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
           <TestimonialBgImage />
@@ -254,14 +260,6 @@ export default function Home() {
           </Carousel>
         </div>
       </section>
-
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container max-w-5xl px-4">
-          <ReferralBanner />
-        </div>
-      </section>
     </div>
   );
 }
-
-    
