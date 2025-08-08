@@ -28,7 +28,7 @@ function HeroImage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" })
+    generateBlogImage({ title: "Serene Background", content: "A calm, luxurious, and minimalist background.", dataAiHint: "serene minimalist background" })
       .then(setImageUrl)
       .catch(console.error);
   }, []);
@@ -95,7 +95,7 @@ export default function Home() {
         </Suspense>
         <div className="absolute inset-0 bg-black/70 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
-          <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold text-primary">
+          <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
             Your Sanctuary, Delivered.
           </h1>
           <p className="mt-4 md:text-xl text-lg text-neutral-200 max-w-2xl mx-auto">
