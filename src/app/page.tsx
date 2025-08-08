@@ -66,7 +66,7 @@ function SectionBgImage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-     generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" })
+     generateBlogImage({ title: "Lush Leaves", content: "A background of dark tropical leaves.", dataAiHint: "dark tropical leaves" })
       .then(setImageUrl)
       .catch(console.error);
   }, []);
@@ -155,22 +155,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="professionals" className="relative py-16 md:py-24 text-card-foreground">
+      <section id="professionals" className="relative py-16 md:py-24 text-white">
         <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
           <SectionBgImage />
         </Suspense>
-        <div className="absolute inset-0 bg-background/80 -z-10" />
+        <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Meet Our Elite Professionals
           </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-center text-neutral-200 max-w-2xl mx-auto">
             Our certified and experienced therapists are dedicated to providing you with an exceptional wellness experience.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
                <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
-                 <Card className="text-center border-transparent bg-card/80 backdrop-blur-sm shadow-lg max-w-xs mx-auto">
+                 <Card className="text-center border-transparent bg-white/10 backdrop-blur-sm shadow-lg max-w-xs mx-auto text-white">
                   <CardContent className="flex flex-col items-center p-6">
                     <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
                       <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
@@ -192,12 +192,12 @@ export default function Home() {
          <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
           <SectionBgImage />
         </Suspense>
-        <div className="absolute inset-0 bg-background/80 -z-10" />
+        <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-5xl px-4">
            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Words of Wellness
           </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-center text-neutral-200 max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>
           <Carousel
@@ -211,18 +211,18 @@ export default function Home() {
               {testimonials.map((testimonial, index) => (
                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-4 h-full">
-                       <Card className="text-center bg-card/80 backdrop-blur-sm shadow-lg h-full flex flex-col">
+                       <Card className="text-center bg-white/10 backdrop-blur-sm shadow-lg h-full flex flex-col text-white">
                         <CardContent className="p-8 flex-grow">
                            <div className="flex justify-center mb-4">
                             {[...Array(5)].map((_, i) => (
                               <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             ))}
                           </div>
-                          <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                          <p className="text-neutral-200 italic">"{testimonial.quote}"</p>
                         </CardContent>
                         <CardHeader className="pt-0">
                           <CardTitle className="font-body text-lg font-bold">{testimonial.name}</CardTitle>
-                          <CardDescription>{testimonial.service}</CardDescription>
+                          <CardDescription className="text-neutral-300">{testimonial.service}</CardDescription>
                         </CardHeader>
                       </Card>
                     </div>
@@ -243,3 +243,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
