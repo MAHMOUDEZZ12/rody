@@ -1,12 +1,28 @@
 import type { Service } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Tag } from 'lucide-react';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ServiceCardProps {
   service: Service;
+}
+
+const ServiceImage = async ({ service }: { service: Service }) => {
+  const imageUrl = await generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint });
+  return (
+    <Image
+      src={imageUrl}
+      alt={service.name}
+      fill
+      className="object-cover"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    />
+  )
 }
 
 export function ServiceCard({ service }: ServiceCardProps) {
@@ -14,14 +30,9 @@ export function ServiceCard({ service }: ServiceCardProps) {
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-card">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-          <Image
-            src={service.image}
-            alt={service.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            data-ai-hint={service.dataAiHint}
-          />
+          <Suspense fallback={<Skeleton className="w-full h-full" />}>
+            <ServiceImage service={service} />
+          </Suspense>
         </div>
       </CardHeader>
       <CardContent className="p-6 flex-grow">

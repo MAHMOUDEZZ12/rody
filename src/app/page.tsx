@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, UserCheck } from 'lucide-react';
+import { Suspense } from 'react';
 
 import { services, professionals } from '@/lib/data';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,21 @@ import {
 } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const HeroImage = async () => {
+  const imageUrl = await generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" });
+  return (
+    <Image
+      src={imageUrl}
+      alt="Luxury spa setting"
+      fill
+      className="object-cover object-center -z-10"
+    />
+  );
+};
+
 
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
@@ -22,13 +38,9 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-center text-white">
-        <Image
-          src="https://placehold.co/1920x1080.png"
-          alt="Luxury spa setting"
-          data-ai-hint="luxury spa"
-          fill
-          className="object-cover object-center -z-10"
-        />
+        <Suspense fallback={<Skeleton className="w-full h-full" />}>
+          <HeroImage />
+        </Suspense>
         <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
           <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-primary">

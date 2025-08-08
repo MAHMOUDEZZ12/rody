@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { notFound, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { services, professionals as allProfessionals, timeSlots, type Addon } from '@/lib/data';
+import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +14,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, User, Users } from 'lucide-react';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ServiceImage = async ({ service }: { service: Service }) => {
+  const imageUrl = await generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint });
+  return (
+    <Image src={imageUrl} alt={service.name} layout="fill" objectFit="cover" />
+  );
+};
 
 export default function ServiceBookingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -74,7 +83,9 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
       <div className="grid md:grid-cols-5 gap-12">
         <div className="md:col-span-3">
           <div className="relative w-full h-96 rounded-lg overflow-hidden">
-            <Image src={service.image} alt={service.name} layout="fill" objectFit="cover" data-ai-hint={service.dataAiHint} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+              <ServiceImage service={service} />
+            </Suspense>
           </div>
           <h1 className="font-headline text-4xl text-primary mt-8">{service.name}</h1>
           <div className="flex items-center gap-8 mt-4 text-muted-foreground">
