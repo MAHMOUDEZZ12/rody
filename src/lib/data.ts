@@ -1,4 +1,5 @@
 
+
 export type Addon = {
   id: string;
   name: string;
@@ -31,6 +32,22 @@ export type Professional = {
   bio: string;
   areasOfExcellence: string[];
 };
+
+export type Package = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  dataAiHint: string;
+  services: string[];
+}
+
+export type Testimonial = {
+  name: string;
+  quote: string;
+  service: string;
+}
 
 export const generalAddons: Addon[] = [
     { id: 'addon-foot', name: 'Foot Reflexology (15 min)', price: 50, description: 'Target pressure points in the feet for deep relaxation.' },
@@ -556,6 +573,65 @@ export const professionals: Professional[] = [
     areasOfExcellence: ['Gel & Polygel Extensions', 'Acrylics', 'Manicures & Pedicures', 'Nail Health'],
   },
 ];
+
+export const packages: Package[] = [
+  {
+    id: 'pkg-total-relaxation',
+    name: 'Total Relaxation',
+    description: 'Melt away stress with a full body massage and a rejuvenating facial.',
+    price: 550,
+    originalPrice: 664,
+    dataAiHint: 'serene spa products',
+    services: ['Relaxation Massage', 'Deep Hydrating Facial'],
+  },
+  {
+    id: 'pkg-beauty-boost',
+    name: 'Beauty Boost',
+    description: 'Get ready for any occasion with our ultimate beauty combination.',
+    price: 499,
+    originalPrice: 560,
+    dataAiHint: 'makeup brushes',
+    services: ['Combo Mani + Pedi', 'Classic Full Set Lashes'],
+  },
+  {
+    id: 'pkg-glow-up',
+    name: 'The Glow Up',
+    description: 'Reveal radiant skin from head to toe with this exfoliating package.',
+    price: 900,
+    originalPrice: 1069,
+    dataAiHint: 'glowing skin',
+    services: ['Arabica Coffee Scrub', 'Anti-Aging Facial'],
+  },
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    name: 'Amina K.',
+    quote: 'The at-home massage was pure bliss. My therapist was so professional and created such a calming atmosphere. I\'ve never felt more relaxed.',
+    service: 'Relaxation Massage',
+  },
+  {
+    name: 'Sarah L.',
+    quote: 'My nails have never looked better! The attention to detail was incredible. Having this level of quality at home is a game-changer.',
+    service: 'Combo Mani + Pedi',
+  },
+  {
+    name: 'Jessica M.',
+    quote: 'Absolutely in love with my lashes. They look so natural yet full. Waking up like this is the best feeling. Highly recommend!',
+    service: 'Russian Full Set Lashes',
+  },
+  {
+    name: 'Yasmin A.',
+    quote: 'My skin feels amazing after the hydrating facial. So plump and glowing! It was the perfect treat before my event.',
+    service: 'Deep Hydrating Facial',
+  },
+  {
+    name: 'Fatima R.',
+    quote: 'The couples massage was the perfect anniversary gift. It was so special to share that experience. We both left feeling completely renewed.',
+    service: 'Couples Relaxation Massage',
+  },
+];
+
 
 export const timeSlots = ["09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM", "07:00 PM"];
 
