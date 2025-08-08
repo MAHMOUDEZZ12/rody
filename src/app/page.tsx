@@ -39,6 +39,18 @@ const ProfessionalImage = async ({ professional }: { professional: Professional 
   )
 }
 
+const ProfessionalsBgImage = async () => {
+  const imageUrl = await generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" });
+  return (
+    <Image
+      src={imageUrl}
+      alt="Leafy background"
+      fill
+      className="object-cover object-center -z-10"
+    />
+  );
+}
+
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
 
@@ -94,7 +106,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="professionals" className="py-16 md:py-24 bg-card">
+      <section id="professionals" className="relative py-16 md:py-24 text-card-foreground">
+        <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
+          <ProfessionalsBgImage />
+        </Suspense>
+        <div className="absolute inset-0 bg-background/80 -z-10" />
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Meet Our Elite Professionals
@@ -105,7 +121,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
                <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
-                 <Card className="text-center border-transparent bg-transparent shadow-none max-w-xs mx-auto">
+                 <Card className="text-center border-transparent bg-card/80 backdrop-blur-sm shadow-lg max-w-xs mx-auto">
                   <CardContent className="flex flex-col items-center p-4">
                     <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
                       <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
