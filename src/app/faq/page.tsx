@@ -61,7 +61,7 @@ const faqs = [
                 answer: "We offer a wonderful Pre-Post-Natal Massage specifically designed for expectant and new mothers (after the first trimester). Many of our facials and nail services are also safe. Please inform us that you are pregnant when booking so we can tailor the treatment accordingly and use pregnancy-safe products. We recommend consulting your doctor before booking any new treatment.",
             },
             {
-                question: 'I\'ve never had a facial/massage before. Which one do you recommend?',
+                question: 'I\\'ve never had a facial/massage before. Which one do you recommend?',
                 answer: "For a first-time massage, our Relaxation Massage is a perfect introduction. For a first facial, the Deep Hydrating Facial is a great choice for all skin types. Our therapists will also conduct a brief consultation before your treatment begins to help recommend the perfect service for your needs.",
             },
             {
@@ -79,7 +79,7 @@ const faqs = [
         questions: [
             {
                 question: 'What payment methods do you accept?',
-                answer: "We accept several convenient payment methods, including secure online payment with a credit/debit card at the time of booking, and cash payment directly to the therapist after your service is complete.",
+                answer: "We accept several convenient payment methods to suit your needs. You can pay securely online with a credit/debit card at the time of booking. Alternatively, we offer cash on delivery or payment via a credit card machine on delivery. Please let your therapist know your preferred method.",
             },
             {
                 question: 'What is your cancellation policy?',
