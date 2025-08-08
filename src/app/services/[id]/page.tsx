@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, Suspense } from 'react';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, User, Users } from 'lucide-react';
+import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -27,6 +27,9 @@ const ServiceImage = async ({ service }: { service: Service }) => {
 
 export default function ServiceBookingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isGifting = searchParams.get('gift') === 'true';
+
   const { toast } = useToast();
 
   const service = services.find((s) => s.id === params.id);
@@ -71,8 +74,8 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
       return;
     }
     toast({
-      title: "Booking Confirmed!",
-      description: `Your ${service.name} is booked. You've earned ${Math.floor(totalPrice / 10)} loyalty points!`,
+      title: isGifting ? "Gift Purchased!" : "Booking Confirmed!",
+      description: isGifting ? `Your gift of ${service.name} is ready.` : `Your ${service.name} is booked. You've earned ${Math.floor(totalPrice / 10)} loyalty points!`,
       duration: 5000,
     });
     router.push('/');
@@ -116,39 +119,44 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
         <div className="md:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle className="font-headline text-2xl text-primary">Book Your Session</CardTitle>
+              <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <Label className="font-bold flex items-center gap-2"><Users className="h-4 w-4" /> Select Professional</Label>
-                <Select value={selectedProfessionalId} onValueChange={setSelectedProfessionalId}>
-                  <SelectTrigger><SelectValue placeholder="Choose a professional" /></SelectTrigger>
-                  <SelectContent>
-                    {serviceProfessionals.map((p) => (
-                      <SelectItem key={p.id} value={p.id}>{p.name} - {p.specialty}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {!isGifting && (
+                <>
+                  <div className="space-y-2">
+                    <Label className="font-bold flex items-center gap-2"><Users className="h-4 w-4" /> Select Professional</Label>
+                    <Select value={selectedProfessionalId} onValueChange={setSelectedProfessionalId}>
+                      <SelectTrigger><SelectValue placeholder="Choose a professional" /></SelectTrigger>
+                      <SelectContent>
+                        {serviceProfessionals.map((p) => (
+                          <SelectItem key={p.id} value={p.id}>{p.name} - {p.specialty}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-              <div className="space-y-2">
-                <Label className="font-bold flex items-center gap-2"><CalendarIcon className="h-4 w-4" /> Select Date</Label>
-                <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="rounded-md border" disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}/>
-              </div>
+                  <div className="space-y-2">
+                    <Label className="font-bold flex items-center gap-2"><CalendarIcon className="h-4 w-4" /> Select Date</Label>
+                    <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="rounded-md border" disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}/>
+                  </div>
 
-              <div className="space-y-2">
-                <Label className="font-bold flex items-center gap-2"><Clock className="h-4 w-4" /> Select Time</Label>
-                <RadioGroup value={selectedTime} onValueChange={setSelectedTime} className="grid grid-cols-3 gap-2">
-                  {timeSlots.map(time => (
-                    <div key={time}>
-                      <RadioGroupItem value={time} id={time} className="sr-only" />
-                      <Label htmlFor={time} className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-sm hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                        {time}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </div>
+                  <div className="space-y-2">
+                    <Label className="font-bold flex items-center gap-2"><Clock className="h-4 w-4" /> Select Time</Label>
+                    <RadioGroup value={selectedTime} onValueChange={setSelectedTime} className="grid grid-cols-3 gap-2">
+                      {timeSlots.map(time => (
+                        <div key={time}>
+                          <RadioGroupItem value={time} id={time} className="sr-only" />
+                          <Label htmlFor={time} className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-sm hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
+                            {time}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                </>
+              )}
+              
 
               {service.addons.length > 0 && (
                 <div className="space-y-2">
@@ -179,7 +187,21 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
                 <span>Total:</span>
                 <span className="text-primary">AED {totalPrice}</span>
               </div>
-              <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">Confirm Booking</Button>
+              
+              {isGifting ? (
+                 <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">
+                    Purchase Gift <Gift className="ml-2"/>
+                  </Button>
+              ) : (
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">Confirm Booking</Button>
+                  <Button onClick={() => router.push(`/services/${service.id}?gift=true`)} size="lg" variant="outline" className="w-full rounded-full font-bold">
+                    Gift this <Gift className="ml-2" />
+                  </Button>
+                </div>
+              )}
+              
+
             </CardContent>
           </Card>
         </div>
