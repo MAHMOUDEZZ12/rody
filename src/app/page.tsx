@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, UserCheck } from 'lucide-react';
 import { Suspense } from 'react';
 
-import { services, professionals } from '@/lib/data';
+import { services, professionals, type Professional } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { ServiceCard } from '@/components/service-card';
 import {
@@ -31,6 +31,12 @@ const HeroImage = async () => {
   );
 };
 
+const ProfessionalImage = async ({ professional }: { professional: Professional }) => {
+  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
+  return (
+    <AvatarImage src={imageUrl} alt={professional.name} />
+  )
+}
 
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
@@ -100,7 +106,9 @@ export default function Home() {
                <Card key={prof.id} className="text-center border-transparent bg-transparent shadow-none max-w-xs mx-auto">
                 <CardContent className="flex flex-col items-center p-4">
                   <Avatar className="w-28 h-28 border-4 border-primary/50">
-                    <AvatarImage src={prof.image} alt={prof.name} data-ai-hint={prof.dataAiHint} />
+                    <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
+                      <ProfessionalImage professional={prof} />
+                    </Suspense>
                     <AvatarFallback>{prof.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <h3 className="mt-4 text-lg font-bold font-body">{prof.name}</h3>
