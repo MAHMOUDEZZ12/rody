@@ -13,8 +13,8 @@ export default function ServicesPage() {
   const backgroundColors = ['bg-background', 'bg-secondary/20', 'bg-primary/5'];
 
   return (
-    <div className="container max-w-7xl px-4 py-12">
-      <header className="mb-12 text-center">
+    <div className="py-12">
+      <header className="mb-12 text-center container">
         <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
           Our Services
         </h1>
