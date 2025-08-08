@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'Dubai Wellness Oasis',
+  title: 'Rody Wellness',
   description: 'Premium home wellness services in Dubai.',
 };
 

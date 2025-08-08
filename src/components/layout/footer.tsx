@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-primary" />
-            <span className="font-headline text-xl font-bold text-primary">Dubai Wellness Oasis</span>
+            <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm text-muted-foreground">
             <Link href="/#services" className="hover:text-primary">Services</Link>
@@ -16,7 +16,7 @@ export function Footer() {
             <Link href="#" className="hover:text-primary">Contact</Link>
             <Link href="#" className="hover:text-primary">Privacy Policy</Link>
           </div>
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Dubai Wellness Oasis. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
         </div>
       </div>
     </footer>
