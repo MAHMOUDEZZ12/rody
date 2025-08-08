@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 330 40% 15%;
  
-    --primary: 260 60% 55%; /* Calming Purple for Buttons/Interactive */
+    --primary: 330 80% 65%; /* Vibrant Pink for Buttons/Interactive */
     --primary-foreground: 0 0% 98%;
  
     --secondary: 330 80% 96%; /* Soft Pink */
@@ -28,9 +28,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 88%;
-    --input: 260 20% 92%;
-    --ring: 260 60% 55%;
+    --border: 330 40% 88%;
+    --input: 330 40% 92%;
+    --ring: 330 80% 65%;
  
     --radius: 0.5rem;
   }
@@ -45,7 +45,7 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
  
-    --primary: 260 70% 65%; /* Brighter Purple */
+    --primary: 330 70% 65%; /* Brighter Pink */
     --primary-foreground: 0 0% 98%;
  
     --secondary: 330 20% 15%; /* Dark Pink */
@@ -60,9 +60,9 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 25%;
-    --input: 260 20% 25%;
-    --ring: 260 70% 65%;
+    --border: 330 20% 25%;
+    --input: 330 20% 25%;
+    --ring: 330 70% 65%;
   }
 }
  
