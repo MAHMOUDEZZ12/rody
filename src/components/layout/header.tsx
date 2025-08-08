@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, User, Phone } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import {
   DropdownMenu,
@@ -22,6 +22,8 @@ import { useRouter } from 'next/navigation';
 export function Header() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const whatsappNumber = "971507797488";
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -96,6 +98,13 @@ export function Header() {
             </Button>
           )}
 
+          <Button asChild variant="outline" className="hidden md:inline-flex rounded-full">
+            <Link href={whatsappLink} target="_blank">
+              <Phone className="mr-2 h-4 w-4"/>
+              Book on WhatsApp
+            </Link>
+          </Button>
+
           <Button asChild className="hidden md:inline-flex rounded-full">
             <Link href="/services">Book Now</Link>
           </Button>
@@ -128,8 +137,14 @@ export function Header() {
                   </Link>
                 ))}
                 <Separator />
-                <Button asChild className="w-full rounded-full">
-                  <Link href="/services">Book Now</Link>
+                 <Button asChild className="w-full rounded-full">
+                  <Link href={whatsappLink} target="_blank">
+                    <Phone className="mr-2 h-4 w-4"/>
+                    Book on WhatsApp
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full rounded-full">
+                  <Link href="/services">Book Online</Link>
                 </Button>
                  {user ? (
                    <>
