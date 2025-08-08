@@ -25,6 +25,27 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
+const Logo = () => (
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="rounded-full"
+  >
+    <circle cx="12" cy="12" r="12" fill="hsl(var(--primary))" />
+    <path
+      d="M8.28,18.06C8.28,18.06 8.28,18.06 8.28,18.06C7.38,17.16 6.84,15.91 6.84,14.52C6.84,11.43 9.42,9 12.48,9C14.76,9 16.68,10.26 17.58,12.06M15.72,5.94C15.72,5.94 15.72,5.94 15.72,5.94C16.62,6.84 17.16,8.09 17.16,9.48C17.16,12.57 14.58,15 11.52,15C9.24,15 7.32,13.74 6.42,11.94"
+      stroke="hsl(var(--primary-foreground))"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+
 export function Header() {
   const { user, loading } = useAuth();
   const router = useRouter();
@@ -66,7 +87,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
+          <Logo />
           <span className="hidden sm:inline-block font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -140,7 +161,7 @@ export function Header() {
             <SheetContent side="right">
               <div className="flex justify-between items-center mb-8">
                  <Link href="/" className="mr-6 flex items-center space-x-2">
-                   <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
+                   <Logo />
                   <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
                 </Link>
                 <SheetClose asChild>
