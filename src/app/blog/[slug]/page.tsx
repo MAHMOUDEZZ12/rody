@@ -6,6 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Suspense } from 'react';
 
 type BlogPostPageProps = {
   params: {
@@ -51,6 +54,19 @@ const MarkdownContent = ({ content }: { content: string }) => {
   );
 };
 
+const PostImage = async ({ post }: { post: BlogPost }) => {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
+  return (
+     <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />
+  )
+}
+
+const RelatedPostImage = async ({ post }: { post: BlogPost }) => {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
+  return (
+     <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />
+  )
+}
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
@@ -82,7 +98,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-        <Image src={post.image} alt={post.title} layout="fill" objectFit="cover" data-ai-hint={post.dataAiHint} />
+        <Suspense fallback={<Skeleton className="w-full h-full" />}>
+          <PostImage post={post} />
+        </Suspense>
       </div>
 
       <div className="text-lg leading-relaxed space-y-6">
@@ -97,7 +115,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
-                                <Image src={related.image} alt={related.title} layout="fill" objectFit="cover" data-ai-hint={related.dataAiHint} />
+                              <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                <RelatedPostImage post={related} />
+                              </Suspense>
                             </div>
                             <CardContent className="p-4">
                                 <h3 className="font-headline text-lg group-hover:underline">{related.title}</h3>

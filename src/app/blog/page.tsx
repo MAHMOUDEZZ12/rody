@@ -1,14 +1,30 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts } from '@/lib/blog';
+import { blogPosts, type BlogPost } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const metadata = {
   title: 'Blog | Rody Wellness',
   description: 'Explore articles on wellness, beauty, and self-care from the experts at Rody Wellness.',
 };
+
+const PostImage = async ({ post }: { post: BlogPost }) => {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
+  return (
+     <Image
+        src={imageUrl}
+        alt={post.title}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+  )
+}
 
 export default function BlogPage() {
   const featuredPost = blogPosts[0];
@@ -30,13 +46,9 @@ export default function BlogPage() {
         <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
-              <Image
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                fill
-                className="object-cover"
-                data-ai-hint={featuredPost.dataAiHint}
-              />
+              <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                <PostImage post={featuredPost} />
+              </Suspense>
             </div>
             <div className="flex flex-col p-8">
               <CardHeader>
@@ -64,14 +76,9 @@ export default function BlogPage() {
               <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      data-ai-hint={post.dataAiHint}
-                    />
+                    <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                      <PostImage post={post} />
+                    </Suspense>
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">
