@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Tag } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from './ui/badge';
 
 interface ServiceCardProps {
   service: Service;
@@ -26,6 +27,8 @@ const ServiceImage = async ({ service }: { service: Service }) => {
 }
 
 export function ServiceCard({ service }: ServiceCardProps) {
+  const isDiscounted = service.originalPrice && service.originalPrice > service.price;
+
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-card">
       <CardHeader className="p-0">
@@ -33,6 +36,9 @@ export function ServiceCard({ service }: ServiceCardProps) {
           <Suspense fallback={<Skeleton className="w-full h-full" />}>
             <ServiceImage service={service} />
           </Suspense>
+          {isDiscounted && (
+            <Badge variant="destructive" className="absolute top-2 right-2">SALE</Badge>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-6 flex-grow">
@@ -45,7 +51,14 @@ export function ServiceCard({ service }: ServiceCardProps) {
           </div>
           <div className="flex items-center gap-2 font-semibold text-foreground">
             <Tag className="h-4 w-4 text-primary" />
-            <span>AED {service.price}</span>
+            {isDiscounted ? (
+              <div className="flex items-baseline gap-2">
+                <span className="text-destructive font-bold">AED {service.price}</span>
+                <span className="line-through text-muted-foreground text-xs">AED {service.originalPrice}</span>
+              </div>
+            ) : (
+              <span>AED {service.price}</span>
+            )}
           </div>
         </div>
       </CardContent>

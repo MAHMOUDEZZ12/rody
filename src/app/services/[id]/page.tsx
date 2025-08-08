@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, User, Users } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
 
 const ServiceImage = async ({ service }: { service: Service }) => {
   const imageUrl = await generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint });
@@ -36,7 +37,8 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([]);
 
   const serviceProfessionals = useMemo(() => {
-    return allProfessionals.filter(p => service?.professionals.includes(p.id));
+    if (!service) return [];
+    return allProfessionals.filter(p => service.professionals.includes(p.id));
   }, [service]);
 
   const handleAddonToggle = (addon: Addon) => {
@@ -52,10 +54,12 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
     const addonsPrice = selectedAddons.reduce((total, addon) => total + addon.price, 0);
     return service.price + addonsPrice;
   }, [service, selectedAddons]);
-
+  
   if (!service) {
     notFound();
   }
+
+  const isDiscounted = service.originalPrice && service.originalPrice > service.price;
   
   const handleBooking = () => {
     if (!selectedDate || !selectedProfessionalId || !selectedTime) {
@@ -86,11 +90,24 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
             <Suspense fallback={<Skeleton className="w-full h-full" />}>
               <ServiceImage service={service} />
             </Suspense>
+             {isDiscounted && (
+              <Badge variant="destructive" className="absolute top-4 left-4 text-lg py-1 px-3">SALE</Badge>
+            )}
           </div>
           <h1 className="font-headline text-4xl text-primary mt-8">{service.name}</h1>
           <div className="flex items-center gap-8 mt-4 text-muted-foreground">
             <div className="flex items-center gap-2"><Clock className="h-5 w-5" /> {service.duration} minutes</div>
-            <div className="flex items-center gap-2"><DollarSign className="h-5 w-5" /> Starts from AED {service.price}</div>
+            <div className="flex items-center gap-2 text-lg">
+                <DollarSign className="h-5 w-5 text-primary" />
+                {isDiscounted ? (
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-destructive font-bold">AED {service.price}</span>
+                    <span className="line-through text-muted-foreground text-sm">AED {service.originalPrice}</span>
+                  </div>
+                ) : (
+                  <span className="font-semibold text-foreground">Starts from AED {service.price}</span>
+                )}
+            </div>
           </div>
           <Separator className="my-6" />
           <p className="text-lg leading-relaxed">{service.longDescription}</p>
@@ -136,13 +153,14 @@ export default function ServiceBookingPage({ params }: { params: { id: string } 
               {service.addons.length > 0 && (
                 <div className="space-y-2">
                   <Label className="font-bold flex items-center gap-2"><Gem className="h-4 w-4" /> Service Add-ons</Label>
-                  <div className="space-y-3 rounded-md border p-4">
+                  <div className="space-y-3 rounded-md border p-4 max-h-60 overflow-y-auto">
                     {service.addons.map(addon => (
                       <div key={addon.id} className="flex items-start">
                         <Checkbox
                           id={addon.id}
                           onCheckedChange={() => handleAddonToggle(addon)}
                           className="mr-3 mt-1"
+                          checked={selectedAddons.some(a => a.id === addon.id)}
                         />
                         <div className="grid gap-1.5 leading-none">
                           <label htmlFor={addon.id} className="font-medium cursor-pointer">

@@ -8,6 +8,7 @@ export const metadata = {
 
 export default function ServicesPage() {
   const serviceCategories = [...new Set(services.map(s => s.category))];
+  const pageServices = services.filter(s => !s.id.endsWith('-page'));
 
   return (
     <div className="container max-w-7xl px-4 py-12">
@@ -27,7 +28,7 @@ export default function ServicesPage() {
                 {category}
               </h2>
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                {services.filter(s => s.category === category).map((service) => (
+                {pageServices.filter(s => s.category === category).map((service) => (
                   <ServiceCard key={service.id} service={service} />
                 ))}
               </div>

@@ -12,6 +12,7 @@ export type Service = {
   description: string;
   longDescription: string;
   price: number;
+  originalPrice?: number;
   duration: number; // in minutes
   image: string;
   dataAiHint: string;
@@ -27,6 +28,22 @@ export type Professional = {
   image: string;
   dataAiHint: string;
 };
+
+export const generalAddons: Addon[] = [
+    { id: 'addon-foot', name: 'Foot Reflexology (15 min)', price: 50, description: 'Target pressure points in the feet for deep relaxation.' },
+    { id: 'addon-head', name: 'Head Massage (15 min)', price: 50, description: 'Relieve tension in your head and scalp.' },
+    { id: 'addon-neck-shoulder', name: 'Neck & Shoulder (15 min)', price: 50, description: 'Focus on releasing upper body tension.' },
+];
+
+export const facialAddons: Addon[] = [
+      { id: 'addon-led', name: 'LED Mask', price: 100, description: 'Rejuvenate your complexion with targeted LED light therapy.' },
+      { id: 'addon-high-freq', name: 'High Frequency', price: 100, description: 'Enhance skin condition for both scalp and face.' },
+      { id: 'addon-gold-mask', name: '24K Gold Mask', price: 120, description: 'A luxurious, revitalizing gold-infused facial mask that increases firmness.' },
+      { id: 'addon-diamond-mask', name: 'Diamond Mask', price: 90, description: 'Polishes the skin, boosts radiance, and smooths fine lines.' },
+      { id: 'addon-vit-c', name: 'Vitamin C Boost', price: 70, description: 'Brightens and evens out skin tone.' },
+      { id: 'addon-hyaluronic', name: 'Hyaluronic Acid Ampoule', price: 80, description: 'Deeply moisturizes and plumps fine lines.' },
+]
+
 
 export const services: Service[] = [
   // Nail Services
@@ -61,7 +78,8 @@ export const services: Service[] = [
     name: 'Combo Mani + Pedi',
     description: 'The ultimate nail care package for hands and feet.',
     longDescription: 'Indulge in the complete nail care experience with our combined Classic Manicure and Pedicure. This package offers all the benefits of both services at a special value, leaving your hands and feet feeling rejuvenated and looking immaculate. It\'s the perfect way to pamper yourself.',
-    price: 210,
+    price: 199,
+    originalPrice: 230,
     duration: 95,
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'manicure pedicure',
@@ -303,7 +321,7 @@ export const services: Service[] = [
     dataAiHint: 'sports therapy',
     category: 'Massage',
     professionals: ['prof1', 'prof3', 'prof6'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'massage-relaxation',
@@ -316,7 +334,7 @@ export const services: Service[] = [
     dataAiHint: 'serene spa',
     category: 'Massage',
     professionals: ['prof1', 'prof3', 'prof6'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'massage-aromatherapy',
@@ -329,7 +347,7 @@ export const services: Service[] = [
     dataAiHint: 'essential oils',
     category: 'Massage',
     professionals: ['prof1', 'prof3'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'massage-deep-tissue',
@@ -342,7 +360,7 @@ export const services: Service[] = [
     dataAiHint: 'muscle relief',
     category: 'Massage',
     professionals: ['prof1', 'prof3', 'prof6'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'massage-hot-stone',
@@ -355,14 +373,15 @@ export const services: Service[] = [
     dataAiHint: 'hot stones',
     category: 'Massage',
     professionals: ['prof1', 'prof3'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'massage-couples-relaxation',
     name: 'Couples Relaxation Massage',
     description: 'Enjoy a relaxing massage experience side-by-side.',
     longDescription: 'A shared experience where two people receive massages simultaneously in the same room from two different therapists. It creates a unique bonding experience, allowing partners or friends to relax and rejuvenate together. Perfect for anniversaries or a unique date idea.',
-    price: 500,
+    price: 499,
+    originalPrice: 600,
     duration: 60,
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'couples spa',
@@ -382,7 +401,7 @@ export const services: Service[] = [
     dataAiHint: 'clear skin',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
-    addons: [],
+    addons: [...facialAddons, ...generalAddons],
   },
   {
     id: 'facial-anti-aging',
@@ -395,7 +414,7 @@ export const services: Service[] = [
     dataAiHint: 'youthful skin',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
-    addons: [],
+    addons: [...facialAddons, ...generalAddons],
   },
   {
     id: 'facial-deep-cleansing',
@@ -408,7 +427,7 @@ export const services: Service[] = [
     dataAiHint: 'facial cleansing',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
-    addons: [],
+    addons: [...facialAddons, ...generalAddons],
   },
   {
     id: 'facial-deep-hydrating',
@@ -421,7 +440,7 @@ export const services: Service[] = [
     dataAiHint: 'hydrated skin',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
-    addons: [],
+    addons: [...facialAddons, ...generalAddons],
   },
    // Body Treatments
   {
@@ -435,7 +454,7 @@ export const services: Service[] = [
     dataAiHint: 'coffee scrub',
     category: 'Body Treatments',
     professionals: ['prof1', 'prof2'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'scrub-himalayan',
@@ -448,7 +467,7 @@ export const services: Service[] = [
     dataAiHint: 'salt scrub',
     category: 'Body Treatments',
     professionals: ['prof1', 'prof2'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
     id: 'scrub-gold',
@@ -461,30 +480,23 @@ export const services: Service[] = [
     dataAiHint: 'gold treatment',
     category: 'Body Treatments',
     professionals: ['prof1', 'prof2'],
-    addons: [],
+    addons: [...generalAddons],
   },
   {
-    id: 'facial-addons',
+    id: 'facial-addons-page',
     name: 'Facial Add-Ons & Masks',
     description: 'Customize your facial with our potent add-ons.',
     longDescription: 'Elevate your facial experience with our range of high-performance add-ons and masks. From the rejuvenating power of a 24K Gold Mask to the intense hydration of a Hyaluronic Acid ampoule, you can customize your treatment to target your specific skin concerns and achieve spectacular results.',
-    price: 350, // Starting from price
+    price: 70, // Starting from price
     duration: 15,
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'facial mask',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
-    addons: [
-      { id: 'addon-led', name: 'LED Mask', price: 850, description: 'Rejuvenate your complexion with targeted LED light therapy.' },
-      { id: 'addon-high-freq', name: 'High Frequency', price: 850, description: 'Enhance skin condition for both scalp and face.' },
-      { id: 'addon-gold-mask', name: '24K Gold Mask', price: 750, description: 'A luxurious, revitalizing gold-infused facial mask that increases firmness.' },
-      { id: 'addon-diamond-mask', name: 'Diamond Mask', price: 350, description: 'Polishes the skin, boosts radiance, and smooths fine lines.' },
-      { id: 'addon-vit-c', name: 'Vitamin C Boost', price: 350, description: 'Brightens and evens out skin tone.' },
-      { id: 'addon-hyaluronic', name: 'Hyaluronic Acid Ampoule', price: 350, description: 'Deeply moisturizes and plumps fine lines.' },
-    ],
+    addons: [...facialAddons],
   },
   {
-    id: 'massage-addons',
+    id: 'massage-addons-page',
     name: 'Add-On Massage',
     description: 'Extend your relaxation with a focused massage add-on.',
     longDescription: 'Enhance any massage or body treatment with one of our targeted add-ons. Whether you need extra attention on your feet with reflexology or want to relieve tension with a head massage, these additions allow you to customize your experience for maximum benefit.',
@@ -494,11 +506,7 @@ export const services: Service[] = [
     dataAiHint: 'focused massage',
     category: 'Massage',
     professionals: ['prof1', 'prof3', 'prof6'],
-    addons: [
-      { id: 'addon-foot', name: 'Foot Reflexology (15 min)', price: 50, description: 'Target pressure points in the feet.' },
-      { id: 'addon-head', name: 'Head Massage (15 min)', price: 50, description: 'Relieve tension in your head and scalp.' },
-      { id: 'addon-neck-shoulder', name: 'Neck & Shoulder (15 min)', price: 50, description: 'Focus on releasing upper body tension.' },
-    ],
+    addons: [...generalAddons],
   },
 ];
 
