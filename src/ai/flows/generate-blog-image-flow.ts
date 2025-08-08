@@ -16,28 +16,29 @@ const GenerateBlogImageInputSchema = z.object({
 });
 export type GenerateBlogImageInput = z.infer<typeof GenerateBlogImageInputSchema>;
 
-export async function generateBlogImage(input: GenerateBlogImageInput): Promise<string> {
-  const generateBlogImageFlow = ai.defineFlow(
-    {
-      name: 'generateBlogImageFlow',
-      inputSchema: GenerateBlogImageInputSchema,
-      outputSchema: z.string(),
-    },
-    async input => {
-      const {media} = await ai.generate({
-        model: 'googleai/gemini-2.0-flash-preview-image-generation',
-        prompt: `Generate a high-quality, visually appealing image for a luxury wellness spa blog post.
+const generateBlogImageFlow = ai.defineFlow(
+  {
+    name: 'generateBlogImageFlow',
+    inputSchema: GenerateBlogImageInputSchema,
+    outputSchema: z.string(),
+  },
+  async input => {
+    const {media} = await ai.generate({
+      model: 'googleai/gemini-2.0-flash-preview-image-generation',
+      prompt: `Generate a high-quality, visually appealing image for a luxury wellness spa blog post.
       The image should be serene, elegant, and professional.
       Theme: ${input.dataAiHint}.
       Blog Post Title: "${input.title}"
       Key concepts from the blog post: ${input.content.substring(0, 200)}...
       The image should be suitable for a blog header. Avoid text and clutter. Focus on a clean, luxurious aesthetic.`,
-        config: {
-          responseModalities: ['TEXT', 'IMAGE'],
-        },
-      });
-      return media!.url;
-    }
-  );
+      config: {
+        responseModalities: ['TEXT', 'IMAGE'],
+      },
+    });
+    return media!.url;
+  }
+);
+
+export async function generateBlogImage(input: GenerateBlogImageInput): Promise<string> {
   return generateBlogImageFlow(input);
 }

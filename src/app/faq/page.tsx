@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   AccordionContent,
@@ -58,11 +59,11 @@ const faqs = [
         questions: [
             {
                 question: 'I am pregnant. Which services are safe for me?',
-                answer: "We offer a wonderful Pre-Post-Natal Massage specifically designed for expectant and new mothers (after the first trimester). Many of our facials and nail services are also safe. Please inform us that you are pregnant when booking so we can tailor the treatment accordingly and use pregnancy-safe products. We recommend consulting your doctor before booking any new treatment.",
+                answer: "We offer a wonderful Pre-Post-Natal Massage specifically designed for expectant and new mothers (after the first trimester). Many of our facials and nail services are also safe. Please inform us that you are pregnant when booking so we can tailor the treatment accordingly and use pregnancy-safe products. We recommend consulting your doctor before booking any new treatment."
             },
             {
                 question: "I've never had a facial/massage before. Which one do you recommend?",
-                answer: "For a first-time massage, our Relaxation Massage is a perfect introduction. For a first facial, the Deep Hydrating Facial is a great choice for all skin types. Our therapists will also conduct a brief consultation before your treatment begins to help recommend the perfect service for your needs.",
+                answer: "For a first-time massage, our Relaxation Massage is a perfect introduction. For a first facial, the Deep Hydrating Facial is a great choice for all skin types. Our therapists will also conduct a brief consultation before your treatment begins to help recommend the perfect service for your needs."
             },
             {
                 question: 'What is the difference between Gel Overlay and Polygel Extensions?',
@@ -71,7 +72,7 @@ const faqs = [
             {
                 question: 'How long will my lash extensions last?',
                 answer: "With proper care, your eyelash extensions can last for 3-4 weeks. To maintain their fullness, we recommend booking a refill appointment every 2-3 weeks.",
-            },
+            }
         ],
     },
     {
