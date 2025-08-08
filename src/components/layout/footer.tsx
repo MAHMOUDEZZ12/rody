@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex items-center gap-2">
-            <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={24} height={24} className="rounded-full" />
+            <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={24} height={24} className="rounded-full" />
             <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm text-muted-foreground">

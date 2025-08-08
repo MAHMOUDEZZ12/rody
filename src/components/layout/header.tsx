@@ -49,7 +49,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
+          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
           <span className="hidden sm:inline-block font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -118,7 +118,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
-                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/IMG_9626.jpg?alt=media&token=31ea8498-6ec0-45d0-abf0-9193bef095f5" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
+                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/logo-light-bg.png?alt=media&token=85158a18-e77c-47d0-9d32-2150399863a3" alt="Rody Wellness Logo" width={40} height={40} className="rounded-full" />
                 <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
               </Link>
               <div className="flex flex-col gap-6">
