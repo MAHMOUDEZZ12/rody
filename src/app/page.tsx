@@ -83,6 +83,27 @@ function SectionBgImage() {
   );
 }
 
+function TestimonialBgImage() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: "Marble Texture", content: "A white marble texture background.", dataAiHint: "white marble texture" })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, []);
+
+  if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
+
+  return (
+    <Image
+      src={imageUrl}
+      alt="Marble background"
+      fill
+      className="object-cover object-center -z-10"
+    />
+  );
+}
+
 
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
@@ -190,14 +211,13 @@ export default function Home() {
 
       <section id="testimonials" className="relative py-16 md:py-24 text-card-foreground">
          <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
-          <SectionBgImage />
+          <TestimonialBgImage />
         </Suspense>
-        <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-5xl px-4">
            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Words of Wellness
           </h2>
-          <p className="mt-4 text-lg text-center text-neutral-200 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>
           <Carousel
@@ -211,18 +231,18 @@ export default function Home() {
               {testimonials.map((testimonial, index) => (
                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-4 h-full">
-                       <Card className="text-center bg-white/10 backdrop-blur-sm shadow-lg h-full flex flex-col text-white">
+                       <Card className="text-center bg-white/80 backdrop-blur-sm shadow-lg h-full flex flex-col text-card-foreground">
                         <CardContent className="p-8 flex-grow">
                            <div className="flex justify-center mb-4">
                             {[...Array(5)].map((_, i) => (
                               <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             ))}
                           </div>
-                          <p className="text-neutral-200 italic">"{testimonial.quote}"</p>
+                          <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
                         </CardContent>
                         <CardHeader className="pt-0">
                           <CardTitle className="font-body text-lg font-bold">{testimonial.name}</CardTitle>
-                          <CardDescription className="text-neutral-300">{testimonial.service}</CardDescription>
+                          <CardDescription className="text-muted-foreground">{testimonial.service}</CardDescription>
                         </CardHeader>
                       </Card>
                     </div>
