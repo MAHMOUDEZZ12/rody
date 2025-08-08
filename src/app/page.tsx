@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ReferralBanner } from '@/components/referral-banner';
 
 const HeroImage = async () => {
   const imageUrl = await generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" });
@@ -103,20 +104,28 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
-               <Card key={prof.id} className="text-center border-transparent bg-transparent shadow-none max-w-xs mx-auto">
-                <CardContent className="flex flex-col items-center p-4">
-                  <Avatar className="w-28 h-28 border-4 border-primary/50">
-                    <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
-                      <ProfessionalImage professional={prof} />
-                    </Suspense>
-                    <AvatarFallback>{prof.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <h3 className="mt-4 text-lg font-bold font-body">{prof.name}</h3>
-                  <p className="text-primary font-semibold">{prof.specialty}</p>
-                 </CardContent>
-              </Card>
+               <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
+                 <Card className="text-center border-transparent bg-transparent shadow-none max-w-xs mx-auto">
+                  <CardContent className="flex flex-col items-center p-4">
+                    <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
+                      <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
+                        <ProfessionalImage professional={prof} />
+                      </Suspense>
+                      <AvatarFallback>{prof.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <h3 className="mt-4 text-lg font-bold font-body group-hover:text-primary transition-colors">{prof.name}</h3>
+                    <p className="text-primary font-semibold">{prof.specialty}</p>
+                   </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container max-w-5xl px-4">
+          <ReferralBanner />
         </div>
       </section>
 
@@ -144,3 +153,5 @@ export default function Home() {
     </div>
   );
 }
+
+    

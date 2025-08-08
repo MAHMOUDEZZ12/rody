@@ -27,6 +27,9 @@ export type Professional = {
   specialty: string;
   image: string;
   dataAiHint: string;
+  experience: number; // in years
+  bio: string;
+  areasOfExcellence: string[];
 };
 
 export const generalAddons: Addon[] = [
@@ -333,7 +336,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'serene spa',
     category: 'Massage',
-    professionals: ['prof1'],
+    professionals: ['prof1', 'prof2', 'prof4', 'prof5'],
     addons: [...generalAddons],
   },
   {
@@ -359,7 +362,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'muscle relief',
     category: 'Massage',
-    professionals: ['prof1'],
+    professionals: ['prof1', 'prof2', 'prof4', 'prof5'],
     addons: [...generalAddons],
   },
   {
@@ -515,30 +518,42 @@ export const professionals: Professional[] = [
   {
     id: 'prof1',
     name: 'Aisha Al Marzooqi',
-    specialty: 'Massage Therapist',
+    specialty: 'Lead Massage Therapist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional therapist',
+    dataAiHint: 'professional therapist portrait',
+    experience: 12,
+    bio: 'Aisha is a master of therapeutic touch with over a decade of experience in prestigious Dubai spas. She specializes in relieving chronic pain and promoting deep relaxation, believing that massage is essential for both physical and mental harmony. Her intuitive approach ensures every client receives a truly personalized and healing experience.',
+    areasOfExcellence: ['Deep Tissue Massage', 'Sports Massage', 'Hot Stone Therapy', 'Pre-Natal Massage'],
   },
   {
     id: 'prof2',
     name: 'Fatima Al Jaber',
     specialty: 'Esthetician & Lash Artist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional esthetician',
+    dataAiHint: 'professional esthetician portrait',
+    experience: 8,
+    bio: 'Fatima combines her passion for skincare science and artistry to deliver transformative results. She is an expert in advanced facial treatments and meticulous lash artistry. Fatima is dedicated to helping clients achieve their skin goals and enhance their natural beauty with flawless, elegant lash designs.',
+    areasOfExcellence: ['Advanced Facials', 'Anti-Aging Treatments', 'Russian Volume Lashes', 'Lash Lifts'],
   },
   {
     id: 'prof4',
     name: 'Layla Al Shamsi',
-    specialty: 'Skincare Specialist',
+    specialty: 'Holistic Skincare Specialist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional skincare expert',
+    dataAiHint: 'professional skincare expert portrait',
+    experience: 7,
+    bio: 'Layla believes that radiant skin is a reflection of overall well-being. She takes a holistic approach, specializing in treatments that nourish the skin from the inside out. Her expertise lies in creating customized facials that address specific concerns while promoting a sense of peace and balance.',
+    areasOfExcellence: ['Hydrating Facials', 'Sensitive Skin Care', 'Natural Beauty', 'Classic Lash Extensions'],
   },
   {
     id: 'prof5',
     name: 'Noora Al Hashimi',
     specialty: 'Master Nail Technician',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional nail artist',
+    dataAiHint: 'professional nail artist portrait',
+    experience: 10,
+    bio: 'Noora is a true artist in the world of nail care. With a decade of experience, she has perfected the art of creating durable, beautiful, and healthy nail enhancements. From flawless classic manicures to intricate nail art and extensions, Noora\'s precision and creativity are unmatched.',
+    areasOfExcellence: ['Gel & Polygel Extensions', 'Acrylics', 'Manicures & Pedicures', 'Nail Health'],
   },
 ];
 

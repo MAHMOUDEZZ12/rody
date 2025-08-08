@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,11 +13,11 @@ export function Footer() {
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm text-muted-foreground">
             <Link href="/services" className="hover:text-primary">Services</Link>
+            <Link href="/referral" className="hover:text-primary">Referral Program</Link>
             <Link href="/blog" className="hover:text-primary">Blog</Link>
             <Link href="/faq" className="hover:text-primary">FAQ</Link>
             <Link href="/about" className="hover:text-primary">About Us</Link>
-            <Link href="#" className="hover:text-primary">Contact</Link>
-            <Link href="/policy" className="hover:text-primary">Privacy Policy</Link>
+            <Link href="/policy" className="hover:text-primary">Policies</Link>
           </div>
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
         </div>
@@ -24,3 +25,5 @@ export function Footer() {
     </footer>
   );
 }
+
+    
