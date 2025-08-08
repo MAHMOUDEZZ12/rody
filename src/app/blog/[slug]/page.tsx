@@ -54,27 +54,19 @@ const MarkdownContent = ({ content }: { content: string }) => {
   );
 };
 
-const PostImage = async ({ post }: { post: BlogPost }) => {
-  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
-  return (
-     <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />
-  )
-}
-
-const RelatedPostImage = async ({ post }: { post: BlogPost }) => {
-  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
-  return (
-     <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />
-  )
-}
-
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
   const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
   if (!post) {
     notFound();
   }
+
+  const [imageUrl, relatedImages] = await Promise.all([
+    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint }),
+    Promise.all(relatedPosts.map(p => generateBlogImage({ title: p.title, content: p.content, dataAiHint: p.dataAiHint })))
+  ]);
+
 
   return (
     <article className="container max-w-4xl px-4 py-12">
@@ -98,9 +90,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          <PostImage post={post} />
-        </Suspense>
+        <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />
       </div>
 
       <div className="text-lg leading-relaxed space-y-6">
@@ -111,13 +101,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <aside className="mt-16 border-t pt-8">
             <h2 className="font-headline text-2xl text-primary mb-6">Related Articles</h2>
             <div className="grid sm:grid-cols-2 gap-8">
-                {relatedPosts.map(related => (
+                {relatedPosts.map((related, index) => (
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
-                              <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                <RelatedPostImage post={related} />
-                              </Suspense>
+                               <Image src={relatedImages[index]} alt={related.title} layout="fill" objectFit="cover" />
                             </div>
                             <CardContent className="p-4">
                                 <h3 className="font-headline text-lg group-hover:underline">{related.title}</h3>

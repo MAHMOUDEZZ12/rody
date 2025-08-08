@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, UserCheck } from 'lucide-react';
 import { Suspense } from 'react';
 
-import { services, professionals, type Professional } from '@/lib/data';
+import { services, professionals } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { ServiceCard } from '@/components/service-card';
 import {
@@ -20,36 +20,6 @@ import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '@/components/referral-banner';
 
-const HeroImage = async () => {
-  const imageUrl = await generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" });
-  return (
-    <Image
-      src={imageUrl}
-      alt="Luxury spa setting"
-      fill
-      className="object-cover object-center -z-10"
-    />
-  );
-};
-
-const ProfessionalImage = async ({ professional }: { professional: Professional }) => {
-  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
-  return (
-    <AvatarImage src={imageUrl} alt={professional.name} />
-  )
-}
-
-const ProfessionalsBgImage = async () => {
-  const imageUrl = await generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" });
-  return (
-    <Image
-      src={imageUrl}
-      alt="Leafy background"
-      fill
-      className="object-cover object-center -z-10"
-    />
-  );
-}
 
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
@@ -58,11 +28,11 @@ export default function Home() {
     <div className="flex flex-col">
       <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-center text-white">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          <HeroImage />
+           <HeroImage />
         </Suspense>
         <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
-          <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-bold text-primary">
+          <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold text-primary">
             Your Sanctuary, Delivered.
           </h1>
           <p className="mt-4 md:text-xl text-lg text-neutral-200 max-w-2xl mx-auto">
@@ -145,5 +115,37 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+
+async function HeroImage() {
+  const imageUrl = await generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" });
+  return (
+    <Image
+      src={imageUrl}
+      alt="Luxury spa setting"
+      fill
+      className="object-cover object-center -z-10"
+    />
+  );
+};
+
+async function ProfessionalImage({ professional }: { professional: (typeof professionals)[0] }) {
+  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
+  return (
+    <AvatarImage src={imageUrl} alt={professional.name} />
+  )
+}
+
+async function ProfessionalsBgImage() {
+  const imageUrl = await generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" });
+  return (
+    <Image
+      src={imageUrl}
+      alt="Leafy background"
+      fill
+      className="object-cover object-center -z-10"
+    />
   );
 }

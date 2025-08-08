@@ -3,7 +3,7 @@
 
 import { notFound, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { professionals, services, type Professional } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -14,12 +14,21 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, Briefcase, Calendar, Star, ThumbsUp } from 'lucide-react';
 import Link from 'next/link';
 
-const ProfessionalImage = async ({ professional }: { professional: Professional }) => {
-  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
+
+function ProfessionalImage({ professional }: { professional: Professional }) {
+  const [imageUrl, setImageUrl] = useState('/placeholder.svg'); // Default placeholder
+
+  useEffect(() => {
+    generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
+      .then(url => setImageUrl(url))
+      .catch(console.error);
+  }, [professional]);
+
   return (
     <AvatarImage src={imageUrl} alt={professional.name} className="object-cover" />
-  )
+  );
 }
+
 
 export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -108,5 +117,3 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
     </div>
   )
 }
-
-    

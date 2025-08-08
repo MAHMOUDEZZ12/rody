@@ -8,6 +8,9 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { unstable_cache as cache } from 'next/cache';
+import 'react';
+
 
 const GenerateBlogImageInputSchema = z.object({
   title: z.string().describe('The title of the blog post.'),
@@ -39,6 +42,8 @@ const generateBlogImageFlow = ai.defineFlow(
   }
 );
 
-export async function generateBlogImage(input: GenerateBlogImageInput): Promise<string> {
-  return generateBlogImageFlow(input);
-}
+export const generateBlogImage = cache(
+  async (input: GenerateBlogImageInput) => generateBlogImageFlow(input),
+  ['generate-blog-image'],
+  { revalidate: 3600 }
+);

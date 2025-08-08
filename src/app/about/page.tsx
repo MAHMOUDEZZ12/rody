@@ -9,7 +9,7 @@ export const metadata = {
   description: 'Learn the story and philosophy behind Rody Wellness, Dubai\'s premier at-home luxury spa service.',
 };
 
-const AboutImage = async ({ dataAiHint, alt }: { dataAiHint: string; alt: string }) => {
+async function AboutImage({ dataAiHint, alt }: { dataAiHint: string; alt: string }) {
   const imageUrl = await generateBlogImage({ title: alt, content: dataAiHint, dataAiHint });
   return (
     <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">

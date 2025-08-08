@@ -13,7 +13,7 @@ interface ServiceCardProps {
   service: Service;
 }
 
-const ServiceImage = async ({ service }: { service: Service }) => {
+async function ServiceImage({ service }: { service: Service }) {
   const imageUrl = await generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint });
   return (
     <Image

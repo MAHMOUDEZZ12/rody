@@ -13,7 +13,7 @@ export const metadata = {
   description: 'Explore articles on wellness, beauty, and self-care from the experts at Rody Wellness.',
 };
 
-const PostImage = async ({ post }: { post: BlogPost }) => {
+async function PostImage({ post }: { post: BlogPost }) {
   const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
   return (
      <Image

@@ -18,8 +18,16 @@ import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 
-const ServiceImage = async ({ service }: { service: Service }) => {
-  const imageUrl = await generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint });
+function ServiceImage({ service }: { service: Service }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useState(() => {
+    generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint })
+      .then(setImageUrl);
+  });
+  
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
   return (
     <Image src={imageUrl} alt={service.name} layout="fill" objectFit="cover" />
   );
