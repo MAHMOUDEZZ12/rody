@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, UserCheck } from 'lucide-react';
@@ -17,6 +18,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
+
+  const serviceCategories = [...new Set(services.map(s => s.category))];
 
   return (
     <div className="flex flex-col">
@@ -76,17 +79,21 @@ export default function Home() {
 
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container max-w-7xl px-4">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Our Signature Services
-          </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            Indulge in our curated selection of treatments, designed for ultimate relaxation and rejuvenation.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
+          {serviceCategories.map(category => (
+            <div key={category} className="mb-16 last:mb-0">
+              <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
+                {category}
+              </h2>
+              <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+                Indulge in our curated selection of {category.toLowerCase()} treatments, designed for ultimate relaxation and rejuvenation.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                {services.filter(s => s.category === category).map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -98,9 +105,9 @@ export default function Home() {
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Our certified and experienced therapists are dedicated to providing you with an exceptional wellness experience.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
-               <Card key={prof.id} className="text-center border-transparent bg-transparent shadow-none">
+               <Card key={prof.id} className="text-center border-transparent bg-transparent shadow-none max-w-xs mx-auto">
                 <CardContent className="flex flex-col items-center p-4">
                   <Avatar className="w-28 h-28 border-4 border-primary/50">
                     <AvatarImage src={prof.image} alt={prof.name} data-ai-hint={prof.dataAiHint} />
