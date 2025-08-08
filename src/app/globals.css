@@ -75,4 +75,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .dark body {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(ellipse at center, hsl(0 0% 12%), hsl(0 0% 4%) 100%);
+  }
 }
