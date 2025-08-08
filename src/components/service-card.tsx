@@ -1,7 +1,10 @@
+
+'use client';
+
 import type { Service } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Gift, Tag } from 'lucide-react';
@@ -13,8 +16,17 @@ interface ServiceCardProps {
   service: Service;
 }
 
-async function ServiceImage({ service }: { service: Service }) {
-  const imageUrl = await generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint });
+function ServiceImage({ service }: { service: Service }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [service]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
   return (
     <Image
       src={imageUrl}
@@ -23,7 +35,7 @@ async function ServiceImage({ service }: { service: Service }) {
       className="object-cover"
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
-  )
+  );
 }
 
 export function ServiceCard({ service }: ServiceCardProps) {

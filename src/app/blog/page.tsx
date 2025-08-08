@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, type BlogPost } from '@/lib/blog';
@@ -5,16 +8,20 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export const metadata = {
-  title: 'Blog | Rody Wellness',
-  description: 'Explore articles on wellness, beauty, and self-care from the experts at Rody Wellness.',
-};
+function PostImage({ post }: { post: BlogPost }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-async function PostImage({ post }: { post: BlogPost }) {
-  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
+  useEffect(() => {
+    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [post]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
   return (
      <Image
         src={imageUrl}
@@ -23,7 +30,7 @@ async function PostImage({ post }: { post: BlogPost }) {
         className="object-cover"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-  )
+  );
 }
 
 export default function BlogPage() {
@@ -99,3 +106,8 @@ export default function BlogPage() {
     </div>
   );
 }
+
+export const metadata = {
+  title: 'Blog | Rody Wellness',
+  description: 'Explore articles on wellness, beauty, and self-care from the experts at Rody Wellness.',
+};

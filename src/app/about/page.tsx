@@ -1,6 +1,8 @@
 
+'use client';
+
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -9,8 +11,19 @@ export const metadata = {
   description: 'Learn the story and philosophy behind Rody Wellness, Dubai\'s premier at-home luxury spa service.',
 };
 
-async function AboutImage({ dataAiHint, alt }: { dataAiHint: string; alt: string }) {
-  const imageUrl = await generateBlogImage({ title: alt, content: dataAiHint, dataAiHint });
+function AboutImage({ dataAiHint, alt }: { dataAiHint: string; alt: string }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: alt, content: dataAiHint, dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [alt, dataAiHint]);
+
+  if (!imageUrl) {
+    return <Skeleton className="w-full h-80 rounded-lg" />;
+  }
+
   return (
     <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
       <Image src={imageUrl} alt={alt} layout="fill" objectFit="cover" />

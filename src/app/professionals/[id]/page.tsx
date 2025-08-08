@@ -16,13 +16,15 @@ import Link from 'next/link';
 
 
 function ProfessionalImage({ professional }: { professional: Professional }) {
-  const [imageUrl, setImageUrl] = useState('/placeholder.svg'); // Default placeholder
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
       .then(url => setImageUrl(url))
       .catch(console.error);
   }, [professional]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full rounded-full" />;
 
   return (
     <AvatarImage src={imageUrl} alt={professional.name} className="object-cover" />

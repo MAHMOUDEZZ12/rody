@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, Suspense, useEffect } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
@@ -21,10 +21,11 @@ import { Badge } from '@/components/ui/badge';
 function ServiceImage({ service }: { service: Service }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  useState(() => {
+  useEffect(() => {
     generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint })
-      .then(setImageUrl);
-  });
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [service]);
   
   if (!imageUrl) return <Skeleton className="w-full h-full" />;
 

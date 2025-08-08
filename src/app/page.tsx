@@ -1,8 +1,10 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, UserCheck } from 'lucide-react';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { services, professionals } from '@/lib/data';
 import { Button } from '@/components/ui/button';
@@ -19,6 +21,66 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '@/components/referral-banner';
+
+
+function HeroImage() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, []);
+
+  if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
+
+  return (
+    <Image
+      src={imageUrl}
+      alt="Luxury spa setting"
+      fill
+      className="object-cover object-center -z-10"
+      priority
+    />
+  );
+};
+
+function ProfessionalImage({ professional }: { professional: (typeof professionals)[0] }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [professional]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full rounded-full" />;
+  
+  return (
+    <AvatarImage src={imageUrl} alt={professional.name} />
+  )
+}
+
+function ProfessionalsBgImage() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+     generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, []);
+ 
+  if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
+
+  return (
+    <Image
+      src={imageUrl}
+      alt="Leafy background"
+      fill
+      className="object-cover object-center -z-10"
+    />
+  );
+}
 
 
 export default function Home() {
@@ -115,37 +177,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  );
-}
-
-
-async function HeroImage() {
-  const imageUrl = await generateBlogImage({ title: "Luxury Spa", content: "A serene and luxurious spa setting.", dataAiHint: "luxury spa" });
-  return (
-    <Image
-      src={imageUrl}
-      alt="Luxury spa setting"
-      fill
-      className="object-cover object-center -z-10"
-    />
-  );
-};
-
-async function ProfessionalImage({ professional }: { professional: (typeof professionals)[0] }) {
-  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
-  return (
-    <AvatarImage src={imageUrl} alt={professional.name} />
-  )
-}
-
-async function ProfessionalsBgImage() {
-  const imageUrl = await generateBlogImage({ title: "Lush Leaves", content: "A background of lush green leaves.", dataAiHint: "green leaves background" });
-  return (
-    <Image
-      src={imageUrl}
-      alt="Leafy background"
-      fill
-      className="object-cover object-center -z-10"
-    />
   );
 }
