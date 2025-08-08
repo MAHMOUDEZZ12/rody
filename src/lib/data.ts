@@ -320,7 +320,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'sports therapy',
     category: 'Massage',
-    professionals: ['prof1', 'prof3', 'prof6'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
   {
@@ -333,7 +333,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'serene spa',
     category: 'Massage',
-    professionals: ['prof1', 'prof3', 'prof6'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
   {
@@ -346,7 +346,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'essential oils',
     category: 'Massage',
-    professionals: ['prof1', 'prof3'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
   {
@@ -359,7 +359,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'muscle relief',
     category: 'Massage',
-    professionals: ['prof1', 'prof3', 'prof6'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
   {
@@ -372,7 +372,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'hot stones',
     category: 'Massage',
-    professionals: ['prof1', 'prof3'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
   {
@@ -386,7 +386,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'couples spa',
     category: 'Massage',
-    professionals: ['prof1', 'prof3', 'prof6'],
+    professionals: ['prof1', 'prof2', 'prof4', 'prof5'],
     addons: [],
   },
    // Facials
@@ -505,7 +505,7 @@ export const services: Service[] = [
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'focused massage',
     category: 'Massage',
-    professionals: ['prof1', 'prof3', 'prof6'],
+    professionals: ['prof1'],
     addons: [...generalAddons],
   },
 ];
@@ -517,42 +517,28 @@ export const professionals: Professional[] = [
     name: 'Aisha Al Marzooqi',
     specialty: 'Massage Therapist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman portrait',
+    dataAiHint: 'professional therapist',
   },
   {
     id: 'prof2',
     name: 'Fatima Al Jaber',
     specialty: 'Esthetician & Lash Artist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'elegant woman',
-  },
-  {
-    id: 'prof3',
-    name: 'Saeed Al Maktoum',
-    specialty: 'Holistic Massage Expert',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man portrait',
+    dataAiHint: 'professional esthetician',
   },
   {
     id: 'prof4',
     name: 'Layla Al Shamsi',
     specialty: 'Skincare Specialist',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional woman',
+    dataAiHint: 'professional skincare expert',
   },
   {
     id: 'prof5',
     name: 'Noora Al Hashimi',
     specialty: 'Master Nail Technician',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman smiling',
-  },
-  {
-    id: 'prof6',
-    name: 'Khalid Al Balushi',
-    specialty: 'Sports & Deep Tissue Therapist',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional man',
+    dataAiHint: 'professional nail artist',
   },
 ];
 
