@@ -10,7 +10,7 @@ export const metadata = {
 export default function ServicesPage() {
   const serviceCategories = [...new Set(services.map(s => s.category))];
   const pageServices = services.filter(s => !s.id.endsWith('-page'));
-  const backgroundColors = ['bg-background', 'bg-secondary/20', 'bg-primary/5'];
+  const backgroundColors = ['bg-transparent', 'bg-secondary/30', 'bg-primary/5'];
 
   return (
     <div className="py-12">

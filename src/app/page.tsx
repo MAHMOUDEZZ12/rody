@@ -128,7 +128,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="recommendations" className="py-16 md:py-24 bg-background">
+      <section id="recommendations" className="py-16 md:py-24 bg-transparent">
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Recommended For You
@@ -160,7 +160,7 @@ export default function Home() {
         </div>
       </section>
       
-       <section id="packages" className="py-16 md:py-24 bg-secondary/20">
+       <section id="packages" className="py-16 md:py-24 bg-secondary/30">
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Curated Wellness Packages
@@ -209,7 +209,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 bg-transparent">
         <div className="container max-w-5xl px-4">
           <ReferralBanner />
         </div>

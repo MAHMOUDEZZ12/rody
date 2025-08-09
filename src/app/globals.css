@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 340 82% 98%; /* Soft Rose */
-    --foreground: 330 40% 15%; /* Deep Plum for Text */
+    --background: 20 50% 98%; /* Soft, natural off-white */
+    --foreground: 20 20% 15%; /* Dark, earthy text color */
 
     --card: 0 0% 100%;
-    --card-foreground: 330 40% 15%;
+    --card-foreground: 20 20% 15%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 330 40% 15%;
+    --popover-foreground: 20 20% 15%;
  
-    --primary: 330 80% 65%; /* Vibrant Pink for Buttons/Interactive */
+    --primary: 150 25% 45%; /* Muted natural green */
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 330 80% 96%; /* Soft Pink */
-    --secondary-foreground: 330 40% 15%;
+    --secondary: 340 60% 96%; /* Soft, light pink */
+    --secondary-foreground: 150 25% 25%;
  
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
  
-    --accent: 330 80% 96%; /* Soft Pink */
-    --accent-foreground: 330 40% 15%;
+    --accent: 340 60% 96%; /* Soft, light pink */
+    --accent-foreground: 150 25% 25%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 330 40% 88%;
-    --input: 330 40% 92%;
-    --ring: 330 80% 65%;
+    --border: 150 10% 88%;
+    --input: 150 10% 92%;
+    --ring: 150 25% 45%;
  
     --radius: 0.5rem;
   }
@@ -45,24 +45,24 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
  
-    --primary: 330 70% 65%; /* Brighter Pink */
+    --primary: 150 30% 65%; /* Brighter natural green */
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 330 20% 15%; /* Dark Pink */
+    --secondary: 340 20% 15%; /* Dark pink */
     --secondary-foreground: 0 0% 98%;
  
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
  
-    --accent: 330 20% 15%; /* Dark Pink */
+    --accent: 340 20% 15%; /* Dark pink */
     --accent-foreground: 0 0% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 330 20% 25%;
-    --input: 330 20% 25%;
-    --ring: 330 70% 65%;
+    --border: 150 20% 25%;
+    --input: 150 20% 25%;
+    --ring: 150 30% 65%;
   }
 }
  
@@ -74,5 +74,30 @@
     @apply bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before,
+  body::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 150vw;
+    height: 150vw;
+    border-radius: 50%;
+    z-index: -1;
+    will-change: transform;
+  }
+  
+  body::before {
+    background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 50%);
+    transform: translateX(-80%) translateY(-60%);
+  }
+
+  body::after {
+    background: radial-gradient(circle, hsl(var(--secondary) / 0.1) 0%, transparent 50%);
+    transform: translateX(10%) translateY(20%);
   }
 }
