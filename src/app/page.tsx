@@ -28,7 +28,7 @@ function HeroImage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    generateBlogImage({ title: "Serene Background", content: "A calm, luxurious, and minimalist background.", dataAiHint: "serene minimalist background" })
+    generateBlogImage({ title: "Artistic Spa Setting", content: "An artistic photo of a serene spa setting with natural elements like stones and flowers.", dataAiHint: "artistic spa nature" })
       .then(setImageUrl)
       .catch(console.error);
   }, []);
@@ -38,7 +38,7 @@ function HeroImage() {
   return (
     <Image
       src={imageUrl}
-      alt="Luxury spa setting"
+      alt="Artistic spa setting with natural elements"
       fill
       className="object-cover object-center -z-10"
       priority
