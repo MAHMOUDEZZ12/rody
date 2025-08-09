@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
-const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/luxury-spa-ambiance.jpg?alt=media&token=c1936913-94c6-43c2-b34e-1736733a7587";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/bright-summer-tropical-background-with-colorful-palm-leaves-and-bokeh-effects-trendy-botanical-wallpaper-with-blue-pink-yellow-colors-festive-mood-wide-banner-copy-space-mockup-for-design-photo.jpeg?alt=media&token=83f73be6-8a59-42b4-8ab5-332f0b4726cc";
+const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/high-quality-spa.jpg?alt=media&token=c191a32a-abce-4a7b-8356-02e48c48a804";
+const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/high-quality-beauty.jpg?alt=media&token=7c1c5a1a-0e3a-4e3a-867c-941913c7a3dd";
 
 
 const CustomHandle = () => (
@@ -53,11 +53,11 @@ export function InteractiveHero() {
             handle={<CustomHandle />}
             itemOne={
                 <div className="relative w-full h-full">
-                    <ReactCompareSliderImage 
-                        src={spaImage} 
+                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${spaImage})`}} />
+                     <ReactCompareSliderImage 
+                        srcSet={spaImage}
                         alt="Wellness & SPA"
                     />
-                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${spaImage})`}} />
                     <HeroPanel 
                         title="Wellness & SPA" 
                         description="Melt away stress and find your balance with our therapeutic massages and body treatments."
@@ -69,11 +69,11 @@ export function InteractiveHero() {
             }
             itemTwo={
                  <div className="relative w-full h-full">
-                    <ReactCompareSliderImage 
-                        src={beautyImage} 
+                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${beautyImage})`}} />
+                     <ReactCompareSliderImage 
+                        srcSet={beautyImage}
                         alt="Beauty & Nails" 
                     />
-                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${beautyImage})`}} />
                     <HeroPanel 
                         title="Beauty & Nails" 
                         description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
