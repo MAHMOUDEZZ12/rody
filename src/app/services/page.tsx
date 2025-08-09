@@ -28,7 +28,7 @@ export default function ServicesPage() {
             <section 
               key={category} 
               id={category.toLowerCase().replace(/\s/g, '-')} 
-              className={`py-16 ${backgroundColors[index % backgroundColors.length]}`}
+              className={`py-16 ${index % 2 === 0 ? 'bg-transparent' : 'bg-secondary/30'}`}
             >
               <div className="container max-w-7xl">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">

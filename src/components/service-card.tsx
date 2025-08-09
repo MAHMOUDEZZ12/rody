@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {
   service: Service;
+  highlight?: boolean;
 }
 
 function ServiceImage({ service }: { service: Service }) {
@@ -39,11 +40,16 @@ function ServiceImage({ service }: { service: Service }) {
   );
 }
 
-export function ServiceCard({ service }: ServiceCardProps) {
+export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
 
   return (
-    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 bg-card hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+    <Card className={cn(
+        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card",
+        highlight 
+          ? "border-primary/30 shadow-lg shadow-primary/20 ring-2 ring-primary/20" 
+          : "hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
+      )}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Suspense fallback={<Skeleton className="w-full h-full" />}>

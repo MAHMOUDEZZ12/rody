@@ -136,26 +136,12 @@ export default function Home() {
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             AI-powered suggestions based on your preferences for a truly personalized wellness journey.
           </p>
-          <div className="mt-12">
-            <Carousel
-              opts={{
-                align: 'start',
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {recommendedServices.map((service) => (
-                  <CarouselItem key={service.id} className="sm:basis-1/2 lg:basis-1/3">
-                    <div className="p-1 h-full">
-                      <ServiceCard service={service} />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden sm:flex" />
-              <CarouselNext className="hidden sm:flex" />
-            </Carousel>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+            {recommendedServices.map((service, index) => (
+                <div key={service.id} className="h-full">
+                  <ServiceCard service={service} highlight={index < 2} />
+                </div>
+            ))}
           </div>
         </div>
       </section>
