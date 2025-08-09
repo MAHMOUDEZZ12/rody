@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/hooks/use-auth';
 
 export const metadata: Metadata = {
-  title: 'Dubai Wellness Oasis',
+  title: 'Rody Wellness',
   description: 'Premium home wellness services in Dubai.',
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="min-h-screen flex-1 bg-background/80 backdrop-blur-sm">
+            <main className="min-h-screen flex-1 bg-background">
               {children}
             </main>
             <Footer />

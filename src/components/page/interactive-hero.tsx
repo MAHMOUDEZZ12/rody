@@ -21,7 +21,9 @@ const HeroPanel = ({ title, description, href, buttonText, theme }: { title: str
     return (
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center text-white p-4">
              <div className="bg-black/60 p-8 rounded-lg animate-fade-in-up" style={{ animationDelay: '500ms' }}>
-                <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
+                <h1 className={cn("font-headline text-4xl md:text-5xl lg:text-7xl font-bold",
+                    theme === 'beauty' ? 'text-beauty-primary' : 'text-spa-primary'
+                )}>
                     {title}
                 </h1>
                 <p className="mt-4 md:text-xl text-lg text-neutral-200 max-w-2xl mx-auto">
@@ -32,7 +34,7 @@ const HeroPanel = ({ title, description, href, buttonText, theme }: { title: str
                     size="lg" 
                     className={cn(
                         "mt-8 rounded-full font-bold text-base px-8 py-6 pointer-events-auto",
-                         "bg-primary text-primary-foreground hover:bg-primary/90"
+                         theme === 'beauty' ? "bg-beauty-primary text-beauty-primary-foreground hover:bg-beauty-primary/90" : "bg-spa-primary text-spa-primary-foreground hover:bg-spa-primary/90"
                     )}
                 >
                     <Link href={href}>{buttonText}</Link>
@@ -78,7 +80,7 @@ export function InteractiveHero() {
             </div>
             <div className="relative w-full h-full flex items-center justify-center">
                 <HeroPanel 
-                    title="Beauty & Artistry" 
+                    title="Beauty & Nails" 
                     description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
                     href="/services/beauty"
                     buttonText='Explore Beauty'

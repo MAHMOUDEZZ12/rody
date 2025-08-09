@@ -1,4 +1,6 @@
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 export const metadata = {
   title: 'Service Policies | Rody Wellness',
   description: 'Our service policies covering booking, cancellations, health, safety, and payments for Rody Wellness at-home spa services.',
@@ -54,19 +56,23 @@ export default function PolicyPage() {
           To ensure a seamless, professional, and luxurious experience for every client, we have established the following service policies. Your comfort, safety, and satisfaction are our highest priorities. We appreciate your understanding and cooperation in helping us maintain this exceptional standard of care.
         </p>
       </header>
-      <main className="space-y-8">
-        {policies.map((policy, index) => (
-          <div key={index}>
-            <h2 className="font-headline text-2xl text-primary mb-3">
-              {index + 1}. {policy.title}
-            </h2>
-            <div className="text-muted-foreground space-y-4">
-              {policy.content.split('. ').map((sentence, sIndex, arr) => (
-                sentence && <p key={sIndex}>{sentence}{arr.length -1 === sIndex ? '' : '.'}</p>
-              ))}
-            </div>
-          </div>
-        ))}
+      <main>
+          <Card className="bg-card/50">
+            <CardContent className="p-8 md:p-12 space-y-8">
+                {policies.map((policy, index) => (
+                <div key={index}>
+                    <h2 className="font-headline text-2xl text-primary mb-3">
+                    {index + 1}. {policy.title}
+                    </h2>
+                    <div className="text-muted-foreground space-y-4">
+                    {policy.content.split('. ').map((sentence, sIndex, arr) => (
+                        sentence && <p key={sIndex}>{sentence}{arr.length -1 === sIndex ? '' : '.'}</p>
+                    ))}
+                    </div>
+                </div>
+                ))}
+            </CardContent>
+        </Card>
       </main>
       <footer className="mt-12 text-center text-muted-foreground">
         <p>Thank you for choosing Rody Wellness. These policies help us consistently deliver the exceptional, safe, and luxurious experience you deserve.</p>

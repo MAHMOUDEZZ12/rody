@@ -44,11 +44,6 @@ export function Header() {
     { href: '/services/nails', label: 'Nail Services' },
     { href: '/services/eyelashes', label: 'Eyelash Services' },
   ];
-
-  const allServiceLinks = [
-      ...wellnessLinks,
-      ...beautyLinks,
-  ]
   
   const MobileLink = ({ href, children, onNavigate }: { href: string; children: React.ReactNode; onNavigate: () => void }) => {
     const handleClick = () => {
@@ -66,7 +61,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <span className="font-headline text-xl font-bold text-primary">Dubai Wellness Oasis</span>
+          <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -74,26 +69,12 @@ export function Header() {
           </Button>
           
           <Button asChild variant="ghost">
-            <Link href="/services/beauty">Beauty</Link>
+            <Link href="/services/beauty">Beauty & Nails</Link>
           </Button>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost">All Services <ChevronDown className="h-4 w-4" /></Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>All Services</DropdownMenuLabel>
-               <DropdownMenuGroup>
-                {allServiceLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link href={link.href}>{link.label}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-               <DropdownMenuItem asChild><Link href="/services">View All Categories</Link></DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button asChild variant="ghost">
+            <Link href="/packages">Packages</Link>
+          </Button>
           
            <Button asChild variant="link">
               <Link href="/#testimonials">Testimonials</Link>
@@ -130,7 +111,7 @@ export function Header() {
           )}
 
           <Button asChild className="hidden md:inline-flex rounded-full">
-            <Link href="/services">Book Now</Link>
+            <Link href="/packages">Book Now</Link>
           </Button>
 
           <Sheet>
@@ -143,7 +124,7 @@ export function Header() {
             <SheetContent side="right">
               <div className="flex justify-between items-center mb-8">
                  <Link href="/" className="mr-6 flex items-center space-x-2">
-                  <span className="font-bold font-headline text-lg text-primary">Dubai Wellness Oasis</span>
+                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
                 </Link>
                 <SheetClose asChild>
                   <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>
@@ -162,7 +143,7 @@ export function Header() {
                       </AccordionContent>
                     </AccordionItem>
                      <AccordionItem value="beauty">
-                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty</AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty & Nails</AccordionTrigger>
                       <AccordionContent className="flex flex-col items-start gap-1">
                          <SheetClose asChild><MobileLink href="/services/beauty" onNavigate={() => {}}>View All</MobileLink></SheetClose>
                         {beautyLinks.map((link) => (
@@ -170,6 +151,9 @@ export function Header() {
                         ))}
                       </AccordionContent>
                     </AccordionItem>
+                    <SheetClose asChild>
+                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Packages</Link>
+                    </SheetClose>
                   </Accordion>
                 </div>
                 <div className="flex flex-col gap-4 mt-4 border-t pt-4">

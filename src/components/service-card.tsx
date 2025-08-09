@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 interface ServiceCardProps {
   service: Service;
   highlight?: boolean;
+  theme?: 'spa' | 'beauty';
 }
 
 function ServiceImage({ service }: { service: Service }) {
@@ -40,12 +41,15 @@ function ServiceImage({ service }: { service: Service }) {
   );
 }
 
-export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
+export function ServiceCard({ service, highlight = false, theme = 'spa' }: ServiceCardProps) {
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
+  const primaryColorClass = theme === 'beauty' ? 'text-beauty-primary' : 'text-spa-primary';
+  const ringColorClass = theme === 'beauty' ? 'hover:border-beauty-primary/50' : 'hover:border-spa-primary/50';
 
   return (
     <Card className={cn(
-        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card hover:shadow-lg hover:border-primary/50",
+        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card hover:shadow-lg",
+        ringColorClass,
         highlight && "border-primary/30 shadow-lg ring-2 ring-primary/20 shadow-primary/10"
       )}>
       <CardHeader className="p-0">
@@ -67,7 +71,7 @@ export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
             <span>{service.duration} min</span>
           </div>
           <div className="flex items-center gap-2 font-semibold text-foreground">
-            <Tag className="h-4 w-4 text-primary" />
+            <Tag className={cn("h-4 w-4", primaryColorClass)} />
             {isDiscounted ? (
               <div className="flex items-baseline gap-2">
                 <span className="text-destructive font-bold">AED {service.price}</span>
