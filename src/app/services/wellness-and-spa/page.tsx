@@ -2,8 +2,6 @@
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 export const metadata = {
   title: 'Wellness & SPA | Rody Wellness',
@@ -11,9 +9,8 @@ export const metadata = {
 };
 
 export default function WellnessAndSpaPage() {
-  const spaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments');
-  const massageServices = spaServices.filter(s => s.category === 'Massage' && !s.id.endsWith('-page'));
-  const bodyServices = spaServices.filter(s => s.category === 'Body Treatments' && !s.id.endsWith('-page'));
+  const massageServices = services.filter(s => s.category === 'Massage' && !s.id.endsWith('-page'));
+  const bodyServices = services.filter(s => s.category === 'Body Treatments' && !s.id.endsWith('-page'));
 
 
   return (

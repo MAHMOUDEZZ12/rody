@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 340 25% 98%; /* Soft, natural off-pink */
-    --foreground: 340 10% 15%; /* Dark, earthy text color */
+    --background: 43 100% 99%; /* Very light, almost white cream */
+    --foreground: 20 20% 15%; /* Dark, earthy text color */
 
     --card: 0 0% 100%;
     --card-foreground: 20 20% 15%;

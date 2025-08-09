@@ -2,10 +2,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { ChevronDown, LogOut, Menu, User, Phone } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,10 +26,8 @@ import {
 } from '@/components/ui/accordion';
 
 export function Header() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
-  const whatsappNumber = "971507797488";
-  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -72,7 +69,6 @@ export function Header() {
           <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
-          {/* Wellness & SPA Dropdown */}
           <Button asChild variant="ghost">
             <Link href="/services/wellness-and-spa">Wellness & SPA</Link>
           </Button>
@@ -81,13 +77,12 @@ export function Header() {
             <Link href="/services/beauty">Beauty</Link>
           </Button>
 
-          {/* All Services Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost">All Services <ChevronDown className="h-4 w-4" /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Services</DropdownMenuLabel>
+              <DropdownMenuLabel>All Services</DropdownMenuLabel>
                <DropdownMenuGroup>
                 {allServiceLinks.map((link) => (
                   <DropdownMenuItem key={link.href} asChild>
@@ -96,7 +91,7 @@ export function Header() {
                 ))}
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-               <DropdownMenuItem asChild><Link href="/services">View All</Link></DropdownMenuItem>
+               <DropdownMenuItem asChild><Link href="/services">View All Categories</Link></DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           
@@ -164,7 +159,6 @@ export function Header() {
                         {wellnessLinks.map((link) => (
                           <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                         ))}
-                         <SheetClose asChild><MobileLink href="/professionals" onNavigate={() => {}}>Therapists</MobileLink></SheetClose>
                       </AccordionContent>
                     </AccordionItem>
                      <AccordionItem value="beauty">
@@ -174,7 +168,6 @@ export function Header() {
                         {beautyLinks.map((link) => (
                           <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                         ))}
-                         <SheetClose asChild><MobileLink href="/professionals" onNavigate={() => {}}>Masters</MobileLink></SheetClose>
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
