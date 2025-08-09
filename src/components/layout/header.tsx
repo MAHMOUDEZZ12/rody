@@ -47,6 +47,11 @@ export function Header() {
     { href: '/services/nails', label: 'Nail Services' },
     { href: '/services/eyelashes', label: 'Eyelash Services' },
   ];
+
+  const allServiceLinks = [
+      ...wellnessLinks,
+      ...beautyLinks,
+  ]
   
   const MobileLink = ({ href, children, onNavigate }: { href: string; children: React.ReactNode; onNavigate: () => void }) => {
     const handleClick = () => {
@@ -71,26 +76,27 @@ export function Header() {
           <Button asChild variant="ghost">
             <Link href="/services/wellness-and-spa">Wellness & SPA</Link>
           </Button>
+          
+          <Button asChild variant="ghost">
+            <Link href="/services/beauty">Beauty</Link>
+          </Button>
 
-          {/* Beauty & Nails Dropdown */}
+          {/* All Services Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost">Beauty & Nails <ChevronDown className="h-4 w-4" /></Button>
+                <Button variant="ghost">All Services <ChevronDown className="h-4 w-4" /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>Services</DropdownMenuLabel>
                <DropdownMenuGroup>
-                {beautyLinks.map((link) => (
+                {allServiceLinks.map((link) => (
                   <DropdownMenuItem key={link.href} asChild>
                     <Link href={link.href}>{link.label}</Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild><Link href="/professionals">Masters</Link></DropdownMenuItem>
-              <DropdownMenuItem asChild><Link href="/blog">Journal</Link></DropdownMenuItem>
-              {/* <DropdownMenuItem asChild><Link href="/offers/beauty">Offers</Link></DropdownMenuItem>
-              <DropdownMenuItem asChild><Link href="/gifts/beauty">Gifts</Link></DropdownMenuItem> */}
+               <DropdownMenuItem asChild><Link href="/services">View All</Link></DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           
@@ -154,6 +160,7 @@ export function Header() {
                     <AccordionItem value="spa">
                       <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Wellness & SPA</AccordionTrigger>
                       <AccordionContent className="flex flex-col items-start gap-1">
+                         <SheetClose asChild><MobileLink href="/services/wellness-and-spa" onNavigate={() => {}}>View All</MobileLink></SheetClose>
                         {wellnessLinks.map((link) => (
                           <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                         ))}
@@ -161,8 +168,9 @@ export function Header() {
                       </AccordionContent>
                     </AccordionItem>
                      <AccordionItem value="beauty">
-                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty & Nails</AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty</AccordionTrigger>
                       <AccordionContent className="flex flex-col items-start gap-1">
+                         <SheetClose asChild><MobileLink href="/services/beauty" onNavigate={() => {}}>View All</MobileLink></SheetClose>
                         {beautyLinks.map((link) => (
                           <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                         ))}

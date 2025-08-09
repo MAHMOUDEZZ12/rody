@@ -79,7 +79,7 @@ export function InteractiveHero() {
                 <HeroPanel 
                     title="Beauty & Nails" 
                     description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
-                    href="/services/facials"
+                    href="/services/beauty"
                     buttonText='Explore Beauty'
                     theme="beauty"
                 />
