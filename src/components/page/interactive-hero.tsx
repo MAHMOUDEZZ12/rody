@@ -21,7 +21,7 @@ const CustomHandle = () => (
 const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center text-white p-4">
-             <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up animation-delay-500">
+             <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up" style={{ animationDelay: '500ms' }}>
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
                 </h1>
@@ -52,7 +52,7 @@ export function InteractiveHero() {
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <>
+                <div className="relative w-full h-full">
                     <ReactCompareSliderImage 
                         src={spaImage} 
                         alt="Wellness & SPA" 
@@ -65,10 +65,10 @@ export function InteractiveHero() {
                         buttonText='Explore SPA'
                         theme="spa"
                     />
-                </>
+                </div>
             }
             itemTwo={
-                <>
+                 <div className="relative w-full h-full">
                     <ReactCompareSliderImage 
                         src={beautyImage} 
                         alt="Beauty & Nails" 
@@ -81,7 +81,7 @@ export function InteractiveHero() {
                         buttonText='Explore Beauty'
                         theme="beauty"
                     />
-                </>
+                </div>
             }
             style={{
                 width: '100%',
