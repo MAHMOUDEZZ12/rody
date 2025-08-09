@@ -52,7 +52,7 @@ export function InteractiveHero() {
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <>
+                <div className="relative w-full h-full">
                     <ReactCompareSliderImage 
                         src={spaImage} 
                         alt="Wellness & SPA" 
@@ -65,10 +65,10 @@ export function InteractiveHero() {
                         buttonText='Explore SPA'
                         theme="spa"
                     />
-                </>
+                </div>
             }
             itemTwo={
-                <>
+                 <div className="relative w-full h-full">
                     <ReactCompareSliderImage 
                         src={beautyImage} 
                         alt="Beauty & Nails" 
@@ -81,7 +81,7 @@ export function InteractiveHero() {
                         buttonText='Explore Beauty'
                         theme="beauty"
                     />
-                </>
+                </div>
             }
             style={{
                 width: '100%',
