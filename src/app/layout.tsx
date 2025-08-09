@@ -25,12 +25,14 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <AuthProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-          <Toaster />
+          <div className="relative flex min-h-screen flex-col bg-background/80 backdrop-blur-sm">
+            <Header />
+            <main className="min-h-screen flex-1">
+              {children}
+            </main>
+            <Footer />
+            <Toaster />
+          </div>
         </AuthProvider>
       </body>
     </html>
