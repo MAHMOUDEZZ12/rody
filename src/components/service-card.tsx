@@ -42,17 +42,12 @@ function ServiceImage({ service }: { service: Service }) {
 
 export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
-  const isBeauty = service.category !== 'Massage';
   
-  const serviceColorClass = isBeauty ? 'text-beauty' : 'text-primary';
-  const serviceRingClass = isBeauty ? 'ring-beauty/20' : 'ring-primary/20';
-  const serviceShadowClass = isBeauty ? 'shadow-beauty/10' : 'shadow-primary/10';
-  const serviceBorderClass = isBeauty ? 'hover:border-beauty/50' : 'hover:border-primary/50';
+  const serviceColorClass = 'text-primary';
+  const serviceRingClass = 'ring-primary/20';
+  const serviceShadowClass = 'shadow-primary/10';
+  const serviceBorderClass = 'hover:border-primary/50';
 
-  const buttonStyle = {
-    backgroundColor: isBeauty ? 'hsl(var(--beauty))' : 'hsl(var(--primary))',
-    color: isBeauty ? 'hsl(var(--beauty-foreground))' : 'hsl(var(--primary-foreground))',
-  };
 
   return (
     <Card className={cn(
@@ -93,7 +88,7 @@ export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0 flex flex-col sm:flex-row gap-2">
-        <Button asChild className="w-full rounded-full font-bold" style={buttonStyle}>
+        <Button asChild className="w-full rounded-full font-bold">
           <Link href={`/services/${service.id}`}>
             Book Now <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
