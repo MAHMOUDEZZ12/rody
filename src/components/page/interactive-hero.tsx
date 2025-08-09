@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
-const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/beautiful-spa-composition-with-bamboo-zen-stones.jpg?alt=media&token=46d4c33f-c30a-4fa5-a7a5-c5432029c049";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/top-view-beautiful-arrangement-with-make-up-products.jpg?alt=media&token=c191a329-a16f-474c-851f-6a9282361872";
+const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/luxury-spa-ambiance.jpg?alt=media&token=c1936913-94c6-43c2-b34e-1736733a7587";
+const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/modern-makeup-tools.jpg?alt=media&token=1d755106-9937-48f5-ab42-237482f3a611";
 
 
 const CustomHandle = () => (
@@ -91,4 +91,3 @@ export function InteractiveHero() {
     </section>
   );
 }
-
