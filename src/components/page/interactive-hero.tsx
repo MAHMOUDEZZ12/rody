@@ -18,9 +18,9 @@ const CustomHandle = () => (
 );
 
 
-const HeroPanel = ({ title, description, href, className, buttonText, theme }: { title: string; description:string; href: string; className?: string, buttonText: string, theme: 'spa' | 'beauty' }) => {
+const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
-        <div className={cn("absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 z-10", className)}>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 z-10">
              <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up animation-delay-500">
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
@@ -52,7 +52,7 @@ export function InteractiveHero() {
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <div className="relative w-full h-full overflow-hidden">
+                <>
                     <ReactCompareSliderImage 
                         src={spaImage} 
                         alt="Wellness & SPA" 
@@ -65,23 +65,23 @@ export function InteractiveHero() {
                         buttonText='Explore SPA'
                         theme="spa"
                     />
-                </div>
+                </>
             }
             itemTwo={
-                 <div className="relative w-full h-full overflow-hidden">
+                <>
                     <ReactCompareSliderImage 
                         src={beautyImage} 
                         alt="Beauty & Nails" 
                         className="w-full h-full object-cover animate-ken-burns"
                     />
-                    <HeroPanel 
+                     <HeroPanel 
                         title="Beauty & Nails" 
                         description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
                         href="/services/facials"
                         buttonText='Explore Beauty'
                         theme="beauty"
                     />
-                </div>
+                </>
             }
             style={{
                 width: '100%',
