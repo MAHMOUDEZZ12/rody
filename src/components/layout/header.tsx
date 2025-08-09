@@ -66,7 +66,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
+          <span className="font-headline text-xl font-bold text-primary">Dubai Wellness Oasis</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -117,7 +117,7 @@ export function Header() {
                   <Link href="/dashboard">My Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-500 focus:text-red-500">
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Logout</span>
                 </DropdownMenuItem>
@@ -143,7 +143,7 @@ export function Header() {
             <SheetContent side="right">
               <div className="flex justify-between items-center mb-8">
                  <Link href="/" className="mr-6 flex items-center space-x-2">
-                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
+                  <span className="font-bold font-headline text-lg text-primary">Dubai Wellness Oasis</span>
                 </Link>
                 <SheetClose asChild>
                   <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>

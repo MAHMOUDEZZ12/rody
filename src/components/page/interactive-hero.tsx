@@ -12,7 +12,7 @@ const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.f
 
 
 const CustomHandle = () => (
-    <div className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center cursor-ew-resize">
+    <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm shadow-lg flex items-center justify-center cursor-ew-resize border border-border">
         <div className="w-2 h-8 bg-primary/50 rounded-full" />
     </div>
 );
@@ -20,7 +20,7 @@ const CustomHandle = () => (
 const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center text-white p-4">
-             <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up" style={{ animationDelay: '500ms' }}>
+             <div className="bg-black/60 p-8 rounded-lg animate-fade-in-up" style={{ animationDelay: '500ms' }}>
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
                 </h1>
@@ -32,8 +32,7 @@ const HeroPanel = ({ title, description, href, buttonText, theme }: { title: str
                     size="lg" 
                     className={cn(
                         "mt-8 rounded-full font-bold text-base px-8 py-6 pointer-events-auto",
-                        theme === 'spa' && "bg-spa-primary text-spa-primary-foreground hover:bg-spa-primary/90",
-                        theme === 'beauty' && "bg-beauty-primary text-beauty-primary-foreground hover:bg-beauty-primary/90"
+                         "bg-primary text-primary-foreground hover:bg-primary/90"
                     )}
                 >
                     <Link href={href}>{buttonText}</Link>
@@ -52,12 +51,14 @@ export function InteractiveHero() {
                 <ReactCompareSliderImage 
                     src={spaImage}
                     alt="Wellness & SPA"
+                    data-ai-hint="wellness spa"
                 />
             }
             itemTwo={
                 <ReactCompareSliderImage 
                     src={beautyImage}
                     alt="Beauty & Nails" 
+                    data-ai-hint="beauty nails"
                 />
             }
             style={{
@@ -77,7 +78,7 @@ export function InteractiveHero() {
             </div>
             <div className="relative w-full h-full flex items-center justify-center">
                 <HeroPanel 
-                    title="Beauty & Nails" 
+                    title="Beauty & Artistry" 
                     description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
                     href="/services/beauty"
                     buttonText='Explore Beauty'

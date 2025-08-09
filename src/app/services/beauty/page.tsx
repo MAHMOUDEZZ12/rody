@@ -4,7 +4,7 @@ import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Beauty Services | Rody Wellness',
+  title: 'Beauty Services | Dubai Wellness Oasis',
   description: 'Explore our expert beauty treatments, including bespoke facials, pristine nail artistry, and stunning eyelash extensions.',
 };
 
@@ -23,6 +23,7 @@ export default function BeautyPage() {
           objectFit="cover"
           className="z-0"
           priority
+          data-ai-hint="beauty treatment"
         />
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
@@ -38,7 +39,7 @@ export default function BeautyPage() {
           <section className="mb-16 text-center max-w-4xl mx-auto">
              <h2 className="font-headline text-3xl text-primary">A Commitment to Radiance</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              At Rody Wellness, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
+              At Dubai Wellness Oasis, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
             </p>
           </section>
 

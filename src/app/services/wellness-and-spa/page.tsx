@@ -4,7 +4,7 @@ import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Wellness & SPA | Rody Wellness',
+  title: 'Wellness & SPA | Dubai Wellness Oasis',
   description: 'Explore our complete range of wellness and spa treatments, including therapeutic massages and revitalizing body scrubs, designed to restore balance and rejuvenate your body and mind.',
 };
 
@@ -23,6 +23,7 @@ export default function WellnessAndSpaPage() {
           objectFit="cover"
           className="z-0"
           priority
+          data-ai-hint="spa setting"
         />
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
@@ -38,7 +39,7 @@ export default function WellnessAndSpaPage() {
           <section className="mb-16 text-center max-w-4xl mx-auto">
              <h2 className="font-headline text-3xl text-primary">A Philosophy of Personalized Healing</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              At Rody Wellness, we believe that true well-being comes from a holistic approach. Our SPA philosophy is rooted in the art of personalization. We don’t just offer treatments; we curate therapeutic journeys designed to meet your unique needs. From ancient techniques that have stood the test of time to modern restorative therapies, each experience is a celebration of your personal health and harmony. Let our expert therapists guide you toward a state of profound peace and physical renewal.
+              At Dubai Wellness Oasis, we believe that true well-being comes from a holistic approach. Our SPA philosophy is rooted in the art of personalization. We don’t just offer treatments; we curate therapeutic journeys designed to meet your unique needs. From ancient techniques that have stood the test of time to modern restorative therapies, each experience is a celebration of your personal health and harmony. Let our expert therapists guide you toward a state of profound peace and physical renewal.
             </p>
           </section>
 
