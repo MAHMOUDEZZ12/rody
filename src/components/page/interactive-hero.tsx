@@ -17,7 +17,6 @@ const CustomHandle = () => (
     </div>
 );
 
-
 const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center text-white p-4">
@@ -44,50 +43,48 @@ const HeroPanel = ({ title, description, href, buttonText, theme }: { title: str
     )
 };
 
-
 export function InteractiveHero() {
-
   return (
     <section className="relative h-screen w-full overflow-hidden">
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <div className="relative w-full h-full">
-                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${spaImage})`}} />
-                     <ReactCompareSliderImage 
-                        srcSet={spaImage}
-                        alt="Wellness & SPA"
-                    />
-                    <HeroPanel 
-                        title="Wellness & SPA" 
-                        description="Melt away stress and find your balance with our therapeutic massages and body treatments."
-                        href="/services/massage"
-                        buttonText='Explore SPA'
-                        theme="spa"
-                    />
-                </div>
+                <ReactCompareSliderImage 
+                    src={spaImage}
+                    alt="Wellness & SPA"
+                />
             }
             itemTwo={
-                 <div className="relative w-full h-full">
-                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${beautyImage})`}} />
-                     <ReactCompareSliderImage 
-                        srcSet={beautyImage}
-                        alt="Beauty & Nails" 
-                    />
-                    <HeroPanel 
-                        title="Beauty & Nails" 
-                        description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
-                        href="/services/facials"
-                        buttonText='Explore Beauty'
-                        theme="beauty"
-                    />
-                </div>
+                <ReactCompareSliderImage 
+                    src={beautyImage}
+                    alt="Beauty & Nails" 
+                />
             }
             style={{
                 width: '100%',
                 height: '100%',
             }}
         />
+        <div className="absolute inset-0 grid grid-cols-2 pointer-events-none">
+            <div className="relative w-full h-full flex items-center justify-center">
+                <HeroPanel 
+                    title="Wellness & SPA" 
+                    description="Melt away stress and find your balance with our therapeutic massages and body treatments."
+                    href="/services/wellness-and-spa"
+                    buttonText='Explore SPA'
+                    theme="spa"
+                />
+            </div>
+            <div className="relative w-full h-full flex items-center justify-center">
+                <HeroPanel 
+                    title="Beauty & Nails" 
+                    description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
+                    href="/services/facials"
+                    buttonText='Explore Beauty'
+                    theme="beauty"
+                />
+            </div>
+        </div>
     </section>
   );
 }

@@ -68,26 +68,9 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           {/* Wellness & SPA Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost">Wellness & SPA <ChevronDown className="h-4 w-4" /></Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Services</DropdownMenuLabel>
-              <DropdownMenuGroup>
-                {wellnessLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link href={link.href}>{link.label}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild><Link href="/professionals">Therapists</Link></DropdownMenuItem>
-              <DropdownMenuItem asChild><Link href="/blog">Journal</Link></DropdownMenuItem>
-              {/* <DropdownMenuItem asChild><Link href="/offers/spa">Offers</Link></DropdownMenuItem>
-              <DropdownMenuItem asChild><Link href="/gifts/spa">Gifts</Link></DropdownMenuItem> */}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button asChild variant="ghost">
+            <Link href="/services/wellness-and-spa">Wellness & SPA</Link>
+          </Button>
 
           {/* Beauty & Nails Dropdown */}
           <DropdownMenu>
