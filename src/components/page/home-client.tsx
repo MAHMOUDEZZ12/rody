@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Star } from 'lucide-react';
-import { testimonials } from '@/lib/data';
+import { testimonials, packages } from '@/lib/data';
 import {
   Carousel,
   CarouselContent,
@@ -14,12 +14,29 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ReferralBanner } from '@/components/referral-banner';
 import { InteractiveHero } from './interactive-hero';
+import { PackageCard } from '../package-card';
 
 
 export function HomeClient() {
   return (
     <div className="flex flex-col">
       <InteractiveHero />
+
+       <section id="packages" className="py-16 md:py-24 bg-secondary/30">
+        <div className="container max-w-7xl px-4">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
+            Curated Packages
+          </h2>
+          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+            Indulge in our thoughtfully designed packages for a complete wellness experience.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            {packages.map((pkg) => (
+              <PackageCard key={pkg.id} pkg={pkg} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-16 md:py-24 bg-transparent">
         <div className="container max-w-5xl px-4">
