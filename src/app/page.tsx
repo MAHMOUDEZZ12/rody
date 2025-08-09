@@ -25,14 +25,8 @@ import { PackageCard } from '@/components/package-card';
 
 
 function HeroImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: "Artistic Spa Setting", content: "An artistic photo of a serene spa setting with natural elements like stones and flowers.", dataAiHint: "artistic spa nature" })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, []);
-
+  const imageUrl = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/360_F_561448547_ma1OzwUti7YFlxZaNsLYhHhz7l41vl1m.jpg?alt=media&token=25f072b5-808f-4dac-bb96-942ac1e9b9c2";
+  
   if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
 
   return (
@@ -62,49 +56,6 @@ function ProfessionalImage({ professional }: { professional: (typeof professiona
   )
 }
 
-function SectionBgImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-     generateBlogImage({ title: "Lush Leaves", content: "A background of dark tropical leaves.", dataAiHint: "dark tropical leaves" })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, []);
- 
-  if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
-
-  return (
-    <Image
-      src={imageUrl}
-      alt="Leafy background"
-      fill
-      className="object-cover object-center -z-10"
-    />
-  );
-}
-
-function TestimonialBgImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: "Marble Texture", content: "A white marble texture background.", dataAiHint: "white marble texture" })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, []);
-
-  if (!imageUrl) return <Skeleton className="absolute inset-0 -z-10 w-full h-full" />;
-
-  return (
-    <Image
-      src={imageUrl}
-      alt="Marble background"
-      fill
-      className="object-cover object-center -z-10"
-    />
-  );
-}
-
-
 export default function Home() {
   const recommendedServices = services.slice(0, 4);
 
@@ -114,7 +65,7 @@ export default function Home() {
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
            <HeroImage />
         </Suspense>
-        <div className="absolute inset-0 bg-black/70 -z-10" />
+        <div className="absolute inset-0 bg-black/60 -z-10" />
         <div className="container max-w-4xl px-4 animate-fade-in-up">
           <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
             Your Sanctuary, Delivered.
@@ -146,7 +97,7 @@ export default function Home() {
         </div>
       </section>
       
-       <section id="packages" className="py-16 md:py-24 bg-secondary/30">
+       <section id="packages" className="py-16 md:py-24 bg-background/80">
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Curated Wellness Packages
@@ -162,22 +113,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="professionals" className="relative py-16 md:py-24 text-white">
-        <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
-          <SectionBgImage />
-        </Suspense>
-        <div className="absolute inset-0 bg-black/60 -z-10" />
+      <section id="professionals" className="relative py-16 md:py-24 text-white bg-background/80">
         <div className="container max-w-7xl px-4">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Meet Our Elite Professionals
           </h2>
-          <p className="mt-4 text-lg text-center text-neutral-200 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Our certified and experienced therapists are dedicated to providing you with an exceptional wellness experience.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12 justify-center">
             {professionals.map((prof) => (
                <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
-                 <Card className="text-center border-transparent bg-white/10 backdrop-blur-sm shadow-lg max-w-xs mx-auto text-white">
+                 <Card className="text-center border-transparent bg-white/10 backdrop-blur-sm shadow-lg max-w-xs mx-auto text-card-foreground">
                   <CardContent className="flex flex-col items-center p-6">
                     <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
                       <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
@@ -201,10 +148,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="testimonials" className="relative py-16 md:py-24 text-card-foreground">
-         <Suspense fallback={<Skeleton className="w-full h-full absolute inset-0 -z-20" />}>
-          <TestimonialBgImage />
-        </Suspense>
+      <section id="testimonials" className="relative py-16 md:py-24 text-card-foreground bg-background/80">
         <div className="container max-w-5xl px-4">
            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
             Words of Wellness
