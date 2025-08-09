@@ -13,24 +13,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 20 20% 15%;
  
-    --primary: 150 25% 45%; /* Muted natural green */
+    --primary: 340 60% 70%; /* Soft, but vibrant Pink */
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 340 60% 96%; /* Soft, light pink */
+    --secondary: 150 25% 96%; /* Muted natural green for backgrounds */
     --secondary-foreground: 150 25% 25%;
  
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
  
-    --accent: 340 60% 96%; /* Soft, light pink */
+    --accent: 150 25% 96%; /* Muted natural green for accents */
     --accent-foreground: 150 25% 25%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 150 10% 88%;
-    --input: 150 10% 92%;
-    --ring: 150 25% 45%;
+    --border: 340 20% 88%;
+    --input: 340 20% 92%;
+    --ring: 340 60% 70%;
  
     --radius: 0.5rem;
   }
@@ -45,24 +45,24 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
  
-    --primary: 150 30% 65%; /* Brighter natural green */
+    --primary: 340 60% 70%; /* Soft, but vibrant Pink */
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 340 20% 15%; /* Dark pink */
+    --secondary: 150 20% 15%; /* Dark muted green for backgrounds */
     --secondary-foreground: 0 0% 98%;
  
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
  
-    --accent: 340 20% 15%; /* Dark pink */
+    --accent: 150 20% 15%; /* Dark muted green for accents */
     --accent-foreground: 0 0% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 150 20% 25%;
-    --input: 150 20% 25%;
-    --ring: 150 30% 65%;
+    --border: 340 20% 25%;
+    --input: 340 20% 25%;
+    --ring: 340 60% 70%;
   }
 }
  
