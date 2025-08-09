@@ -25,9 +25,9 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <AuthProvider>
-          <div className="relative flex min-h-screen flex-col bg-background/80 backdrop-blur-sm">
+          <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="min-h-screen flex-1">
+            <main className="min-h-screen flex-1 bg-background/80 backdrop-blur-sm">
               {children}
             </main>
             <Footer />
