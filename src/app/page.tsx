@@ -139,7 +139,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
             {recommendedServices.map((service) => (
                 <div key={service.id} className="h-full">
-                  <ServiceCard service={service} />
+                  <ServiceCard service={service} highlight={true} />
                 </div>
             ))}
           </div>

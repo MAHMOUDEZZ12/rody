@@ -73,9 +73,13 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
   }
 
   const isBeauty = service.category !== 'Massage';
-  const serviceColorClass = isBeauty ? 'text-green-500' : 'text-primary';
-  const servicePrimaryColor = isBeauty ? 'var(--beauty)' : 'var(--primary)';
-  const serviceBorderClass = isBeauty ? 'peer-data-[state=checked]:border-green-500 [&:has([data-state=checked])]:border-green-500' : 'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary';
+  const serviceColorClass = isBeauty ? 'text-beauty' : 'text-primary';
+  const serviceBorderClass = isBeauty ? 'peer-data-[state=checked]:border-beauty [&:has([data-state=checked])]:border-beauty' : 'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary';
+
+  const buttonStyle = {
+    backgroundColor: isBeauty ? 'hsl(var(--beauty))' : 'hsl(var(--primary))',
+    color: isBeauty ? 'hsl(var(--beauty-foreground))' : 'hsl(var(--primary-foreground))',
+  };
 
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
   
@@ -204,12 +208,12 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               </div>
               
               {isGifting ? (
-                 <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">
+                 <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold" style={buttonStyle}>
                     Purchase Gift <Gift />
                   </Button>
               ) : (
                 <div className="flex flex-col gap-2">
-                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold">Confirm Booking</Button>
+                  <Button onClick={handleBooking} size="lg" className="w-full rounded-full font-bold" style={buttonStyle}>Confirm Booking</Button>
                   <Button onClick={() => router.push(`/services/${service.id}?gift=true`)} size="lg" variant="outline" className="w-full rounded-full font-bold">
                     Gift this <Gift />
                   </Button>
