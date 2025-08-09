@@ -18,10 +18,10 @@ const CustomHandle = () => (
 );
 
 
-const HeroPanel = ({ title, description, href, className, buttonText, theme }: { title: string; description: string; href: string; className?: string, buttonText: string, theme: 'spa' | 'beauty' }) => {
+const HeroPanel = ({ title, description, href, className, buttonText, theme }: { title: string; description:string; href: string; className?: string, buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
         <div className={cn("absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 z-10", className)}>
-             <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up">
+             <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up animation-delay-500">
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
                 </h1>
@@ -48,12 +48,16 @@ const HeroPanel = ({ title, description, href, className, buttonText, theme }: {
 export function InteractiveHero() {
 
   return (
-    <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden">
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <div className="relative w-full h-full">
-                    <ReactCompareSliderImage src={spaImage} alt="Wellness & SPA" />
+                <div className="relative w-full h-full overflow-hidden">
+                    <ReactCompareSliderImage 
+                        src={spaImage} 
+                        alt="Wellness & SPA" 
+                        className="w-full h-full object-cover animate-ken-burns"
+                    />
                     <HeroPanel 
                         title="Wellness & SPA" 
                         description="Melt away stress and find your balance with our therapeutic massages and body treatments."
@@ -64,8 +68,12 @@ export function InteractiveHero() {
                 </div>
             }
             itemTwo={
-                 <div className="relative w-full h-full">
-                    <ReactCompareSliderImage src={beautyImage} alt="Beauty & Nails" />
+                 <div className="relative w-full h-full overflow-hidden">
+                    <ReactCompareSliderImage 
+                        src={beautyImage} 
+                        alt="Beauty & Nails" 
+                        className="w-full h-full object-cover animate-ken-burns"
+                    />
                     <HeroPanel 
                         title="Beauty & Nails" 
                         description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
