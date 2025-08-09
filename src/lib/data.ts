@@ -1,6 +1,7 @@
 
 
 
+
 export type Addon = {
   id: string;
   name: string;
@@ -635,5 +636,3 @@ export const testimonials: Testimonial[] = [
 
 
 export const timeSlots = ["09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM", "07:00 PM"];
-
-    
