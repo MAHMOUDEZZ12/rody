@@ -23,11 +23,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased app-background">
         <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="min-h-screen flex-1 bg-background">
+            <main className="min-h-screen flex-1 bg-background/80 backdrop-blur-sm">
               {children}
             </main>
             <Footer />

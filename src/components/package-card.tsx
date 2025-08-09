@@ -40,7 +40,7 @@ function PackageImage({ pkg }: { pkg: Package }) {
 
 export function PackageCard({ pkg }: PackageCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-card">
+    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-card/80 backdrop-blur-sm">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Suspense fallback={<Skeleton className="w-full h-full" />}>

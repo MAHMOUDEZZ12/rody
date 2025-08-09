@@ -6,6 +6,8 @@ import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
+import { SectionTitle } from '@/components/section-title';
+import { Card, CardContent } from '@/components/ui/card';
 
 
 async function HeroImage() {
@@ -51,41 +53,45 @@ export default function BeautyPage() {
         </div>
       </section>
 
-      <div className="bg-background">
-        <div className="container max-w-7xl px-4 py-16">
-          <section className="mb-16 text-center max-w-4xl mx-auto">
-             <h2 className="font-headline text-3xl text-beauty-primary">A Commitment to Radiance</h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              At Rody Wellness, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
-            </p>
-          </section>
+      <div className="py-16">
+        <div className="container max-w-7xl px-4">
+          <Card className="bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-8 md:p-12">
+              <section className="mb-16 text-center max-w-4xl mx-auto">
+                <h2 className="font-headline text-3xl text-beauty-primary">A Commitment to Radiance</h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  At Rody Wellness, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
+                </p>
+              </section>
 
-          <main className="space-y-16">
-            <section id="facials">
-              <h2 className="font-headline text-3xl md:text-4xl text-beauty-primary mb-10 text-center">Facial Treatments</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {facialServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} theme="beauty"/>
-                ))}
-              </div>
-            </section>
-            <section id="nails">
-              <h2 className="font-headline text-3xl md:text-4xl text-beauty-primary mb-10 text-center">Nail Services</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {nailServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} theme="beauty" />
-                ))}
-              </div>
-            </section>
-             <section id="eyelashes">
-              <h2 className="font-headline text-3xl md:text-4xl text-beauty-primary mb-10 text-center">Eyelash Services</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {eyelashServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} theme="beauty"/>
-                ))}
-              </div>
-            </section>
-          </main>
+              <main className="space-y-16">
+                <section id="facials">
+                  <SectionTitle title="Facial Treatments" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                    {facialServices.map((service) => (
+                      <ServiceCard key={service.id} service={service} theme="beauty"/>
+                    ))}
+                  </div>
+                </section>
+                <section id="nails">
+                  <SectionTitle title="Nail Services" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                    {nailServices.map((service) => (
+                      <ServiceCard key={service.id} service={service} theme="beauty" />
+                    ))}
+                  </div>
+                </section>
+                 <section id="eyelashes">
+                  <SectionTitle title="Eyelash Services" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                    {eyelashServices.map((service) => (
+                      <ServiceCard key={service.id} service={service} theme="beauty"/>
+                    ))}
+                  </div>
+                </section>
+              </main>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </>

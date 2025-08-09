@@ -16,6 +16,7 @@ import { ReferralBanner } from '@/components/referral-banner';
 import { InteractiveHero } from './interactive-hero';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
+import { SectionTitle } from '../section-title';
 
 
 export function HomeClient() {
@@ -23,11 +24,9 @@ export function HomeClient() {
     <div className="flex flex-col">
       <InteractiveHero />
 
-       <section id="packages" className="py-16 md:py-24 bg-card/50">
+       <section id="packages" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Curated Packages
-          </h2>
+          <SectionTitle title="Curated Packages" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Indulge in our thoughtfully designed packages for a complete wellness experience.
           </p>
@@ -44,17 +43,15 @@ export function HomeClient() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-transparent">
+      <section className="py-16 md:py-24">
         <div className="container max-w-5xl px-4">
           <ReferralBanner />
         </div>
       </section>
 
-      <section id="testimonials" className="py-16 md:py-24 bg-card/50">
+      <section id="testimonials" className="py-16 md:py-24">
         <div className="container max-w-5xl px-4">
-           <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Words of Wellness
-          </h2>
+           <SectionTitle title="Words of Wellness" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>

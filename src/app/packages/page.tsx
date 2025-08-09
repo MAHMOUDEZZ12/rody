@@ -2,6 +2,7 @@
 import { packages } from '@/lib/data';
 import { PackageCard } from '@/components/package-card';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { SectionTitle } from '@/components/section-title';
 
 export const metadata = {
   title: 'Service Packages | Rody Wellness',
@@ -12,15 +13,13 @@ export default function PackagesPage() {
   return (
     <div className="container max-w-7xl px-4 py-12">
       <header className="mb-12 text-center">
-        <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
-          Curated Wellness Packages
-        </h1>
+        <SectionTitle title="Curated Wellness Packages" />
         <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
           Indulge in a complete journey of rejuvenation with our thoughtfully designed packages. Each offers a unique combination of our most popular services at an exceptional value, perfect for a gift or a well-deserved treat for yourself.
         </p>
       </header>
       <main>
-        <Card className="bg-card/50">
+        <Card className="bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {packages.map((pkg) => (

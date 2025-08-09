@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { SectionTitle } from '@/components/section-title';
 
 async function HeroImage() {
     const imageUrl = await generateBlogImage({
@@ -51,9 +52,9 @@ export default function WellnessAndSpaPage() {
         </div>
       </section>
 
-      <div className="bg-background py-16">
+      <div className="py-16">
         <div className="container max-w-7xl px-4">
-          <Card className="bg-card/50">
+          <Card className="bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
               <section className="mb-16 text-center max-w-4xl mx-auto">
                 <h2 className="font-headline text-3xl text-spa-primary">A Philosophy of Personalized Healing</h2>
@@ -64,16 +65,16 @@ export default function WellnessAndSpaPage() {
 
               <main className="space-y-16">
                 <section id="massage">
-                  <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Massage Therapy</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <SectionTitle title="Massage Therapy" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {massageServices.map((service) => (
                       <ServiceCard key={service.id} service={service} theme="spa" />
                     ))}
                   </div>
                 </section>
                 <section id="body-treatments">
-                  <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Body Treatments</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <SectionTitle title="Body Treatments" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {bodyServices.map((service) => (
                       <ServiceCard key={service.id} service={service} theme="spa" />
                     ))}
