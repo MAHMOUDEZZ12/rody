@@ -15,9 +15,6 @@
  
     --primary: 340 60% 70%; /* Soft, but vibrant Pink */
     --primary-foreground: 0 0% 98%;
-
-    --beauty: 150 25% 70%;
-    --beauty-foreground: 150 25% 15%;
  
     --secondary: 340 25% 96%; /* Muted natural pink for backgrounds */
     --secondary-foreground: 340 25% 25%;
@@ -50,9 +47,6 @@
  
     --primary: 340 60% 70%; /* Soft, but vibrant Pink */
     --primary-foreground: 0 0% 98%;
-
-    --beauty: 150 25% 70%;
-    --beauty-foreground: 150 25% 15%;
  
     --secondary: 340 20% 15%; /* Dark muted pink for backgrounds */
     --secondary-foreground: 0 0% 98%;
@@ -80,31 +74,5 @@
     @apply bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  body::before,
-  body::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 150vw;
-    height: 150vw;
-    border-radius: 50%;
-    z-index: -1;
-    will-change: transform;
-    transition: transform 1s ease-in-out;
-  }
-  
-  body::before {
-    background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 50%);
-    transform: translateX(-80%) translateY(-60%);
-  }
-
-  body::after {
-    background: radial-gradient(circle, hsl(var(--secondary) / 0.1) 0%, transparent 50%);
-    transform: translateX(10%) translateY(20%);
   }
 }

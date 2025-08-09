@@ -72,9 +72,6 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
     notFound();
   }
 
-  const serviceColorClass = 'text-primary';
-  const serviceBorderClass = 'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary';
-
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
   
   const handleBooking = () => {
@@ -110,11 +107,11 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3">SALE</Badge>
             )}
           </div>
-          <h1 className={cn("font-headline text-3xl md:text-4xl mt-8", serviceColorClass)}>{service.name}</h1>
+          <h1 className="font-headline text-3xl md:text-4xl mt-8 text-primary">{service.name}</h1>
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-4 text-muted-foreground">
             <div className="flex items-center gap-2"><Clock /> {service.duration} minutes</div>
             <div className="flex items-center gap-2 text-lg">
-                <DollarSign className={serviceColorClass} />
+                <DollarSign className="text-primary" />
                 {isDiscounted ? (
                   <div className="flex items-baseline gap-2">
                     <span className="text-destructive font-bold">AED {service.price}</span>
@@ -132,7 +129,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
         <div className="md:col-span-2">
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className={cn("font-headline text-2xl", serviceColorClass)}>{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
+              <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {!isGifting && (
@@ -160,7 +157,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                       {timeSlots.map(time => (
                         <div key={time}>
                           <RadioGroupItem value={time} id={time} className="sr-only" />
-                          <Label htmlFor={time} className={cn("flex items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer", serviceBorderClass)}>
+                          <Label htmlFor={time} className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
                             {time}
                           </Label>
                         </div>
@@ -185,7 +182,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                         />
                         <div className="grid gap-1.5 leading-none">
                           <label htmlFor={addon.id} className="font-medium cursor-pointer">
-                            {addon.name} <span className={cn("font-bold", serviceColorClass)}>(+AED {addon.price})</span>
+                            {addon.name} <span className="font-bold text-primary">(+AED {addon.price})</span>
                           </label>
                           <p className="text-sm text-muted-foreground">{addon.description}</p>
                         </div>
@@ -198,7 +195,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               <Separator />
               <div className="flex justify-between items-center font-bold text-xl">
                 <span>Total:</span>
-                <span className={serviceColorClass}>AED {totalPrice}</span>
+                <span className="text-primary">AED {totalPrice}</span>
               </div>
               
               {isGifting ? (

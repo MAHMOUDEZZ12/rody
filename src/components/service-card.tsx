@@ -42,19 +42,11 @@ function ServiceImage({ service }: { service: Service }) {
 
 export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
   const isDiscounted = service.originalPrice && service.originalPrice > service.price;
-  
-  const serviceColorClass = 'text-primary';
-  const serviceRingClass = 'ring-primary/20';
-  const serviceShadowClass = 'shadow-primary/10';
-  const serviceBorderClass = 'hover:border-primary/50';
-
 
   return (
     <Card className={cn(
-        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card",
-        highlight 
-          ? `border-primary/30 shadow-lg ring-2 ${serviceRingClass} ${serviceShadowClass}`
-          : `hover:shadow-lg ${serviceBorderClass}`
+        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card hover:shadow-lg hover:border-primary/50",
+        highlight && "border-primary/30 shadow-lg ring-2 ring-primary/20 shadow-primary/10"
       )}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
@@ -75,7 +67,7 @@ export function ServiceCard({ service, highlight = false }: ServiceCardProps) {
             <span>{service.duration} min</span>
           </div>
           <div className="flex items-center gap-2 font-semibold text-foreground">
-            <Tag className={cn("h-4 w-4", serviceColorClass)} />
+            <Tag className="h-4 w-4 text-primary" />
             {isDiscounted ? (
               <div className="flex items-baseline gap-2">
                 <span className="text-destructive font-bold">AED {service.price}</span>
