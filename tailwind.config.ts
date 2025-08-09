@@ -36,6 +36,14 @@ export default {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
+        'beauty-primary': {
+            DEFAULT: 'hsl(var(--beauty-primary))',
+            foreground: 'hsl(var(--beauty-primary-foreground))',
+        },
+        'spa-primary': {
+            DEFAULT: 'hsl(var(--spa-primary))',
+            foreground: 'hsl(var(--spa-primary-foreground))',
+        },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
