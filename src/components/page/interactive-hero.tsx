@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
-const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/360_F_561448547_ma1OzwUti7YFlxZaNsLYhHhz7l41vl1m.jpg?alt=media&token=25f072b5-808f-4dac-bb96-942ac1e9b9c2";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/bright-summer-tropical-background-with-colorful-palm-leaves-and-bokeh-effects-trendy-botanical-wallpaper-with-blue-pink-yellow-colors-festive-mood-wide-banner-copy-space-mockup-for-design-photo.jpeg?alt=media&token=83f73be6-8a59-42b4-8ab5-332f0b4726cc";
+const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/beautiful-spa-composition-with-bamboo-zen-stones.jpg?alt=media&token=46d4c33f-c30a-4fa5-a7a5-c5432029c049";
+const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/top-view-beautiful-arrangement-with-make-up-products.jpg?alt=media&token=c191a329-a16f-474c-851f-6a9282361872";
 
 
 const CustomHandle = () => (
@@ -20,7 +20,7 @@ const CustomHandle = () => (
 
 const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center text-center text-white p-4">
+        <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center text-white p-4">
              <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up animation-delay-500">
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
@@ -52,40 +52,36 @@ export function InteractiveHero() {
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <div className="relative w-full h-full">
+                <>
                     <ReactCompareSliderImage 
                         src={spaImage} 
                         alt="Wellness & SPA" 
                         className="w-full h-full object-cover animate-ken-burns"
                     />
-                    <div className="absolute inset-0 pointer-events-none">
-                        <HeroPanel 
-                            title="Wellness & SPA" 
-                            description="Melt away stress and find your balance with our therapeutic massages and body treatments."
-                            href="/services/massage"
-                            buttonText='Explore SPA'
-                            theme="spa"
-                        />
-                    </div>
-                </div>
+                    <HeroPanel 
+                        title="Wellness & SPA" 
+                        description="Melt away stress and find your balance with our therapeutic massages and body treatments."
+                        href="/services/massage"
+                        buttonText='Explore SPA'
+                        theme="spa"
+                    />
+                </>
             }
             itemTwo={
-                 <div className="relative w-full h-full">
+                <>
                     <ReactCompareSliderImage 
                         src={beautyImage} 
                         alt="Beauty & Nails" 
                         className="w-full h-full object-cover animate-ken-burns"
                     />
-                     <div className="absolute inset-0 pointer-events-none">
-                        <HeroPanel 
-                            title="Beauty & Nails" 
-                            description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
-                            href="/services/facials"
-                            buttonText='Explore Beauty'
-                            theme="beauty"
-                        />
-                    </div>
-                </div>
+                    <HeroPanel 
+                        title="Beauty & Nails" 
+                        description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
+                        href="/services/facials"
+                        buttonText='Explore Beauty'
+                        theme="beauty"
+                    />
+                </>
             }
             style={{
                 width: '100%',
@@ -95,3 +91,4 @@ export function InteractiveHero() {
     </section>
   );
 }
+
