@@ -545,7 +545,7 @@ export const professionals: Professional[] = [
   {
     id: 'prof2',
     name: 'Fatima Al Jaber',
-    specialty: 'Esthetician & Lash Artist',
+    specialty: 'Lead Esthetician & Lash Artist',
     image: 'https://placehold.co/100x100.png',
     dataAiHint: 'professional esthetician portrait',
     experience: 8,

@@ -40,25 +40,8 @@ function HeroImage() {
   );
 };
 
-function ProfessionalImage({ professional }: { professional: (typeof professionals)[0] }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [professional]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full rounded-full" />;
-  
-  return (
-    <AvatarImage src={imageUrl} alt={professional.name} />
-  )
-}
 
 export default function Home() {
-  const recommendedServices = services.slice(0, 4);
-
   return (
     <div className="flex flex-col">
       <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-center text-white">
@@ -76,69 +59,6 @@ export default function Home() {
           <Button asChild size="lg" className="mt-8 rounded-full font-bold text-base px-8 py-6">
             <Link href="/services">Book Now</Link>
           </Button>
-        </div>
-      </section>
-
-      <section id="recommendations" className="py-16 md:py-24 bg-transparent">
-        <div className="container max-w-7xl px-4">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Recommended For You
-          </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            AI-powered suggestions based on your preferences for a truly personalized wellness journey.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {recommendedServices.map((service) => (
-                <div key={service.id} className="h-full">
-                  <ServiceCard service={service} highlight={true} />
-                </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-       <section id="packages" className="py-16 md:py-24 bg-background/80">
-        <div className="container max-w-7xl px-4">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Curated Wellness Packages
-          </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            Indulge in our thoughtfully designed packages for a complete head-to-toe wellness experience.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {packages.map((pkg) => (
-              <PackageCard key={pkg.id} pkg={pkg} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="professionals" className="relative py-16 md:py-24 text-white bg-background/80">
-        <div className="container max-w-7xl px-4">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary">
-            Meet Our Elite Professionals
-          </h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            Our certified and experienced therapists are dedicated to providing you with an exceptional wellness experience.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12 justify-center">
-            {professionals.map((prof) => (
-               <Link key={prof.id} href={`/professionals/${prof.id}`} className="block group">
-                 <Card className="text-center border-transparent bg-white/10 backdrop-blur-sm shadow-lg max-w-xs mx-auto text-card-foreground">
-                  <CardContent className="flex flex-col items-center p-6">
-                    <Avatar className="w-28 h-28 border-4 border-primary/50 group-hover:border-primary transition-colors">
-                      <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
-                        <ProfessionalImage professional={prof} />
-                      </Suspense>
-                      <AvatarFallback>{prof.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="mt-4 text-xl font-bold font-body group-hover:text-primary transition-colors">{prof.name}</h3>
-                    <p className="text-primary font-semibold">{prof.specialty}</p>
-                   </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 

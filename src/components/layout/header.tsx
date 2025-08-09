@@ -6,13 +6,14 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { ChevronDown, LogOut, Menu, User, Phone } from 'lucide-react';
-import { Separator } from '../ui/separator';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from '@/hooks/use-auth';
 import { auth } from '@/lib/firebase';
@@ -36,18 +37,15 @@ export function Header() {
     router.push('/');
   };
 
-  const serviceLinks = [
+  const wellnessLinks = [
     { href: '/services/massage', label: 'Massage Therapy' },
-    { href: '/services/facials', label: 'Facial Treatments' },
     { href: '/services/body-treatments', label: 'Body Treatments' },
+  ];
+  
+  const beautyLinks = [
+    { href: '/services/facials', label: 'Facial Treatments' },
     { href: '/services/nails', label: 'Nail Services' },
     { href: '/services/eyelashes', label: 'Eyelash Services' },
-  ];
-
-  const mainLinks = [
-    { href: '/#professionals', label: 'Professionals' },
-    { href: '/#recommendations', label: 'For You' },
-    { href: '/blog', label: 'Blog' },
   ];
   
   const MobileLink = ({ href, children, onNavigate }: { href: string; children: React.ReactNode; onNavigate: () => void }) => {
@@ -56,7 +54,7 @@ export function Header() {
       router.push(href);
     }
     return (
-      <Link href={href} onClick={handleClick} className="text-base transition-colors hover:text-primary py-2">
+      <Link href={href} onClick={handleClick} className="text-base transition-colors hover:text-primary py-2 w-full text-left pl-8">
         {children}
       </Link>
     );
@@ -68,29 +66,58 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2 mr-6">
           <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        <nav className="hidden md:flex items-center gap-1 text-sm">
+          {/* Wellness & SPA Dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 transition-colors hover:text-primary font-medium outline-none">
-              Services <ChevronDown className="h-4 w-4" />
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost">Wellness & SPA <ChevronDown className="h-4 w-4" /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              {serviceLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
-                  <Link href={link.href}>{link.label}</Link>
-                </DropdownMenuItem>
-              ))}
-               <DropdownMenuSeparator />
-               <DropdownMenuItem asChild>
-                  <Link href="/services">All Services</Link>
-                </DropdownMenuItem>
+              <DropdownMenuLabel>Services</DropdownMenuLabel>
+              <DropdownMenuGroup>
+                {wellnessLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <Link href={link.href}>{link.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild><Link href="/professionals">Therapists</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link href="/blog">Journal</Link></DropdownMenuItem>
+              {/* <DropdownMenuItem asChild><Link href="/offers/spa">Offers</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link href="/gifts/spa">Gifts</Link></DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {mainLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="transition-colors hover:text-primary font-medium">
-              {link.label}
-            </Link>
-          ))}
+          {/* Beauty & Nails Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost">Beauty & Nails <ChevronDown className="h-4 w-4" /></Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Services</DropdownMenuLabel>
+               <DropdownMenuGroup>
+                {beautyLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <Link href={link.href}>{link.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild><Link href="/professionals">Masters</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link href="/blog">Journal</Link></DropdownMenuItem>
+              {/* <DropdownMenuItem asChild><Link href="/offers/beauty">Offers</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link href="/gifts/beauty">Gifts</Link></DropdownMenuItem> */}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+           <Button asChild variant="link">
+              <Link href="/#testimonials">Testimonials</Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/referral">Referrals</Link>
+            </Button>
+
         </nav>
         <div className="flex items-center gap-2">
            {user ? (
@@ -118,13 +145,6 @@ export function Header() {
             </Button>
           )}
 
-          <Button asChild variant="outline" className="hidden md:inline-flex rounded-full">
-            <Link href={whatsappLink} target="_blank">
-              <Phone className="mr-2 h-4 w-4"/>
-              Book on WhatsApp
-            </Link>
-          </Button>
-
           <Button asChild className="hidden md:inline-flex rounded-full">
             <Link href="/services">Book Now</Link>
           </Button>
@@ -148,44 +168,34 @@ export function Header() {
               <div className="flex flex-col h-[calc(100vh-8rem)]">
                 <div className="flex-grow">
                    <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="services" className="border-b-0">
-                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Services</AccordionTrigger>
-                      <AccordionContent className="pl-4 flex flex-col items-start gap-1">
-                        {serviceLinks.map((link) => (
+                    <AccordionItem value="spa">
+                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Wellness & SPA</AccordionTrigger>
+                      <AccordionContent className="flex flex-col items-start gap-1">
+                        {wellnessLinks.map((link) => (
                           <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
                         ))}
-                        <SheetClose asChild><MobileLink href="/services" onNavigate={() => {}}>All Services</MobileLink></SheetClose>
+                         <SheetClose asChild><MobileLink href="/professionals" onNavigate={() => {}}>Therapists</MobileLink></SheetClose>
+                      </AccordionContent>
+                    </AccordionItem>
+                     <AccordionItem value="beauty">
+                      <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty & Nails</AccordionTrigger>
+                      <AccordionContent className="flex flex-col items-start gap-1">
+                        {beautyLinks.map((link) => (
+                          <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
+                        ))}
+                         <SheetClose asChild><MobileLink href="/professionals" onNavigate={() => {}}>Masters</MobileLink></SheetClose>
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
-                  <Separator className="my-2"/>
-                  {mainLinks.map((link) => (
-                     <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
-                  ))}
-                  <Separator className="my-2" />
                 </div>
-                <div className="flex flex-col gap-4">
-                  <Button asChild className="w-full rounded-full">
-                    <Link href={whatsappLink} target="_blank">
-                      <Phone /> Book on WhatsApp
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="w-full rounded-full">
-                    <Link href="/services">Book Online</Link>
-                  </Button>
-                   {user ? (
+                <div className="flex flex-col gap-4 mt-4 border-t pt-4">
+                  {user ? (
                      <>
-                      <Button asChild variant="outline" className="w-full rounded-full">
-                        <Link href="/dashboard">My Profile</Link>
-                      </Button>
-                       <Button onClick={handleLogout} variant="ghost" className="w-full rounded-full">
-                        Logout
-                      </Button>
+                      <SheetClose asChild><Link href="/dashboard"><Button variant="outline" className="w-full rounded-full">My Profile</Button></Link></SheetClose>
+                      <Button onClick={() => { handleLogout(); }} variant="ghost" className="w-full rounded-full">Logout</Button>
                      </>
                    ) : (
-                      <Button asChild variant="outline" className="w-full rounded-full">
-                        <Link href="/login">Login / Sign Up</Link>
-                      </Button>
+                      <SheetClose asChild><Link href="/login"><Button variant="outline" className="w-full rounded-full">Login / Sign Up</Button></Link></SheetClose>
                    )}
                 </div>
               </div>
