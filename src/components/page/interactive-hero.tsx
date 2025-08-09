@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 
 const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/luxury-spa-ambiance.jpg?alt=media&token=c1936913-94c6-43c2-b34e-1736733a7587";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/modern-makeup-tools.jpg?alt=media&token=1d755106-9937-48f5-ab42-237482f3a611";
+const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/bright-summer-tropical-background-with-colorful-palm-leaves-and-bokeh-effects-trendy-botanical-wallpaper-with-blue-pink-yellow-colors-festive-mood-wide-banner-copy-space-mockup-for-design-photo.jpeg?alt=media&token=83f73be6-8a59-42b4-8ab5-332f0b4726cc";
 
 
 const CustomHandle = () => (
@@ -55,9 +55,9 @@ export function InteractiveHero() {
                 <div className="relative w-full h-full">
                     <ReactCompareSliderImage 
                         src={spaImage} 
-                        alt="Wellness & SPA" 
-                        className="w-full h-full object-cover animate-ken-burns"
+                        alt="Wellness & SPA"
                     />
+                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${spaImage})`}} />
                     <HeroPanel 
                         title="Wellness & SPA" 
                         description="Melt away stress and find your balance with our therapeutic massages and body treatments."
@@ -72,8 +72,8 @@ export function InteractiveHero() {
                     <ReactCompareSliderImage 
                         src={beautyImage} 
                         alt="Beauty & Nails" 
-                        className="w-full h-full object-cover animate-ken-burns"
                     />
+                    <div className="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style={{backgroundImage: `url(${beautyImage})`}} />
                     <HeroPanel 
                         title="Beauty & Nails" 
                         description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
