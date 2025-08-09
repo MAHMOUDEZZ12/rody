@@ -137,9 +137,9 @@ export default function Home() {
             AI-powered suggestions based on your preferences for a truly personalized wellness journey.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {recommendedServices.map((service, index) => (
+            {recommendedServices.map((service) => (
                 <div key={service.id} className="h-full">
-                  <ServiceCard service={service} highlight={index < 2} />
+                  <ServiceCard service={service} />
                 </div>
             ))}
           </div>
