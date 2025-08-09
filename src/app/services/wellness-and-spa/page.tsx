@@ -6,12 +6,13 @@ import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 async function HeroImage() {
     const imageUrl = await generateBlogImage({
         title: 'Sanctuary for the Senses',
         content: 'Step into a world of tranquility and healing. Our Wellness & SPA services are dedicated to restoring your body’s balance and rejuvenating your spirit.',
-        dataAiHint: 'serene spa background with flowers and a little green',
+        dataAiHint: 'tranquil spa setting with orchids and balanced stones',
     });
     return (
         <Image
@@ -50,33 +51,37 @@ export default function WellnessAndSpaPage() {
         </div>
       </section>
 
-      <div className="bg-background">
-        <div className="container max-w-7xl px-4 py-16">
-          <section className="mb-16 text-center max-w-4xl mx-auto">
-             <h2 className="font-headline text-3xl text-spa-primary">A Philosophy of Personalized Healing</h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              At Rody Wellness, we believe that true well-being comes from a holistic approach. Our SPA philosophy is rooted in the art of personalization. We don’t just offer treatments; we curate therapeutic journeys designed to meet your unique needs. From ancient techniques that have stood the test of time to modern restorative therapies, each experience is a celebration of your personal health and harmony. Let our expert therapists guide you toward a state of profound peace and physical renewal.
-            </p>
-          </section>
+      <div className="bg-background py-16">
+        <div className="container max-w-7xl px-4">
+          <Card className="bg-card/50">
+            <CardContent className="p-8 md:p-12">
+              <section className="mb-16 text-center max-w-4xl mx-auto">
+                <h2 className="font-headline text-3xl text-spa-primary">A Philosophy of Personalized Healing</h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  At Rody Wellness, we believe that true well-being comes from a holistic approach. Our SPA philosophy is rooted in the art of personalization. We don’t just offer treatments; we curate therapeutic journeys designed to meet your unique needs. From ancient techniques that have stood the test of time to modern restorative therapies, each experience is a celebration of your personal health and harmony. Let our expert therapists guide you toward a state of profound peace and physical renewal.
+                </p>
+              </section>
 
-          <main className="space-y-16">
-            <section id="massage">
-              <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Massage Therapy</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {massageServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} theme="spa" />
-                ))}
-              </div>
-            </section>
-            <section id="body-treatments">
-              <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Body Treatments</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {bodyServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} theme="spa" />
-                ))}
-              </div>
-            </section>
-          </main>
+              <main className="space-y-16">
+                <section id="massage">
+                  <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Massage Therapy</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {massageServices.map((service) => (
+                      <ServiceCard key={service.id} service={service} theme="spa" />
+                    ))}
+                  </div>
+                </section>
+                <section id="body-treatments">
+                  <h2 className="font-headline text-3xl md:text-4xl text-spa-primary mb-10 text-center">Body Treatments</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {bodyServices.map((service) => (
+                      <ServiceCard key={service.id} service={service} theme="spa" />
+                    ))}
+                  </div>
+                </section>
+              </main>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </>
