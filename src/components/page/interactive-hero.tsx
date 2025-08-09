@@ -18,12 +18,9 @@ const CustomHandle = () => (
 );
 
 
-const HeroPanel = ({ title, description, href, buttonText, theme, position }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty', position: 'left' | 'right' }) => {
+const HeroPanel = ({ title, description, href, buttonText, theme }: { title: string; description:string; href: string; buttonText: string, theme: 'spa' | 'beauty' }) => {
     return (
-        <div className={cn(
-            "absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 z-10 pointer-events-none",
-             position === 'left' ? 'w-1/2 left-0' : 'w-1/2 right-0'
-            )}>
+        <div className="w-full h-full flex flex-col items-center justify-center text-center text-white p-4">
              <div className="bg-black/50 p-8 rounded-lg animate-fade-in-up animation-delay-500">
                 <h1 className="font-headline text-4xl md:text-5xl lg:text-7xl font-bold">
                     {title}
@@ -52,44 +49,48 @@ export function InteractiveHero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-        <HeroPanel 
-            title="Wellness & SPA" 
-            description="Melt away stress and find your balance with our therapeutic massages and body treatments."
-            href="/services/massage"
-            buttonText='Explore SPA'
-            theme="spa"
-            position="left"
-        />
-
         <ReactCompareSlider
             handle={<CustomHandle />}
             itemOne={
-                <ReactCompareSliderImage 
-                    src={spaImage} 
-                    alt="Wellness & SPA" 
-                    className="w-full h-full object-cover animate-ken-burns"
-                />
+                <div className="relative w-full h-full">
+                    <ReactCompareSliderImage 
+                        src={spaImage} 
+                        alt="Wellness & SPA" 
+                        className="w-full h-full object-cover animate-ken-burns"
+                    />
+                    <div className="absolute inset-0 pointer-events-none">
+                        <HeroPanel 
+                            title="Wellness & SPA" 
+                            description="Melt away stress and find your balance with our therapeutic massages and body treatments."
+                            href="/services/massage"
+                            buttonText='Explore SPA'
+                            theme="spa"
+                        />
+                    </div>
+                </div>
             }
             itemTwo={
-                <ReactCompareSliderImage 
-                    src={beautyImage} 
-                    alt="Beauty & Nails" 
-                    className="w-full h-full object-cover animate-ken-burns"
-                />
+                 <div className="relative w-full h-full">
+                    <ReactCompareSliderImage 
+                        src={beautyImage} 
+                        alt="Beauty & Nails" 
+                        className="w-full h-full object-cover animate-ken-burns"
+                    />
+                     <div className="absolute inset-0 pointer-events-none">
+                        <HeroPanel 
+                            title="Beauty & Nails" 
+                            description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
+                            href="/services/facials"
+                            buttonText='Explore Beauty'
+                            theme="beauty"
+                        />
+                    </div>
+                </div>
             }
             style={{
                 width: '100%',
                 height: '100%',
             }}
-        />
-
-        <HeroPanel 
-            title="Beauty & Nails" 
-            description="Enhance your natural radiance with our expert facials, lash artistry, and pristine nail care."
-            href="/services/facials"
-            buttonText='Explore Beauty'
-            theme="beauty"
-            position="right"
         />
     </section>
   );
