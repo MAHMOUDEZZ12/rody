@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
-const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/high-quality-spa.jpg?alt=media&token=c191a32a-abce-4a7b-8356-02e48c48a804";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/high-quality-beauty.jpg?alt=media&token=7c1c5a1a-0e3a-4e3a-867c-941913c7a3dd";
+const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-2%20(1).png?alt=media&token=6626e426-3886-44ec-ac73-ac1a3fd5591e";
+const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-3%20(2).png?alt=media&token=97ed2705-acc6-4297-8527-3aae62a4927e";
 
 
 const CustomHandle = () => (
