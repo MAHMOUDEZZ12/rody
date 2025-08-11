@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
 import { SectionTitle } from '@/components/section-title';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
 async function HeroImage() {
@@ -46,10 +46,7 @@ export default function BeautyPage() {
         </Suspense>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
-          <h1 className="font-headline text-4xl md:text-6xl font-bold text-beauty-primary">Artistry in Beauty</h1>
-          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
-            Enhance your natural radiance with our suite of expert beauty treatments, from advanced facials to flawless nail and lash artistry.
-          </p>
+          {/* Text removed as it's in the image */}
         </div>
       </section>
 
@@ -58,10 +55,16 @@ export default function BeautyPage() {
           <Card className="bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
               <section className="mb-16 text-center max-w-4xl mx-auto">
-                <h2 className="font-headline text-3xl text-beauty-primary">A Commitment to Radiance</h2>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  At Rody Wellness, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
-                </p>
+                <Card className="bg-card/50">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-3xl text-beauty-primary">A Commitment to Radiance</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="mt-4 text-lg text-muted-foreground">
+                        At Rody Wellness, we believe beauty is an art form. Our approach is centered on enhancing your unique features with meticulous care and high-quality products. Whether you seek a glowing complexion, perfectly sculpted nails, or captivating lashes, our master technicians are dedicated to delivering results that are both beautiful and personal. We blend modern techniques with timeless elegance to help you look and feel your absolute best.
+                        </p>
+                    </CardContent>
+                </Card>
               </section>
 
               <main className="space-y-16">

@@ -6,7 +6,7 @@ import { Gift, ArrowRight } from 'lucide-react';
 
 export function ReferralBanner() {
   return (
-    <Card className="bg-gradient-to-r from-primary/10 to-accent/5">
+    <Card className="bg-gradient-to-r from-primary/10 to-accent/50">
       <CardContent className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8">
         <div className="flex items-center gap-6">
             <div className="hidden sm:block">
@@ -17,13 +17,13 @@ export function ReferralBanner() {
                     Share the Sanctuary, Get Rewards
                 </h2>
                 <p className="mt-2 text-lg text-muted-foreground">
-                    Introduce friends to Rody Wellness and you both get 50 AED off.
+                    Introduce friends to Rody Wellness and you both get 50 AED off. It's simple with your Sure by Rody card!
                 </p>
             </div>
         </div>
         <Button asChild size="lg" className="rounded-full font-bold text-base px-8 py-6 flex-shrink-0">
           <Link href="/referral">
-            Learn More <ArrowRight className="ml-2 h-5 w-5" />
+            Get Your Code <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
       </CardContent>

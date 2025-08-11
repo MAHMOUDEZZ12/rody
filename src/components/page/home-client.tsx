@@ -5,13 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Sparkles } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
@@ -24,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ReferralBanner } from '../referral-banner';
 
 function HeroImage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -215,45 +209,37 @@ export function HomeClient() {
           </div>
         </div>
       </section>
+      
+      <section className="py-16 md:py-24 container max-w-7xl">
+        <ReferralBanner />
+      </section>
 
       <section id="testimonials" className="py-16 md:py-24 bg-card/50">
-        <div className="container max-w-5xl px-4">
+        <div className="container max-w-7xl px-4">
            <SectionTitle title="Words of Wellness" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            className="w-full mt-12"
-          >
-            <CarouselContent>
-              {testimonials.map((testimonial, index) => (
-                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="p-4 h-full">
-                       <Card className="text-center bg-white/80 backdrop-blur-sm shadow-lg h-full flex flex-col">
-                        <CardContent className="p-8 flex-grow">
-                           <div className="flex justify-center mb-4">
+          <div className="relative mt-12">
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                {testimonials.map((testimonial, index) => (
+                    <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg break-inside-avoid">
+                        <CardContent className="p-6">
+                           <div className="flex justify-center mb-2">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                              <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                             ))}
                           </div>
-                          <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                          <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
                         </CardContent>
                         <CardHeader className="pt-0">
-                          <CardTitle className="font-body text-lg font-bold">{testimonial.name}</CardTitle>
-                          <CardDescription className="text-muted-foreground">{testimonial.service}</CardDescription>
+                          <CardTitle className="font-body text-base font-bold">{testimonial.name}</CardTitle>
+                          <CardDescription className="text-sm text-muted-foreground">{testimonial.service}</CardDescription>
                         </CardHeader>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-              ))}
-            </CarouselContent>
-             <CarouselPrevious className="hidden sm:flex -left-4" />
-            <CarouselNext className="hidden sm:flex -right-4" />
-          </Carousel>
+                    </Card>
+                ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>

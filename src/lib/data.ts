@@ -208,6 +208,49 @@ export const services: Service[] = [
     professionals: ['prof2', 'prof4'],
     addons: [...facialAddons, ...generalAddons],
   },
+  // Eyelash Services
+  {
+    id: 'eyelash-classic',
+    name: 'Classic Full Set',
+    description: 'Enhance your natural lashes with a classic full set.',
+    longDescription: 'The classic full set offers a timeless and elegant enhancement to your natural lashes. One individual extension is applied to each natural lash, adding length and curl for a flawless mascara-like effect that lasts for weeks.',
+    price: 299,
+    originalPrice: 350,
+    duration: 90,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'eyelash extensions',
+    category: 'Eyelashes',
+    professionals: ['prof2'],
+    addons: [],
+  },
+  {
+    id: 'eyelash-russian',
+    name: 'Russian Volume Set',
+    description: 'For a dramatic, full, and fluffy lash line.',
+    longDescription: 'Achieve maximum glamour with our Russian Volume set. Our technicians create handmade fans of ultra-fine extensions to apply to each natural lash, resulting in a dense, dark, and fluffy lash line that is surprisingly lightweight and comfortable.',
+    price: 399,
+    originalPrice: 450,
+    duration: 120,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'volume lashes',
+    category: 'Eyelashes',
+    professionals: ['prof2'],
+    addons: [],
+  },
+  {
+    id: 'eyelash-lift',
+    name: 'Lash Lift & Tint',
+    description: 'Lift and curl your natural lashes for a wide-eyed look.',
+    longDescription: 'A lash lift is a semi-permanent treatment that gives your natural lashes an illusion of being perfectly curled, longer, and darker. It\'s a fantastic alternative to eyelash extensions, with no aftercare required. Includes a tint to darken the lashes.',
+    price: 250,
+    originalPrice: 290,
+    duration: 60,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'lash lift',
+    category: 'Eyelashes',
+    professionals: ['prof2', 'prof4'],
+    addons: [],
+  },
 ];
 
 export const professionals: Professional[] = [
@@ -306,17 +349,92 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Jessica M.',
     quote: 'Absolutely in love with my lashes. They look so natural yet full. Waking up like this is the best feeling. Highly recommend!',
-    service: 'Russian Full Set Lashes',
+    service: 'Russian Volume Set',
   },
   {
     name: 'Yasmin A.',
     quote: 'My skin feels amazing after the hydrating facial. So plump and glowing! It was the perfect treat before my event.',
-    service: 'Deep Hydrating Facial',
+    service: 'Anti-Aging Facial',
   },
   {
     name: 'Fatima R.',
     quote: 'The couples massage was the perfect anniversary gift. It was so special to share that experience. We both left feeling completely renewed.',
-    service: 'Couples Relaxation Massage',
+    service: 'Couple\'s Retreat Package',
+  },
+  {
+    name: 'Noor S.',
+    quote: 'The Sure by Rody card is genius. So easy to book and the offers are fantastic. I feel like a real VIP.',
+    service: 'Sure by Rody Membership',
+  },
+  {
+    name: 'Layla H.',
+    quote: 'I booked the "Beauty Boost" package and felt like a new woman. The convenience of having everything done at home is unbeatable.',
+    service: 'Beauty Boost Package',
+  },
+  {
+    name: 'Mariam B.',
+    quote: 'The sports massage was exactly what I needed after a tough week of workouts. The therapist really knew what she was doing.',
+    service: 'Sports Massage',
+  },
+  {
+    name: 'Hessa Al M.',
+    quote: 'Professional, punctual, and perfect results. The gel overlay is flawless and has lasted for weeks without a single chip.',
+    service: 'Gel Overlay',
+  },
+  {
+    name: 'Rania G.',
+    quote: 'The referral program is such a great idea! My friend got a discount and I got credit. Win-win!',
+    service: 'Referral Program',
+  },
+  {
+    name: 'Zainab F.',
+    quote: 'I was hesitant about at-home services, but Rody Wellness exceeded all my expectations. The setup is so professional.',
+    service: 'Deep Tissue Massage',
+  },
+  {
+    name: 'Dana W.',
+    quote: 'The lash lift and tint is my new favourite treatment. My eyes look so open and awake without any makeup.',
+    service: 'Lash Lift & Tint',
+  },
+  {
+    name: 'Sonia P.',
+    quote: 'The booking process was so simple with just my WhatsApp number. Love how modern and easy this is.',
+    service: 'Sure by Rody Booking',
+  },
+  {
+    name: 'Farah I.',
+    quote: 'The Anti-Aging facial left my skin looking brighter and firmer. I could see a difference immediately.',
+    service: 'Anti-Aging Facial',
+  },
+  {
+    name: 'Maya N.',
+    quote: 'From the booking to the therapist arriving on time, the entire experience was seamless and luxurious. 10/10.',
+    service: 'Relaxation Massage',
+  },
+  {
+    name: 'Chloe T.',
+    quote: 'My polygel extensions are stunning. So much lighter than acrylics but just as strong. I am obsessed!',
+    service: 'Polygel Extensions',
+  },
+  {
+    name: ' Aisha Q.',
+    quote: 'Finally, a wellness service that fits into my busy schedule. The quality of the at-home service is just as good, if not better, than a hotel spa.',
+    service: 'Combo Mani + Pedi',
+  },
+  {
+    name: 'Gabriela C.',
+    quote: 'The therapist was so kind and made me feel comfortable immediately. A truly five-star experience from start to finish.',
+    service: 'Relaxation Massage',
+  },
+  {
+    name: 'Hind A.',
+    quote: 'I love that I can get all my beauty treatments done in one place, in the comfort of my own home. Rody Wellness is a lifesaver.',
+    service: 'Classic Full Set',
+  },
+  {
+    name: 'Reem K.',
+    quote: 'The "Glow Up" package is my pre-vacation ritual. My skin has never looked better. Worth every dirham!',
+    service: 'The Glow Up Package',
   },
 ];
 
