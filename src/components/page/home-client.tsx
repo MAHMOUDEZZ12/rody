@@ -18,9 +18,36 @@ import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
+import { Suspense, useEffect, useState } from 'react';
+import { Skeleton } from '../ui/skeleton';
+import { generateVideo } from '@/ai/flows/generate-video-flow';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 
-const heroImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-2%20(1).png?alt=media&token=6626e426-3886-44ec-ac73-ac1a3fd5591e";
-const beautyImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-3%20(2).png?alt=media&token=97ed2705-acc6-4297-8527-3aae62a4927e";
+
+function HeroVideo() {
+    const [videoUrl, setVideoUrl] = useState<string | null>(null);
+
+    useEffect(() => {
+        generateVideo({ prompt: 'A cinematic, slow-motion shot of a luxurious and serene spa setting. Soft, natural light streams through a window, illuminating floating flower petals in a pristine bowl of water. Focus on details like steaming towels, smooth massage stones, and elegant orchid flowers. The overall mood is tranquil, minimalist, and high-end.'})
+        .then(setVideoUrl)
+        .catch(console.error);
+    }, []);
+
+    if (!videoUrl) {
+        return <Skeleton className="absolute inset-0 w-full h-full z-0" />;
+    }
+
+    return (
+        <video
+            src={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
+        />
+    )
+}
 
 export function HomeClient() {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
@@ -29,14 +56,9 @@ export function HomeClient() {
   return (
     <div className="flex flex-col">
        <section className="relative h-[80vh] w-full flex items-center justify-center text-center text-white p-4 overflow-hidden">
-        <Image
-          src={heroImage}
-          alt="Serene wellness background"
-          fill
-          className="object-cover z-0"
-          priority
-          data-ai-hint="wellness spa"
-        />
+        <Suspense fallback={<Skeleton className="absolute inset-0 w-full h-full z-0" />}>
+            <HeroVideo />
+        </Suspense>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
            <div className="bg-black/50 p-8 rounded-lg shadow-2xl backdrop-blur-sm border border-white/20">
@@ -47,7 +69,7 @@ export function HomeClient() {
               Experience luxurious, five-star spa and beauty treatments in the comfort and privacy of your own home.
             </p>
              <Button asChild size="lg" className="mt-8 rounded-full font-bold text-base px-8 py-6">
-                <Link href="/packages">Explore Packages</Link>
+                <Link href="/packages">Book Now</Link>
              </Button>
           </div>
         </div>

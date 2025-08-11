@@ -2,6 +2,7 @@
 
 
 
+
 export type Addon = {
   id: string;
   name: string;
@@ -604,6 +605,15 @@ export const packages: Package[] = [
     dataAiHint: 'glowing skin',
     services: ['Arabica Coffee Scrub', 'Anti-Aging Facial'],
   },
+  {
+    id: 'pkg-couples-retreat',
+    name: 'Couple\'s Retreat',
+    description: 'Share a serene experience with a massage and facial for two.',
+    price: 850,
+    originalPrice: 963,
+    dataAiHint: 'romantic spa setting',
+    services: ['Couples Relaxation Massage', 'Deep Hydrating Facial'],
+  }
 ];
 
 export const testimonials: Testimonial[] = [
