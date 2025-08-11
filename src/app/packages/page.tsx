@@ -1,7 +1,7 @@
 
 import { packages } from '@/lib/data';
 import { PackageCard } from '@/components/package-card';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
 
 export const metadata = {

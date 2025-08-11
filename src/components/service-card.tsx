@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Clock, Gift, Sparkles, Tag } from 'lucide-react';
+import { ArrowRight, Clock, Sparkles, Tag } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {

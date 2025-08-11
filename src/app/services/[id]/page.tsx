@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, Suspense, useEffect } from 'react';
@@ -13,7 +14,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users, Sparkles, Truck, CreditCard, Radio } from 'lucide-react';
+import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users, Sparkles, Truck, CreditCard, Radio, CheckCircle } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -108,6 +109,25 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
     });
   }
 
+  const whatToExpect = [
+    {
+      title: 'Therapist Arrival',
+      description: 'Your certified therapist will arrive at your location within a 15-minute window of your booking time, fully equipped with a professional massage table, fresh linens, and all necessary products.',
+    },
+    {
+      title: 'Space Setup',
+      description: 'We require a small, clean, and quiet space (approx. 2x3 meters) to set up. Your therapist will transform your room into a serene spa environment in minutes.',
+    },
+    {
+      title: 'Your Comfort',
+      description: 'For massages and body treatments, you can undress to your comfort level. You will be professionally draped at all times, ensuring your privacy and comfort throughout the session.',
+    },
+    {
+      title: 'Payment',
+      description: 'Once your treatment is complete and you are fully satisfied, payment can be settled with your therapist via cash, credit card machine, or a secure payment link.',
+    },
+  ];
+
   return (
     <div className="container max-w-7xl px-4 py-12">
       <Button variant="ghost" onClick={() => router.back()} className="mb-8">
@@ -168,10 +188,28 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                 )}
             </CardContent>
           </Card>
+
+           <section className="mt-12">
+            <h2 className="font-headline text-3xl text-primary mb-6">What to Expect</h2>
+            <div className="space-y-6">
+              {whatToExpect.map((item, index) => (
+                <Card key={index} className="bg-card/80">
+                  <CardContent className="flex items-start gap-4 p-6">
+                    <CheckCircle className="w-8 h-8 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-bold text-lg">{item.title}</h3>
+                      <p className="text-muted-foreground">{item.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
         </div>
 
         <div className="md:col-span-2">
-          <Card className="shadow-lg bg-white/80 backdrop-blur-sm">
+          <Card className="shadow-lg bg-white/80 backdrop-blur-sm sticky top-24">
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>

@@ -33,8 +33,8 @@ export const metadata = {
 };
 
 export default function WellnessAndSpaPage() {
-  const massageServices = services.filter(s => s.category === 'Massage' && !s.id.endsWith('-page'));
-  const bodyServices = services.filter(s => s.category === 'Body Treatments' && !s.id.endsWith('-page'));
+  const massageServices = services.filter(s => s.category === 'Massage');
+  const bodyServices = services.filter(s => s.category === 'Body Treatments');
 
 
   return (
@@ -67,8 +67,8 @@ export default function WellnessAndSpaPage() {
                 <section id="massage">
                   <SectionTitle title="Massage Therapy" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                    {massageServices.map((service) => (
-                      <ServiceCard key={service.id} service={service} theme="spa" />
+                    {massageServices.map((service, index) => (
+                      <ServiceCard key={service.id} service={service} theme="spa" highlight={index === 0} />
                     ))}
                   </div>
                 </section>

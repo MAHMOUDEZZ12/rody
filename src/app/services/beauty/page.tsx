@@ -34,9 +34,9 @@ export const metadata = {
 };
 
 export default function BeautyPage() {
-  const facialServices = services.filter(s => s.category === 'Facials' && !s.id.endsWith('-page'));
-  const nailServices = services.filter(s => s.category === 'Nails' && !s.id.endsWith('-page'));
-  const eyelashServices = services.filter(s => s.category === 'Eyelashes' && !s.id.endsWith('-page'));
+  const facialServices = services.filter(s => s.category === 'Facials');
+  const nailServices = services.filter(s => s.category === 'Nails');
+  const eyelashServices = services.filter(s => s.category === 'Eyelashes');
 
   return (
     <>
@@ -71,8 +71,8 @@ export default function BeautyPage() {
                 <section id="facials">
                   <SectionTitle title="Facial Treatments" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                    {facialServices.map((service) => (
-                      <ServiceCard key={service.id} service={service} theme="beauty"/>
+                    {facialServices.map((service, index) => (
+                      <ServiceCard key={service.id} service={service} theme="beauty" highlight={index === 0}/>
                     ))}
                   </div>
                 </section>
