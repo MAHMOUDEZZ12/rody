@@ -458,8 +458,8 @@ export const professionals: Professional[] = [
 export const packages: Package[] = [
   {
     id: 'pkg-total-relaxation',
-    name: 'Total Relaxation',
-    description: 'Melt away stress with a full body massage and a rejuvenating facial.',
+    name: 'Sure: Total Relaxation',
+    description: 'The ultimate de-stress. Melt away tension with a full body massage and a deeply rejuvenating facial, curated by our team of experts.',
     price: 599,
     originalPrice: 690,
     dataAiHint: 'serene spa products',
@@ -467,8 +467,8 @@ export const packages: Package[] = [
   },
   {
     id: 'pkg-beauty-boost',
-    name: 'Beauty Boost',
-    description: 'Get ready for any occasion with our ultimate beauty combination.',
+    name: 'Sure: Beauty Boost',
+    description: 'Your one-stop for event-ready glamour. We pair a perfect mani-pedi with an eye-opening lash lift for a complete look.',
     price: 450,
     originalPrice: 529,
     dataAiHint: 'makeup brushes',
@@ -476,8 +476,8 @@ export const packages: Package[] = [
   },
   {
     id: 'pkg-glow-up',
-    name: 'The Glow Up',
-    description: 'Reveal radiant skin from head to toe with this exfoliating package.',
+    name: 'Sure: The Glow Up',
+    description: 'Reveal your most radiant skin. This package combines our best exfoliating treatments for a head-to-toe, healthy glow.',
     price: 450,
     originalPrice: 530,
     dataAiHint: 'glowing skin',
@@ -485,8 +485,8 @@ export const packages: Package[] = [
   },
   {
     id: 'pkg-couples-retreat',
-    name: 'Couple\'s Retreat',
-    description: 'Share a serene experience with a massage and facial for two.',
+    name: 'Sure: Couple\'s Retreat',
+    description: 'Share a moment of serenity. This package includes a personalized massage and facial for two, experienced side-by-side.',
     price: 850,
     originalPrice: 963,
     dataAiHint: 'romantic spa setting',

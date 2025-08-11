@@ -40,6 +40,27 @@ function HeroImage({
 export function InteractiveHero() {
     return (
         <section className="relative h-[80vh] w-full text-white">
+            <style jsx global>{`
+                .rcs-handle-root {
+                    width: 48px !important;
+                    height: 48px !important;
+                }
+                .rcs-handle-root button {
+                    background-color: rgba(255, 255, 255, 0.8) !important;
+                    backdrop-filter: blur(4px) !important;
+                    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+                    border: 2px solid white !important;
+                }
+                .rcs-handle-root button div {
+                    background-color: hsl(var(--primary)) !important;
+                    height: 24px !important;
+                }
+                 .rcs-handle-root button svg {
+                    color: hsl(var(--primary)) !important;
+                    width: 18px !important;
+                    height: 18px !important;
+                }
+            `}</style>
             <ReactCompareSlider
                 itemOne={
                     <Suspense fallback={<Skeleton className="w-full h-full" />}>

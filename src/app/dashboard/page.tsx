@@ -8,18 +8,35 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { Gift, History, Star, Ticket, Sparkles } from 'lucide-react';
+import { Gift, History, Star, Ticket, Sparkles, Share2, Clock } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/');
     }
   }, [user, loading, router]);
+
+  const handleExtend = () => {
+    toast({
+        title: "Offer Extended!",
+        description: "This offer is now valid for another 30 days.",
+    });
+  }
+
+  const handleShare = () => {
+    navigator.clipboard.writeText("Check out this amazing offer from Rody Wellness!");
+    toast({
+        title: "Link Copied!",
+        description: "Share the offer with your friends.",
+    });
+  }
 
   if (loading || !user) {
     return (
@@ -47,7 +64,7 @@ export default function DashboardPage() {
                     Welcome to Sure
                 </h1>
                 <p className="mt-2 text-lg text-muted-foreground">
-                    Your personal space for exclusive offers and wellness rewards.
+                    Your personal space for exclusive offers and wellness rewards. With Sure, it's a sure thing you'll always find the best price.
                 </p>
             </div>
         </div>
@@ -65,23 +82,35 @@ export default function DashboardPage() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <div className="flex justify-between items-center p-4 border rounded-lg bg-accent/50">
-                    <div>
-                        <h3 className="font-bold text-lg">Save 15% on any Massage</h3>
-                        <p className="text-sm text-muted-foreground">Expires: 31 Dec, 2024</p>
+                <div className="p-4 border rounded-lg bg-accent/50">
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <h3 className="font-bold text-lg">Save 15% on any Massage</h3>
+                            <p className="text-sm text-muted-foreground">Expires: 31 Dec, 2024</p>
+                        </div>
+                        <Button asChild size="sm">
+                            <Link href="/services/wellness-and-spa">Book Now</Link>
+                        </Button>
                     </div>
-                    <Button asChild>
-                        <Link href="/services/wellness-and-spa">Book Now</Link>
-                    </Button>
+                    <div className="flex items-center gap-2 mt-4 border-t pt-3">
+                        <Button onClick={handleShare} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                        <Button onClick={handleExtend} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
+                    </div>
                 </div>
-                 <div className="flex justify-between items-center p-4 border rounded-lg bg-accent/50">
-                    <div>
-                        <h3 className="font-bold text-lg">Free 24K Gold Mask Add-on</h3>
-                        <p className="text-sm text-muted-foreground">with any Anti-Aging Facial</p>
+                 <div className="p-4 border rounded-lg bg-accent/50">
+                     <div className="flex justify-between items-start">
+                        <div>
+                            <h3 className="font-bold text-lg">Free 24K Gold Mask Add-on</h3>
+                            <p className="text-sm text-muted-foreground">with any Anti-Aging Facial</p>
+                        </div>
+                         <Button asChild size="sm">
+                             <Link href="/services/facials">Book Now</Link>
+                        </Button>
                     </div>
-                    <Button asChild>
-                         <Link href="/services/facials">Book Now</Link>
-                    </Button>
+                     <div className="flex items-center gap-2 mt-4 border-t pt-3">
+                        <Button onClick={handleShare} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                        <Button onClick={handleExtend} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
+                    </div>
                 </div>
             </CardContent>
         </Card>
