@@ -59,117 +59,121 @@ export default function ReferralPage() {
       </header>
       
       <main>
-        <section className="py-12">
-            <Card className="bg-card/50">
-              <CardHeader className="text-center">
-                <CardTitle className="font-headline text-2xl">Your Personal Referral Code</CardTitle>
-                <CardDescription>Share this code with friends. They get 50 AED off, you get 50 AED credit!</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                {loading ? (
-                  <Skeleton className="h-12 w-64 mx-auto" />
-                ) : user ? (
-                  <div className="flex items-center justify-center gap-4 p-4 border-2 border-dashed border-primary rounded-lg max-w-md mx-auto">
-                    <span className="text-3xl font-bold tracking-widest text-primary">{referralCode}</span>
-                    <Button onClick={copyToClipboard} variant="ghost" size="icon">
-                      <Copy className="h-6 w-6" />
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <p className="text-lg text-muted-foreground mb-4">Log in to get your personal referral code.</p>
-                    <Button asChild size="lg" className="rounded-full font-bold">
-                        <Link href="/login">Login or Sign Up</Link>
-                    </Button>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-        </section>
+        <Card className="bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-8 md:p-12">
+                <section className="py-12">
+                    <Card className="bg-card/50">
+                    <CardHeader className="text-center">
+                        <CardTitle className="font-headline text-2xl">Your Personal Referral Code</CardTitle>
+                        <CardDescription>Share this code with friends. They get 50 AED off, you get 50 AED credit!</CardDescription>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                        {loading ? (
+                        <Skeleton className="h-12 w-64 mx-auto" />
+                        ) : user ? (
+                        <div className="flex items-center justify-center gap-4 p-4 border-2 border-dashed border-primary rounded-lg max-w-md mx-auto">
+                            <span className="text-3xl font-bold tracking-widest text-primary">{referralCode}</span>
+                            <Button onClick={copyToClipboard} variant="ghost" size="icon">
+                            <Copy className="h-6 w-6" />
+                            </Button>
+                        </div>
+                        ) : (
+                        <div className="text-center">
+                            <p className="text-lg text-muted-foreground mb-4">Log in to get your personal referral code.</p>
+                            <Button asChild size="lg" className="rounded-full font-bold">
+                                <Link href="/login">Login or Sign Up</Link>
+                            </Button>
+                        </div>
+                        )}
+                    </CardContent>
+                    </Card>
+                </section>
 
-        <section id="how-it-works" className="py-12">
-             <h2 className="font-headline text-3xl text-primary text-center mb-10">A Simple Path to Rewards</h2>
-             <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div className="flex flex-col items-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
-                        <Send className="w-10 h-10 text-primary" />
+                <section id="how-it-works" className="py-12">
+                    <h2 className="font-headline text-3xl text-primary text-center mb-10">A Simple Path to Rewards</h2>
+                    <div className="grid md:grid-cols-3 gap-8 text-center">
+                        <div className="flex flex-col items-center">
+                            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
+                                <Send className="w-10 h-10 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">1. Share Your Code</h3>
+                            <p className="text-muted-foreground">Log in to your profile to find your personal referral code. Share it with friends who are new to Rody Wellness.</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
+                                <Gift className="w-10 h-10 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">2. Your Friend Gets a Gift</h3>
+                            <p className="text-muted-foreground">Your friend uses your code at checkout to receive **50 AED off** their first treatment. A perfect welcome!</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
+                                <Star className="w-10 h-10 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">3. You Get Rewarded!</h3>
+                            <p className="text-muted-foreground">Once their appointment is complete, a **50 AED credit** is automatically added to your account for your next booking.</p>
+                        </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">1. Share Your Code</h3>
-                    <p className="text-muted-foreground">Log in to your profile to find your personal referral code. Share it with friends who are new to Rody Wellness.</p>
-                </div>
-                 <div className="flex flex-col items-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
-                        <Gift className="w-10 h-10 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">2. Your Friend Gets a Gift</h3>
-                    <p className="text-muted-foreground">Your friend uses your code at checkout to receive **50 AED off** their first treatment. A perfect welcome!</p>
-                </div>
-                 <div className="flex flex-col items-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary mb-4">
-                        <Star className="w-10 h-10 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">3. You Get Rewarded!</h3>
-                    <p className="text-muted-foreground">Once their appointment is complete, a **50 AED credit** is automatically added to your account for your next booking.</p>
-                </div>
-             </div>
-        </section>
+                </section>
 
-        <section id="rewards-journey" className="py-12 bg-card rounded-lg my-12">
-            <div className="container max-w-4xl">
-                 <h2 className="font-headline text-3xl text-primary text-center mb-10">Your Rewards Journey</h2>
-                 <div className="grid md:grid-cols-3 gap-8">
-                    <Card className="text-center">
-                        <CardHeader>
-                            <UserPlus className="w-12 h-12 mx-auto text-primary" />
-                            <CardTitle className="font-headline text-2xl pt-4">First Referral</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                           <p className="text-3xl font-bold text-foreground">Give 50, Get 50</p>
-                           <p className="text-muted-foreground mt-2">You both get 50 AED credit. A simple and beautiful thank you.</p>
-                        </CardContent>
-                    </Card>
-                     <Card className="text-center border-primary/50 shadow-primary/10 shadow-lg">
-                        <CardHeader>
-                            <Award className="w-12 h-12 mx-auto text-primary" />
-                            <CardTitle className="font-headline text-2xl pt-4">Wellness Ambassador</CardTitle>
-                             <p className="text-sm text-muted-foreground">(3 Successful Referrals)</p>
-                        </CardHeader>
-                        <CardContent>
-                           <p className="text-3xl font-bold text-foreground">Bonus 75 AED Credit</p>
-                           <p className="text-muted-foreground mt-2">Receive a bonus 75 AED credit as a special thank you for your loyalty.</p>
-                        </CardContent>
-                    </Card>
-                     <Card className="text-center">
-                        <CardHeader>
-                            <Star className="w-12 h-12 mx-auto text-primary" />
-                            <CardTitle className="font-headline text-2xl pt-4">Rody VIP</CardTitle>
-                             <p className="text-sm text-muted-foreground">(5 Successful Referrals)</p>
-                        </CardHeader>
-                        <CardContent>
-                           <p className="text-3xl font-bold text-foreground">Free Massage</p>
-                           <p className="text-muted-foreground mt-2">Enjoy a complimentary 60-Min Relaxation Massage (a 300 AED value) on us.</p>
-                        </CardContent>
-                    </Card>
-                 </div>
-                 <p className="text-center text-muted-foreground mt-8 text-sm">*After your fifth referral, your rewards journey resets, and you can begin a new path to achieving Rody VIP status all over again!</p>
-            </div>
-        </section>
-        
-        <section id="faq" className="py-12">
-             <h2 className="font-headline text-3xl text-primary text-center mb-10">Frequently Asked Questions</h2>
-            <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto">
-              {referralFAQs.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-left text-lg hover:no-underline">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-base text-muted-foreground">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-        </section>
+                <section id="rewards-journey" className="py-12 bg-card rounded-lg my-12">
+                    <div className="container max-w-4xl">
+                        <h2 className="font-headline text-3xl text-primary text-center mb-10">Your Rewards Journey</h2>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <Card className="text-center">
+                                <CardHeader>
+                                    <UserPlus className="w-12 h-12 mx-auto text-primary" />
+                                    <CardTitle className="font-headline text-2xl pt-4">First Referral</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                <p className="text-3xl font-bold text-foreground">Give 50, Get 50</p>
+                                <p className="text-muted-foreground mt-2">You both get 50 AED credit. A simple and beautiful thank you.</p>
+                                </CardContent>
+                            </Card>
+                            <Card className="text-center border-primary/50 shadow-primary/10 shadow-lg">
+                                <CardHeader>
+                                    <Award className="w-12 h-12 mx-auto text-primary" />
+                                    <CardTitle className="font-headline text-2xl pt-4">Wellness Ambassador</CardTitle>
+                                    <p className="text-sm text-muted-foreground">(3 Successful Referrals)</p>
+                                </CardHeader>
+                                <CardContent>
+                                <p className="text-3xl font-bold text-foreground">Bonus 75 AED Credit</p>
+                                <p className="text-muted-foreground mt-2">Receive a bonus 75 AED credit as a special thank you for your loyalty.</p>
+                                </CardContent>
+                            </Card>
+                            <Card className="text-center">
+                                <CardHeader>
+                                    <Star className="w-12 h-12 mx-auto text-primary" />
+                                    <CardTitle className="font-headline text-2xl pt-4">Rody VIP</CardTitle>
+                                    <p className="text-sm text-muted-foreground">(5 Successful Referrals)</p>
+                                </CardHeader>
+                                <CardContent>
+                                <p className="text-3xl font-bold text-foreground">Free Massage</p>
+                                <p className="text-muted-foreground mt-2">Enjoy a complimentary 60-Min Relaxation Massage (a 300 AED value) on us.</p>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <p className="text-center text-muted-foreground mt-8 text-sm">*After your fifth referral, your rewards journey resets, and you can begin a new path to achieving Rody VIP status all over again!</p>
+                    </div>
+                </section>
+                
+                <section id="faq" className="py-12">
+                    <h2 className="font-headline text-3xl text-primary text-center mb-10">Frequently Asked Questions</h2>
+                    <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto">
+                    {referralFAQs.map((item, index) => (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger className="text-left text-lg hover:no-underline">
+                            {item.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-base text-muted-foreground">
+                            {item.answer}
+                        </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                    </Accordion>
+                </section>
+            </CardContent>
+        </Card>
       </main>
     </div>
   );

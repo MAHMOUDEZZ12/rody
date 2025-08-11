@@ -108,7 +108,7 @@ export default function FAQPage() {
       </header>
 
       <main className="space-y-12">
-        <Card className="bg-card/50">
+        <Card className="bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8">
                 {faqs.map((category) => (
                 <section key={category.category} className="mb-8 last:mb-0">

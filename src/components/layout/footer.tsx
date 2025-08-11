@@ -46,7 +46,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col items-center md:items-end">
              <h3 className="font-bold font-headline text-lg mb-4">Connect With Us</h3>
-             <a href="https://wa.me/97100000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground px-4 py-2 rounded-full transition-colors">
+             <a href="https://wa.me/97100000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition-colors">
                 <WhatsAppIcon className="h-5 w-5"/>
                 <span>Chat on WhatsApp</span>
              </a>

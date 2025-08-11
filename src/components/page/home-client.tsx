@@ -3,9 +3,9 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star, Sparkles } from 'lucide-react';
-import { testimonials, packages, services } from '@/lib/data';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Star, Sparkles, ArrowRight } from 'lucide-react';
+import { testimonials, packages, services, type BlogPost, blogPosts } from '@/lib/data';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
@@ -18,33 +18,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '../referral-banner';
-
-function HeroImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({
-      title: 'Luxury Wellness Background',
-      content: 'A serene and luxurious spa-like background image, elegant and calming, suitable for a hero section.',
-      dataAiHint: 'serene spa background'
-    })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, []);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
-  return (
-    <Image
-      src={imageUrl}
-      alt="Luxury wellness background"
-      layout="fill"
-      objectFit="cover"
-      className="z-0 animate-ken-burns"
-      priority
-    />
-  );
-}
+import { InteractiveHero } from './interactive-hero';
 
 function SureBannerImage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -126,6 +100,71 @@ function SureBanner() {
     );
 }
 
+function BlogImage({ post }: { post: BlogPost }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [post]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
+  return (
+     <Image
+        src={imageUrl}
+        alt={post.title}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+  );
+}
+
+
+function BlogBanner() {
+    const latestPost = blogPosts[0];
+
+    if (!latestPost) return null;
+
+    return (
+        <section id="blog-banner" className="py-16 md:py-24">
+            <div className="container max-w-7xl px-4">
+                <SectionTitle title="From The Journal" />
+                <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+                    Explore our latest articles on wellness, beauty, and self-care rituals.
+                </p>
+                <div className="mt-12 max-w-4xl mx-auto">
+                    <Link href={`/blog/${latestPost.slug}`} className="block group">
+                        <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+                            <div className="relative h-64 md:h-full min-h-[300px]">
+                                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                    <BlogImage post={latestPost} />
+                                </Suspense>
+                            </div>
+                            <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
+                                <CardHeader>
+                                    <CardTitle className="font-headline text-3xl text-primary group-hover:underline">{latestPost.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-grow">
+                                    <p className="text-muted-foreground line-clamp-3">
+                                    {latestPost.subtitle}
+                                    </p>
+                                </CardContent>
+                                <CardFooter>
+                                    <span className="font-semibold flex items-center">
+                                    Read More <ArrowRight className="ml-2 h-4 w-4" />
+                                    </span>
+                                </CardFooter>
+                            </div>
+                        </Card>
+                    </Link>
+                </div>
+            </div>
+        </section>
+    );
+}
 
 export function HomeClient() {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
@@ -133,21 +172,7 @@ export function HomeClient() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-screen w-full flex items-center justify-center text-center p-4 overflow-hidden">
-        <div className="absolute inset-0 bg-black/30 z-10" />
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-            <HeroImage />
-        </Suspense>
-        <div className="relative z-20 animate-fade-in-up text-white">
-          <h1 className="font-headline text-5xl md:text-7xl font-bold">Your Sanctuary, Delivered</h1>
-          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
-            Experience Dubai's most luxurious at-home spa and beauty services. Ultimate convenience, uncompromising quality.
-          </p>
-          <Button asChild size="lg" className="mt-8 rounded-full font-bold px-10 py-7 text-lg">
-            <Link href="#services">Explore Services</Link>
-          </Button>
-        </div>
-      </section>
+      <InteractiveHero />
 
       <SureBanner />
 
@@ -213,6 +238,8 @@ export function HomeClient() {
       <section className="py-16 md:py-24 container max-w-7xl">
         <ReferralBanner />
       </section>
+      
+      <BlogBanner />
 
       <section id="testimonials" className="py-16 md:py-24 bg-card/50">
         <div className="container max-w-7xl px-4">
