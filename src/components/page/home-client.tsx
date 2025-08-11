@@ -27,8 +27,8 @@ function SureBannerImage() {
   useEffect(() => {
     generateBlogImage({
       title: 'Sure by Rody Card',
-      content: 'An elegant, minimalist pink card design representing an exclusive membership.',
-      dataAiHint: 'elegant pink card'
+      content: 'An elegant, minimalist pink card design representing an exclusive membership. The card should feature the text \'Sure by Rody\', a subtle sparkle icon, and a delicate floral element.',
+      dataAiHint: 'elegant pink card with flower'
     })
       .then(setImageUrl)
       .catch(console.error);
