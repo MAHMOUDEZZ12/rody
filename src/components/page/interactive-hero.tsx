@@ -5,6 +5,9 @@ import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slide
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Suspense, useEffect, useState } from 'react';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '../ui/skeleton';
 
 
 const spaImage = "https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-2%20(1).png?alt=media&token=6626e426-3886-44ec-ac73-ac1a3fd5591e";
@@ -44,30 +47,55 @@ const HeroPanel = ({ title, description, href, buttonText, theme }: { title: str
     )
 };
 
+function GeneratedHeroImage({ title, content, dataAiHint, alt }: { title: string, content: string, dataAiHint: string, alt: string }) {
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+    useEffect(() => {
+        generateBlogImage({ title, content, dataAiHint })
+            .then(setImageUrl)
+            .catch(console.error);
+    }, [title, content, dataAiHint]);
+
+    if (!imageUrl) {
+        return <Skeleton className="w-full h-full" />;
+    }
+
+    return (
+        <ReactCompareSliderImage
+            src={imageUrl}
+            alt={alt}
+        />
+    )
+}
+
 export function InteractiveHero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
-        <ReactCompareSlider
-            handle={<CustomHandle />}
-            itemOne={
-                <ReactCompareSliderImage 
-                    src={spaImage}
-                    alt="Wellness & SPA"
-                    data-ai-hint="wellness spa"
-                />
-            }
-            itemTwo={
-                <ReactCompareSliderImage 
-                    src={beautyImage}
-                    alt="Beauty & Nails" 
-                    data-ai-hint="beauty nails"
-                />
-            }
-            style={{
-                width: '100%',
-                height: '100%',
-            }}
-        />
+        <Suspense fallback={<div className="w-full h-full grid grid-cols-2"><Skeleton className="w-full h-full rounded-none" /><Skeleton className="w-full h-full rounded-none" /></div>}>
+            <ReactCompareSlider
+                handle={<CustomHandle />}
+                itemOne={
+                    <GeneratedHeroImage 
+                        title="Wellness & SPA"
+                        content="A serene, luxurious spa setting with orchids, balanced stones, and soft, natural lighting."
+                        dataAiHint="serene spa"
+                        alt="Wellness & SPA"
+                    />
+                }
+                itemTwo={
+                    <GeneratedHeroImage 
+                        title="Beauty & Nails"
+                        content="An elegant and artistic flat lay of luxury beauty products, nail polish bottles, and makeup brushes on a pink marble background."
+                        dataAiHint="luxury beauty products"
+                        alt="Beauty & Nails" 
+                    />
+                }
+                style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+            />
+        </Suspense>
         <div className="absolute inset-0 grid grid-cols-2 pointer-events-none">
             <div className="relative w-full h-full flex items-center justify-center">
                 <HeroPanel 
