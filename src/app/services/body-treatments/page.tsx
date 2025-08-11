@@ -1,3 +1,4 @@
+
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 
@@ -22,10 +23,12 @@ export default function BodyTreatmentsPage() {
       <main>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {bodyServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} theme="spa"/>
           ))}
         </div>
       </main>
     </div>
   );
 }
+
+    
