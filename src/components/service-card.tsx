@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Gift, Tag } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from './ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {
