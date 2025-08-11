@@ -21,7 +21,7 @@ async function HeroImage() {
           src={imageUrl}
           alt="Elegant beauty treatment setting"
           fill
-          className="object-cover z-0"
+          className="object-cover z-0 animate-ken-burns"
           priority
           data-ai-hint="beauty treatment"
         />

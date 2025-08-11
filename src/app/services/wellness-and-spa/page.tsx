@@ -20,7 +20,7 @@ async function HeroImage() {
           src={imageUrl}
           alt="Serene spa setting"
           fill
-          className="object-cover z-0"
+          className="object-cover z-0 animate-ken-burns"
           priority
           data-ai-hint="spa setting"
         />
