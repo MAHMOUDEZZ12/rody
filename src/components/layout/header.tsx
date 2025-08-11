@@ -57,7 +57,7 @@ export function Header() {
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <Sparkles className="h-6 w-6 text-primary"/>
-          <span className="font-headline text-xl font-bold text-primary">Sure by Rody</span>
+          <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -98,7 +98,7 @@ export function Header() {
               <div className="flex justify-between items-center mb-8">
                  <Link href="/" className="mr-6 flex items-center space-x-2">
                   <Sparkles className="h-6 w-6 text-primary" />
-                  <span className="font-bold font-headline text-lg text-primary">Sure by Rody</span>
+                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
                 </Link>
                 <SheetClose asChild>
                   <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>
@@ -148,5 +148,3 @@ export function Header() {
     </header>
   );
 }
-
-    
