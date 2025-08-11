@@ -15,14 +15,8 @@ import {
 } from '@/components/ui/accordion';
 
 export function Header() {
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
-
-  const handleLoginClick = () => {
-    // Simulate login and redirect to dashboard
-    login({ uid: '123', email: 'user@sure.com' });
-    router.push('/dashboard');
-  }
 
   const handleLogoutClick = () => {
     logout();
@@ -73,15 +67,9 @@ export function Header() {
           </Button>
         </nav>
         <div className="flex items-center gap-2">
-           {user ? (
-             <Button onClick={() => router.push('/dashboard')} variant="ghost" size="sm" className="hidden md:inline-flex">
+            <Button onClick={() => router.push('/dashboard')} variant="ghost" size="sm" className="hidden md:inline-flex">
                 <User /> My Dashboard
-              </Button>
-          ) : (
-            <Button onClick={handleLoginClick} variant="ghost" size="sm" className="hidden md:inline-flex">
-              <LogIn /> Member Access
             </Button>
-          )}
 
           <Button asChild className="hidden md:inline-flex rounded-full">
             <Link href="/packages">Book Now</Link>
@@ -137,7 +125,7 @@ export function Header() {
                       <Button onClick={() => { handleLogoutClick(); }} variant="ghost" className="w-full rounded-full">Logout</Button>
                      </>
                    ) : (
-                      <SheetClose asChild><Button onClick={handleLoginClick} variant="outline" className="w-full rounded-full">Member Access</Button></SheetClose>
+                      <SheetClose asChild><Button onClick={() => router.push('/dashboard')} variant="outline" className="w-full rounded-full">Member Access</Button></SheetClose>
                    )}
                 </div>
               </div>

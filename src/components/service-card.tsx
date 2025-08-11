@@ -74,7 +74,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
             <Tag className={cn("h-4 w-4", primaryColorClass)} />
             {isDiscounted ? (
               <div className="flex items-baseline gap-2">
-                <span className="text-primary font-bold">AED {service.price}</span>
+                <span className={cn("font-bold", primaryColorClass)}>AED {service.price}</span>
                 <span className="line-through text-muted-foreground text-xs">AED {service.originalPrice}</span>
               </div>
             ) : (

@@ -3,25 +3,21 @@
 
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { Gift, History, Star, Ticket, Sparkles, Share2, Clock } from 'lucide-react';
+import { Gift, History, Star, Ticket, Sparkles, Share2, Clock, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
 
 export default function DashboardPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, login } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/');
-    }
-  }, [user, loading, router]);
+  const [whatsappNumber, setWhatsappNumber] = useState('');
 
   const handleExtend = () => {
     toast({
@@ -38,7 +34,23 @@ export default function DashboardPage() {
     });
   }
 
-  if (loading || !user) {
+  const handleLogin = () => {
+    if (whatsappNumber.length < 10) {
+      toast({
+        title: "Invalid Number",
+        description: "Please enter a valid WhatsApp number.",
+        variant: "destructive",
+      });
+      return;
+    }
+    login({ uid: whatsappNumber, email: `${whatsappNumber}@sure.com` });
+    toast({
+      title: "Welcome to Sure!",
+      description: "You're in! Check out your exclusive offers.",
+    });
+  };
+
+  if (loading) {
     return (
       <div className="container max-w-4xl px-4 py-12">
         <div className="space-y-4">
@@ -50,6 +62,38 @@ export default function DashboardPage() {
             <Skeleton className="h-48 w-full" />
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="container max-w-2xl px-4 py-12 text-center">
+        <Card>
+          <CardHeader>
+            <div className="flex justify-center mb-4">
+              <Sparkles className="w-12 h-12 text-primary" />
+            </div>
+            <CardTitle className="font-headline text-3xl text-primary">Access Your Sure Rewards</CardTitle>
+            <CardDescription className="text-lg">Enter your WhatsApp number to view your exclusive offers and booking history.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <Input
+                type="tel"
+                placeholder="Your WhatsApp Number"
+                className="bg-white text-center"
+                value={whatsappNumber}
+                onChange={(e) => setWhatsappNumber(e.target.value)}
+              />
+              <Button onClick={handleLogin} className="w-full sm:w-auto">
+                <LogIn className="mr-2 h-4 w-4" />
+                Login with WhatsApp
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">No passwords, no hassle. Just instant access.</p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
