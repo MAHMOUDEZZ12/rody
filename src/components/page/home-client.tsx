@@ -4,7 +4,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Sparkles, ArrowRight } from 'lucide-react';
-import { testimonials, packages, services, type BlogPost, blogPosts } from '@/lib/data';
+import { testimonials, packages, services } from '@/lib/data';
+import { type BlogPost, blogPosts } from '@/lib/blog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
