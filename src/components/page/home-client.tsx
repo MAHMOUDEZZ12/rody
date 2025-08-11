@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star, Sparkles, WhatsApp } from 'lucide-react';
+import { Star, Sparkles } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
 import {
   Carousel,
@@ -18,10 +18,65 @@ import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
 import { Input } from '../ui/input';
-import { useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
+
+function HeroImage() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({
+      title: 'Luxury Wellness Background',
+      content: 'A serene and luxurious spa-like background image, elegant and calming, suitable for a hero section.',
+      dataAiHint: 'serene spa background'
+    })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, []);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
+  return (
+    <Image
+      src={imageUrl}
+      alt="Luxury wellness background"
+      layout="fill"
+      objectFit="cover"
+      className="z-0 animate-ken-burns"
+      priority
+    />
+  );
+}
+
+function SureBannerImage() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({
+      title: 'Sure by Rody Card',
+      content: 'An elegant, minimalist pink card design representing an exclusive membership.',
+      dataAiHint: 'elegant pink card'
+    })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, []);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+  
+  return (
+      <Image 
+          src={imageUrl}
+          alt="Sure by Rody card"
+          layout="fill"
+          objectFit="cover"
+      />
+  );
+}
+
 
 function SureBanner() {
     const [whatsappNumber, setWhatsappNumber] = useState('');
@@ -66,13 +121,9 @@ function SureBanner() {
                             </div>
                         </div>
                         <div className="hidden md:block relative min-h-[300px]">
-                            <Image 
-                                src="https://placehold.co/600x600.png"
-                                alt="Sure by Rody card"
-                                layout="fill"
-                                objectFit="cover"
-                                data-ai-hint="elegant pink card"
-                            />
+                           <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                <SureBannerImage />
+                            </Suspense>
                         </div>
                     </div>
                 </Card>
@@ -90,15 +141,9 @@ export function HomeClient() {
     <div className="flex flex-col">
       <section className="relative h-screen w-full flex items-center justify-center text-center p-4 overflow-hidden">
         <div className="absolute inset-0 bg-black/30 z-10" />
-        <Image 
-          src="https://placehold.co/1920x1080.png"
-          alt="Luxury wellness background"
-          layout="fill"
-          objectFit="cover"
-          className="z-0 animate-ken-burns"
-          data-ai-hint="serene spa background"
-          priority
-        />
+        <Suspense fallback={<Skeleton className="w-full h-full" />}>
+            <HeroImage />
+        </Suspense>
         <div className="relative z-20 animate-fade-in-up text-white">
           <h1 className="font-headline text-5xl md:text-7xl font-bold">Your Sanctuary, Delivered</h1>
           <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
