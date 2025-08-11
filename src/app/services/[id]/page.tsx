@@ -13,11 +13,12 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users } from 'lucide-react';
+import { ArrowLeft, CalendarIcon, Clock, DollarSign, Gem, Gift, User, Users, Sparkles, Truck, CreditCard, Radio } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
 
 function ServiceImage({ service }: { service: Service }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -48,6 +49,8 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
   const [selectedProfessionalId, setSelectedProfessionalId] = useState<string | undefined>();
   const [selectedTime, setSelectedTime] = useState<string | undefined>();
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([]);
+  const [isSureMember, setIsSureMember] = useState(false);
+  const [whatsappNumber, setWhatsappNumber] = useState('');
 
   const serviceProfessionals = useMemo(() => {
     if (!service) return [];
@@ -61,19 +64,17 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
         : [...prev, addon]
     );
   };
-
-  const totalPrice = useMemo(() => {
-    if (!service) return 0;
-    const addonsPrice = selectedAddons.reduce((total, addon) => total + addon.price, 0);
-    return service.price + addonsPrice;
-  }, [service, selectedAddons]);
   
   if (!service) {
     notFound();
   }
-
-  const isDiscounted = service.originalPrice && service.originalPrice > service.price;
   
+  const originalPrice = service.originalPrice || service.price;
+  const surePrice = service.price;
+  const addonsPrice = selectedAddons.reduce((total, addon) => total + addon.price, 0);
+
+  const totalPrice = isSureMember ? surePrice + addonsPrice : originalPrice + addonsPrice;
+
   const handleBooking = () => {
     if (!selectedDate || !selectedProfessionalId || !selectedTime) {
       toast({
@@ -85,10 +86,26 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
     }
     toast({
       title: isGifting ? "Gift Purchased!" : "Booking Confirmed!",
-      description: isGifting ? `Your gift of ${service.name} is ready.` : `Your ${service.name} is booked. You've earned ${Math.floor(totalPrice / 10)} loyalty points!`,
+      description: `Your ${service.name} is booked. Payment of AED ${totalPrice} is due on delivery.`,
       duration: 5000,
     });
-    router.push('/');
+    router.push('/dashboard');
+  }
+
+  const handleJoinSure = () => {
+    if (whatsappNumber.length < 10) {
+       toast({
+        title: "Invalid Number",
+        description: "Please enter a valid WhatsApp number.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsSureMember(true);
+    toast({
+      title: "Welcome to Sure!",
+      description: `You've unlocked the exclusive price for ${service.name}.`,
+    });
   }
 
   return (
@@ -103,31 +120,58 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
             <Suspense fallback={<Skeleton className="w-full h-full" />}>
               <ServiceImage service={service} />
             </Suspense>
-             {isDiscounted && (
-              <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3">SALE</Badge>
+             {isSureMember && (
+              <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3 bg-primary text-white">SURE OFFER</Badge>
             )}
           </div>
           <h1 className="font-headline text-3xl md:text-4xl mt-8 text-primary">{service.name}</h1>
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-4 text-muted-foreground">
             <div className="flex items-center gap-2"><Clock /> {service.duration} minutes</div>
-            <div className="flex items-center gap-2 text-lg">
-                <DollarSign className="text-primary" />
-                {isDiscounted ? (
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-destructive font-bold">AED {service.price}</span>
-                    <span className="line-through text-muted-foreground text-sm">AED {service.originalPrice}</span>
-                  </div>
-                ) : (
-                  <span className="font-semibold text-foreground">Starts from AED {service.price}</span>
-                )}
-            </div>
+            <div className="flex items-center gap-2"><Truck /> Free Delivery</div>
           </div>
           <Separator className="my-6" />
           <p className="text-lg leading-relaxed">{service.longDescription}</p>
+
+          <Card className="mt-8 bg-card/80">
+            <CardHeader>
+                <CardTitle className="font-headline text-2xl flex items-center gap-2 text-primary"><Sparkles /> Sure by Rody Offer</CardTitle>
+            </CardHeader>
+            <CardContent>
+                {isSureMember ? (
+                     <div className="text-center p-6 bg-green-100/50 rounded-lg">
+                        <h3 className="text-2xl font-bold text-green-700">You've unlocked the Sure price!</h3>
+                        <p className="text-muted-foreground mt-2">Continue with your booking to enjoy the savings.</p>
+                     </div>
+                ) : (
+                    <>
+                        <CardDescription>Join "Sure by Rody" for FREE with your WhatsApp number to unlock exclusive pricing on this service and more!</CardDescription>
+                        <div className="flex items-baseline gap-4 mt-4">
+                            <div>
+                                <p className="text-sm text-muted-foreground">Standard Price</p>
+                                <p className="text-2xl font-bold line-through">AED {originalPrice}</p>
+                            </div>
+                            <div>
+                                <p className="text-sm text-primary font-bold">Sure Price</p>
+                                <p className="text-3xl font-bold text-primary">AED {surePrice}</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-2 mt-6">
+                            <Input 
+                                placeholder="Enter your WhatsApp number" 
+                                className="bg-white" 
+                                value={whatsappNumber}
+                                onChange={(e) => setWhatsappNumber(e.target.value)}
+                            />
+                            <Button onClick={handleJoinSure} className="w-full sm:w-auto">Get Sure Offer</Button>
+                        </div>
+                    </>
+                )}
+            </CardContent>
+          </Card>
         </div>
 
         <div className="md:col-span-2">
-          <Card className="shadow-lg">
+          <Card className="shadow-lg bg-white/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary">{isGifting ? 'Gift This Service' : 'Book Your Session'}</CardTitle>
             </CardHeader>
@@ -148,7 +192,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
 
                   <div className="space-y-2">
                     <Label className="font-bold flex items-center gap-2"><CalendarIcon /> Select Date</Label>
-                    <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="rounded-md border" disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}/>
+                    <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="rounded-md border bg-white" disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}/>
                   </div>
 
                   <div className="space-y-2">
@@ -157,7 +201,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                       {timeSlots.map(time => (
                         <div key={time}>
                           <RadioGroupItem value={time} id={time} className="sr-only" />
-                          <Label htmlFor={time} className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                          <Label htmlFor={time} className="flex items-center justify-center rounded-md border-2 border-muted bg-white p-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
                             {time}
                           </Label>
                         </div>
@@ -167,11 +211,10 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                 </>
               )}
               
-
               {service.addons.length > 0 && (
                 <div className="space-y-2">
                   <Label className="font-bold flex items-center gap-2"><Gem /> Service Add-ons</Label>
-                  <div className="space-y-3 rounded-md border p-4 max-h-60 overflow-y-auto">
+                  <div className="space-y-3 rounded-md border p-4 max-h-60 overflow-y-auto bg-white">
                     {service.addons.map(addon => (
                       <div key={addon.id} className="flex items-start">
                         <Checkbox
@@ -193,6 +236,14 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
               )}
 
               <Separator />
+
+               <div className="space-y-2">
+                  <Label className="font-bold flex items-center gap-2"><CreditCard /> Payment</Label>
+                  <div className="text-sm text-muted-foreground p-3 border rounded-lg bg-white">
+                    All payments are settled upon delivery. We accept <span className="font-bold">Cash, Card, or Payment Link</span>.
+                  </div>
+                </div>
+              
               <div className="flex justify-between items-center font-bold text-xl">
                 <span>Total:</span>
                 <span className="text-primary">AED {totalPrice}</span>
@@ -210,8 +261,6 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                   </Button>
                 </div>
               )}
-              
-
             </CardContent>
           </Card>
         </div>

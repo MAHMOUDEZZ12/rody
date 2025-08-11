@@ -4,19 +4,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuGroup,
-} from "@/components/ui/dropdown-menu"
+import { LogIn, Menu, Sparkles, User } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
-import { auth } from '@/lib/firebase';
-import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import {
   Accordion,
@@ -26,13 +15,19 @@ import {
 } from '@/components/ui/accordion';
 
 export function Header() {
-  const { user } = useAuth();
+  const { user, login, logout } = useAuth();
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await signOut(auth);
+  const handleLoginClick = () => {
+    // Simulate login and redirect to dashboard
+    login({ uid: '123', email: 'user@sure.com' });
+    router.push('/dashboard');
+  }
+
+  const handleLogoutClick = () => {
+    logout();
     router.push('/');
-  };
+  }
 
   const wellnessLinks = [
     { href: '/services/massage', label: 'Massage Therapy' },
@@ -61,7 +56,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
+          <Sparkles className="h-6 w-6 text-primary"/>
+          <span className="font-headline text-xl font-bold text-primary">Sure by Rody</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -73,40 +69,17 @@ export function Header() {
           </Button>
 
           <Button asChild variant="ghost">
-            <Link href="/packages">Packages</Link>
+            <Link href="/packages">Sure Packages</Link>
           </Button>
-          
-           <Button asChild variant="link">
-              <Link href="/#testimonials">Testimonials</Link>
-            </Button>
-            <Button asChild variant="link">
-              <Link href="/referral">Referrals</Link>
-            </Button>
-
         </nav>
         <div className="flex items-center gap-2">
            {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="hidden md:inline-flex">
-                  <User className="h-5 w-5" />
-                  <span className="sr-only">Profile</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard">My Profile</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+             <Button onClick={() => router.push('/dashboard')} variant="ghost" size="sm" className="hidden md:inline-flex">
+                <User /> My Dashboard
+              </Button>
           ) : (
-            <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
-              <Link href="/login">Log In</Link>
+            <Button onClick={handleLoginClick} variant="ghost" size="sm" className="hidden md:inline-flex">
+              <LogIn /> Member Access
             </Button>
           )}
 
@@ -124,7 +97,8 @@ export function Header() {
             <SheetContent side="right">
               <div className="flex justify-between items-center mb-8">
                  <Link href="/" className="mr-6 flex items-center space-x-2">
-                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
+                  <Sparkles className="h-6 w-6 text-primary" />
+                  <span className="font-bold font-headline text-lg text-primary">Sure by Rody</span>
                 </Link>
                 <SheetClose asChild>
                   <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>
@@ -152,18 +126,18 @@ export function Header() {
                       </AccordionContent>
                     </AccordionItem>
                     <SheetClose asChild>
-                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Packages</Link>
+                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Sure Packages</Link>
                     </SheetClose>
                   </Accordion>
                 </div>
                 <div className="flex flex-col gap-4 mt-4 border-t pt-4">
                   {user ? (
                      <>
-                      <SheetClose asChild><Link href="/dashboard"><Button variant="outline" className="w-full rounded-full">My Profile</Button></Link></SheetClose>
-                      <Button onClick={() => { handleLogout(); }} variant="ghost" className="w-full rounded-full">Logout</Button>
+                      <SheetClose asChild><Link href="/dashboard"><Button variant="outline" className="w-full rounded-full">My Dashboard</Button></Link></SheetClose>
+                      <Button onClick={() => { handleLogoutClick(); }} variant="ghost" className="w-full rounded-full">Logout</Button>
                      </>
                    ) : (
-                      <SheetClose asChild><Link href="/login"><Button variant="outline" className="w-full rounded-full">Login / Sign Up</Button></Link></SheetClose>
+                      <SheetClose asChild><Button onClick={handleLoginClick} variant="outline" className="w-full rounded-full">Member Access</Button></SheetClose>
                    )}
                 </div>
               </div>

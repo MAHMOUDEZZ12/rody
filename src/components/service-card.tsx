@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Clock, Gift, Tag } from 'lucide-react';
+import { ArrowRight, Clock, Gift, Sparkles, Tag } from 'lucide-react';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -48,7 +48,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
 
   return (
     <Card className={cn(
-        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-card hover:shadow-lg",
+        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-white/80 backdrop-blur-sm hover:shadow-lg",
         ringColorClass,
         highlight && "border-primary/30 shadow-lg ring-2 ring-primary/20 shadow-primary/10"
       )}>
@@ -58,7 +58,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
             <ServiceImage service={service} />
           </Suspense>
           {isDiscounted && (
-            <Badge variant="destructive" className="absolute top-2 right-2">SALE</Badge>
+            <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>
           )}
         </div>
       </CardHeader>
@@ -74,7 +74,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
             <Tag className={cn("h-4 w-4", primaryColorClass)} />
             {isDiscounted ? (
               <div className="flex items-baseline gap-2">
-                <span className="text-destructive font-bold">AED {service.price}</span>
+                <span className="text-primary font-bold">AED {service.price}</span>
                 <span className="line-through text-muted-foreground text-xs">AED {service.originalPrice}</span>
               </div>
             ) : (
@@ -83,15 +83,10 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
           </div>
         </div>
       </CardContent>
-      <CardFooter className="p-6 pt-0 flex flex-col sm:flex-row gap-2">
+      <CardFooter className="p-6 pt-0">
         <Button asChild className="w-full rounded-full font-bold">
           <Link href={`/services/${service.id}`}>
-            Book Now <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
-         <Button asChild variant="outline" className="w-full rounded-full font-bold">
-          <Link href={`/services/${service.id}?gift=true`}>
-            Gift it Now <Gift className="ml-2 h-4 w-4" />
+            View Offer & Book <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
       </CardFooter>

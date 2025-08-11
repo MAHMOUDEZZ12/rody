@@ -10,8 +10,11 @@ interface SectionTitleProps {
 
 export function SectionTitle({ title, className }: SectionTitleProps) {
     return (
-        <div className={cn("bg-primary py-3 px-6", className)}>
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center text-primary-foreground">
+        <div className="text-center mb-12">
+            <h2 className={cn(
+                "font-headline text-3xl md:text-4xl font-bold inline-block text-primary-foreground bg-primary py-2 px-8", 
+                className
+            )}>
                 {title}
             </h2>
         </div>

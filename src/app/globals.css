@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%; /* Off-white #FDFCFB */
+    --background: 39 41% 95%; /* Soft Pink-White #F6F4F2 */
     --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
@@ -28,7 +28,7 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 240 3.8% 46.1%;
  
-    --accent: 0 0% 96.1%;
+    --accent: 338 78% 90%; /* Lighter Pink for accents */
     --accent-foreground: 240 5.9% 10%;
  
     --destructive: 0 84.2% 60.2%;
@@ -52,8 +52,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
   .app-background {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/R%2FUntitled-9.png?alt=media&token=fe05991e-ac04-47c1-a9f5-a834cf513a30');
+    background-color: hsl(var(--background));
+    background-image:  linear-gradient(135deg, #F4C2C255 25%, transparent 25%), linear-gradient(225deg, #F4C2C255 25%, transparent 25%), linear-gradient(45deg, #F4C2C255 25%, transparent 25%), linear-gradient(315deg, #F4C2C255 25%, #fdfcfb 25%);
+    background-position:  40px 0, 40px 0, 0 0, 0 0;
+    background-size: 80px 80px;
     background-repeat: repeat;
-    background-size: 800px;
   }
 }

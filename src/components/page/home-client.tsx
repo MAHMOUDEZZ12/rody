@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
+import { Star, Sparkles, WhatsApp } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
 import {
   Carousel,
@@ -13,15 +13,73 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ReferralBanner } from '@/components/referral-banner';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
-import { Suspense, useEffect, useState } from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { generateVideo } from '@/ai/flows/generate-video-flow';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Input } from '../ui/input';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/use-auth';
+
+function SureBanner() {
+    const [whatsappNumber, setWhatsappNumber] = useState('');
+    const { toast } = useToast();
+    const router = useRouter();
+    const { login } = useAuth();
+
+    const handleJoin = () => {
+        if (whatsappNumber.length < 10) {
+            toast({
+                title: "Invalid Number",
+                description: "Please enter a valid WhatsApp number.",
+                variant: "destructive",
+            });
+            return;
+        }
+        login({ uid: whatsappNumber, email: `${whatsappNumber}@sure.com`});
+        toast({
+            title: "Welcome to Sure!",
+            description: "You're in! Check out your exclusive offers in the dashboard.",
+        });
+        router.push('/dashboard');
+    }
+
+    return (
+        <section id="sure-banner" className="py-16 md:py-24">
+            <div className="container max-w-4xl px-4">
+                <Card className="bg-white/90 backdrop-blur-sm overflow-hidden shadow-2xl shadow-primary/10">
+                    <div className="grid md:grid-cols-2">
+                        <div className="p-8 md:p-12 flex flex-col justify-center">
+                            <Sparkles className="h-12 w-12 text-primary mb-4" />
+                            <h2 className="font-headline text-3xl md:text-4xl text-primary">Introducing <br/>Sure by Rody</h2>
+                            <p className="mt-4 text-muted-foreground">Join for free with your WhatsApp number to get instant access to exclusive offers, member-only pricing, and a seamless booking experience. No passwords, no hassle.</p>
+                            <div className="flex flex-col sm:flex-row gap-2 mt-6">
+                                <Input 
+                                    placeholder="Your WhatsApp Number" 
+                                    className="bg-white"
+                                    value={whatsappNumber}
+                                    onChange={(e) => setWhatsappNumber(e.target.value)}
+                                />
+                                <Button onClick={handleJoin} className="w-full sm:w-auto">Join Now</Button>
+                            </div>
+                        </div>
+                        <div className="hidden md:block relative min-h-[300px]">
+                            <Image 
+                                src="https://placehold.co/600x600.png"
+                                alt="Sure by Rody card"
+                                layout="fill"
+                                objectFit="cover"
+                                data-ai-hint="elegant pink card"
+                            />
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </section>
+    );
+}
 
 
 export function HomeClient() {
@@ -30,12 +88,34 @@ export function HomeClient() {
 
   return (
     <div className="flex flex-col">
+      <section className="relative h-screen w-full flex items-center justify-center text-center p-4 overflow-hidden">
+        <div className="absolute inset-0 bg-black/30 z-10" />
+        <Image 
+          src="https://placehold.co/1920x1080.png"
+          alt="Luxury wellness background"
+          layout="fill"
+          objectFit="cover"
+          className="z-0 animate-ken-burns"
+          data-ai-hint="serene spa background"
+          priority
+        />
+        <div className="relative z-20 animate-fade-in-up text-white">
+          <h1 className="font-headline text-5xl md:text-7xl font-bold">Your Sanctuary, Delivered</h1>
+          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
+            Experience Dubai's most luxurious at-home spa and beauty services. Ultimate convenience, uncompromising quality.
+          </p>
+          <Button asChild size="lg" className="mt-8 rounded-full font-bold px-10 py-7 text-lg">
+            <Link href="#services">Explore Services</Link>
+          </Button>
+        </div>
+      </section>
+
+      <SureBanner />
+
       <section id="services" className="py-16 md:py-24 bg-card/50">
         <div className="container max-w-7xl px-4">
           <SectionTitle title="Our Services" />
             <div className="grid md:grid-cols-2 gap-12 mt-12">
-                
-                {/* SPA Section */}
                 <div className="space-y-8">
                     <div className="text-center">
                         <h3 className="font-headline text-3xl text-spa-primary">Wellness & SPA</h3>
@@ -52,8 +132,6 @@ export function HomeClient() {
                         </Button>
                     </div>
                 </div>
-
-                {/* Beauty Section */}
                 <div className="space-y-8">
                     <div className="text-center">
                         <h3 className="font-headline text-3xl text-beauty-primary">Beauty & Nails</h3>
@@ -76,9 +154,9 @@ export function HomeClient() {
 
        <section id="packages" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
-          <SectionTitle title="Curated Packages" />
+          <SectionTitle title="Sure Packages" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            Indulge in our thoughtfully designed packages for a complete wellness experience.
+            Indulge in our thoughtfully designed packages, exclusively for Sure members.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {packages.map((pkg) => (
@@ -93,13 +171,7 @@ export function HomeClient() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card/50">
-        <div className="container max-w-5xl px-4">
-          <ReferralBanner />
-        </div>
-      </section>
-
-      <section id="testimonials" className="py-16 md:py-24">
+      <section id="testimonials" className="py-16 md:py-24 bg-card/50">
         <div className="container max-w-5xl px-4">
            <SectionTitle title="Words of Wellness" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
@@ -116,7 +188,7 @@ export function HomeClient() {
               {testimonials.map((testimonial, index) => (
                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-4 h-full">
-                       <Card className="text-center bg-card/80 backdrop-blur-sm shadow-lg h-full flex flex-col">
+                       <Card className="text-center bg-white/80 backdrop-blur-sm shadow-lg h-full flex flex-col">
                         <CardContent className="p-8 flex-grow">
                            <div className="flex justify-center mb-4">
                             {[...Array(5)].map((_, i) => (
