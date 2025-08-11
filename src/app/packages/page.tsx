@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { SectionTitle } from '@/components/section-title';
 
 export const metadata = {
-  title: 'Service Packages | Rody Wellness',
+  title: 'Sure Offers | Rody Wellness',
   description: 'Explore our curated wellness packages for a complete, luxurious experience at a special value.',
 };
 
@@ -13,7 +13,7 @@ export default function PackagesPage() {
   return (
     <div className="container max-w-7xl px-4 py-12">
       <header className="mb-12 text-center">
-        <SectionTitle title="Curated Wellness Packages" />
+        <SectionTitle title="Sure Offers" />
         <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
           Indulge in a complete journey of rejuvenation with our thoughtfully designed packages. Each offers a unique combination of our most popular services at an exceptional value, perfect for a gift or a well-deserved treat for yourself.
         </p>

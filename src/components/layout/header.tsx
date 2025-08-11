@@ -69,7 +69,7 @@ export function Header() {
           </Button>
 
           <Button asChild variant="ghost">
-            <Link href="/packages">Sure</Link>
+            <Link href="/packages">Sure Offers</Link>
           </Button>
         </nav>
         <div className="flex items-center gap-2">
@@ -126,7 +126,7 @@ export function Header() {
                       </AccordionContent>
                     </AccordionItem>
                     <SheetClose asChild>
-                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Sure</Link>
+                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Sure Offers</Link>
                     </SheetClose>
                   </Accordion>
                 </div>
