@@ -7,36 +7,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Sparkles, Tag } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Suspense } from 'react';
-
-function ServiceImage({ service }: { service: Service }) {
-  const imagePromise = generateBlogImage({
-    title: service.name,
-    content: service.description,
-    dataAiHint: service.dataAiHint,
-  });
-
-  return (
-    <Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
-      {/* @ts-ignore */}
-      <ServiceImageRenderer imagePromise={imagePromise} alt={service.name} />
-    </Suspense>
-  );
-}
-
-async function ServiceImageRenderer({ imagePromise, alt }: { imagePromise: Promise<string>, alt: string }) {
-  const imageUrl = await imagePromise;
-  return (
-    <Image
-      src={imageUrl}
-      alt={alt}
-      fill
-      className="object-cover"
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    />
-  );
-}
 
 interface ServiceCardProps {
   service: Service;
@@ -57,7 +27,14 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
       )}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-           <ServiceImage service={service} />
+           <Image 
+                src={service.image} 
+                alt={service.name}
+                data-ai-hint={service.dataAiHint}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           {isDiscounted && (
             <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>
           )}

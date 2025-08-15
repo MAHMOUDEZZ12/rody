@@ -6,16 +6,14 @@ import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 import { SectionTitle } from '@/components/section-title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
 async function HeroImage() {
-  const imageUrl = await generateBlogImage({
-    title: 'Artistry in Beauty',
-    content:
-      'Elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
-    dataAiHint: 'pink artistic beauty',
+  const imageUrl = await generateSimpleImage({
+    prompt:
+      'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
   });
 
   return (
@@ -38,8 +36,7 @@ export function BeautyClient() {
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
         <Suspense fallback={<Skeleton className="absolute inset-0" />}>
-           {/* @ts-ignore */}
-          <HeroImage />
+           <HeroImage />
         </Suspense>
         <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="relative z-20 animate-fade-in-up">

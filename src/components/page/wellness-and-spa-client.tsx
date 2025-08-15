@@ -6,16 +6,14 @@ import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
 async function HeroImage() {
-  const imageUrl = await generateBlogImage({
-    title: 'Sanctuary for the Senses',
-    content:
-      'A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness.',
-    dataAiHint: 'tranquil spa setting orchids',
+  const imageUrl = await generateSimpleImage({
+    prompt:
+      'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness.',
   });
 
   return (
@@ -37,7 +35,6 @@ export function WellnessAndSpaClient() {
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
         <Suspense fallback={<Skeleton className="absolute inset-0" />}>
-           {/* @ts-ignore */}
           <HeroImage />
         </Suspense>
         <div className="absolute inset-0 bg-black/30 z-10" />

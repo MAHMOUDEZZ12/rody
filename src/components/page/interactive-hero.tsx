@@ -5,15 +5,13 @@ import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import Image from 'next/image';
 
 async function HeroImage() {
-  const imageUrl = await generateBlogImage({
-    title: 'Luxury Home Sanctuary',
-    content:
-      'A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy.',
-    dataAiHint: 'luxury home spa',
+  const imageUrl = await generateSimpleImage({
+    prompt:
+      'Luxury Home Sanctuary: A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy, with a luxury aesthetic.',
   });
 
   return (
@@ -31,7 +29,6 @@ export function InteractiveHero() {
   return (
     <section className="relative h-[80vh] w-full text-white">
       <Suspense fallback={<Skeleton className="absolute inset-0" />}>
-         {/* @ts-ignore */}
         <HeroImage />
       </Suspense>
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-t from-black/60 to-transparent text-center p-4">
