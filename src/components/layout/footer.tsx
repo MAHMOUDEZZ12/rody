@@ -23,10 +23,16 @@ export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto max-w-7xl px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="flex flex-col items-center md:items-start">
              <Link href="/" className="flex items-center gap-2 mb-4">
-                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={140} height={50} />
+                 <Image 
+                    src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" 
+                    alt="Rody Wellness Logo" 
+                    width={140} 
+                    height={50}
+                    style={{ filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.7))' }}
+                 />
             </Link>
             <p className="text-sm text-center md:text-left">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
           </div>
@@ -45,7 +51,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col items-center md:items-end">
              <h3 className="font-bold font-headline text-lg mb-4">Connect With Us</h3>
-             <a href="https://wa.me/97100000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition-colors">
+             <a href="https://wa.me/97100000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-full transition-colors">
                 <WhatsAppIcon className="h-5 w-5"/>
                 <span>Chat on WhatsApp</span>
              </a>

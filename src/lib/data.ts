@@ -499,40 +499,51 @@ export const professionals: Professional[] = [
 
 export const packages: Package[] = [
   {
-    id: 'pkg-total-relaxation',
-    name: 'Sure: Total Relaxation',
-    description: 'The ultimate de-stress journey. Melt away tension with a full body massage and a deeply rejuvenating facial, curated by our team of experts.',
-    price: 599,
-    originalPrice: 690,
-    dataAiHint: 'serene spa products with flowers',
-    services: ['Relaxation Massage', 'Deep Hydrating Facial'],
+    id: 'pkg-royal-glow',
+    name: 'Royal Glow Package',
+    description: 'A 90-min luxury massage, customized facial, and luxury pedicure for full relaxation and a radiant glow.',
+    price: 1200,
+    originalPrice: 1350,
+    dataAiHint: 'royal spa treatment gold',
+    services: [
+      '90-min Luxury Full Body Massage (Thai, Swedish, or Aromatherapy)',
+      'Customized Luxury Facial (Vitamin C / Collagen / Gold Mask)',
+      'Callus Removal + Luxury Pedicure + Foot Spa',
+      'Free Hot Towel Foot Wrap',
+      'Complimentary Scented Candle & Aromatherapy Oils'
+    ],
   },
   {
-    id: 'pkg-beauty-boost',
-    name: 'Sure: Beauty Boost',
-    description: 'Your one-stop for event-ready glamour. We pair a perfect mani-pedi with an eye-opening lash lift for a complete, polished look.',
-    price: 450,
-    originalPrice: 529,
-    dataAiHint: 'luxury makeup flatlay',
-    services: ['Combo Mani + Pedi', 'Lash Lift & Tint'],
+    id: 'pkg-queens-indulgence',
+    name: 'Queen’s Indulgence Package',
+    description: 'Head-to-toe perfection with a 90-min massage, luxury mani-pedi, paraffin treatment, and facial.',
+    price: 1500,
+    originalPrice: 1700,
+    dataAiHint: 'queen throne luxury spa',
+    services: [
+      '90-min Full Body Massage (Lymphatic Drainage or Deep Tissue)',
+      'Luxury Manicure & Pedicure (Gel or Acrylic)',
+      'Foot Paraffin Treatment + Jelly Foot Spa',
+      'Luxury Facial (Glow Mask of Your Choice)',
+      'Complimentary Herbal Tea Service'
+    ],
   },
   {
-    id: 'pkg-glow-up',
-    name: 'Sure: The Glow Up',
-    description: 'Reveal your most radiant self. This package combines our best exfoliating treatments for a head-to-toe, healthy and vibrant glow.',
-    price: 450,
-    originalPrice: 530,
-    dataAiHint: 'glowing skin woman',
-    services: ['Arabica Coffee Scrub', 'Rody Wellness Glow Facial'],
-  },
-  {
-    id: 'pkg-couples-retreat',
-    name: 'Sure: Couple\'s Retreat',
-    description: 'Share a moment of pure serenity. This package includes a personalized massage and facial for two, experienced side-by-side in blissful comfort.',
-    price: 850,
-    originalPrice: 963,
-    dataAiHint: 'romantic spa for two',
-    services: ['Couples Relaxation Massage', 'Deep Hydrating Facial for Two'],
+    id: 'pkg-ultimate-bliss',
+    name: 'Ultimate Bliss Package',
+    description: 'The complete VIP spa ritual. 120-min signature massage, anti-aging facial, luxury mani-pedi, hair treatment, and more.',
+    price: 1800,
+    originalPrice: 2100,
+    dataAiHint: 'ultimate bliss zen garden',
+    services: [
+      '120-min Full Body Signature Massage (Mix of Techniques)',
+      'Anti-Aging Luxury Facial with Gold Mask and Led Face Mask',
+      'Callus Removal + Jelly Foot Spa + Foot Massage',
+      'Luxury Manicure & Pedicure (Gel or Acrylic)',
+      'Foot Paraffin Treatment',
+      'Hair Treatment with Essential Oils & Relaxing Scalp Massage',
+      'VIP Touch: Freshly served Herbal Tea or Coffee'
+    ],
   }
 ];
 

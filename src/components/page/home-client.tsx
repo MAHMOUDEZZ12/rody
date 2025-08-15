@@ -62,7 +62,7 @@ function BlogBanner() {
 
 export function HomeClient() {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
-  const featuredBeautyServices = services.filter(s => s.category === 'Nails' || s.category === 'Facials').slice(0, 2);
+  const featuredBeautyServices = services.filter(s => s.category === 'Facials' || s.category === 'Nails').slice(0, 2);
 
   return (
     <div className="flex flex-col">
@@ -112,9 +112,9 @@ export function HomeClient() {
 
        <section id="packages" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
-          <SectionTitle title="Sure Packages" />
+          <SectionTitle title="Luxury Packages" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            Indulge in our thoughtfully designed packages, exclusively for Sure members.
+            Indulge in our thoughtfully designed packages for a complete, luxurious experience at a special value.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {packages.map((pkg) => (
