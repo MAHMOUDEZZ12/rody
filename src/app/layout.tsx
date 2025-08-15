@@ -5,11 +5,25 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/hooks/use-auth';
+import { Playfair_Display, PT_Sans } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Sure by Rody',
   description: 'Premium home wellness services in Dubai.',
 };
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-playfair',
+});
+
+const ptSans = PT_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-pt-sans',
+});
+
 
 export default function RootLayout({
   children,
@@ -18,12 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body antialiased app-background">
+      <body className={`${playfair.variable} ${ptSans.variable} font-body antialiased app-background`}>
         <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />

@@ -3,12 +3,12 @@
 
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { Gift, History, Star, Ticket, Sparkles, Share2, Clock, LogIn } from 'lucide-react';
+import { History, Star, Ticket, Sparkles, Share2, Clock, LogIn, User } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
@@ -27,11 +27,13 @@ export default function DashboardPage() {
   }
 
   const handleShare = () => {
-    navigator.clipboard.writeText("Check out this amazing offer from Rody Wellness!");
-    toast({
-        title: "Link Copied!",
-        description: "Share the offer with your friends.",
-    });
+    if (typeof navigator.clipboard !== 'undefined') {
+        navigator.clipboard.writeText("Check out this amazing offer from Rody Wellness!");
+        toast({
+            title: "Link Copied!",
+            description: "Share the offer with your friends.",
+        });
+    }
   }
 
   const handleLogin = () => {
@@ -43,9 +45,10 @@ export default function DashboardPage() {
       });
       return;
     }
-    login({ uid: whatsappNumber, email: `${whatsappNumber}@sure.com` });
+    const mockName = 'Radwa'; // In a real app, you'd get this from your database
+    login({ uid: whatsappNumber, email: `${whatsappNumber}@sure.com`, name: mockName });
     toast({
-      title: "Welcome to Sure!",
+      title: `Welcome, ${mockName}!`,
       description: "You're in! Check out your exclusive offers.",
     });
   };
@@ -102,13 +105,13 @@ export default function DashboardPage() {
     <div className="container max-w-5xl px-4 py-12">
       <header className="mb-12">
         <div className="flex items-center gap-4">
-            <Sparkles className="w-12 h-12 text-primary" />
+            <User className="w-12 h-12 text-primary p-2 bg-primary/10 rounded-full" />
             <div>
                  <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
-                    Welcome to Sure
+                    Welcome, {user.name || 'Valued Member'}
                 </h1>
                 <p className="mt-2 text-lg text-muted-foreground">
-                    Your personal space for exclusive offers and wellness rewards. With Sure, it's a sure thing you'll always find the best price.
+                    This is your personal space for exclusive offers and wellness rewards with Sure.
                 </p>
             </div>
         </div>

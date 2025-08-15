@@ -7,6 +7,7 @@ import { useState, useEffect, createContext, useContext, ReactNode, useCallback 
 export type User = {
   uid: string;
   email: string; // Using email as a stand-in for WhatsApp number for simplicity
+  name?: string;
 };
 
 type AuthContextType = {

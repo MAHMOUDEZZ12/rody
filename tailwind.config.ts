@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -16,9 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['PT Sans', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'],
-        code: ['monospace'],
+        body: ['var(--font-pt-sans)', 'sans-serif'],
+        headline: ['var(--font-playfair)', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -95,16 +95,11 @@ export default {
                 transform: 'translateY(0)',
             },
         },
-        'ken-burns': {
-            '0%': { transform: 'scale(1) translate(0, 0)' },
-            '100%': { transform: 'scale(1.1) translate(-2%, -1%)' },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-        'ken-burns': 'ken-burns 15s ease-out alternate-reverse infinite',
       },
     },
   },

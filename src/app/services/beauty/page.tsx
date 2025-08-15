@@ -2,28 +2,33 @@
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
 import { SectionTitle } from '@/components/section-title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+function HeroImage() {
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-async function HeroImage() {
-    const imageUrl = await generateBlogImage({
-        title: 'Artistry in Beauty',
-        content: 'Enhance your natural radiance with our suite of expert beauty treatments, from advanced facials to flawless nail and lash artistry.',
-        dataAiHint: 'pink artistic beauty background with splashes of color',
-    });
+    useEffect(() => {
+        generateBlogImage({
+            title: 'Artistry in Beauty',
+            content: 'Enhance your natural radiance with our suite of expert beauty treatments, from advanced facials to flawless nail and lash artistry.',
+            dataAiHint: 'pink artistic beauty background with splashes of color',
+        }).then(setImageUrl).catch(console.error);
+    }, []);
+
+    if (!imageUrl) return <Skeleton className="w-full h-full" />;
+    
     return (
         <Image
           src={imageUrl}
           alt="Elegant beauty treatment setting"
           fill
-          className="object-cover z-0 animate-ken-burns"
+          className="object-cover z-0"
           priority
-          data-ai-hint="beauty treatment"
         />
     )
 }
@@ -40,13 +45,16 @@ export default function BeautyPage() {
 
   return (
     <>
-      <section className="relative h-[60vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
+      <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
           <HeroImage />
         </Suspense>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
-          {/* Text removed as it's in the image */}
+           <h1 className="font-headline text-4xl md:text-6xl font-bold text-beauty-primary">Artistry in Beauty</h1>
+          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
+            Enhance your natural radiance with our suite of expert beauty treatments, from advanced facials to flawless nail and lash artistry.
+          </p>
         </div>
       </section>
 

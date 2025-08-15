@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, Suspense, useEffect } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
@@ -20,8 +20,16 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 
-async function ServiceImage({ service }: { service: Service }) {
-  const imageUrl = await generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint });
+function ServiceImage({ service }: { service: Service }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    generateBlogImage({ title: service.name, content: service.longDescription, dataAiHint: service.dataAiHint })
+      .then(setImageUrl)
+      .catch(console.error);
+  }, [service]);
+
+  if (!imageUrl) return <Skeleton className="w-full h-full" />;
 
   return (
     <Image src={imageUrl} alt={service.name} layout="fill" objectFit="cover" />
@@ -129,7 +137,6 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
         <div className="md:col-span-3">
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
             <Suspense fallback={<Skeleton className="w-full h-full" />}>
-              {/* @ts-expect-error Async Server Component */}
               <ServiceImage service={service} />
             </Suspense>
              {isSureMember && (

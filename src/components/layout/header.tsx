@@ -34,15 +34,13 @@ export function Header() {
     { href: '/services/eyelashes', label: 'Eyelash Services' },
   ];
   
-  const MobileLink = ({ href, children, onNavigate }: { href: string; children: React.ReactNode; onNavigate: () => void }) => {
-    const handleClick = () => {
-      onNavigate();
-      router.push(href);
-    }
+  const MobileLink = ({ href, children }: { href: string; children: React.ReactNode; }) => {
     return (
-      <Link href={href} onClick={handleClick} className="text-base transition-colors hover:text-primary py-2 w-full text-left pl-8">
-        {children}
-      </Link>
+        <SheetClose asChild>
+            <Link href={href} className="text-base transition-colors hover:text-primary py-2 w-full text-left pl-8">
+                {children}
+            </Link>
+        </SheetClose>
     );
   };
 
@@ -72,7 +70,7 @@ export function Header() {
             </Button>
 
           <Button asChild className="hidden md:inline-flex rounded-full">
-            <Link href="/packages">Book Now</Link>
+            <Link href="/services/wellness-and-spa">Book Now</Link>
           </Button>
 
           <Sheet>
@@ -84,12 +82,11 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <div className="flex justify-between items-center mb-8">
-                 <Link href="/" className="mr-6 flex items-center space-x-2">
-                  <Sparkles className="h-6 w-6 text-primary" />
-                  <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
-                </Link>
-                <SheetClose asChild>
-                  <Button variant="ghost" size="icon"><span className="sr-only">Close</span></Button>
+                 <SheetClose asChild>
+                    <Link href="/" className="mr-6 flex items-center space-x-2">
+                    <Sparkles className="h-6 w-6 text-primary" />
+                    <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
+                    </Link>
                 </SheetClose>
               </div>
               <div className="flex flex-col h-[calc(100vh-8rem)]">
@@ -98,23 +95,23 @@ export function Header() {
                     <AccordionItem value="spa">
                       <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Wellness & SPA</AccordionTrigger>
                       <AccordionContent className="flex flex-col items-start gap-1">
-                         <SheetClose asChild><MobileLink href="/services/wellness-and-spa" onNavigate={() => {}}>View All</MobileLink></SheetClose>
+                         <MobileLink href="/services/wellness-and-spa">View All</MobileLink>
                         {wellnessLinks.map((link) => (
-                          <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
+                          <MobileLink key={link.href} href={link.href}>{link.label}</MobileLink>
                         ))}
                       </AccordionContent>
                     </AccordionItem>
                      <AccordionItem value="beauty">
                       <AccordionTrigger className="text-lg font-semibold hover:no-underline py-2">Beauty & Nails</AccordionTrigger>
                       <AccordionContent className="flex flex-col items-start gap-1">
-                         <SheetClose asChild><MobileLink href="/services/beauty" onNavigate={() => {}}>View All</MobileLink></SheetClose>
+                         <MobileLink href="/services/beauty">View All</MobileLink>
                         {beautyLinks.map((link) => (
-                          <SheetClose key={link.href} asChild><MobileLink href={link.href} onNavigate={() => {}}>{link.label}</MobileLink></SheetClose>
+                           <MobileLink key={link.href} href={link.href}>{link.label}</MobileLink>
                         ))}
                       </AccordionContent>
                     </AccordionItem>
-                    <SheetClose asChild>
-                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b">Sure Offers</Link>
+                     <SheetClose asChild>
+                      <Link href="/packages" className="block text-lg font-semibold py-3 hover:no-underline border-b w-full text-left">Sure Offers</Link>
                     </SheetClose>
                   </Accordion>
                 </div>

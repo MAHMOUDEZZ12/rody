@@ -2,27 +2,33 @@
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
 
-async function HeroImage() {
-    const imageUrl = await generateBlogImage({
-        title: 'Sanctuary for the Senses',
-        content: 'Step into a world of tranquility and healing. Our Wellness & SPA services are dedicated to restoring your body’s balance and rejuvenating your spirit.',
-        dataAiHint: 'tranquil spa setting with orchids and balanced stones',
-    });
+function HeroImage() {
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+    useEffect(() => {
+        generateBlogImage({
+            title: 'Sanctuary for the Senses',
+            content: 'Step into a world of tranquility and healing. Our Wellness & SPA services are dedicated to restoring your body’s balance and rejuvenating your spirit.',
+            dataAiHint: 'tranquil spa setting with orchids and balanced stones',
+        }).then(setImageUrl).catch(console.error);
+    }, []);
+
+    if (!imageUrl) return <Skeleton className="w-full h-full" />;
+
     return (
         <Image
           src={imageUrl}
           alt="Serene spa setting"
           fill
-          className="object-cover z-0 animate-ken-burns"
+          className="object-cover z-0"
           priority
-          data-ai-hint="spa setting"
         />
     )
 }
@@ -39,7 +45,7 @@ export default function WellnessAndSpaPage() {
 
   return (
     <>
-      <section className="relative h-[60vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
+      <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
          <Suspense fallback={<Skeleton className="w-full h-full" />}>
           <HeroImage />
         </Suspense>
