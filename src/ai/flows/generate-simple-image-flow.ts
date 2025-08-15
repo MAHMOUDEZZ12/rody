@@ -38,6 +38,6 @@ const generateSimpleImageFlow = ai.defineFlow(
 
 export const generateSimpleImage = cache(
   async (input: GenerateSimpleImageInput) => generateSimpleImageFlow(input),
-  ['generate-simple-image-v2'],
+  ['generate-simple-image-v3'],
   {revalidate: 3600 * 24} // Cache for 24 hours
 );
