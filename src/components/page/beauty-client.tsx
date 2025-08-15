@@ -8,24 +8,16 @@ import { SectionTitle } from '@/components/section-title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Suspense } from 'react';
+import { Skeleton } from '../ui/skeleton';
 
-function HeroImage() {
-    const imagePromise = generateBlogImage({
-        title: 'Artistry in Beauty',
-        content: 'Elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
-        dataAiHint: 'pink artistic beauty',
-    });
+async function HeroImage() {
+  const imageUrl = await generateBlogImage({
+    title: 'Artistry in Beauty',
+    content:
+      'Elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
+    dataAiHint: 'pink artistic beauty',
+  });
 
-    return (
-      <Suspense fallback={<div className="absolute inset-0 bg-muted animate-pulse" />}>
-        {/* @ts-ignore */}
-        <HeroImageRenderer imagePromise={imagePromise} />
-      </Suspense>
-    )
-}
-
-async function HeroImageRenderer({ imagePromise }: { imagePromise: Promise<string> }) {
-  const imageUrl = await imagePromise;
   return (
     <Image
       src={imageUrl}
@@ -45,7 +37,10 @@ export function BeautyClient() {
   return (
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
-        <HeroImage />
+        <Suspense fallback={<Skeleton className="absolute inset-0" />}>
+           {/* @ts-ignore */}
+          <HeroImage />
+        </Suspense>
         <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="relative z-20 animate-fade-in-up">
            <h1 className="font-headline text-4xl md:text-6xl font-bold text-beauty-primary" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.3)' }}>Artistry in Beauty</h1>
