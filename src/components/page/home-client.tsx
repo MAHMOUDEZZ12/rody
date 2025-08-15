@@ -12,6 +12,36 @@ import { ServiceCard } from '../service-card';
 import { ReferralBanner } from '../referral-banner';
 import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Suspense } from 'react';
+
+function BlogImage({ post }: { post: BlogPost }) {
+  const imagePromise = generateBlogImage({
+    title: post.title,
+    content: post.content,
+    dataAiHint: post.dataAiHint,
+  });
+
+  return (
+    <Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
+      {/* @ts-ignore */}
+      <BlogImageRenderer imagePromise={imagePromise} alt={post.title} />
+    </Suspense>
+  );
+}
+
+async function BlogImageRenderer({ imagePromise, alt }: { imagePromise: Promise<string>, alt: string }) {
+  const imageUrl = await imagePromise;
+  return (
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      className="object-cover"
+    />
+  );
+}
+
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -29,13 +59,7 @@ function BlogBanner() {
                      <Link href={`/blog/${latestPost.slug}`} className="block group">
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
-                                <Image
-                                    src={`https://placehold.co/1200x600.png`}
-                                    alt={latestPost.title}
-                                    data-ai-hint={latestPost.dataAiHint}
-                                    fill
-                                    className="object-cover"
-                                />
+                                <BlogImage post={latestPost} />
                             </div>
                             <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
                                 <CardHeader>
