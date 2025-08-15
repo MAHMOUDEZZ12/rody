@@ -25,6 +25,14 @@ const generateSimpleImageFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async input => {
+    if (!process.env.GEMINI_API_KEY) {
+      console.error(
+        'GEMINI_API_KEY is not set. Please create a .env.local file and add your key to it.'
+      );
+      // Return a placeholder if the API key is not set.
+      return 'https://placehold.co/600x400.png';
+    }
+
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
       prompt: input.prompt,
@@ -38,6 +46,6 @@ const generateSimpleImageFlow = ai.defineFlow(
 
 export const generateSimpleImage = cache(
   async (input: GenerateSimpleImageInput) => generateSimpleImageFlow(input),
-  ['generate-simple-image-v3'],
+  ['generate-simple-image-v4'],
   {revalidate: 3600 * 24} // Cache for 24 hours
 );

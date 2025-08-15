@@ -44,6 +44,14 @@ const generateVideoFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async (input) => {
+    if (!process.env.GEMINI_API_KEY) {
+      console.error(
+        'GEMINI_API_KEY is not set for video generation. Please create a .env.local file and add your key to it.'
+      );
+      // Return a placeholder if the API key is not set. This could be a static image or a silent video.
+      return 'https://placehold.co/600x400.png';
+    }
+
     let { operation } = await ai.generate({
       model: googleAI.model('veo-3.0-generate-preview'),
       prompt: input.prompt,
@@ -76,6 +84,6 @@ const generateVideoFlow = ai.defineFlow(
 
 export const generateVideo = cache(
   async (input: GenerateVideoInput) => generateVideoFlow(input),
-  ['generate-video-v2'],
+  ['generate-video-v4'],
   { revalidate: 3600 * 24 } // Cache for 24 hours
 );
