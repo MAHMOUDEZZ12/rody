@@ -26,7 +26,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center md:items-start">
              <Link href="/" className="flex items-center gap-2 mb-4">
-                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12.png?alt=media&token=75d82414-a440-4cdc-ad4b-1822a6d556b7" alt="Rody Wellness Logo" width={140} height={50} style={{ filter: 'brightness(0) invert(1)' }} />
+                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={140} height={50} />
             </Link>
             <p className="text-sm text-center md:text-left">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
           </div>
