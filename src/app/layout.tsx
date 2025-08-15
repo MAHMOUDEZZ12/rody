@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${playfair.variable} ${ptSans.variable} font-body antialiased app-background`}>
+      <body className={`${playfair.variable} ${ptSans.variable} font-body antialiased`}>
         <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />
