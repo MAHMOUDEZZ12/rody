@@ -76,6 +76,6 @@ const generateVideoFlow = ai.defineFlow(
 
 export const generateVideo = cache(
   async (input: GenerateVideoInput) => generateVideoFlow(input),
-  ['generate-video'],
+  ['generate-video-v2'],
   { revalidate: 3600 * 24 } // Cache for 24 hours
 );
