@@ -1,4 +1,5 @@
 
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
@@ -87,6 +88,7 @@ function BlogBanner() {
 export function HomeClient() {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
   const featuredBeautyServices = services.filter(s => s.category === 'Facials' || s.category === 'Nails').slice(0, 2);
+  const surePackages = packages.slice(0, 3);
 
   return (
     <div className="flex flex-col">
@@ -141,7 +143,7 @@ export function HomeClient() {
             Indulge in our thoughtfully designed packages for a complete, luxurious experience at a special value.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {packages.map((pkg) => (
+            {surePackages.map((pkg) => (
               <PackageCard key={pkg.id} pkg={pkg} />
             ))}
           </div>
