@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
@@ -26,8 +26,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center md:items-start">
              <Link href="/" className="flex items-center gap-2 mb-4">
-                <Sparkles className="h-8 w-8"/>
-                <span className="font-headline text-2xl font-bold">Rody Wellness</span>
+                 <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-9%20(2).png?alt=media&token=6873a894-fa14-49cb-9ae2-77bee72107cc" alt="Rody Wellness Logo" width={140} height={50} style={{ filter: 'brightness(0) invert(1)' }} />
             </Link>
             <p className="text-sm text-center md:text-left">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
           </div>

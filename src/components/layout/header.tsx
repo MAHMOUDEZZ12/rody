@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { LogIn, Menu, Sparkles, User } from 'lucide-react';
+import { LogIn, Menu, User } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import Image from 'next/image';
 
 export function Header() {
   const { user, logout } = useAuth();
@@ -48,8 +49,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Sparkles className="h-6 w-6 text-primary"/>
-          <span className="font-headline text-xl font-bold text-primary">Rody Wellness</span>
+          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-9%20(2).png?alt=media&token=6873a894-fa14-49cb-9ae2-77bee72107cc" alt="Rody Wellness Logo" width={120} height={40} />
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -84,8 +84,7 @@ export function Header() {
               <div className="flex justify-between items-center mb-8">
                  <SheetClose asChild>
                     <Link href="/" className="mr-6 flex items-center space-x-2">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    <span className="font-bold font-headline text-lg text-primary">Rody Wellness</span>
+                      <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-9%20(2).png?alt=media&token=6873a894-fa14-49cb-9ae2-77bee72107cc" alt="Rody Wellness Logo" width={120} height={40} />
                     </Link>
                 </SheetClose>
               </div>
