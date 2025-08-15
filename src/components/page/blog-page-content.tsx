@@ -6,6 +6,8 @@ import { blogPosts } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Suspense } from 'react';
+import { Skeleton } from '../ui/skeleton';
 
 export function BlogPageContent() {
   const featuredPost = blogPosts[0];
@@ -27,13 +29,14 @@ export function BlogPageContent() {
         <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
-              <Image 
-                src={featuredPost.image} 
-                alt={featuredPost.title} 
-                data-ai-hint={featuredPost.dataAiHint}
-                fill
-                className="object-cover"
-              />
+              <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                <Image 
+                  src={featuredPost.image} 
+                  alt={featuredPost.title} 
+                  fill
+                  className="object-cover"
+                />
+              </Suspense>
             </div>
             <div className="flex flex-col p-8">
               <CardHeader>
@@ -61,13 +64,14 @@ export function BlogPageContent() {
               <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
-                    <Image 
-                        src={post.image} 
-                        alt={post.title} 
-                        data-ai-hint={post.dataAiHint}
-                        fill
-                        className="object-cover"
-                    />
+                    <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                        <Image 
+                            src={post.image} 
+                            alt={post.title} 
+                            fill
+                            className="object-cover"
+                        />
+                    </Suspense>
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">

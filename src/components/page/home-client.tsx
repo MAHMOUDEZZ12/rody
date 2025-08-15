@@ -13,6 +13,8 @@ import { ServiceCard } from '../service-card';
 import { ReferralBanner } from '../referral-banner';
 import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
+import { Suspense } from 'react';
+import { Skeleton } from '../ui/skeleton';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -30,13 +32,14 @@ function BlogBanner() {
                      <Link href={`/blog/${latestPost.slug}`} className="block group">
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
-                                <Image 
-                                    src={latestPost.image} 
-                                    alt={latestPost.title} 
-                                    data-ai-hint={latestPost.dataAiHint}
-                                    fill
-                                    className="object-cover"
-                                />
+                                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                    <Image 
+                                        src={latestPost.image} 
+                                        alt={latestPost.title} 
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </Suspense>
                             </div>
                             <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
                                 <CardHeader>
@@ -119,7 +122,7 @@ export function HomeClient() {
             Indulge in our thoughtfully designed packages for a complete, luxurious experience at a special value.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {surePackages.map((pkg) => (
+            {packages.map((pkg) => (
               <PackageCard key={pkg.id} pkg={pkg} />
             ))}
           </div>

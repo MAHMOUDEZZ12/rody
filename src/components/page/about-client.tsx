@@ -1,7 +1,41 @@
 
 'use client';
 
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import Image from 'next/image';
+import { Suspense } from 'react';
+import { Skeleton } from '../ui/skeleton';
+
+
+async function AboutImage1() {
+  const imageUrl = await generateSimpleImage({
+    prompt:
+      'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic.',
+  });
+  return (
+    <Image
+      src={imageUrl}
+      alt="A serene and luxurious home environment"
+      fill
+      className="object-cover"
+    />
+  );
+}
+
+async function AboutImage2() {
+    const imageUrl = await generateSimpleImage({
+      prompt:
+        'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise.',
+    });
+    return (
+      <Image
+        src={imageUrl}
+        alt="A professional and friendly wellness therapist"
+        fill
+        className="object-cover"
+      />
+    );
+  }
 
 export function AboutClient() {
   return (
@@ -28,13 +62,9 @@ export function AboutClient() {
           </div>
           <div className="order-1 md:order-2">
             <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
-                <Image 
-                  src={`https://placehold.co/800x600.png`} 
-                  alt="A serene and luxurious home environment"
-                  data-ai-hint="luxury home interior"
-                  layout="fill" 
-                  objectFit="cover" 
-                />
+                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                    <AboutImage1 />
+                </Suspense>
             </div>
           </div>
         </section>
@@ -76,13 +106,9 @@ export function AboutClient() {
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-1">
              <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
-                <Image 
-                  src={`https://placehold.co/800x600.png`} 
-                  alt="A professional and friendly wellness therapist"
-                  data-ai-hint="friendly therapist portrait"
-                  layout="fill" 
-                  objectFit="cover" 
-                />
+                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                    <AboutImage2 />
+                </Suspense>
             </div>
           </div>
           <div className="text-lg leading-relaxed space-y-4 text-muted-foreground order-2">

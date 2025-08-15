@@ -32,9 +32,8 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
         <div className="md:col-span-4 flex flex-col items-center text-center">
           <Avatar className="w-48 h-48 border-4 border-primary mb-4">
             <AvatarImage 
-                src={`https://placehold.co/400x400.png`} 
+                src={professional.image}
                 alt={professional.name} 
-                data-ai-hint={professional.dataAiHint} 
                 className="object-cover" 
             />
             <AvatarFallback>{professional.name.charAt(0)}</AvatarFallback>

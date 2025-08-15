@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Sparkles, Tag } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
+import { Suspense } from 'react';
+import { Skeleton } from './ui/skeleton';
 
 interface ServiceCardProps {
   service: Service;
@@ -27,14 +29,15 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
       )}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-           <Image 
-                src={service.image} 
-                alt={service.name}
-                data-ai-hint={service.dataAiHint}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+            <Suspense fallback={<Skeleton className='w-full h-full' />}>
+                <Image 
+                        src={service.image} 
+                        alt={service.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+            </Suspense>
           {isDiscounted && (
             <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>
           )}
