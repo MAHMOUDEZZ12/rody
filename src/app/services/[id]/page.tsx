@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
@@ -17,6 +17,35 @@ import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, CalendarIcon, Clock, CreditCard, CheckCircle, Gem, Gift, Sparkles, Truck, Users } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+
+function ServiceImage({ service }: { service: Service }) {
+  const imagePromise = generateBlogImage({
+    title: service.name,
+    content: service.longDescription,
+    dataAiHint: service.dataAiHint,
+  });
+
+  return (
+    <Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
+      {/* @ts-ignore */}
+      <ServiceImageRenderer imagePromise={imagePromise} alt={service.name} />
+    </Suspense>
+  );
+}
+
+async function ServiceImageRenderer({ imagePromise, alt }: { imagePromise: Promise<string>, alt: string }) {
+  const imageUrl = await imagePromise;
+  return (
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      className="object-cover"
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  );
+}
 
 export default function ServiceBookingPage({ params }: { params: { id:string } }) {
   const router = useRouter();
@@ -118,13 +147,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       <div className="grid md:grid-cols-5 gap-8 md:gap-12">
         <div className="md:col-span-3">
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
-            <Image 
-                src={`https://placehold.co/1200x800.png`}
-                alt={service.name} 
-                data-ai-hint={service.dataAiHint}
-                layout="fill" 
-                objectFit="cover" 
-            />
+            <ServiceImage service={service} />
              {isSureMember && (
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3 bg-primary text-white">SURE OFFER</Badge>
             )}

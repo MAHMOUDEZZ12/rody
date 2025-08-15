@@ -1,4 +1,5 @@
 
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type BlogPost } from '@/lib/blog';
@@ -6,6 +7,35 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Suspense } from 'react';
+
+function BlogImage({ post }: { post: BlogPost }) {
+  const imagePromise = generateBlogImage({
+    title: post.title,
+    content: post.content,
+    dataAiHint: post.dataAiHint,
+  });
+
+  return (
+    <Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
+      {/* @ts-ignore */}
+      <BlogImageRenderer imagePromise={imagePromise} alt={post.title} />
+    </Suspense>
+  );
+}
+
+async function BlogImageRenderer({ imagePromise, alt }: { imagePromise: Promise<string>, alt: string }) {
+  const imageUrl = await imagePromise;
+  return (
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      className="object-cover"
+    />
+  );
+}
 
 const MarkdownContent = ({ content }: { content: string }) => {
   return (
@@ -51,13 +81,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
       </div>
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-        <Image 
-          src={`https://placehold.co/1200x800.png`} 
-          alt={post.title}
-          data-ai-hint={post.dataAiHint}
-          layout="fill" 
-          objectFit="cover" 
-        />
+        <BlogImage post={post} />
       </div>
 
       <div className="text-lg leading-relaxed space-y-6">
@@ -72,13 +96,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
-                                <Image 
-                                  src={`https://placehold.co/600x400.png`} 
-                                  alt={related.title} 
-                                  data-ai-hint={related.dataAiHint}
-                                  layout="fill" 
-                                  objectFit="cover" 
-                                />
+                                <BlogImage post={related} />
                             </div>
                             <CardContent className="p-4">
                                 <h3 className="font-headline text-lg group-hover:underline">{related.title}</h3>

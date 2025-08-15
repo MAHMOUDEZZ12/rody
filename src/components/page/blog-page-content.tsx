@@ -1,10 +1,40 @@
 
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, type BlogPost } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Suspense } from 'react';
+
+function BlogImage({ post }: { post: BlogPost }) {
+  const imagePromise = generateBlogImage({
+    title: post.title,
+    content: post.content,
+    dataAiHint: post.dataAiHint,
+  });
+
+  return (
+    <Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
+      {/* @ts-ignore */}
+      <BlogImageRenderer imagePromise={imagePromise} alt={post.title} />
+    </Suspense>
+  );
+}
+
+async function BlogImageRenderer({ imagePromise, alt }: { imagePromise: Promise<string>, alt: string }) {
+  const imageUrl = await imagePromise;
+  return (
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      className="object-cover"
+    />
+  );
+}
 
 export function BlogPageContent() {
   const featuredPost = blogPosts[0];
@@ -26,13 +56,7 @@ export function BlogPageContent() {
         <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
-              <Image
-                src={`https://placehold.co/1200x600.png`}
-                alt={featuredPost.title}
-                data-ai-hint={featuredPost.dataAiHint}
-                fill
-                className="object-cover"
-              />
+              <BlogImage post={featuredPost} />
             </div>
             <div className="flex flex-col p-8">
               <CardHeader>
@@ -60,14 +84,7 @@ export function BlogPageContent() {
               <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
-                    <Image
-                      src={`https://placehold.co/600x400.png`}
-                      alt={post.title}
-                      data-ai-hint={post.dataAiHint}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                    <BlogImage post={post} />
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">
