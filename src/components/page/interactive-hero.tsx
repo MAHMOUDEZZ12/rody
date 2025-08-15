@@ -1,39 +1,17 @@
 
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import Link from 'next/link';
 
 function HeroImages() {
-    const [imageOneUrl, setImageOneUrl] = useState<string | null>(null);
-    const [imageTwoUrl, setImageTwoUrl] = useState<string | null>(null);
-
-    useEffect(() => {
-        generateBlogImage({
-            title: "Sanctuary for the Senses",
-            content: "serene spa setting with orchids and balanced stones",
-            dataAiHint: "serene spa setting with orchids and balanced stones"
-        }).then(setImageOneUrl);
-
-        generateBlogImage({
-            title: "Artistry in Beauty",
-            content: "elegant beauty treatment setting with soft pink tones",
-            dataAiHint: "elegant beauty treatment setting with soft pink tones"
-        }).then(setImageTwoUrl);
-    }, []);
-
-    if (!imageOneUrl || !imageTwoUrl) {
-        return <Skeleton className="w-full h-full" />;
-    }
-
     return (
          <ReactCompareSlider
-            itemOne={<ReactCompareSliderImage src={imageOneUrl} alt="Serene spa setting" />}
-            itemTwo={<ReactCompareSliderImage src={imageTwoUrl} alt="Elegant beauty treatment setting" />}
+            itemOne={<ReactCompareSliderImage src={`https://placehold.co/1600x900.png`} data-ai-hint="serene spa setting orchids" alt="Serene spa setting" />}
+            itemTwo={<ReactCompareSliderImage src={`https://placehold.co/1600x900.png`} data-ai-hint="elegant beauty treatment" alt="Elegant beauty treatment setting" />}
             style={{
                 width: '100%',
                 height: '100%',

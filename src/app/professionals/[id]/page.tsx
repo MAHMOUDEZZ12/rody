@@ -3,26 +3,13 @@
 
 import { notFound, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Suspense } from 'react';
 import { professionals, services, type Professional } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, Briefcase, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
-
-
-async function ProfessionalImage({ professional }: { professional: Professional }) {
-  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
-  
-  return (
-    <AvatarImage src={imageUrl} alt={professional.name} className="object-cover" />
-  );
-}
-
 
 export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -44,10 +31,12 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
       <div className="grid md:grid-cols-12 gap-8 md:gap-12">
         <div className="md:col-span-4 flex flex-col items-center text-center">
           <Avatar className="w-48 h-48 border-4 border-primary mb-4">
-             <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
-                {/* @ts-expect-error Async Server Component */}
-                <ProfessionalImage professional={professional} />
-              </Suspense>
+            <AvatarImage 
+                src={`https://placehold.co/400x400.png`} 
+                alt={professional.name} 
+                data-ai-hint={professional.dataAiHint} 
+                className="object-cover" 
+            />
             <AvatarFallback>{professional.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <h1 className="font-headline text-3xl text-primary">{professional.name}</h1>

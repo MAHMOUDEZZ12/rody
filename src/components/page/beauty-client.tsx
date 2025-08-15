@@ -4,37 +4,21 @@
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
-import { Suspense, useEffect, useState } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import React from 'react';
 import { SectionTitle } from '@/components/section-title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 function HeroImage() {
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-    useEffect(() => {
-        generateBlogImage({
-            title: 'Artistry in Beauty',
-            content: 'Enhance your natural radiance with our suite of expert beauty treatments, from advanced facials to flawless nail and lash artistry.',
-            dataAiHint: 'pink artistic beauty background with splashes of color',
-        }).then(setImageUrl).catch(console.error);
-    }, []);
-
-    if (!imageUrl) return <Skeleton className="w-full h-full" />;
-    
     return (
         <Image
-          src={imageUrl}
+          src={`https://placehold.co/1600x900.png`}
           alt="Elegant beauty treatment setting"
+          data-ai-hint="pink artistic beauty background with splashes of color"
           fill
           className="object-cover z-0"
           priority
         />
     )
 }
-
 
 export function BeautyClient() {
   const facialServices = services.filter(s => s.category === 'Facials');
@@ -44,9 +28,7 @@ export function BeautyClient() {
   return (
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          <HeroImage />
-        </Suspense>
+        <HeroImage />
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
            <h1 className="font-headline text-4xl md:text-6xl font-bold text-beauty-primary">Artistry in Beauty</h1>

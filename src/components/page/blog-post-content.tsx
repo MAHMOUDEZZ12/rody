@@ -6,9 +6,6 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Suspense } from 'react';
 
 const MarkdownContent = ({ content }: { content: string }) => {
   return (
@@ -25,16 +22,6 @@ const MarkdownContent = ({ content }: { content: string }) => {
     </div>
   );
 };
-
-async function PostImage({ title, content, dataAiHint }: { title: string; content: string; dataAiHint: string }) {
-  const imageUrl = await generateBlogImage({ title, content, dataAiHint });
-  return <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />;
-}
-
-async function RelatedPostImage({ post }: { post: BlogPost }) {
-  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
-  return <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />;
-}
 
 type BlogPostClientProps = {
     post: BlogPost;
@@ -64,10 +51,13 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
       </div>
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          {/* @ts-expect-error Async Server Component */}
-          <PostImage title={post.title} content={post.content} dataAiHint={post.dataAiHint} />
-        </Suspense>
+        <Image 
+          src={`https://placehold.co/1200x800.png`} 
+          alt={post.title}
+          data-ai-hint={post.dataAiHint}
+          layout="fill" 
+          objectFit="cover" 
+        />
       </div>
 
       <div className="text-lg leading-relaxed space-y-6">
@@ -82,10 +72,13 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
-                               <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                  {/* @ts-expect-error Async Server Component */}
-                                 <RelatedPostImage post={related} />
-                               </Suspense>
+                                <Image 
+                                  src={`https://placehold.co/600x400.png`} 
+                                  alt={related.title} 
+                                  data-ai-hint={related.dataAiHint}
+                                  layout="fill" 
+                                  objectFit="cover" 
+                                />
                             </div>
                             <CardContent className="p-4">
                                 <h3 className="font-headline text-lg group-hover:underline">{related.title}</h3>

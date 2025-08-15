@@ -4,30 +4,15 @@
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
-import { Suspense, useEffect, useState } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
 
 function HeroImage() {
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-    useEffect(() => {
-        generateBlogImage({
-            title: 'Sanctuary for the Senses',
-            content: 'Step into a world of tranquility and healing. Our Wellness & SPA services are dedicated to restoring your body’s balance and rejuvenating your spirit.',
-            dataAiHint: 'tranquil spa setting with orchids and balanced stones',
-        }).then(setImageUrl).catch(console.error);
-    }, []);
-
-    if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
     return (
         <Image
-          src={imageUrl}
+          src={`https://placehold.co/1600x900.png`}
           alt="Serene spa setting"
+          data-ai-hint="tranquil spa setting with orchids and balanced stones"
           fill
           className="object-cover z-0"
           priority
@@ -43,9 +28,7 @@ export function WellnessAndSpaClient() {
   return (
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
-         <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          <HeroImage />
-        </Suspense>
+        <HeroImage />
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 animate-fade-in-up">
           <h1 className="font-headline text-4xl md:text-6xl font-bold text-spa-primary">Sanctuary for the Senses</h1>

@@ -5,23 +5,6 @@ import { blogPosts, type BlogPost } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-
-async function PostImage({ post }: { post: BlogPost }) {
-  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
-
-  return (
-     <Image
-        src={imageUrl}
-        alt={post.title}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-  );
-}
 
 export function BlogPageContent() {
   const featuredPost = blogPosts[0];
@@ -43,10 +26,13 @@ export function BlogPageContent() {
         <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
-              <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                 {/* @ts-expect-error Async Server Component */}
-                <PostImage post={featuredPost} />
-              </Suspense>
+              <Image
+                src={`https://placehold.co/1200x600.png`}
+                alt={featuredPost.title}
+                data-ai-hint={featuredPost.dataAiHint}
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="flex flex-col p-8">
               <CardHeader>
@@ -74,10 +60,14 @@ export function BlogPageContent() {
               <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
-                    <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                       {/* @ts-expect-error Async Server Component */}
-                      <PostImage post={post} />
-                    </Suspense>
+                    <Image
+                      src={`https://placehold.co/600x400.png`}
+                      alt={post.title}
+                      data-ai-hint={post.dataAiHint}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">

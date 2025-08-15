@@ -1,38 +1,17 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star, Sparkles, ArrowRight } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
 import { type BlogPost, blogPosts } from '@/lib/blog';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
-import { Input } from '../ui/input';
-import { Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '../referral-banner';
 import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
-
-
-async function BlogImage({ post }: { post: BlogPost }) {
-    const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
-
-    return (
-        <Image
-        src={imageUrl}
-        alt={post.title}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-    );
-}
-
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -47,13 +26,16 @@ function BlogBanner() {
                     Explore our latest articles on wellness, beauty, and self-care rituals.
                 </p>
                 <div className="mt-12 max-w-4xl mx-auto">
-                    <Link href={`/blog/${latestPost.slug}`} className="block group">
+                     <Link href={`/blog/${latestPost.slug}`} className="block group">
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
-                                <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                    {/* @ts-expect-error Server Component */}
-                                    <BlogImage post={latestPost} />
-                                </Suspense>
+                                <Image
+                                    src={`https://placehold.co/1200x600.png`}
+                                    alt={latestPost.title}
+                                    data-ai-hint={latestPost.dataAiHint}
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
                                 <CardHeader>
@@ -65,9 +47,9 @@ function BlogBanner() {
                                     </p>
                                 </CardContent>
                                 <CardFooter>
-                                    <span className="font-semibold flex items-center">
-                                    Read More <ArrowRight className="ml-2 h-4 w-4" />
-                                    </span>
+                                    <Button variant="link" className="p-0 h-auto font-semibold">
+                                        Read More
+                                    </Button>
                                 </CardFooter>
                             </div>
                         </Card>

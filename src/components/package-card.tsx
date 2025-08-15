@@ -2,30 +2,13 @@
 import type { Package } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Tag } from 'lucide-react';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from './ui/badge';
 
 interface PackageCardProps {
   pkg: Package;
-}
-
-async function PackageImage({ pkg }: { pkg: Package }) {
-  const imageUrl = await generateBlogImage({ title: pkg.name, content: pkg.description, dataAiHint: pkg.dataAiHint });
-  
-  return (
-    <Image
-      src={imageUrl}
-      alt={pkg.name}
-      fill
-      className="object-cover"
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    />
-  );
 }
 
 export function PackageCard({ pkg }: PackageCardProps) {
@@ -33,10 +16,14 @@ export function PackageCard({ pkg }: PackageCardProps) {
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-white/80 backdrop-blur-sm">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-          <Suspense fallback={<Skeleton className="w-full h-full" />}>
-             {/* @ts-expect-error Async Server Component */}
-            <PackageImage pkg={pkg} />
-          </Suspense>
+            <Image
+              src={`https://placehold.co/600x400.png`}
+              alt={pkg.name}
+              data-ai-hint={pkg.dataAiHint}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3" /> SURE OFFER</Badge>
           <Badge variant="secondary" className="absolute top-2 right-2">SAVE {Math.round(100 - (pkg.price / pkg.originalPrice) * 100)}%</Badge>
         </div>

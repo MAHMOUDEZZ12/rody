@@ -2,12 +2,9 @@
 import type { Service } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Sparkles, Tag } from 'lucide-react';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 
@@ -15,20 +12,6 @@ interface ServiceCardProps {
   service: Service;
   highlight?: boolean;
   theme?: 'spa' | 'beauty';
-}
-
-async function ServiceImage({ service }: { service: Service }) {
-  const imageUrl = await generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint });
-  
-  return (
-    <Image
-      src={imageUrl}
-      alt={service.name}
-      fill
-      className="object-cover"
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    />
-  );
 }
 
 export function ServiceCard({ service, highlight = false, theme = 'spa' }: ServiceCardProps) {
@@ -44,10 +27,14 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
       )}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-          <Suspense fallback={<Skeleton className="w-full h-full" />}>
-            {/* @ts-expect-error Async Server Component */}
-            <ServiceImage service={service} />
-          </Suspense>
+           <Image
+              src={`https://placehold.co/600x400.png`}
+              alt={service.name}
+              data-ai-hint={service.dataAiHint}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           {isDiscounted && (
             <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>
           )}

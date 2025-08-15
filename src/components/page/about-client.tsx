@@ -2,30 +2,6 @@
 'use client';
 
 import Image from 'next/image';
-import { Suspense, useEffect, useState } from 'react';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Skeleton } from '@/components/ui/skeleton';
-
-
-function AboutImage({ dataAiHint, alt }: { dataAiHint: string; alt: string }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: alt, content: dataAiHint, dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [alt, dataAiHint]);
-
-  if (!imageUrl) {
-    return <Skeleton className="w-full h-80 rounded-lg" />;
-  }
-
-  return (
-    <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
-      <Image src={imageUrl} alt={alt} layout="fill" objectFit="cover" />
-    </div>
-  );
-}
 
 export function AboutClient() {
   return (
@@ -51,9 +27,15 @@ export function AboutClient() {
             </p>
           </div>
           <div className="order-1 md:order-2">
-            <Suspense fallback={<Skeleton className="w-full h-80 rounded-lg" />}>
-              <AboutImage dataAiHint="luxury home interior" alt="A serene and luxurious home environment" />
-            </Suspense>
+            <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
+                <Image 
+                  src={`https://placehold.co/800x600.png`} 
+                  alt="A serene and luxurious home environment"
+                  data-ai-hint="luxury home interior"
+                  layout="fill" 
+                  objectFit="cover" 
+                />
+            </div>
           </div>
         </section>
         
@@ -93,9 +75,15 @@ export function AboutClient() {
 
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-1">
-             <Suspense fallback={<Skeleton className="w-full h-80 rounded-lg" />}>
-              <AboutImage dataAiHint="friendly therapist portrait" alt="A professional and friendly wellness therapist" />
-            </Suspense>
+             <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
+                <Image 
+                  src={`https://placehold.co/800x600.png`} 
+                  alt="A professional and friendly wellness therapist"
+                  data-ai-hint="friendly therapist portrait"
+                  layout="fill" 
+                  objectFit="cover" 
+                />
+            </div>
           </div>
           <div className="text-lg leading-relaxed space-y-4 text-muted-foreground order-2">
             <h2 className="font-headline text-3xl text-primary">The Heart of Rody: Our Professional Team</h2>
