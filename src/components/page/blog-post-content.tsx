@@ -1,6 +1,4 @@
 
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { type BlogPost } from '@/lib/blog';
@@ -43,7 +41,7 @@ type BlogPostClientProps = {
     relatedPosts: BlogPost[];
 }
 
-export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
+export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
   return (
     <article className="container max-w-4xl px-4 py-12">
       <Link href="/blog" className="flex items-center text-primary hover:underline mb-8">

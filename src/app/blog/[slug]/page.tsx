@@ -1,7 +1,7 @@
 
 import { notFound } from 'next/navigation';
 import { blogPosts } from '@/lib/blog';
-import { BlogPostClient } from '@/components/page/blog-post-client';
+import { BlogPostContent } from '@/components/page/blog-post-content';
 
 
 type BlogPostPageProps = {
@@ -19,7 +19,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
-  return <BlogPostClient post={post} relatedPosts={relatedPosts} />;
+  return <BlogPostContent post={post} relatedPosts={relatedPosts} />;
 }
 
 // Statically generate routes for each blog post

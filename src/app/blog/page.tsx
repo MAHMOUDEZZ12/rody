@@ -1,5 +1,5 @@
 
-import { BlogClient } from '@/components/page/blog-client';
+import { BlogPageContent } from '@/components/page/blog-page-content';
 
 export const metadata = {
   title: 'Blog | Rody Wellness',
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  return <BlogClient />;
+  return <BlogPageContent />;
 }

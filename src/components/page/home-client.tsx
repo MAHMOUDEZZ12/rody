@@ -1,6 +1,4 @@
 
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Sparkles, ArrowRight } from 'lucide-react';
@@ -12,113 +10,28 @@ import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
 import { Input } from '../ui/input';
-import { Suspense, useState, useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/use-auth';
-import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
+import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '../referral-banner';
 import { InteractiveHero } from './interactive-hero';
-
-function SureBannerImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({
-        title: 'Sure by Rody Card',
-        content: 'An elegant, minimalist pink card design representing an exclusive membership. The card should feature the text \'Sure by Rody\', a subtle sparkle icon, and a delicate floral element.',
-        dataAiHint: 'elegant pink card with flower'
-    }).then(setImageUrl);
-  }, []);
-  
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
-  return (
-      <Image 
-          src={imageUrl}
-          alt="Sure by Rody card"
-          layout="fill"
-          objectFit="cover"
-      />
-  );
-}
+import { SureBanner } from './sure-banner';
 
 
-function SureBanner() {
-    const [whatsappNumber, setWhatsappNumber] = useState('');
-    const { toast } = useToast();
-    const router = useRouter();
-    const { login } = useAuth();
-
-    const handleJoin = () => {
-        if (whatsappNumber.length < 10) {
-            toast({
-                title: "Invalid Number",
-                description: "Please enter a valid WhatsApp number.",
-                variant: "destructive",
-            });
-            return;
-        }
-        login({ uid: whatsappNumber, email: `${whatsappNumber}@sure.com`});
-        toast({
-            title: "Welcome to Sure!",
-            description: "You're in! Check out your exclusive offers in the dashboard.",
-        });
-        router.push('/dashboard');
-    }
+async function BlogImage({ post }: { post: BlogPost }) {
+    const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
 
     return (
-        <section id="sure-banner" className="py-16 md:py-24">
-            <div className="container max-w-4xl px-4">
-                <Card className="bg-white/90 backdrop-blur-sm overflow-hidden shadow-2xl shadow-primary/10">
-                    <div className="grid md:grid-cols-2">
-                        <div className="p-8 md:p-12 flex flex-col justify-center">
-                            <Sparkles className="h-12 w-12 text-primary mb-4" />
-                            <h2 className="font-headline text-3xl md:text-4xl text-primary">Introducing <br/>Sure by Rody</h2>
-                            <p className="mt-4 text-muted-foreground">Join for free with your WhatsApp number to get instant access to exclusive offers, member-only pricing, and a seamless booking experience. No passwords, no hassle.</p>
-                            <div className="flex flex-col sm:flex-row gap-2 mt-6">
-                                <Input 
-                                    placeholder="Your WhatsApp Number" 
-                                    className="bg-white"
-                                    value={whatsappNumber}
-                                    onChange={(e) => setWhatsappNumber(e.target.value)}
-                                />
-                                <Button onClick={handleJoin} className="w-full sm:w-auto">Join Now</Button>
-                            </div>
-                        </div>
-                        <div className="hidden md:block relative min-h-[300px]">
-                           <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                <SureBannerImage />
-                            </Suspense>
-                        </div>
-                    </div>
-                </Card>
-            </div>
-        </section>
-    );
-}
-
-function BlogImage({ post }: { post: BlogPost }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
-      .then(setImageUrl);
-  }, [post]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
-  return (
-     <Image
+        <Image
         src={imageUrl}
         alt={post.title}
         fill
         className="object-cover"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-  );
+        />
+    );
 }
+
+import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 
 
 function BlogBanner() {
@@ -138,6 +51,7 @@ function BlogBanner() {
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
                                 <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                    {/* @ts-expect-error Server Component */}
                                     <BlogImage post={latestPost} />
                                 </Suspense>
                             </div>

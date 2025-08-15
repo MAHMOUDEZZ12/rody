@@ -1,6 +1,4 @@
 
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, type BlogPost } from '@/lib/blog';
@@ -25,7 +23,7 @@ async function PostImage({ post }: { post: BlogPost }) {
   );
 }
 
-export function BlogClient() {
+export function BlogPageContent() {
   const featuredPost = blogPosts[0];
   const otherPosts = blogPosts.slice(1);
 
