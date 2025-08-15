@@ -1,30 +1,40 @@
 
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import Link from 'next/link';
 
-export function InteractiveHero() {
-    const [imageOneUrl, setImageOneUrl] = useState<string | null>(null);
-    const [imageTwoUrl, setImageTwoUrl] = useState<string | null>(null);
-
-    useEffect(() => {
+async function HeroImages() {
+    const [imageOneUrl, imageTwoUrl] = await Promise.all([
         generateBlogImage({
             title: "Sanctuary for the Senses",
             content: "serene spa setting with orchids and balanced stones",
             dataAiHint: "serene spa setting with orchids and balanced stones"
-        }).then(setImageOneUrl).catch(console.error);
-
+        }),
         generateBlogImage({
             title: "Artistry in Beauty",
             content: "elegant beauty treatment setting with soft pink tones",
             dataAiHint: "elegant beauty treatment setting with soft pink tones"
-        }).then(setImageTwoUrl).catch(console.error);
-    }, []);
+        })
+    ]);
+
+    return (
+         <ReactCompareSlider
+            itemOne={<ReactCompareSliderImage src={imageOneUrl} alt="Serene spa setting" />}
+            itemTwo={<ReactCompareSliderImage src={imageTwoUrl} alt="Elegant beauty treatment setting" />}
+            style={{
+                width: '100%',
+                height: '100%',
+            }}
+        />
+    );
+}
+
+export function InteractiveHero() {
 
     return (
         <section className="relative h-[80vh] w-full text-white">
@@ -50,18 +60,10 @@ export function InteractiveHero() {
                 }
             `}</style>
             
-            {imageOneUrl && imageTwoUrl ? (
-                <ReactCompareSlider
-                    itemOne={<ReactCompareSliderImage src={imageOneUrl} alt="Serene spa setting" />}
-                    itemTwo={<ReactCompareSliderImage src={imageTwoUrl} alt="Elegant beauty treatment setting" />}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                    }}
-                />
-            ) : (
-                <Skeleton className="w-full h-full" />
-            )}
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                 {/* @ts-expect-error Async Server Component */}
+                <HeroImages />
+            </Suspense>
 
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/50 text-center p-4 pointer-events-none">
                 <div className="pointer-events-auto">

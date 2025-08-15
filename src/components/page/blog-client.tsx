@@ -8,19 +8,11 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-function PostImage({ post }: { post: BlogPost }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [post]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+async function PostImage({ post }: { post: BlogPost }) {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
 
   return (
      <Image
@@ -54,6 +46,7 @@ export function BlogClient() {
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
               <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                 {/* @ts-expect-error Async Server Component */}
                 <PostImage post={featuredPost} />
               </Suspense>
             </div>
@@ -84,6 +77,7 @@ export function BlogClient() {
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
                     <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                       {/* @ts-expect-error Async Server Component */}
                       <PostImage post={post} />
                     </Suspense>
                   </div>

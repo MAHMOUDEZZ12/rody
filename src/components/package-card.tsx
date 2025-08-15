@@ -4,7 +4,7 @@
 import type { Package } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Tag } from 'lucide-react';
@@ -16,17 +16,9 @@ interface PackageCardProps {
   pkg: Package;
 }
 
-function PackageImage({ pkg }: { pkg: Package }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: pkg.name, content: pkg.description, dataAiHint: pkg.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [pkg]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
+async function PackageImage({ pkg }: { pkg: Package }) {
+  const imageUrl = await generateBlogImage({ title: pkg.name, content: pkg.description, dataAiHint: pkg.dataAiHint });
+  
   return (
     <Image
       src={imageUrl}
@@ -44,6 +36,7 @@ export function PackageCard({ pkg }: PackageCardProps) {
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Suspense fallback={<Skeleton className="w-full h-full" />}>
+             {/* @ts-expect-error Async Server Component */}
             <PackageImage pkg={pkg} />
           </Suspense>
           <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3" /> SURE OFFER</Badge>

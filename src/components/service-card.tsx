@@ -4,7 +4,7 @@
 import type { Service } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Sparkles, Tag } from 'lucide-react';
@@ -19,17 +19,9 @@ interface ServiceCardProps {
   theme?: 'spa' | 'beauty';
 }
 
-function ServiceImage({ service }: { service: Service }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [service]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
+async function ServiceImage({ service }: { service: Service }) {
+  const imageUrl = await generateBlogImage({ title: service.name, content: service.description, dataAiHint: service.dataAiHint });
+  
   return (
     <Image
       src={imageUrl}
@@ -55,6 +47,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Suspense fallback={<Skeleton className="w-full h-full" />}>
+            {/* @ts-expect-error Async Server Component */}
             <ServiceImage service={service} />
           </Suspense>
           {isDiscounted && (

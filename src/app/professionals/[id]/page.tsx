@@ -3,7 +3,7 @@
 
 import { notFound, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { professionals, services, type Professional } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -11,23 +11,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ArrowLeft, Briefcase, Calendar, Star, ThumbsUp } from 'lucide-react';
+import { ArrowLeft, Briefcase, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
 
 
-function ProfessionalImage({ professional }: { professional: Professional }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (professional) {
-      generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint })
-        .then(url => setImageUrl(url))
-        .catch(console.error);
-    }
-  }, [professional]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full rounded-full" />;
-
+async function ProfessionalImage({ professional }: { professional: Professional }) {
+  const imageUrl = await generateBlogImage({ title: professional.name, content: professional.specialty, dataAiHint: professional.dataAiHint });
+  
   return (
     <AvatarImage src={imageUrl} alt={professional.name} className="object-cover" />
   );
@@ -55,6 +45,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
         <div className="md:col-span-4 flex flex-col items-center text-center">
           <Avatar className="w-48 h-48 border-4 border-primary mb-4">
              <Suspense fallback={<Skeleton className="w-full h-full rounded-full" />}>
+                {/* @ts-expect-error Async Server Component */}
                 <ProfessionalImage professional={professional} />
               </Suspense>
             <AvatarFallback>{professional.name.charAt(0)}</AvatarFallback>

@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 
 const MarkdownContent = ({ content }: { content: string }) => {
   return (
@@ -28,31 +28,13 @@ const MarkdownContent = ({ content }: { content: string }) => {
   );
 };
 
-function PostImage({ title, content, dataAiHint }: { title: string; content: string; dataAiHint: string }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title, content, dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [title, content, dataAiHint]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
+async function PostImage({ title, content, dataAiHint }: { title: string; content: string; dataAiHint: string }) {
+  const imageUrl = await generateBlogImage({ title, content, dataAiHint });
   return <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />;
 }
 
-function RelatedPostImage({ post }: { post: BlogPost }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [post]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
-
+async function RelatedPostImage({ post }: { post: BlogPost }) {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
   return <Image src={imageUrl} alt={post.title} layout="fill" objectFit="cover" />;
 }
 
@@ -85,6 +67,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
+          {/* @ts-expect-error Async Server Component */}
           <PostImage title={post.title} content={post.content} dataAiHint={post.dataAiHint} />
         </Suspense>
       </div>
@@ -102,6 +85,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
                                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                  {/* @ts-expect-error Async Server Component */}
                                  <RelatedPostImage post={related} />
                                </Suspense>
                             </div>

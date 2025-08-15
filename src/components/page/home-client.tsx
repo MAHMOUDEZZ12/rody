@@ -12,7 +12,7 @@ import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
 import { Input } from '../ui/input';
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
@@ -21,20 +21,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ReferralBanner } from '../referral-banner';
 import { InteractiveHero } from './interactive-hero';
 
-function SureBannerImage() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({
+async function SureBannerImage() {
+  const imageUrl = await generateBlogImage({
       title: 'Sure by Rody Card',
       content: 'An elegant, minimalist pink card design representing an exclusive membership. The card should feature the text \'Sure by Rody\', a subtle sparkle icon, and a delicate floral element.',
       dataAiHint: 'elegant pink card with flower'
-    })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, []);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+  });
   
   return (
       <Image 
@@ -91,6 +83,7 @@ function SureBanner() {
                         </div>
                         <div className="hidden md:block relative min-h-[300px]">
                            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                 {/* @ts-expect-error Async Server Component */}
                                 <SureBannerImage />
                             </Suspense>
                         </div>
@@ -101,16 +94,8 @@ function SureBanner() {
     );
 }
 
-function BlogImage({ post }: { post: BlogPost }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint })
-      .then(setImageUrl)
-      .catch(console.error);
-  }, [post]);
-
-  if (!imageUrl) return <Skeleton className="w-full h-full" />;
+async function BlogImage({ post }: { post: BlogPost }) {
+  const imageUrl = await generateBlogImage({ title: post.title, content: post.content, dataAiHint: post.dataAiHint });
 
   return (
      <Image
@@ -141,6 +126,7 @@ function BlogBanner() {
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
                                 <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                                     {/* @ts-expect-error Async Server Component */}
                                     <BlogImage post={latestPost} />
                                 </Suspense>
                             </div>
