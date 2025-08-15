@@ -45,5 +45,5 @@ const generateBlogImageFlow = ai.defineFlow(
 export const generateBlogImage = cache(
   async (input: GenerateBlogImageInput) => generateBlogImageFlow(input),
   ['generate-blog-image'],
-  { revalidate: 3600 }
+  { revalidate: 3600 * 24 } // Cache for 24 hours
 );
