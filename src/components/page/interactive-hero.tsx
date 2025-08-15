@@ -1,26 +1,34 @@
 
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { generateBlogImage } from '@/ai/flows/generate-blog-image-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import Link from 'next/link';
 
-async function HeroImages() {
-    const [imageOneUrl, imageTwoUrl] = await Promise.all([
+function HeroImages() {
+    const [imageOneUrl, setImageOneUrl] = useState<string | null>(null);
+    const [imageTwoUrl, setImageTwoUrl] = useState<string | null>(null);
+
+    useEffect(() => {
         generateBlogImage({
             title: "Sanctuary for the Senses",
             content: "serene spa setting with orchids and balanced stones",
             dataAiHint: "serene spa setting with orchids and balanced stones"
-        }),
+        }).then(setImageOneUrl);
+
         generateBlogImage({
             title: "Artistry in Beauty",
             content: "elegant beauty treatment setting with soft pink tones",
             dataAiHint: "elegant beauty treatment setting with soft pink tones"
-        })
-    ]);
+        }).then(setImageTwoUrl);
+    }, []);
+
+    if (!imageOneUrl || !imageTwoUrl) {
+        return <Skeleton className="w-full h-full" />;
+    }
 
     return (
          <ReactCompareSlider
@@ -61,7 +69,6 @@ export function InteractiveHero() {
             `}</style>
             
             <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                 {/* @ts-expect-error Async Server Component */}
                 <HeroImages />
             </Suspense>
 
