@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/hooks/use-auth';
 import { Playfair_Display, PT_Sans } from 'next/font/google';
+import { MobileCtaBar } from '@/components/layout/mobile-cta-bar';
 
 export const metadata: Metadata = {
   title: 'Sure by Rody',
@@ -36,10 +37,11 @@ export default function RootLayout({
         <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="min-h-screen flex-1 bg-transparent backdrop-blur-sm">
+            <main className="min-h-screen flex-1 bg-transparent backdrop-blur-sm pb-20 md:pb-0">
               {children}
             </main>
             <Footer />
+            <MobileCtaBar />
             <Toaster />
           </div>
         </AuthProvider>
