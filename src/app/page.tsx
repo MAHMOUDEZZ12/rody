@@ -2,7 +2,8 @@
 import { HomeClient } from '@/components/page/home-client';
 import { InteractiveHero } from '@/components/page/interactive-hero';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
-import { services, packages, blogPosts } from '@/lib/data';
+import { services, packages } from '@/lib/data';
+import { blogPosts } from '@/lib/blog';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
