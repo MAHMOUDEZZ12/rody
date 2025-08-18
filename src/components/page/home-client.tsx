@@ -67,15 +67,16 @@ function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
 }
 
 export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImageUrl }: HomeClientProps) {
-  const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
-  const featuredBeautyServices = services.filter(s => s.category === 'Facials' || s.category === 'Nails').slice(0, 2);
+  const featuredSpaServices = services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments')).slice(0, 2);
+  const featuredBeautyServices = services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails')).slice(0, 2);
+  const featuredTreatmentServices = services.filter(s => s.categories.includes('Treatment')).slice(0, 2);
 
   return (
     <>
       <section id="services" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
           <SectionTitle title="Our Services" />
-            <div className="grid md:grid-cols-2 gap-12 mt-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
                 <div className="space-y-8">
                     <div className="text-center">
                         <h3 className="font-headline text-3xl text-spa-primary">Wellness & SPA</h3>
@@ -105,6 +106,22 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
                      <div className="text-center">
                         <Button asChild variant="outline">
                             <Link href="/services/beauty">Explore All Beauty Services</Link>
+                        </Button>
+                    </div>
+                </div>
+                 <div className="space-y-8 lg:col-span-1 md:col-span-2">
+                    <div className="text-center">
+                        <h3 className="font-headline text-3xl text-primary">Featured Treatments</h3>
+                        <p className="text-muted-foreground mt-2">Targeted solutions for corrective and therapeutic results.</p>
+                    </div>
+                    <div className="grid gap-6">
+                       {featuredTreatmentServices.map(service => (
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                      ))}
+                    </div>
+                     <div className="text-center">
+                        <Button asChild variant="outline">
+                            <Link href="/services/wellness-and-spa">Explore All Treatments</Link>
                         </Button>
                     </div>
                 </div>

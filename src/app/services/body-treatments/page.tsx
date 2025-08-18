@@ -1,14 +1,24 @@
 
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const metadata = {
   title: 'Body Treatments | Rody Wellness',
   description: 'Indulge in our luxurious body treatments, including exfoliating scrubs that leave your skin feeling soft, smooth, and revitalized.',
 };
 
+async function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
+    const service = services.find(s => s.id === serviceId);
+    if (!service) return null;
+    const imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
+    return <ServiceCard service={service} imageUrl={imageUrl} theme="spa" />
+}
+
 export default function BodyTreatmentsPage() {
-  const bodyServices = services.filter(s => s.category === 'Body Treatments');
+  const bodyServices = services.filter(s => s.categories.includes('Body Treatments'));
 
   return (
     <div className="container max-w-7xl px-4 py-12">
@@ -23,12 +33,12 @@ export default function BodyTreatmentsPage() {
       <main>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {bodyServices.map((service) => (
-            <ServiceCard key={service.id} service={service} theme="spa"/>
+            <Suspense key={service.id} fallback={<Skeleton className="h-96 w-full" />}>
+              <ServiceImage serviceId={service.id} alt={service.name} />
+            </Suspense>
           ))}
         </div>
       </main>
     </div>
   );
 }
-
-    

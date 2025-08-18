@@ -13,9 +13,9 @@ type BeautyClientProps = {
 }
 
 export function BeautyClient({ heroImageUrl, serviceImageUrls }: BeautyClientProps) {
-  const facialServices = services.filter(s => s.category === 'Facials');
-  const nailServices = services.filter(s => s.category === 'Nails');
-  const eyelashServices = services.filter(s => s.category === 'Eyelashes');
+  const facialServices = services.filter(s => s.categories.includes('Facials'));
+  const nailServices = services.filter(s => s.categories.includes('Nails'));
+  const eyelashServices = services.filter(s => s.categories.includes('Eyelashes'));
 
   return (
     <>

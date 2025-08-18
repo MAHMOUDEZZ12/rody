@@ -1,14 +1,25 @@
 
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const metadata = {
   title: 'Eyelash Services | Rody Wellness',
   description: 'Enhance your eyes with our professional eyelash services, including classic and Russian volume extensions, lash lifts, and tints.',
 };
 
+async function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
+    const service = services.find(s => s.id === serviceId);
+    if (!service) return null;
+    const imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
+    return <ServiceCard service={service} imageUrl={imageUrl} theme="beauty" />
+}
+
+
 export default function EyelashesPage() {
-  const eyelashServices = services.filter(s => s.category === 'Eyelashes');
+  const eyelashServices = services.filter(s => s.categories.includes('Eyelashes'));
 
   return (
     <div className="container max-w-7xl px-4 py-12">
@@ -23,12 +34,12 @@ export default function EyelashesPage() {
       <main>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {eyelashServices.map((service) => (
-            <ServiceCard key={service.id} service={service} theme="beauty"/>
+             <Suspense key={service.id} fallback={<Skeleton className="h-96 w-full" />}>
+              <ServiceImage serviceId={service.id} alt={service.name} />
+            </Suspense>
           ))}
         </div>
       </main>
     </div>
   );
 }
-
-    

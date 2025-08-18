@@ -13,8 +13,8 @@ type WellnessAndSpaClientProps = {
 }
 
 export function WellnessAndSpaClient({ heroImageUrl, serviceImageUrls }: WellnessAndSpaClientProps) {
-  const massageServices = services.filter(s => s.category === 'Massage');
-  const bodyServices = services.filter(s => s.category === 'Body Treatments');
+  const massageServices = services.filter(s => s.categories.includes('Massage'));
+  const bodyServices = services.filter(s => s.categories.includes('Body Treatments'));
 
   return (
     <>

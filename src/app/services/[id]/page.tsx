@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
@@ -18,6 +18,34 @@ import { ArrowLeft, CalendarIcon, Clock, CreditCard, CheckCircle, Gem, Gift, Spa
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { handleBooking as handleBookingAction } from '@/app/actions';
+import { Skeleton } from '@/components/ui/skeleton';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+
+function ServiceImage({ service }: { service: Service }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useState(() => {
+    generateSimpleImage({
+      prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`,
+    }).then(setImageUrl);
+  });
+
+  if (!imageUrl) {
+    return <Skeleton className="absolute inset-0" />;
+  }
+
+  return (
+    <Image
+      src={imageUrl}
+      alt={service.name}
+      fill
+      className="object-cover"
+      sizes="(max-width: 768px) 100vw, 50vw"
+      priority
+    />
+  );
+}
+
 
 export default function ServiceBookingPage({ params }: { params: { id:string } }) {
   const router = useRouter();
@@ -140,14 +168,9 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       <div className="grid md:grid-cols-5 gap-8 md:gap-12">
         <div className="md:col-span-3">
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
-             <Image 
-                src={service.image} 
-                alt={service.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-            />
+             <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                <ServiceImage service={service} />
+             </Suspense>
              {isSureMember && (
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3 bg-primary text-white">SURE OFFER</Badge>
             )}
