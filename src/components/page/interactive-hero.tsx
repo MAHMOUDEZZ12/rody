@@ -11,7 +11,7 @@ async function HeroImage() {
     try {
         imageUrl = await generateSimpleImage({
             prompt:
-            'Luxury Home Sanctuary: A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy, with a luxury aesthetic.',
+            'Luxury Home Sanctuary: A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy, with a luxury aesthetic. High resolution, photorealistic.',
         });
     } catch (error) {
         console.error("Failed to generate hero image, falling back to placeholder.", error);

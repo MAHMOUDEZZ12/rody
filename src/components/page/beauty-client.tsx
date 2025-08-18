@@ -13,7 +13,7 @@ async function HeroImage() {
     try {
         imageUrl = await generateSimpleImage({
             prompt:
-            'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
+            'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic, high resolution, photorealistic.',
         });
     } catch (error) {
         console.error("Failed to generate beauty hero image, falling back to placeholder.", error);

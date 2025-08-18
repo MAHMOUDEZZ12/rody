@@ -13,7 +13,7 @@ async function HeroImage() {
     try {
         imageUrl = await generateSimpleImage({
             prompt:
-            'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness.',
+            'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness. High resolution, photorealistic.',
         });
     } catch (error) {
         console.error("Failed to generate wellness hero image, falling back to placeholder.", error);

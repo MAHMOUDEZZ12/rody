@@ -16,7 +16,26 @@ import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
-import { BlogPostContent } from './blog-post-content';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+
+async function BlogBannerImage({ post }: { post: BlogPost }) {
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+    } catch (e) {
+        console.error(e);
+        imageUrl = post.image;
+    }
+
+    return (
+         <Image 
+            src={imageUrl} 
+            alt={post.title} 
+            fill
+            className="object-cover"
+        />
+    )
+}
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -35,12 +54,7 @@ function BlogBanner() {
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
                                 <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                    <Image 
-                                        src={latestPost.image} 
-                                        alt={latestPost.title} 
-                                        fill
-                                        className="object-cover"
-                                    />
+                                    <BlogBannerImage post={latestPost} />
                                 </Suspense>
                             </div>
                             <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">

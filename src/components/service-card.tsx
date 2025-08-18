@@ -14,7 +14,7 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 async function ServiceImage({ service }: { service: Service }) {
   let imageUrl;
   try {
-    imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.category} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic.`});
+    imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.category} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
   } catch (e) {
     console.error(e);
     imageUrl = service.image;

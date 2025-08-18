@@ -10,7 +10,7 @@ async function AboutImage1() {
   try {
     imageUrl = await generateSimpleImage({
         prompt:
-        'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic.',
+        'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic. High resolution detail, photorealistic.',
     });
   } catch(e) {
     console.error(e);
@@ -31,7 +31,7 @@ async function AboutImage2() {
     try {
         imageUrl = await generateSimpleImage({
         prompt:
-            'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise.',
+            'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise. High resolution detail, photorealistic.',
         });
     } catch(e) {
         console.error(e);

@@ -17,7 +17,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 async function ProfessionalImage({ professional }: { professional: Professional }) {
     let imageUrl;
     try {
-        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic.`});
+        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
     } catch (e) {
         console.error(e);
         imageUrl = professional.image;
