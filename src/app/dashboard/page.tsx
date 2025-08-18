@@ -85,7 +85,7 @@ export default function DashboardPage() {
               <Input
                 type="tel"
                 placeholder="Your WhatsApp Number"
-                className="bg-white text-center"
+                className="bg-white text-center sm:text-left"
                 value={whatsappNumber}
                 onChange={(e) => setWhatsappNumber(e.target.value)}
               />

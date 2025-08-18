@@ -11,7 +11,7 @@ type InteractiveHeroProps = {
 
 export function InteractiveHero({ imageUrl }: InteractiveHeroProps) {
   return (
-    <section className="relative h-[80vh] w-full text-white">
+    <section className="relative h-[70vh] md:h-[80vh] w-full text-white">
       <Image
         src={imageUrl}
         alt="Serene luxury spa setting in a home"

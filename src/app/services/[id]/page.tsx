@@ -273,7 +273,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                   </div>
                 </div>
               
-              <div className="flex justify-between items-center font-bold text-xl">
+              <div className="flex justify-between items-center font-bold text-2xl">
                 <span>Total:</span>
                 <span className="text-primary">AED {totalPrice}</span>
               </div>
