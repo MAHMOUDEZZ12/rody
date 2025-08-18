@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { Star, ArrowRight } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
 import { type BlogPost, blogPosts } from '@/lib/blog';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,7 +15,12 @@ import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import BlogBannerImage from './blog-banner-image';
-import TestimonialsSection from './testimonials-section';
+import dynamic from 'next/dynamic';
+
+const TestimonialsSection = dynamic(() => import('./testimonials-section'), {
+  suspense: true,
+  ssr: false
+});
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -139,7 +144,7 @@ export function HomeClient() {
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>
-           <Suspense fallback={<div className="text-center">Loading testimonials...</div>}>
+           <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><Skeleton className="h-48 w-full" /><Skeleton className="h-48 w-full" /><Skeleton className="h-48 w-full" /></div>}>
               <TestimonialsSection />
            </Suspense>
         </div>
