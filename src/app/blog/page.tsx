@@ -4,10 +4,11 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { blogPosts } from '@/lib/blog';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Blog | Rody Wellness',
-  description: 'Explore articles on wellness, beauty, and self-care from the experts at Rody Wellness.',
+export const metadata: Metadata = {
+  title: 'The Rody Wellness Journal',
+  description: 'Explore expert articles, tips, and insights on wellness, beauty, and self-care rituals from the specialists at Rody Wellness, your at-home spa in Dubai.',
 };
 
 export default async function BlogPage() {

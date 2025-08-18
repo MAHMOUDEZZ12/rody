@@ -1,9 +1,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Service Policies | Rody Wellness',
-  description: 'Our service policies covering booking, cancellations, health, safety, and payments for Rody Wellness at-home spa services.',
+export const metadata: Metadata = {
+  title: 'Our Policies',
+  description: 'Review our service policies for booking, cancellations, health, safety, and payments for Rody Wellness at-home spa services in Dubai.',
 };
 
 export default function PolicyPage() {

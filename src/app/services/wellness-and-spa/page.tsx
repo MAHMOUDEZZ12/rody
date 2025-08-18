@@ -4,10 +4,11 @@ import { services } from '@/lib/data';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Wellness & SPA | Rody Wellness',
-  description: 'Explore our complete range of wellness and spa treatments, including therapeutic massages and revitalizing body scrubs, designed to restore balance and rejuvenate your body and mind.',
+export const metadata: Metadata = {
+  title: 'At-Home Wellness & SPA Services',
+  description: 'Explore our complete range of at-home wellness and spa treatments in Dubai, including therapeutic massages and revitalizing body scrubs to restore balance.',
 };
 
 export default async function WellnessAndSpaPage() {

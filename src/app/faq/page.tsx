@@ -6,10 +6,11 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'FAQ | Rody Wellness',
-  description: 'Frequently Asked Questions about Rody Wellness at-home spa services in Dubai.',
+export const metadata: Metadata = {
+  title: 'Frequently Asked Questions',
+  description: 'Find answers to common questions about Rody Wellness at-home spa services in Dubai, including booking, appointments, payments, and policies.',
 };
 
 const faqs = [

@@ -4,10 +4,11 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { services } from '@/lib/data';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Beauty & Nails | Rody Wellness',
-  description: 'Explore our expert beauty treatments, including bespoke facials, pristine nail artistry, and stunning eyelash extensions.',
+export const metadata: Metadata = {
+  title: 'At-Home Beauty & Nail Services',
+  description: 'Discover expert beauty treatments in Dubai. We offer bespoke facials, pristine nail artistry with gel & acrylics, and stunning eyelash extensions at your home.',
 };
 
 export default async function BeautyPage() {

@@ -4,10 +4,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'About Us | Rody Wellness',
-  description: 'Learn the story and philosophy behind Rody Wellness, Dubai\'s premier at-home luxury spa service.',
+export const metadata: Metadata = {
+  title: 'Our Story',
+  description: 'Learn the story and philosophy behind Rody Wellness, Dubai\'s premier at-home luxury spa service, delivering a five-star sanctuary to your door.',
 };
 
 export default async function AboutUsPage() {

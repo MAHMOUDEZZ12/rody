@@ -6,6 +6,13 @@ import { services, packages } from '@/lib/data';
 import { blogPosts } from '@/lib/blog';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sure by Rody | Premium At-Home Spa & Beauty in Dubai',
+  description: 'Experience the ultimate luxury of at-home wellness. Rody Spa offers premium massage, beauty, and spa treatments delivered to your door in Dubai.',
+};
+
 
 export default async function Home() {
   const heroImageUrl = await generateSimpleImage({

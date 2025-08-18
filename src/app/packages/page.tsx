@@ -6,10 +6,11 @@ import { SectionTitle } from '@/components/section-title';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Sure Offers | Rody Wellness',
-  description: 'Explore our curated wellness packages for a complete, luxurious experience at a special value.',
+export const metadata: Metadata = {
+  title: 'Sure Offers & Packages',
+  description: 'Indulge and save with our curated wellness packages. Each package combines our most popular at-home spa and beauty services at an exceptional value.',
 };
 
 export default async function PackagesPage() {

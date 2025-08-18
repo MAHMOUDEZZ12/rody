@@ -35,6 +35,8 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export function Footer() {
+  const whatsappUrl = "https://wa.me/message/S46XZJVEVAOJF1?text=Hello%20Rody%20Wellness!%20I'm%20interested%20in%20booking%20a%20service.";
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto max-w-7xl px-4 py-8">
@@ -73,7 +75,7 @@ export function Footer() {
                 <a href="https://www.instagram.com/rodyuae/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:opacity-80 transition-opacity">
                     <InstagramIcon className="h-7 w-7"/>
                 </a>
-                <a href="https://wa.me/message/S46XZJVEVAOJF1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-full transition-colors">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-full transition-colors">
                     <WhatsAppIcon className="h-5 w-5"/>
                     <span className="text-white">Chat on WhatsApp</span>
                 </a>

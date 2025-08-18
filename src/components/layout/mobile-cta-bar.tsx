@@ -21,12 +21,14 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export function MobileCtaBar() {
+  const whatsappUrl = "https://wa.me/message/S46XZJVEVAOJF1?text=Hello%20Rody%20Wellness!%20I'm%20interested%20in%20booking%20a%20service.";
+  
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-t shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-50">
       <div className="container h-full mx-auto">
         <div className="grid grid-cols-2 h-full gap-2">
           <a
-            href="https://wa.me/message/S46XZJVEVAOJF1"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center h-full text-lg font-semibold text-primary"
