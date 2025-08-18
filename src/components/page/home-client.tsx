@@ -72,9 +72,7 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
 
   return (
     <>
-      <SureBanner />
-
-      <section id="services" className="py-16 md:py-24 bg-card/50">
+      <section id="services" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
           <SectionTitle title="Our Services" />
             <div className="grid md:grid-cols-2 gap-12 mt-12">
@@ -113,8 +111,10 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
             </div>
         </div>
       </section>
+      
+      <SureBanner />
 
-       <section id="packages" className="py-16 md:py-24">
+       <section id="packages" className="py-16 md:py-24 bg-card/50">
         <div className="container max-w-7xl px-4">
           <SectionTitle title="Luxury Packages" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
