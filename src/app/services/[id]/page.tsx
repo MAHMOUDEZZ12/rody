@@ -17,11 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, CalendarIcon, Clock, CreditCard, CheckCircle, Gem, Gift, Sparkles, Truck, Users } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-
-// This page needs to be a client component for interactivity, but we can't fetch data here.
-// We'll assume the image URL is passed in or we use the placeholder.
-// A better approach would be to have this component receive the service object as a prop
-// from a parent Server Component that fetches the data.
+import { handleBooking as handleBookingAction } from '@/app/actions';
 
 export default function ServiceBookingPage({ params }: { params: { id:string } }) {
   const router = useRouter();
@@ -62,7 +58,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
 
   const totalPrice = isSureMember ? surePrice + addonsPrice : originalPrice + addonsPrice;
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
     if (!selectedDate || !selectedProfessionalId || !selectedTime) {
       toast({
         title: "Incomplete Information",
@@ -71,12 +67,33 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       });
       return;
     }
-    toast({
-      title: isGifting ? "Gift Purchased!" : "Booking Confirmed!",
-      description: `Your ${service.name} is booked. Payment of AED ${totalPrice} is due on delivery.`,
-      duration: 5000,
-    });
-    router.push('/dashboard');
+
+    const bookingData = {
+      serviceName: service.name,
+      totalPrice,
+      isGifting,
+      date: selectedDate.toLocaleDateString(),
+      time: selectedTime,
+      professionalId: selectedProfessionalId,
+      addons: selectedAddons.map(a => a.name),
+    };
+
+    const result = await handleBookingAction(bookingData);
+
+    if (result.success) {
+      toast({
+        title: isGifting ? "Gift Purchased!" : "Booking Confirmed!",
+        description: `Your ${service.name} is booked. Payment of AED ${totalPrice} is due on delivery.`,
+        duration: 5000,
+      });
+      router.push('/dashboard');
+    } else {
+       toast({
+        title: "Booking Failed",
+        description: "Could not complete your booking. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   const handleJoinSure = () => {
@@ -273,7 +290,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
                   </div>
                 </div>
               
-              <div className="flex justify-between items-center font-bold text-2xl">
+              <div className="flex justify-between items-center font-bold text-3xl">
                 <span>Total:</span>
                 <span className="text-primary">AED {totalPrice}</span>
               </div>
