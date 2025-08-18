@@ -22,11 +22,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
-  const postImageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+  const postImageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. The mood should reflect the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography with a clean background, an elegant aesthetic, and high resolution.`});
   
   const relatedPostsImageUrls: Record<string, string> = {};
   for (const p of relatedPosts) {
-    relatedPostsImageUrls[p.slug] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${p.category}. Keywords: ${p.title}, ${p.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+    relatedPostsImageUrls[p.slug] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${p.category}. The mood should reflect the title: "${p.title}". Keywords: ${p.dataAiHint}. Use professional photography with a clean background, an elegant aesthetic, and high resolution.`});
   }
 
 
@@ -54,6 +54,6 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
   return {
     title: `${post.title} | Rody Wellness Blog`,
-    description: post.content.substring(0, 160),
+    description: post.subtitle,
   };
 }

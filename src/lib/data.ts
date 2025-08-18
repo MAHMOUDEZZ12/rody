@@ -70,8 +70,8 @@ export const services: Service[] = [
   {
     id: 'massage-relaxation',
     name: 'Relaxation Massage',
-    description: 'A gentle massage to soothe and de-stress.',
-    longDescription: 'A classic, gentle-to-medium pressure massage that uses long, smooth, gliding strokes. This treatment is proven to reduce stress and anxiety, lower blood pressure, improve circulation, and promote a feeling of overall tranquility. It’s the perfect reset for a busy mind and body. Ideal for anyone new to massage or those experiencing high levels of stress.',
+    description: 'A gentle, soothing massage designed to melt away stress and promote tranquility.',
+    longDescription: 'Escape the demands of daily life with our classic Relaxation Massage. This treatment features gentle-to-medium pressure with long, smooth, gliding strokes, proven to reduce stress, lower blood pressure, and improve circulation. It is the perfect introduction to massage therapy and an essential reset for a busy mind and body, leaving you in a state of profound calm.',
     price: 270,
     originalPrice: 300,
     duration: 60,
@@ -84,8 +84,8 @@ export const services: Service[] = [
   {
     id: 'massage-deep-tissue',
     name: 'Deep Tissue Massage',
-    description: 'Release chronic muscle tension with firm pressure.',
-    longDescription: 'A targeted massage that uses slow, firm strokes and deep pressure to reach the deeper layers of muscle and fascia. It provides significant relief from chronic muscle tension, breaks down painful knots, and increases mobility. Ideal for athletes or anyone suffering from chronic pain.',
+    description: 'Firm, targeted pressure to release chronic muscle tension and knots.',
+    longDescription: 'A therapeutic massage that uses slow, firm strokes and deep, focused pressure to reach the deeper layers of muscle and fascia. This treatment provides significant relief from chronic pain, breaks down stubborn knots, and restores mobility. It is ideal for athletes, those with physically demanding lifestyles, or anyone suffering from persistent muscle soreness.',
     price: 270,
     originalPrice: 300,
     duration: 60,
@@ -98,8 +98,8 @@ export const services: Service[] = [
   {
     id: 'massage-aromatherapy',
     name: 'Aromatherapy Massage',
-    description: 'Calming massage with therapeutic essential oils.',
-    longDescription: 'A holistic healing treatment that uses natural plant extracts to promote health and well-being. This massage combines the physical benefits of massage with the emotional benefits of scent, using essential oils to reduce stress, improve mood, and relieve pain.',
+    description: 'A calming journey combining gentle massage with therapeutic essential oils.',
+    longDescription: 'A holistic healing experience that integrates the physical benefits of massage with the emotional harmony of scent. This gentle massage uses a custom blend of pure essential oils to reduce stress, elevate mood, and soothe the body. Let the aromatic botanicals transport you to a state of complete serenity.',
     price: 290,
     originalPrice: 320,
     duration: 60,
@@ -112,8 +112,8 @@ export const services: Service[] = [
   {
     id: 'massage-sports',
     name: 'Sports Massage',
-    description: 'Target muscle tension and improve flexibility.',
-    longDescription: 'A dynamic massage tailored specifically for athletic individuals. It helps prevent injuries, enhances athletic performance, reduces recovery time after intense workouts, and increases flexibility and range of motion. Ideal for professional athletes, weekend warriors, and anyone who maintains a regular, active fitness routine.',
+    description: 'For active individuals seeking to enhance performance and speed recovery.',
+    longDescription: 'A dynamic massage tailored to the needs of athletic individuals. This treatment helps prevent injuries, boosts performance, reduces recovery time, and increases flexibility. It is ideal for professional athletes, weekend warriors, or anyone who maintains an active fitness routine and wants to keep their body in peak condition.',
     price: 270,
     originalPrice: 300,
     duration: 60,
@@ -126,8 +126,8 @@ export const services: Service[] = [
   {
     id: 'massage-maderotherapy',
     name: 'Maderotherapy (Wood Therapy)',
-    description: 'Body sculpting massage using wooden tools.',
-    longDescription: 'An effective and non-invasive treatment that uses specially designed wooden tools to contour the body, break down cellulite, and facilitate lymphatic drainage. This therapy helps to tone, tighten, and define the body while promoting overall well-being.',
+    description: 'An intensive body sculpting massage using specialized wooden tools.',
+    longDescription: 'Experience the contouring power of Maderotherapy, also known as Wood Therapy. This effective, non-invasive treatment uses a set of specially designed wooden tools to sculpt the body, break down cellulite, and facilitate lymphatic drainage. It helps to tone, tighten, and define your figure while promoting overall well-being.',
     price: 350,
     originalPrice: 400,
     duration: 60,
@@ -140,8 +140,8 @@ export const services: Service[] = [
   {
     id: 'massage-hot-stone',
     name: 'Hot Stone Massage',
-    description: 'Melt away tension with heated basalt stones.',
-    longDescription: 'This luxurious massage uses smooth, heated basalt stones placed on key points of the body. The gentle heat penetrates deep into the muscles, easing tension, improving circulation, and promoting a profound sense of calm and relaxation.',
+    description: 'Melt away deep-seated tension with the gentle heat of basalt stones.',
+    longDescription: 'This luxurious massage uses smooth, heated basalt stones placed on key points of the body. The gentle, radiating heat penetrates deep into the muscles, easing stiffness, improving circulation, and inducing a state of profound calm. It is a deeply grounding and restorative experience.',
     price: 320,
     originalPrice: 350,
     duration: 75,
@@ -154,8 +154,8 @@ export const services: Service[] = [
   {
     id: 'massage-lymphatic',
     name: 'Lymphatic Drainage',
-    description: 'A gentle massage to reduce bloating and detoxify.',
-    longDescription: 'A very light, rhythmic massage that encourages the natural drainage of the lymph, which carries waste products away from the tissues. It is highly effective for reducing swelling, bloating, and water retention, and boosting the immune system.',
+    description: 'A gentle, rhythmic massage to detoxify, reduce bloating, and boost immunity.',
+    longDescription: 'A light, rhythmic massage that encourages the body\'s natural detoxification process by stimulating the lymphatic system. This treatment is highly effective for reducing swelling, water retention, and post-surgery recovery. It is a gentle path to feeling lighter, healthier, and more energized.',
     price: 300,
     originalPrice: 340,
     duration: 60,
@@ -167,9 +167,9 @@ export const services: Service[] = [
   },
   {
     id: 'massage-prenatal',
-    name: 'Pre-Post-Natal Massage',
-    description: 'Safe and soothing massage for expectant mothers.',
-    longDescription: 'A gentle, nurturing massage specifically designed for the needs of pregnant women. It helps relieve back pain, reduce swelling in the legs and feet, and provide emotional support during this special time. Safe for the second and third trimesters.',
+    name: 'Pre & Post-Natal Massage',
+    description: 'A safe, soothing, and nurturing massage for expectant or new mothers.',
+    longDescription: 'A nurturing massage specifically designed for the unique needs of expectant and new mothers. This gentle treatment helps relieve back pain, reduce swelling, and provide emotional support during this special time. Safe for the second and third trimesters, and beneficial for post-natal recovery.',
     price: 290,
     originalPrice: 320,
     duration: 60,
@@ -184,8 +184,8 @@ export const services: Service[] = [
   {
     id: 'body-coffee-scrub',
     name: 'Arabica Coffee Scrub',
-    description: 'Exfoliate and energize with an invigorating coffee scrub.',
-    longDescription: 'Awaken your senses and your skin with our Arabica Coffee Scrub. The natural caffeine and antioxidants in coffee help to stimulate circulation, reduce the appearance of cellulite, and slough away dead skin cells, revealing smooth, radiant, and energized skin.',
+    description: 'Exfoliate, energize, and reduce the appearance of cellulite.',
+    longDescription: 'Awaken your senses and skin with our invigorating Arabica Coffee Scrub. The natural caffeine and antioxidants stimulate circulation and help reduce the appearance of cellulite, while finely ground coffee beans slough away dead cells to reveal smooth, radiant, and energized skin.',
     price: 250,
     originalPrice: 280,
     duration: 45,
@@ -198,8 +198,8 @@ export const services: Service[] = [
   {
     id: 'body-gold-scrub',
     name: '24K Gold Scrub',
-    description: 'A luxurious scrub for radiant, glowing skin.',
-    longDescription: 'Indulge in the ultimate luxury with our 24K Gold Scrub. This opulent treatment gently exfoliates while imparting the anti-inflammatory and radiance-boosting benefits of gold. It helps to improve skin texture and leave you with a luminous, youthful glow.',
+    description: 'A luxurious, anti-inflammatory scrub for truly radiant, glowing skin.',
+    longDescription: 'Indulge in the ultimate luxury with our 24K Gold Scrub. This opulent treatment gently exfoliates while imparting the anti-inflammatory and radiance-boosting benefits of pure gold. It helps to improve skin texture and leaves you with a luminous, youthful glow from head to toe.',
     price: 300,
     originalPrice: 340,
     duration: 45,
@@ -212,8 +212,8 @@ export const services: Service[] = [
   {
     id: 'body-himalayan-salt-scrub',
     name: 'Himalayan Salt Scrub',
-    description: 'Detoxify and mineralize your skin with pure salt crystals.',
-    longDescription: 'This detoxifying treatment uses pure Himalayan salt crystals to gently exfoliate the body, drawing out impurities and stimulating circulation. Rich in over 80 minerals, this scrub helps to balance your body’s pH and leaves your skin feeling incredibly soft and smooth.',
+    description: 'Detoxify and mineralize your skin with pure, mineral-rich salt crystals.',
+    longDescription: 'This detoxifying treatment uses pure Himalayan salt crystals to gently exfoliate, drawing out impurities and stimulating circulation. Rich in over 80 minerals and trace elements, this scrub helps to balance your body’s pH and leaves your skin feeling incredibly soft, smooth, and renewed.',
     price: 260,
     originalPrice: 290,
     duration: 45,
@@ -228,7 +228,7 @@ export const services: Service[] = [
   {
     id: 'facial-hydrating',
     name: 'Deep Hydrating Facial',
-    description: 'Quench thirsty skin with an intense moisture boost.',
+    description: 'Quench thirsty skin with an intense moisture boost for a dewy, plump look.',
     longDescription: 'A deeply nourishing facial for dry or dehydrated skin. Using hyaluronic acid and other powerful humectants, this treatment restores the skin\'s moisture barrier, plumps up fine lines, and leaves your complexion looking dewy, supple, and refreshed.',
     price: 350,
     originalPrice: 390,
@@ -242,7 +242,7 @@ export const services: Service[] = [
   {
     id: 'facial-anti-aging',
     name: 'Anti-Aging Facial',
-    description: 'Smooths fine lines and promotes a youthful complexion.',
+    description: 'A powerful treatment to smooth fine lines and promote a youthful complexion.',
     longDescription: 'A luxurious treatment designed to combat the signs of aging. It uses powerful ingredients to boost collagen production, smooth fine lines, and restore elasticity. It visibly reduces the appearance of wrinkles and firms sagging skin for a more youthful, radiant complexion.',
     price: 380,
     originalPrice: 419,
@@ -256,7 +256,7 @@ export const services: Service[] = [
   {
     id: 'facial-glow',
     name: 'Rody Wellness Glow Facial',
-    description: 'Our signature facial for a radiant, camera-ready glow.',
+    description: 'Our signature facial for an immediate, camera-ready, luminous glow.',
     longDescription: 'Our signature treatment combines gentle exfoliation, a vitamin-rich serum infusion, and a brightening mask to instantly revive dull skin. This facial is perfect before a special event, leaving your skin looking luminous, even-toned, and absolutely radiant.',
     price: 400,
     originalPrice: 450,
@@ -270,7 +270,7 @@ export const services: Service[] = [
   {
     id: 'facial-acne',
     name: 'Acne Treatment Facial',
-    description: 'Targets acne and blemishes, reducing inflammation.',
+    description: 'A deep-cleansing facial to target acne, reduce inflammation, and prevent breakouts.',
     longDescription: 'A clarifying facial focused on treating and preventing acne. It involves deep cleansing, gentle extractions, and the application of anti-bacterial products to soothe the skin. It unclogs pores, reduces inflammation, and helps prevent future breakouts for a clearer, calmer complexion. Ideal for teenagers and adults struggling with congested skin.',
     price: 320,
     originalPrice: 353,
@@ -286,7 +286,7 @@ export const services: Service[] = [
   {
     id: 'nail-classic-mani',
     name: 'Classic Manicure',
-    description: 'A timeless manicure for a clean and elegant look.',
+    description: 'A timeless manicure for a clean, elegant, and perfectly groomed look.',
     longDescription: 'Our classic manicure service includes expert shaping, cuticle care, a relaxing massage, and a flawless polish application. It leaves your hands looking perfectly groomed, clean, and elegant. A true staple of self-care.',
     price: 99,
     originalPrice: 120,
@@ -300,7 +300,7 @@ export const services: Service[] = [
   {
     id: 'nail-classic-pedi',
     name: 'Classic Pedicure',
-    description: 'A relaxing pedicure for perfectly polished toes.',
+    description: 'A relaxing pedicure for soft feet and perfectly polished toes.',
     longDescription: 'Our classic pedicure service includes expert shaping, cuticle care, a relaxing massage, and a flawless polish application. It leaves your feet looking perfectly groomed, clean, and elegant. A true staple of self-care.',
     price: 99,
     originalPrice: 110,
@@ -314,7 +314,7 @@ export const services: Service[] = [
   {
     id: 'nail-combo',
     name: 'Combo Mani + Pedi',
-    description: 'The ultimate nail care package for hands and feet.',
+    description: 'The ultimate nail care package for impeccably groomed hands and feet.',
     longDescription: 'Indulge in the complete nail care experience with our combined Classic Manicure and Pedicure. This package offers all the benefits of both services at a special value, leaving your hands and feet feeling rejuvenated and looking immaculate. It\'s the perfect way to pamper yourself.',
     price: 189,
     originalPrice: 230,
@@ -328,7 +328,7 @@ export const services: Service[] = [
   {
     id: 'nail-gel-overlay',
     name: 'Gel Overlay',
-    description: 'Strengthening for your natural nails without added length.',
+    description: 'A long-lasting, chip-free gel application that strengthens natural nails.',
     longDescription: 'A Gel Overlay strengthens your natural nails without adding length. It provides a chip-free manicure that lasts for weeks and adds strength to natural nails, allowing for a durable and glossy finish.',
     price: 250,
     originalPrice: 280,
@@ -342,7 +342,7 @@ export const services: Service[] = [
   {
     id: 'nail-polygel-extensions',
     name: 'Polygel Extensions',
-    description: 'Lightweight and strong nail extensions for a flawless look.',
+    description: 'The best of both worlds: lightweight, flexible, and strong nail extensions.',
     longDescription: 'Polygel Extensions are used to create beautiful, durable, and long-lasting nail enhancements. They provide a chip-free manicure that lasts for weeks, add strength, and allow for customized length and shape.',
     price: 320,
     originalPrice: 350,
@@ -356,7 +356,7 @@ export const services: Service[] = [
   {
     id: 'nail-acrylic-extensions',
     name: 'Acrylic Extensions (Natural)',
-    description: 'Durable and long-lasting extensions for dramatic length.',
+    description: 'The strongest, most durable extensions for dramatic length and shape.',
     longDescription: 'Acrylic extensions are the strongest and most durable option for adding significant length to your nails. They are perfect for creating bold shapes and are highly resistant to breakage, making them ideal for those who are hard on their hands.',
     price: 340,
     originalPrice: 370,
@@ -370,7 +370,7 @@ export const services: Service[] = [
   {
     id: 'nail-acrylic-french',
     name: 'Acrylic Extensions (French)',
-    description: 'Classic French tip design with the durability of acrylic.',
+    description: 'The timeless French tip design with the superior durability of acrylic.',
     longDescription: 'Get the timeless, elegant look of a French manicure with the superior strength and longevity of acrylic extensions. This service provides a flawless, chip-resistant finish that lasts for weeks.',
     price: 390,
     originalPrice: 420,
@@ -386,7 +386,7 @@ export const services: Service[] = [
   {
     id: 'eyelash-classic',
     name: 'Classic Full Set',
-    description: 'Enhance your natural lashes with a classic full set.',
+    description: 'A timeless enhancement, adding length and curl for a natural mascara look.',
     longDescription: 'The classic full set offers a timeless and elegant enhancement to your natural lashes. One individual extension is applied to each natural lash, adding length and curl for a flawless mascara-like effect that lasts for weeks.',
     price: 299,
     originalPrice: 350,
@@ -400,7 +400,7 @@ export const services: Service[] = [
   {
     id: 'eyelash-classic-refill',
     name: 'Classic Lash Refill',
-    description: 'Maintain your classic lashes with a refill (2-3 weeks).',
+    description: 'Maintain your flawless classic lashes. Recommended every 2-3 weeks.',
     longDescription: 'Keep your classic lashes looking full and fresh. We recommend a refill every 2-3 weeks to replace any extensions that have naturally shed, maintaining the beautiful, seamless look of your full set.',
     price: 199,
     originalPrice: 220,
@@ -414,7 +414,7 @@ export const services: Service[] = [
   {
     id: 'eyelash-russian',
     name: 'Russian Volume Set',
-    description: 'For a dramatic, full, and fluffy lash line.',
+    description: 'For a dramatic, full, and fluffy lash line that makes a statement.',
     longDescription: 'Achieve maximum glamour with our Russian Volume set. Our technicians create handmade fans of ultra-fine extensions to apply to each natural lash, resulting in a dense, dark, and fluffy lash line that is surprisingly lightweight and comfortable.',
     price: 399,
     originalPrice: 450,
@@ -428,7 +428,7 @@ export const services: Service[] = [
   {
     id: 'eyelash-russian-refill',
     name: 'Russian Volume Refill',
-    description: 'Maintain your voluminous lashes with a refill (2-3 weeks).',
+    description: 'Maintain your voluminous lashes. Recommended every 2-3 weeks.',
     longDescription: 'Keep your Russian Volume lashes looking dense and dramatic. We recommend a refill every 2-3 weeks to replace any fans that have naturally shed, ensuring your lashes remain perfectly full and fluffy.',
     price: 250,
     originalPrice: 280,
@@ -442,8 +442,8 @@ export const services: Service[] = [
   {
     id: 'eyelash-lift',
     name: 'Lash Lift & Tint',
-    description: 'Lift and curl your natural lashes for a wide-eyed look.',
-    longDescription: 'A lash lift is a semi-permanent treatment that gives your natural lashes an illusion of being perfectly curled, longer, and darker. It\'s a fantastic alternative to eyelash extensions, with no aftercare required. Includes a tint to darken the lashes.',
+    description: 'Lift, curl, and darken your natural lashes for a wide-eyed, low-maintenance look.',
+    longDescription: 'A lash lift is a semi-permanent treatment that gives your natural lashes an illusion of being perfectly curled, longer, and darker. It\'s a fantastic alternative to eyelash extensions, with no aftercare required. Includes a tint to darken the lashes for extra definition.',
     price: 250,
     originalPrice: 290,
     duration: 60,
@@ -501,51 +501,51 @@ export const professionals: Professional[] = [
 export const packages: Package[] = [
     {
         id: 'pkg-royal-glow',
-        name: 'Royal Glow Package',
-        description: 'A 90-min luxury massage, customized facial, and luxury pedicure for full relaxation and a radiant glow.',
+        name: 'The Royal Glow',
+        description: 'A complete rejuvenation package featuring a luxury massage, customized facial, and premium pedicure for ultimate relaxation and a radiant glow.',
         price: 1200,
         originalPrice: 1350,
         image: 'https://placehold.co/600x400.png',
         dataAiHint: 'royal spa treatment gold',
         services: [
-          '90-min Luxury Full Body Massage (Thai, Swedish, or Aromatherapy)',
-          'Customized Luxury Facial (Vitamin C / Collagen / Gold Mask)',
+          '90-min Luxury Full Body Massage (Your choice)',
+          'Customized Luxury Facial with choice of mask',
           'Callus Removal + Luxury Pedicure + Foot Spa',
           'Free Hot Towel Foot Wrap',
-          'Complimentary Scented Candle & Aromatherapy Oils'
+          'Complimentary Scented Candle & Aromatherapy'
         ],
       },
       {
         id: 'pkg-queens-indulgence',
-        name: 'Queen’s Indulgence Package',
-        description: 'Head-to-toe perfection with a 90-min massage, luxury mani-pedi, paraffin treatment, and facial.',
+        name: 'The Queen’s Indulgence',
+        description: 'Head-to-toe perfection with a therapeutic massage, luxury mani-pedi with paraffin treatment, and a signature facial.',
         price: 1500,
         originalPrice: 1700,
         image: 'https://placehold.co/600x400.png',
         dataAiHint: 'queen throne luxury spa',
         services: [
-          '90-min Full Body Massage (Lymphatic Drainage or Deep Tissue)',
+          '90-min Full Body Massage (Lymphatic or Deep Tissue)',
           'Luxury Manicure & Pedicure (Gel or Acrylic)',
           'Foot Paraffin Treatment + Jelly Foot Spa',
-          'Luxury Facial (Glow Mask of Your Choice)',
+          'Luxury Facial with choice of Glow Mask',
           'Complimentary Herbal Tea Service'
         ],
       },
       {
         id: 'pkg-ultimate-bliss',
-        name: 'Ultimate Bliss Package',
-        description: 'The complete VIP spa ritual. 120-min signature massage, anti-aging facial, luxury mani-pedi, hair treatment, and more.',
+        name: 'The Ultimate Bliss Ritual',
+        description: 'Our most comprehensive VIP spa experience. A 2-hour signature massage, anti-aging facial, luxury mani-pedi, and a nourishing hair treatment.',
         price: 1800,
         originalPrice: 2100,
         image: 'https://placehold.co/600x400.png',
         dataAiHint: 'ultimate bliss zen garden',
         services: [
-          '120-min Full Body Signature Massage (Mix of Techniques)',
-          'Anti-Aging Luxury Facial with Gold Mask and Led Face Mask',
+          '120-min Full Body Signature Massage',
+          'Anti-Aging Facial with Gold Mask & LED Therapy',
           'Callus Removal + Jelly Foot Spa + Foot Massage',
           'Luxury Manicure & Pedicure (Gel or Acrylic)',
           'Foot Paraffin Treatment',
-          'Hair Treatment with Essential Oils & Relaxing Scalp Massage',
+          'Nourishing Hair Treatment with Scalp Massage',
           'VIP Touch: Freshly served Herbal Tea or Coffee'
         ],
       }
@@ -584,8 +584,8 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: 'Layla H.',
-    quote: 'I booked the "Beauty Boost" package and felt like a new woman. The convenience of having everything done at home is unbeatable.',
-    service: 'Beauty Boost Package',
+    quote: 'I booked the "Royal Glow" package and felt like a new woman. The convenience of having everything done at home is unbeatable.',
+    service: 'Royal Glow Package',
   },
   {
     name: 'Mariam B.',
@@ -649,8 +649,8 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: 'Reem K.',
-    quote: 'The "Glow Up" package is my pre-vacation ritual. My skin has never looked better. Worth every dirham!',
-    service: 'The Glow Up Package',
+    quote: 'The Queen\'s Indulgence package is my pre-vacation ritual. My skin has never looked better. Worth every dirham!',
+    service: 'Queen’s Indulgence Package',
   },
 ];
 

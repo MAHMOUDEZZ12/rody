@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const imageUrls: Record<string, string> = {};
   for (const post of blogPosts) {
-    imageUrls[post.slug] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+    imageUrls[post.slug] = await generateSimpleImage({prompt: `An artistic and luxurious image for a blog post about ${post.category}. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`});
   }
 
   return (

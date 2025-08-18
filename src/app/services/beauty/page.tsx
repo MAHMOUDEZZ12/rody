@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 export default async function BeautyPage() {
   const heroImageUrl = await generateSimpleImage({
     prompt:
-    'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic, high resolution, photorealistic.',
+    'Artistry in Beauty: An elegant, abstract beauty treatment setting. Features artistic splashes of pink and gold on a clean white background, conveying a sense of luxury, creativity, and professionalism. The aesthetic should be bright, modern, and clean. High resolution, photorealistic render.',
   });
 
   const beautyServices = services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails') || s.categories.includes('Eyelashes'));
   const serviceImageUrls: Record<string, string> = {};
   for (const service of beautyServices) {
-    serviceImageUrls[service.id] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
+    serviceImageUrls[service.id] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`});
   }
 
 

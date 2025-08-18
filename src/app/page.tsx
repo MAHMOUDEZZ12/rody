@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const heroImageUrl = await generateSimpleImage({
     prompt:
-    'Luxury Home Sanctuary: A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy, with a luxury aesthetic. High resolution, photorealistic.',
+    'A breathtakingly serene and luxurious spa environment inside a modern Dubai villa. Soft, natural sunlight streams through large windows, illuminating elegant orchids, minimalist decor, and a tranquil water feature. The aesthetic is bright, airy, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
   });
 
   const featuredSpaServices = services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments')).slice(0, 2);
@@ -27,16 +27,16 @@ export default async function Home() {
   
   const serviceImageUrls: Record<string, string> = {};
   for (const service of allFeaturedServices) {
-    serviceImageUrls[service.id] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
+    serviceImageUrls[service.id] = await generateSimpleImage({prompt: `An artistic and luxurious lifestyle photograph representing a ${service.categories[0]} service. The image should feature elements related to the service: ${service.name} and its key benefit: ${service.dataAiHint}. The setting is a clean, elegant, and bright. The overall aesthetic is one of premium quality and relaxation. High-resolution, professional product photography.`});
   }
 
   const packageImageUrls: Record<string, string> = {};
   for(const pkg of packages) {
-    packageImageUrls[pkg.id] = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${pkg.name}, ${pkg.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.` });
+    packageImageUrls[pkg.id] = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay composition representing a spa package. Keywords for the mood are: ${pkg.name}, ${pkg.dataAiHint}. Use clean, bright lighting on a minimalist background. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.` });
   }
 
   const latestPost = blogPosts[0];
-  const latestPostImageUrl = latestPost ? await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${latestPost.category}. Keywords: ${latestPost.title}, ${latestPost.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`}) : '';
+  const latestPostImageUrl = latestPost ? await generateSimpleImage({prompt: `A beautiful, editorial-style image for a luxury wellness blog post about "${latestPost.title}". The image should visually capture the essence of: ${latestPost.dataAiHint}. Use a professional photography style with a clean, bright background, an elegant aesthetic, and high resolution.`}) : '';
 
 
   return (

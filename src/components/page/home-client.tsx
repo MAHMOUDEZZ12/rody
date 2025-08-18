@@ -150,13 +150,7 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
         </div>
       </section>
       
-      <section className="py-16 md:py-24 container max-w-7xl">
-        <ReferralBanner />
-      </section>
-      
-      <BlogBanner latestPostImageUrl={latestPostImageUrl} />
-
-      <section id="testimonials" className="py-16 md:py-24 bg-card/50">
+      <section id="testimonials" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
            <SectionTitle title="Words of Wellness" />
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
@@ -167,6 +161,13 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
            </Suspense>
         </div>
       </section>
+
+      <section className="py-16 md:py-24 bg-card/50 container max-w-7xl">
+        <ReferralBanner />
+      </section>
+      
+      <BlogBanner latestPostImageUrl={latestPostImageUrl} />
+
     </>
   );
 }

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function PackagesPage() {
   const packageImageUrls: Record<string, string> = {};
   for(const pkg of packages) {
-    packageImageUrls[pkg.id] = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${pkg.name}, ${pkg.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.` });
+    packageImageUrls[pkg.id] = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay composition representing a spa package. The theme should reflect the package name: "${pkg.name}". Keywords: ${pkg.dataAiHint}. Use clean, bright lighting on a minimalist background. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.` });
   }
 
   return (

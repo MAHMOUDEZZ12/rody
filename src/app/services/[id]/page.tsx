@@ -26,7 +26,7 @@ function ServiceImage({ service }: { service: Service }) {
 
   useState(() => {
     generateSimpleImage({
-      prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`,
+      prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`,
     }).then(setImageUrl);
   });
 

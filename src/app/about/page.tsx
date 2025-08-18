@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 export default async function AboutUsPage() {
   const imageUrl1 = await generateSimpleImage({
     prompt:
-    'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic. High resolution detail, photorealistic.',
+    'A photograph of a serene and luxurious home environment in Dubai, with soft natural light, elegant furniture, and a sense of peace and tranquility. The aesthetic is bright, airy, and modern. High resolution detail, photorealistic.',
   });
   const imageUrl2 = await generateSimpleImage({
     prompt:
-        'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise. High resolution detail, photorealistic.',
+        'A professional and friendly female wellness therapist with a warm smile, wearing a clean, elegant uniform. The background should be a soft, out-of-focus luxury home interior, conveying trust and expertise. High resolution detail, photorealistic portrait.',
   });
 
   return (
