@@ -5,9 +5,20 @@ import { Star } from 'lucide-react';
 import { testimonials } from '@/lib/data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Skeleton } from '../ui/skeleton';
+import { useEffect, useState } from 'react';
 
 export default function TestimonialsSection() {
     const isMobile = useIsMobile();
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12"><Skeleton className="h-48 w-full" /><Skeleton className="h-48 w-full" /><Skeleton className="h-48 w-full" /></div>;
+    }
 
     return (
          <div className="relative mt-12">

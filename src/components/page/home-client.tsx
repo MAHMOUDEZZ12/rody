@@ -15,12 +15,7 @@ import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import BlogBannerImage from './blog-banner-image';
-import dynamic from 'next/dynamic';
-
-const TestimonialsSection = dynamic(() => import('./testimonials-section'), {
-  suspense: true,
-  ssr: false
-});
+import TestimonialsSection from './testimonials-section';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];

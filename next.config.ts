@@ -25,19 +25,6 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://*.web.app https://*.firebaseapp.com;",
-          },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;
