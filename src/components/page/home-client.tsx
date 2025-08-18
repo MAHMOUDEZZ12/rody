@@ -1,4 +1,6 @@
 
+'use client';
+
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
@@ -13,6 +15,7 @@ import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import BlogBannerImage from './blog-banner-image';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
@@ -57,13 +60,73 @@ function BlogBanner() {
     );
 }
 
+function TestimonialsSection() {
+    const isMobile = useIsMobile();
+
+    if (isMobile === undefined) {
+        return (
+             <div className="container max-w-7xl px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <Skeleton className="h-48 w-full" />
+                    <Skeleton className="h-48 w-full" />
+                    <Skeleton className="h-48 w-full" />
+                </div>
+            </div>
+        );
+    }
+
+    return (
+         <div className="relative mt-12">
+            {isMobile ? (
+                <div className="space-y-4">
+                    {testimonials.map((testimonial, index) => (
+                        <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg">
+                            <CardContent className="p-6">
+                            <div className="flex justify-center mb-2">
+                                {[...Array(5)].map((_, i) => (
+                                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                                ))}
+                            </div>
+                            <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
+                            </CardContent>
+                            <CardHeader className="pt-0">
+                            <CardTitle className="font-body text-base font-bold">{testimonial.name}</CardTitle>
+                            <CardDescription className="text-sm text-muted-foreground">{testimonial.service}</CardDescription>
+                            </CardHeader>
+                        </Card>
+                    ))}
+                </div>
+            ) : (
+                <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                    {testimonials.map((testimonial, index) => (
+                        <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg break-inside-avoid">
+                            <CardContent className="p-6">
+                            <div className="flex justify-center mb-2">
+                                {[...Array(5)].map((_, i) => (
+                                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                                ))}
+                            </div>
+                            <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
+                            </CardContent>
+                            <CardHeader className="pt-0">
+                            <CardTitle className="font-body text-base font-bold">{testimonial.name}</CardTitle>
+                            <CardDescription className="text-sm text-muted-foreground">{testimonial.service}</CardDescription>
+                            </CardHeader>
+                        </Card>
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}
+
 export function HomeClient() {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
   const featuredBeautyServices = services.filter(s => s.category === 'Facials' || s.category === 'Nails').slice(0, 2);
   const surePackages = packages.slice(0, 3);
 
   return (
-    <div className="flex flex-col">
+    <>
       <SureBanner />
 
       <section id="services" className="py-16 md:py-24 bg-card/50">
@@ -137,28 +200,9 @@ export function HomeClient() {
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             Hear from our clients who have experienced the Rody Wellness sanctuary.
           </p>
-          <div className="relative mt-12">
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-                {testimonials.map((testimonial, index) => (
-                    <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg break-inside-avoid">
-                        <CardContent className="p-6">
-                           <div className="flex justify-center mb-2">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                            ))}
-                          </div>
-                          <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
-                        </CardContent>
-                        <CardHeader className="pt-0">
-                          <CardTitle className="font-body text-base font-bold">{testimonial.name}</CardTitle>
-                          <CardDescription className="text-sm text-muted-foreground">{testimonial.service}</CardDescription>
-                        </CardHeader>
-                    </Card>
-                ))}
-            </div>
-          </div>
+          <TestimonialsSection />
         </div>
       </section>
-    </div>
+    </>
   );
 }
