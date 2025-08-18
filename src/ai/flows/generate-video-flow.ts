@@ -48,42 +48,47 @@ const generateVideoFlow = ai.defineFlow(
       console.error(
         'GEMINI_API_KEY is not set for video generation. Please create a .env.local file and add your key to it.'
       );
-      // Return a placeholder if the API key is not set. This could be a static image or a silent video.
+      // Return a placeholder if the API key is not set.
       return 'https://placehold.co/600x400.png';
     }
 
-    let { operation } = await ai.generate({
-      model: googleAI.model('veo-3.0-generate-preview'),
-      prompt: input.prompt,
-      config: {
-        aspectRatio: '16:9',
-      },
-    });
+    try {
+        let { operation } = await ai.generate({
+        model: googleAI.model('veo-3.0-generate-preview'),
+        prompt: input.prompt,
+        config: {
+            aspectRatio: '16:9',
+        },
+        });
 
-    if (!operation) {
-      throw new Error('Expected the model to return an operation');
-    }
+        if (!operation) {
+        throw new Error('Expected the model to return an operation');
+        }
 
-    while (!operation.done) {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      operation = await ai.checkOperation(operation);
-    }
+        while (!operation.done) {
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        operation = await ai.checkOperation(operation);
+        }
 
-    if (operation.error) {
-      throw new Error('failed to generate video: ' + operation.error.message);
+        if (operation.error) {
+        throw new Error('failed to generate video: ' + operation.error.message);
+        }
+        
+        const videoPart = operation.output?.message?.content.find((p) => !!p.media);
+        if (!videoPart || !videoPart.media?.url) {
+        throw new Error('Failed to find the generated video');
+        }
+        
+        return await downloadVideo(videoPart as MediaPart);
+    } catch(e) {
+        console.error("Video generation failed.", e);
+        return 'https://placehold.co/600x400.png';
     }
-    
-    const videoPart = operation.output?.message?.content.find((p) => !!p.media);
-    if (!videoPart || !videoPart.media?.url) {
-      throw new Error('Failed to find the generated video');
-    }
-    
-    return await downloadVideo(videoPart as MediaPart);
   }
 );
 
 export const generateVideo = cache(
   async (input: GenerateVideoInput) => generateVideoFlow(input),
-  ['generate-video-v5'],
+  ['generate-video-v6'],
   { revalidate: 3600 * 24 } // Cache for 24 hours
 );

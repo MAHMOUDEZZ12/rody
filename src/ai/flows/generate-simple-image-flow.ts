@@ -33,19 +33,24 @@ const generateSimpleImageFlow = ai.defineFlow(
       return 'https://placehold.co/600x400.png';
     }
 
-    const {media} = await ai.generate({
-      model: 'googleai/gemini-2.0-flash-preview-image-generation',
-      prompt: input.prompt,
-      config: {
-        responseModalities: ['TEXT', 'IMAGE'],
-      },
-    });
-    return media!.url;
+    try {
+        const {media} = await ai.generate({
+        model: 'googleai/gemini-2.0-flash-preview-image-generation',
+        prompt: input.prompt,
+        config: {
+            responseModalities: ['TEXT', 'IMAGE'],
+        },
+        });
+        return media!.url;
+    } catch (e) {
+        console.error("Image generation failed.", e);
+        return 'https://placehold.co/600x400.png';
+    }
   }
 );
 
 export const generateSimpleImage = cache(
   async (input: GenerateSimpleImageInput) => generateSimpleImageFlow(input),
-  ['generate-simple-image-v5'],
+  ['generate-simple-image-v6'],
   {revalidate: 3600 * 24} // Cache for 24 hours
 );
