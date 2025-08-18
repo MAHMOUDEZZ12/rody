@@ -12,12 +12,10 @@ import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
 import { ReferralBanner } from '../referral-banner';
 import { SureBanner } from './sure-banner';
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import BlogBannerImage from './blog-banner-image';
-import { useIsMobile } from '@/hooks/use-mobile';
-
-const TestimonialsSection = lazy(() => import('./testimonials-section'));
+import TestimonialsSection from './testimonials-section';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
