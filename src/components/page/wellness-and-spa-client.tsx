@@ -30,7 +30,7 @@ async function HeroImage() {
     );
 }
 
-export function WellnessAndSpaClient() {
+export async function WellnessAndSpaClient() {
   const massageServices = services.filter(s => s.category === 'Massage');
   const bodyServices = services.filter(s => s.category === 'Body Treatments');
 

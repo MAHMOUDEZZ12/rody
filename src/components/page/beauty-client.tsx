@@ -30,7 +30,7 @@ async function HeroImage() {
     );
 }
 
-export function BeautyClient() {
+export async function BeautyClient() {
   const facialServices = services.filter(s => s.category === 'Facials');
   const nailServices = services.filter(s => s.category === 'Nails');
   const eyelashServices = services.filter(s => s.category === 'Eyelashes');

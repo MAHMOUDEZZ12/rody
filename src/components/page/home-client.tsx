@@ -1,6 +1,4 @@
 
-'use client';
-
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';

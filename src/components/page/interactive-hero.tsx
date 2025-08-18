@@ -51,7 +51,7 @@ export function InteractiveHero() {
             Premium at-home wellness and beauty services in Dubai.
           </p>
           <Button asChild size="lg" className="mt-8 rounded-full font-bold">
-            <Link href="#services">Explore Services</Link>
+            <Link href="/services/wellness-and-spa">Explore Services</Link>
           </Button>
         </div>
       </div>

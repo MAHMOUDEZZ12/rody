@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ProfessionalClientActions, BookServiceButton } from '@/components/page/professional-client';
+import { ProfessionalClientActions } from '@/components/page/professional-client';
 import { Button } from '@/components/ui/button';
 
 async function ProfessionalImage({ professional }: { professional: Professional }) {
@@ -29,7 +29,7 @@ async function ProfessionalImage({ professional }: { professional: Professional 
     )
 }
 
-export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
+export default async function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const professional = professionals.find(p => p.id === params.id);
 
   if (!professional) {
@@ -88,7 +88,9 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                 </CardHeader>
                 <CardContent>
                     <p className="text-muted-foreground mb-4">To view {professional.name.split(' ')[0]}'s real-time availability and book a session, please select a service below.</p>
-                     <BookServiceButton />
+                     <Button asChild className="rounded-full">
+                        <Link href="/services/wellness-and-spa">Explore Services to Book</Link>
+                    </Button>
                 </CardContent>
             </Card>
         </div>

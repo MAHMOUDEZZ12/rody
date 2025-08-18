@@ -47,7 +47,7 @@ async function AboutImage2() {
     );
   }
 
-export function AboutClient() {
+export async function AboutClient() {
   return (
     <div className="container max-w-5xl px-4 py-12">
       <header className="mb-16 text-center">
