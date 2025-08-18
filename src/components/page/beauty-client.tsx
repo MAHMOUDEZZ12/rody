@@ -1,6 +1,4 @@
 
-'use client';
-
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
