@@ -41,17 +41,18 @@ export function Footer() {
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          <div className="flex flex-col items-center md:items-start">
-             <Link href="/" className="flex items-center gap-2 mb-4">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+             <Link href="/" className="flex items-center justify-center md:justify-start gap-2 mb-4 w-full">
                  <Image 
                     src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" 
                     alt="Rody Wellness Logo" 
-                    width={140} 
-                    height={50}
+                    width={180} 
+                    height={60}
                     style={{ filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.7))' }}
                  />
             </Link>
-            <p className="text-sm text-center md:text-left">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
+            <p className="text-sm max-w-xs">Your Sanctuary, Delivered. Experience premium at-home wellness and beauty services in Dubai.</p>
+            <p className="text-xs mt-4 opacity-80">&copy; {new Date().getFullYear()} Rody Wellness. All rights reserved.</p>
           </div>
           <div className="text-center md:text-left">
             <h3 className="font-bold font-headline text-lg mb-4">Quick Links</h3>
@@ -68,17 +69,19 @@ export function Footer() {
           </div>
           <div className="flex flex-col items-center md:items-end">
              <h3 className="font-bold font-headline text-lg mb-4">Connect With Us</h3>
-             <div className="flex items-center gap-4">
-                <a href="https://www.facebook.com/Rodyuae" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:opacity-80 transition-opacity">
-                    <FacebookIcon className="h-7 w-7"/>
-                </a>
-                <a href="https://www.instagram.com/rodyuae/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:opacity-80 transition-opacity">
-                    <InstagramIcon className="h-7 w-7"/>
-                </a>
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-full transition-colors">
+             <div className="flex flex-col gap-4 w-full max-w-xs">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold px-4 py-2 rounded-full transition-colors w-full">
                     <WhatsAppIcon className="h-5 w-5"/>
-                    <span className="text-white">Chat on WhatsApp</span>
+                    <span>Chat on WhatsApp</span>
                 </a>
+                 <div className="flex items-center justify-center gap-4">
+                    <a href="https://www.facebook.com/Rodyuae" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:opacity-80 transition-opacity">
+                        <FacebookIcon className="h-7 w-7"/>
+                    </a>
+                    <a href="https://www.instagram.com/rodyuae/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:opacity-80 transition-opacity">
+                        <InstagramIcon className="h-7 w-7"/>
+                    </a>
+                </div>
              </div>
           </div>
         </div>
