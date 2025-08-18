@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { History, Star, Ticket, Sparkles, Share2, Clock, LogIn, User } from 'lucide-react';
+import { History, Star, Ticket, Sparkles, Share2, Clock, LogIn, User, KeyRound } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
@@ -17,30 +17,35 @@ export default function DashboardPage() {
   const { user, loading, login } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
+  
+  const [loginStep, setLoginStep] = useState<'enter-number' | 'enter-code'>('enter-number');
   const [whatsappNumber, setWhatsappNumber] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
 
-  const handleExtend = () => {
-    toast({
-        title: "Offer Extended!",
-        description: "This offer is now valid for another 30 days.",
-    });
-  }
-
-  const handleShare = () => {
-    if (typeof navigator.clipboard !== 'undefined') {
-        navigator.clipboard.writeText("Check out this amazing offer from Rody Wellness!");
-        toast({
-            title: "Link Copied!",
-            description: "Share the offer with your friends.",
-        });
-    }
-  }
-
-  const handleLogin = () => {
+  const handleSendCode = () => {
     if (whatsappNumber.length < 10) {
       toast({
         title: "Invalid Number",
         description: "Please enter a valid WhatsApp number.",
+        variant: "destructive",
+      });
+      return;
+    }
+    // In a real app, you would trigger an API call here to send a code via Twilio/etc.
+    toast({
+        title: "Verification Code Sent!",
+        description: "A code has been sent to your WhatsApp.",
+    });
+    setLoginStep('enter-code');
+  };
+
+
+  const handleVerifyCode = () => {
+    // This is the simulated verification. In a real app, you'd check against a server value.
+    if (verificationCode !== '1234') {
+      toast({
+        title: "Invalid Code",
+        description: "The verification code is incorrect. Please try again.",
         variant: "destructive",
       });
       return;
@@ -51,6 +56,10 @@ export default function DashboardPage() {
       title: `Welcome, ${mockName}!`,
       description: "You're in! Check out your exclusive offers.",
     });
+    // Reset state for next time
+    setLoginStep('enter-number');
+    setWhatsappNumber('');
+    setVerificationCode('');
   };
 
   if (loading) {
@@ -78,23 +87,48 @@ export default function DashboardPage() {
               <Sparkles className="w-12 h-12 text-primary" />
             </div>
             <CardTitle className="font-headline text-3xl text-primary">Access Your Sure Rewards</CardTitle>
-            <CardDescription className="text-lg">Enter your WhatsApp number to view your exclusive offers and booking history.</CardDescription>
+            <CardDescription className="text-lg">
+              {loginStep === 'enter-number' 
+                ? 'Enter your WhatsApp number to view your exclusive offers and booking history.' 
+                : 'Please enter the 4-digit code sent to your WhatsApp.'}
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-              <Input
-                type="tel"
-                placeholder="Your WhatsApp Number"
-                className="bg-white text-center sm:text-left"
-                value={whatsappNumber}
-                onChange={(e) => setWhatsappNumber(e.target.value)}
-              />
-              <Button onClick={handleLogin} className="w-full sm:w-auto">
-                <LogIn className="mr-2 h-4 w-4" />
-                Login with WhatsApp
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground">No passwords, no hassle. Just instant access.</p>
+             {loginStep === 'enter-number' ? (
+                <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                    <Input
+                        type="tel"
+                        placeholder="Your WhatsApp Number"
+                        className="bg-white text-center sm:text-left"
+                        value={whatsappNumber}
+                        onChange={(e) => setWhatsappNumber(e.target.value)}
+                    />
+                    <Button onClick={handleSendCode} className="w-full sm:w-auto">
+                        <LogIn className="mr-2 h-4 w-4" />
+                        Send Code
+                    </Button>
+                </div>
+             ) : (
+                <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                    <Input
+                        type="tel"
+                        placeholder="4-Digit Code (e.g., 1234)"
+                        className="bg-white text-center sm:text-left tracking-widest"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                        maxLength={4}
+                    />
+                    <Button onClick={handleVerifyCode} className="w-full sm:w-auto">
+                        <KeyRound className="mr-2 h-4 w-4" />
+                        Verify & Login
+                    </Button>
+                </div>
+             )}
+            <p className="text-xs text-muted-foreground">
+                {loginStep === 'enter-number'
+                ? 'No passwords, no hassle. Just instant access.'
+                : 'For demonstration, please use code 1234.'}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -140,8 +174,8 @@ export default function DashboardPage() {
                         </Button>
                     </div>
                     <div className="flex items-center gap-2 mt-4 border-t pt-3">
-                        <Button onClick={handleShare} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
-                        <Button onClick={handleExtend} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
+                        <Button onClick={() => {}} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                        <Button onClick={() => {}} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
                     </div>
                 </div>
                  <div className="p-4 border rounded-lg bg-accent/50">
@@ -155,8 +189,8 @@ export default function DashboardPage() {
                         </Button>
                     </div>
                      <div className="flex items-center gap-2 mt-4 border-t pt-3">
-                        <Button onClick={handleShare} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
-                        <Button onClick={handleExtend} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
+                        <Button onClick={() => {}} variant="outline" size="sm"><Share2 className="mr-2 h-4 w-4" /> Share</Button>
+                        <Button onClick={() => {}} variant="outline" size="sm"><Clock className="mr-2 h-4 w-4" /> Extend</Button>
                     </div>
                 </div>
             </CardContent>
@@ -197,3 +231,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
