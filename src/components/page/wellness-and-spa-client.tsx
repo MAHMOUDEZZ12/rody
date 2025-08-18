@@ -1,45 +1,31 @@
 
+'use client';
+
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
-import { Suspense } from 'react';
-import { Skeleton } from '../ui/skeleton';
 
-async function HeroImage() {
-    let imageUrl;
-    try {
-        imageUrl = await generateSimpleImage({
-            prompt:
-            'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness. High resolution, photorealistic.',
-        });
-    } catch (error) {
-        console.error("Failed to generate wellness hero image, falling back to placeholder.", error);
-        imageUrl = "https://placehold.co/1920x1080.png";
-    }
-    return (
-        <Image
-        src={imageUrl}
-        alt="Serene spa setting"
-        fill
-        className="object-cover z-0"
-        priority
-        />
-    );
+type WellnessAndSpaClientProps = {
+    heroImageUrl: string;
+    serviceImageUrls: Record<string, string>;
 }
 
-export async function WellnessAndSpaClient() {
+export function WellnessAndSpaClient({ heroImageUrl, serviceImageUrls }: WellnessAndSpaClientProps) {
   const massageServices = services.filter(s => s.category === 'Massage');
   const bodyServices = services.filter(s => s.category === 'Body Treatments');
 
   return (
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
-        <Suspense fallback={<Skeleton className="absolute inset-0" />}>
-          <HeroImage />
-        </Suspense>
+        <Image
+            src={heroImageUrl}
+            alt="Serene spa setting"
+            fill
+            className="object-cover z-0"
+            priority
+        />
         <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="relative z-20 animate-fade-in-up">
           <h1 className="font-headline text-4xl md:text-6xl font-bold text-spa-primary" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.3)' }}>Sanctuary for the Senses</h1>
@@ -65,7 +51,7 @@ export async function WellnessAndSpaClient() {
                   <SectionTitle title="Massage Therapy" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {massageServices.map((service, index) => (
-                      <ServiceCard key={service.id} service={service} theme="spa" highlight={index === 0} />
+                      <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" highlight={index === 0} />
                     ))}
                   </div>
                 </section>
@@ -73,7 +59,7 @@ export async function WellnessAndSpaClient() {
                   <SectionTitle title="Body Treatments" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {bodyServices.map((service) => (
-                      <ServiceCard key={service.id} service={service} theme="spa" />
+                      <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
                     ))}
                   </div>
                 </section>

@@ -2,7 +2,9 @@
 import { notFound } from 'next/navigation';
 import { blogPosts } from '@/lib/blog';
 import { BlogPostContent } from '@/components/page/blog-post-content';
-
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type BlogPostPageProps = {
   params: {
@@ -10,7 +12,7 @@ type BlogPostPageProps = {
   };
 };
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
   
   if (!post) {
@@ -19,7 +21,19 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
-  return <BlogPostContent post={post} relatedPosts={relatedPosts} />;
+  const postImageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+  
+  const relatedPostsImageUrls: Record<string, string> = {};
+  for (const p of relatedPosts) {
+    relatedPostsImageUrls[p.slug] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${p.category}. Keywords: ${p.title}, ${p.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
+  }
+
+
+  return (
+    <Suspense fallback={<Skeleton className="h-screen w-full" />}>
+      <BlogPostContent post={post} relatedPosts={relatedPosts} postImageUrl={postImageUrl} relatedPostsImageUrls={relatedPostsImageUrls} />
+    </Suspense>
+  )
 }
 
 // Statically generate routes for each blog post

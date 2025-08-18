@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Star, ArrowRight } from 'lucide-react';
-import { testimonials, packages, services } from '@/lib/data';
+import { testimonials, packages, services, Service } from '@/lib/data';
 import { type BlogPost, blogPosts } from '@/lib/blog';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
@@ -17,7 +17,13 @@ import { Skeleton } from '../ui/skeleton';
 import BlogBannerImage from './blog-banner-image';
 import TestimonialsSection from './testimonials-section';
 
-function BlogBanner() {
+type HomeClientProps = {
+    serviceImageUrls: Record<string, string>;
+    packageImageUrls: Record<string, string>;
+    latestPostImageUrl: string;
+}
+
+function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
     const latestPost = blogPosts[0];
 
     if (!latestPost) return null;
@@ -34,7 +40,7 @@ function BlogBanner() {
                         <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-64 md:h-full min-h-[300px]">
                                 <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                                    <BlogBannerImage post={latestPost} />
+                                    <BlogBannerImage imageUrl={latestPostImageUrl} alt={latestPost.title} />
                                 </Suspense>
                             </div>
                             <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
@@ -60,7 +66,7 @@ function BlogBanner() {
     );
 }
 
-export function HomeClient() {
+export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImageUrl }: HomeClientProps) {
   const featuredSpaServices = services.filter(s => s.category === 'Massage' || s.category === 'Body Treatments').slice(0, 2);
   const featuredBeautyServices = services.filter(s => s.category === 'Facials' || s.category === 'Nails').slice(0, 2);
 
@@ -79,7 +85,7 @@ export function HomeClient() {
                     </div>
                     <div className="grid gap-6">
                       {featuredSpaServices.map(service => (
-                        <ServiceCard key={service.id} service={service} theme="spa" />
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
                       ))}
                     </div>
                     <div className="text-center">
@@ -95,7 +101,7 @@ export function HomeClient() {
                     </div>
                     <div className="grid gap-6">
                        {featuredBeautyServices.map(service => (
-                        <ServiceCard key={service.id} service={service} theme="beauty" />
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
                       ))}
                     </div>
                      <div className="text-center">
@@ -116,7 +122,7 @@ export function HomeClient() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {packages.map((pkg) => (
-              <PackageCard key={pkg.id} pkg={pkg} />
+              <PackageCard key={pkg.id} pkg={pkg} imageUrl={packageImageUrls[pkg.id]} />
             ))}
           </div>
            <div className="text-center mt-12">
@@ -131,7 +137,7 @@ export function HomeClient() {
         <ReferralBanner />
       </section>
       
-      <BlogBanner />
+      <BlogBanner latestPostImageUrl={latestPostImageUrl} />
 
       <section id="testimonials" className="py-16 md:py-24 bg-card/50">
         <div className="container max-w-7xl px-4">

@@ -1,53 +1,12 @@
 
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import Image from 'next/image';
-import { Suspense } from 'react';
-import { Skeleton } from '../ui/skeleton';
 
-
-async function AboutImage1() {
-  let imageUrl;
-  try {
-    imageUrl = await generateSimpleImage({
-        prompt:
-        'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic. High resolution detail, photorealistic.',
-    });
-  } catch(e) {
-    console.error(e);
-    imageUrl = 'https://placehold.co/600x400.png';
-  }
-  return (
-    <Image
-      src={imageUrl}
-      alt="A serene and luxurious home environment"
-      fill
-      className="object-cover"
-    />
-  );
+type AboutClientProps = {
+    imageUrl1: string;
+    imageUrl2: string;
 }
 
-async function AboutImage2() {
-    let imageUrl;
-    try {
-        imageUrl = await generateSimpleImage({
-        prompt:
-            'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise. High resolution detail, photorealistic.',
-        });
-    } catch(e) {
-        console.error(e);
-        imageUrl = 'https://placehold.co/600x400.png';
-    }
-    return (
-      <Image
-        src={imageUrl}
-        alt="A professional and friendly wellness therapist"
-        fill
-        className="object-cover"
-      />
-    );
-  }
-
-export async function AboutClient() {
+export function AboutClient({ imageUrl1, imageUrl2 }: AboutClientProps) {
   return (
     <div className="container max-w-5xl px-4 py-12">
       <header className="mb-16 text-center">
@@ -72,9 +31,12 @@ export async function AboutClient() {
           </div>
           <div className="order-1 md:order-2">
             <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
-                <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                    <AboutImage1 />
-                </Suspense>
+                <Image
+                    src={imageUrl1}
+                    alt="A serene and luxurious home environment"
+                    fill
+                    className="object-cover"
+                />
             </div>
           </div>
         </section>
@@ -116,9 +78,12 @@ export async function AboutClient() {
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-1">
              <div className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
-                <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                    <AboutImage2 />
-                </Suspense>
+                <Image
+                    src={imageUrl2}
+                    alt="A professional and friendly wellness therapist"
+                    fill
+                    className="object-cover"
+                />
             </div>
           </div>
           <div className="text-lg leading-relaxed space-y-4 text-muted-foreground order-2">

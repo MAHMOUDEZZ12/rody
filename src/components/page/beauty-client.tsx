@@ -1,36 +1,18 @@
 
-import { services } from '@/lib/data';
+'use client';
+
+import { services, type Service } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
 import Image from 'next/image';
 import { SectionTitle } from '@/components/section-title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
-import { Suspense } from 'react';
-import { Skeleton } from '../ui/skeleton';
 
-async function HeroImage() {
-    let imageUrl;
-    try {
-        imageUrl = await generateSimpleImage({
-            prompt:
-            'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic, high resolution, photorealistic.',
-        });
-    } catch (error) {
-        console.error("Failed to generate beauty hero image, falling back to placeholder.", error);
-        imageUrl = "https://placehold.co/1920x1080.png";
-    }
-    return (
-        <Image
-            src={imageUrl}
-            alt="Elegant beauty treatment setting"
-            fill
-            className="object-cover z-0"
-            priority
-        />
-    );
+type BeautyClientProps = {
+    heroImageUrl: string;
+    serviceImageUrls: Record<string, string>;
 }
 
-export async function BeautyClient() {
+export function BeautyClient({ heroImageUrl, serviceImageUrls }: BeautyClientProps) {
   const facialServices = services.filter(s => s.category === 'Facials');
   const nailServices = services.filter(s => s.category === 'Nails');
   const eyelashServices = services.filter(s => s.category === 'Eyelashes');
@@ -38,9 +20,13 @@ export async function BeautyClient() {
   return (
     <>
       <section className="relative h-[50vh] w-full flex items-center justify-center text-white text-center p-4 overflow-hidden">
-        <Suspense fallback={<Skeleton className="absolute inset-0" />}>
-           <HeroImage />
-        </Suspense>
+        <Image
+            src={heroImageUrl}
+            alt="Elegant beauty treatment setting"
+            fill
+            className="object-cover z-0"
+            priority
+        />
         <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="relative z-20 animate-fade-in-up">
            <h1 className="font-headline text-4xl md:text-6xl font-bold text-beauty-primary" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.3)' }}>Artistry in Beauty</h1>
@@ -72,7 +58,7 @@ export async function BeautyClient() {
                   <SectionTitle title="Facial Treatments" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {facialServices.map((service, index) => (
-                      <ServiceCard key={service.id} service={service} theme="beauty" highlight={index === 0}/>
+                      <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" highlight={index === 0}/>
                     ))}
                   </div>
                 </section>
@@ -80,7 +66,7 @@ export async function BeautyClient() {
                   <SectionTitle title="Nail Services" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {nailServices.map((service) => (
-                      <ServiceCard key={service.id} service={service} theme="beauty" />
+                      <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
                     ))}
                   </div>
                 </section>
@@ -88,7 +74,7 @@ export async function BeautyClient() {
                   <SectionTitle title="Eyelash Services" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {eyelashServices.map((service) => (
-                      <ServiceCard key={service.id} service={service} theme="beauty"/>
+                      <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty"/>
                     ))}
                   </div>
                 </section>

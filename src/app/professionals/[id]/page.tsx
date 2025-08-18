@@ -13,13 +13,8 @@ import { ProfessionalClientActions } from '@/components/page/professional-client
 import { Button } from '@/components/ui/button';
 
 async function ProfessionalImage({ professional }: { professional: Professional }) {
-    let imageUrl = professional.image;
-    try {
-        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
-    } catch (e) {
-        console.error(e);
-    }
-
+    const imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
+    
     return (
         <AvatarImage 
             src={imageUrl}

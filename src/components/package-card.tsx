@@ -6,42 +6,24 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Tag } from 'lucide-react';
 import { Badge } from './ui/badge';
-import { Suspense } from 'react';
-import { Skeleton } from './ui/skeleton';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
-
-
-async function PackageImage({ pkg }: { pkg: Package }) {
-    let imageUrl = pkg.image;
-    try {
-        imageUrl = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${pkg.name}, ${pkg.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.` });
-    } catch(e) {
-        console.error(e);
-    }
-    return (
-        <Image
-            src={imageUrl}
-            alt={pkg.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-    );
-}
-
 
 interface PackageCardProps {
   pkg: Package;
+  imageUrl: string;
 }
 
-export function PackageCard({ pkg }: PackageCardProps) {
+export function PackageCard({ pkg, imageUrl }: PackageCardProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-white/80 backdrop-blur-sm">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
-            <Suspense fallback={<Skeleton className='w-full h-full' />}>
-                <PackageImage pkg={pkg} />
-            </Suspense>
+            <Image
+                src={imageUrl}
+                alt={pkg.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3" /> SURE OFFER</Badge>
           <Badge variant="secondary" className="absolute top-2 right-2">SAVE {Math.round(100 - (pkg.price / pkg.originalPrice) * 100)}%</Badge>
         </div>

@@ -1,35 +1,21 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts, type BlogPost } from '@/lib/blog';
+import { type BlogPost } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Suspense } from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
-async function PostImage({ post }: { post: BlogPost }) {
-    let imageUrl = post.image;
-    try {
-        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
-    } catch (e) {
-        console.error(e);
-    }
-
-    return (
-         <Image 
-            src={imageUrl} 
-            alt={post.title} 
-            fill
-            className="object-cover"
-        />
-    )
+type BlogPageContentProps = {
+    posts: BlogPost[];
+    imageUrls: Record<string, string>;
 }
 
-export function BlogPageContent() {
-  const featuredPost = blogPosts[0];
-  const otherPosts = blogPosts.slice(1);
+export function BlogPageContent({ posts, imageUrls }: BlogPageContentProps) {
+  const featuredPost = posts[0];
+  const otherPosts = posts.slice(1);
 
   return (
     <div className="container max-w-7xl px-4 py-12">
@@ -44,31 +30,36 @@ export function BlogPageContent() {
       
       <main>
         {/* Featured Post */}
-        <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
-          <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
-            <div className="relative h-64 md:h-full min-h-[300px]">
-              <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                <PostImage post={featuredPost} />
-              </Suspense>
-            </div>
-            <div className="flex flex-col p-8">
-              <CardHeader>
-                <Badge variant="secondary" className="w-fit mb-4">{featuredPost.category}</Badge>
-                <h2 className="font-headline text-3xl text-primary group-hover:underline">{featuredPost.title}</h2>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground line-clamp-3">
-                  {featuredPost.content.split('\n\n')[0]}
-                </p>
-              </CardContent>
-              <CardFooter>
-                 <span className="font-semibold flex items-center">
-                  Read More <ArrowRight className="ml-2 h-4 w-4" />
-                </span>
-              </CardFooter>
-            </div>
-          </Card>
-        </Link>
+        {featuredPost && (
+            <Link href={`/blog/${featuredPost.slug}`} className="block mb-16 group">
+            <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+                <div className="relative h-64 md:h-full min-h-[300px]">
+                <Image 
+                    src={imageUrls[featuredPost.slug]} 
+                    alt={featuredPost.title} 
+                    fill
+                    className="object-cover"
+                />
+                </div>
+                <div className="flex flex-col p-8">
+                <CardHeader>
+                    <Badge variant="secondary" className="w-fit mb-4">{featuredPost.category}</Badge>
+                    <h2 className="font-headline text-3xl text-primary group-hover:underline">{featuredPost.title}</h2>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                    <p className="text-muted-foreground line-clamp-3">
+                    {featuredPost.content.split('\n\n')[0]}
+                    </p>
+                </CardContent>
+                <CardFooter>
+                    <span className="font-semibold flex items-center">
+                    Read More <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                </CardFooter>
+                </div>
+            </Card>
+            </Link>
+        )}
         
         {/* Grid of Other Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -77,9 +68,12 @@ export function BlogPageContent() {
               <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
-                    <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                        <PostImage post={post} />
-                    </Suspense>
+                    <Image 
+                        src={imageUrls[post.slug]} 
+                        alt={post.title} 
+                        fill
+                        className="object-cover"
+                    />
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">

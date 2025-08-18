@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { type BlogPost } from '@/lib/blog';
@@ -6,9 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Suspense } from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 const MarkdownContent = ({ content }: { content: string }) => {
   return (
@@ -29,27 +28,11 @@ const MarkdownContent = ({ content }: { content: string }) => {
 type BlogPostClientProps = {
     post: BlogPost;
     relatedPosts: BlogPost[];
+    postImageUrl: string;
+    relatedPostsImageUrls: Record<string, string>;
 }
 
-async function PostImage({ post }: { post: BlogPost }) {
-    let imageUrl = post.image;
-    try {
-        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
-    } catch (e) {
-        console.error(e);
-    }
-
-    return (
-         <Image 
-            src={imageUrl} 
-            alt={post.title} 
-            fill
-            className="object-cover"
-        />
-    )
-}
-
-export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
+export function BlogPostContent({ post, relatedPosts, postImageUrl, relatedPostsImageUrls }: BlogPostClientProps) {
   return (
     <article className="container max-w-4xl px-4 py-12">
       <Link href="/blog" className="flex items-center text-primary hover:underline mb-8">
@@ -72,9 +55,12 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
       </div>
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-        <Suspense fallback={<Skeleton className='w-full h-full' />}>
-           <PostImage post={post} />
-        </Suspense>
+        <Image 
+            src={postImageUrl} 
+            alt={post.title} 
+            fill
+            className="object-cover"
+        />
       </div>
 
       <div className="text-lg leading-relaxed space-y-6">
@@ -89,9 +75,12 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
-                               <Suspense fallback={<Skeleton className='w-full h-full' />}>
-                                    <PostImage post={related} />
-                               </Suspense>
+                               <Image 
+                                    src={relatedPostsImageUrls[related.slug]} 
+                                    alt={related.title} 
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <CardContent className="p-4">
                                 <h3 className="font-headline text-lg group-hover:underline">{related.title}</h3>
