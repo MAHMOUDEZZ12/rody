@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 const MarkdownContent = ({ content }: { content: string }) => {
   return (
@@ -29,6 +30,25 @@ const MarkdownContent = ({ content }: { content: string }) => {
 type BlogPostClientProps = {
     post: BlogPost;
     relatedPosts: BlogPost[];
+}
+
+async function PostImage({ post }: { post: BlogPost }) {
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic.`});
+    } catch (e) {
+        console.error(e);
+        imageUrl = post.image;
+    }
+
+    return (
+         <Image 
+            src={imageUrl} 
+            alt={post.title} 
+            fill
+            className="object-cover"
+        />
+    )
 }
 
 export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
@@ -55,12 +75,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
 
       <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
         <Suspense fallback={<Skeleton className='w-full h-full' />}>
-            <Image 
-                src={post.image} 
-                alt={post.title} 
-                fill
-                className="object-cover"
-            />
+           <PostImage post={post} />
         </Suspense>
       </div>
 
@@ -77,12 +92,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostClientProps) {
                         <Card className="h-full overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
                             <div className="relative h-40 w-full">
                                <Suspense fallback={<Skeleton className='w-full h-full' />}>
-                                    <Image 
-                                            src={related.image} 
-                                            alt={related.title} 
-                                            fill
-                                            className="object-cover"
-                                        />
+                                    <PostImage post={related} />
                                </Suspense>
                             </div>
                             <CardContent className="p-4">

@@ -11,12 +11,18 @@ import { Skeleton } from './ui/skeleton';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 
-async function PackageImage({ name, hint }: { name: string, hint: string }) {
-    const imageUrl = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${name}, ${hint}. Professional product photography, clean background, elegant aesthetic.` });
+async function PackageImage({ pkg }: { pkg: Package }) {
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${pkg.name}, ${pkg.dataAiHint}. Professional product photography, clean background, elegant aesthetic.` });
+    } catch(e) {
+        console.error(e);
+        imageUrl = pkg.image;
+    }
     return (
         <Image
             src={imageUrl}
-            alt={name}
+            alt={pkg.name}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -35,7 +41,7 @@ export function PackageCard({ pkg }: PackageCardProps) {
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
             <Suspense fallback={<Skeleton className='w-full h-full' />}>
-                <PackageImage name={pkg.name} hint={pkg.dataAiHint} />
+                <PackageImage pkg={pkg} />
             </Suspense>
           <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3" /> SURE OFFER</Badge>
           <Badge variant="secondary" className="absolute top-2 right-2">SAVE {Math.round(100 - (pkg.price / pkg.originalPrice) * 100)}%</Badge>

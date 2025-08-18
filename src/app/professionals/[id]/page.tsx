@@ -10,6 +10,27 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Briefcase, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+
+async function ProfessionalImage({ professional }: { professional: Professional }) {
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic.`});
+    } catch (e) {
+        console.error(e);
+        imageUrl = professional.image;
+    }
+
+    return (
+        <AvatarImage 
+            src={imageUrl}
+            alt={professional.name} 
+            className="object-cover" 
+        />
+    )
+}
 
 export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -31,11 +52,9 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
       <div className="grid md:grid-cols-12 gap-8 md:gap-12">
         <div className="md:col-span-4 flex flex-col items-center text-center">
           <Avatar className="w-48 h-48 border-4 border-primary mb-4">
-            <AvatarImage 
-                src={professional.image}
-                alt={professional.name} 
-                className="object-cover" 
-            />
+            <Suspense fallback={<Skeleton className='w-full h-full rounded-full' />}>
+                <ProfessionalImage professional={professional} />
+            </Suspense>
             <AvatarFallback>{professional.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <h1 className="font-headline text-3xl text-primary">{professional.name}</h1>

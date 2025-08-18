@@ -2,12 +2,32 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts } from '@/lib/blog';
+import { blogPosts, type BlogPost } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+
+async function PostImage({ post }: { post: BlogPost }) {
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic.`});
+    } catch (e) {
+        console.error(e);
+        imageUrl = post.image;
+    }
+
+    return (
+         <Image 
+            src={imageUrl} 
+            alt={post.title} 
+            fill
+            className="object-cover"
+        />
+    )
+}
 
 export function BlogPageContent() {
   const featuredPost = blogPosts[0];
@@ -30,12 +50,7 @@ export function BlogPageContent() {
           <Card className="grid md:grid-cols-2 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
             <div className="relative h-64 md:h-full min-h-[300px]">
               <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                <Image 
-                  src={featuredPost.image} 
-                  alt={featuredPost.title} 
-                  fill
-                  className="object-cover"
-                />
+                <PostImage post={featuredPost} />
               </Suspense>
             </div>
             <div className="flex flex-col p-8">
@@ -65,12 +80,7 @@ export function BlogPageContent() {
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
                     <Suspense fallback={<Skeleton className="w-full h-full" />}>
-                        <Image 
-                            src={post.image} 
-                            alt={post.title} 
-                            fill
-                            className="object-cover"
-                        />
+                        <PostImage post={post} />
                     </Suspense>
                   </div>
                 </CardHeader>

@@ -1,6 +1,4 @@
 
-import { generateSimpleImage } from "@/ai/flows/generate-simple-image-flow";
-
 export type Addon = {
   id: string;
   name: string;
@@ -40,6 +38,7 @@ export type Package = {
   description: string;
   price: number;
   originalPrice: number;
+  image: string;
   dataAiHint: string;
   services: string[];
 }
@@ -48,15 +47,6 @@ export type Testimonial = {
   name: string;
   quote: string;
   service: string;
-}
-
-async function generateImageWithFallback(prompt: string, fallback: string = 'https://placehold.co/600x400.png'): Promise<string> {
-    try {
-        return await generateSimpleImage({ prompt });
-    } catch (error) {
-        console.error(`Failed to generate image for prompt: "${prompt}". Falling back to placeholder. Error:`, error);
-        return fallback;
-    }
 }
 
 export const generalAddons: Addon[] = [
@@ -85,7 +75,7 @@ export const services: Service[] = [
     price: 270,
     originalPrice: 300,
     duration: 60,
-    image: await generateImageWithFallback('A serene spa setting with a massage table, soft towels, and orchids, conveying a sense of deep relaxation. Bright, clean, and professional aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'serene spa massage',
     category: 'Massage',
     professionals: ['prof1', 'prof2', 'prof4', 'prof5'],
@@ -99,7 +89,7 @@ export const services: Service[] = [
     price: 270,
     originalPrice: 300,
     duration: 60,
-    image: await generateImageWithFallback('A close-up shot of a therapist performing a deep tissue massage on a client\'s back, showing focused pressure and muscle relief. Professional and therapeutic aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'deep tissue muscle relief',
     category: 'Massage',
     professionals: ['prof1', 'prof2', 'prof4', 'prof5'],
@@ -113,7 +103,7 @@ export const services: Service[] = [
     price: 290,
     originalPrice: 320,
     duration: 60,
-    image: await generateImageWithFallback('A beautiful flatlay of aromatherapy oils, lavender, and other botanicals on a clean background, conveying a sense of calm and natural healing.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'aromatherapy oils flowers',
     category: 'Massage',
     professionals: ['prof1', 'prof4'],
@@ -127,7 +117,7 @@ export const services: Service[] = [
     price: 270,
     originalPrice: 300,
     duration: 60,
-    image: await generateImageWithFallback('An athletic person receiving a sports massage on their leg, with a focus on muscle manipulation and recovery. Dynamic and professional aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'sports therapy athlete',
     category: 'Massage',
     professionals: ['prof1'],
@@ -141,7 +131,7 @@ export const services: Service[] = [
     price: 350,
     originalPrice: 400,
     duration: 60,
-    image: await generateImageWithFallback('A display of beautifully crafted wooden massage tools used for Maderotherapy, arranged artistically on a clean surface. Natural and therapeutic aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'wooden massage tools',
     category: 'Massage',
     professionals: ['prof1', 'prof5'],
@@ -155,7 +145,7 @@ export const services: Service[] = [
     price: 320,
     originalPrice: 350,
     duration: 75,
-    image: await generateImageWithFallback('A row of smooth, dark hot stones placed on a client\'s back during a massage, with steam rising gently. Luxurious and calming aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'hot stones on back',
     category: 'Massage',
     professionals: ['prof1', 'prof4'],
@@ -169,7 +159,7 @@ export const services: Service[] = [
     price: 300,
     originalPrice: 340,
     duration: 60,
-    image: await generateImageWithFallback('A conceptual image illustrating the lymphatic system with gentle light trails over a silhouette, conveying detoxification and lightness. Clean and medical aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'lymphatic drainage illustration',
     category: 'Massage',
     professionals: ['prof1', 'prof4'],
@@ -183,7 +173,7 @@ export const services: Service[] = [
     price: 290,
     originalPrice: 320,
     duration: 60,
-    image: await generateImageWithFallback('A serene image of a pregnant woman relaxing on a massage table, with soft lighting and a comfortable setup. Nurturing and safe aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'pregnant woman relaxing spa',
     category: 'Massage',
     professionals: ['prof1'],
@@ -199,7 +189,7 @@ export const services: Service[] = [
     price: 250,
     originalPrice: 280,
     duration: 45,
-    image: await generateImageWithFallback('A close-up macro shot of rich, dark Arabica coffee scrub texture, looking both exfoliating and luxurious. Aromatic and energizing aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'coffee scrub texture',
     category: 'Body Treatments',
     professionals: ['prof4'],
@@ -213,7 +203,7 @@ export const services: Service[] = [
     price: 300,
     originalPrice: 340,
     duration: 45,
-    image: await generateImageWithFallback('An abstract image of shimmering gold particles and glitter against a dark, luxurious background, conveying opulence and radiance.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'gold particles background shimmer',
     category: 'Body Treatments',
     professionals: ['prof4', 'prof2'],
@@ -227,7 +217,7 @@ export const services: Service[] = [
     price: 260,
     originalPrice: 290,
     duration: 45,
-    image: await generateImageWithFallback('A close-up shot of beautiful pink Himalayan salt crystals, with a soft, clean, and mineral-rich aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'himalayan salt pink',
     category: 'Body Treatments',
     professionals: ['prof4'],
@@ -243,7 +233,7 @@ export const services: Service[] = [
     price: 350,
     originalPrice: 390,
     duration: 60,
-    image: await generateImageWithFallback('An artistic shot of a woman\'s face with a splash of clear, clean water, conveying deep hydration and freshness. Clean and refreshing aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'water splash face',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
@@ -257,7 +247,7 @@ export const services: Service[] = [
     price: 380,
     originalPrice: 419,
     duration: 75,
-    image: await generateImageWithFallback('A portrait of an elegant, mature woman with beautiful, glowing skin, conveying grace and effective anti-aging skincare. Luxurious and sophisticated aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'elegant woman face',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
@@ -271,7 +261,7 @@ export const services: Service[] = [
     price: 400,
     originalPrice: 450,
     duration: 75,
-    image: await generateImageWithFallback('A close-up profile shot of a woman\'s face with a beautiful, healthy, and radiant glow, with soft lighting. Aspirational and beautiful aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'glowing face profile',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
@@ -285,7 +275,7 @@ export const services: Service[] = [
     price: 320,
     originalPrice: 353,
     duration: 60,
-    image: await generateImageWithFallback('A close-up of a woman\'s face showing clear, clean, and healthy skin, conveying the effectiveness of an acne treatment. Clinical and trustworthy aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'clear skin face',
     category: 'Facials',
     professionals: ['prof2', 'prof4'],
@@ -301,7 +291,7 @@ export const services: Service[] = [
     price: 99,
     originalPrice: 120,
     duration: 45,
-    image: await generateImageWithFallback('A close-up of elegantly manicured hands with a classic, clean nail polish color. Sophisticated and pristine aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'elegant manicure hands',
     category: 'Nails',
     professionals: ['prof2', 'prof5'],
@@ -315,7 +305,7 @@ export const services: Service[] = [
     price: 99,
     originalPrice: 110,
     duration: 50,
-    image: await generateImageWithFallback('A shot of perfectly pedicured feet relaxing in a spa environment, with clean water and flower petals. Relaxing and clean aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'relaxing pedicure feet',
     category: 'Nails',
     professionals: ['prof2', 'prof5'],
@@ -329,7 +319,7 @@ export const services: Service[] = [
     price: 189,
     originalPrice: 230,
     duration: 95,
-    image: await generateImageWithFallback('An artistic shot of both perfectly manicured hands and pedicured feet, showing a complete, polished look. Coordinated and luxurious aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'manicure pedicure set',
     category: 'Nails',
     professionals: ['prof2', 'prof5'],
@@ -343,7 +333,7 @@ export const services: Service[] = [
     price: 250,
     originalPrice: 280,
     duration: 75,
-    image: await generateImageWithFallback('A macro shot of glossy, perfectly applied gel polish on natural nails, showing its strength and shine. Durable and clean aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'glossy gel nails',
     category: 'Nails',
     professionals: ['prof2', 'prof5'],
@@ -357,7 +347,7 @@ export const services: Service[] = [
     price: 320,
     originalPrice: 350,
     duration: 120,
-    image: await generateImageWithFallback('A shot of long, perfectly shaped nail extensions with a flawless finish, showcasing their strength and beauty. Modern and high-fashion aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'perfect nail extensions',
     category: 'Nails',
     professionals: ['prof5'],
@@ -371,7 +361,7 @@ export const services: Service[] = [
     price: 340,
     originalPrice: 370,
     duration: 120,
-    image: await generateImageWithFallback('A close-up of long, elegant acrylic nails with a natural finish, showcasing their durability and shape. Strong and beautiful aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'long acrylic nails',
     category: 'Nails',
     professionals: ['prof5'],
@@ -385,7 +375,7 @@ export const services: Service[] = [
     price: 390,
     originalPrice: 420,
     duration: 135,
-    image: await generateImageWithFallback('A beautiful shot of a classic French manicure on long acrylic nails, conveying timeless elegance and perfection. Classic and sophisticated aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'classic french manicure',
     category: 'Nails',
     professionals: ['prof5'],
@@ -401,7 +391,7 @@ export const services: Service[] = [
     price: 299,
     originalPrice: 350,
     duration: 90,
-    image: await generateImageWithFallback('A close-up of an eye with beautiful, natural-looking classic eyelash extensions, showing added length and curl. Elegant and subtle aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'natural eyelash extensions',
     category: 'Eyelashes',
     professionals: ['prof2'],
@@ -415,7 +405,7 @@ export const services: Service[] = [
     price: 199,
     originalPrice: 220,
     duration: 60,
-    image: await generateImageWithFallback('A macro shot of an eyelash, showing the detail and precision of a lash extension application. Clean and professional aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'eyelash macro',
     category: 'Eyelashes',
     professionals: ['prof2'],
@@ -429,7 +419,7 @@ export const services: Service[] = [
     price: 399,
     originalPrice: 450,
     duration: 120,
-    image: await generateImageWithFallback('A close-up of an eye with dramatic, fluffy Russian volume lashes, showcasing incredible fullness. Glamorous and bold aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'fluffy volume lashes',
     category: 'Eyelashes',
     professionals: ['prof2'],
@@ -443,7 +433,7 @@ export const services: Service[] = [
     price: 250,
     originalPrice: 280,
     duration: 75,
-    image: await generateImageWithFallback('A close-up of an eye with full, dramatic Russian volume eyelashes, conveying a glamorous and high-fashion look. Intense and beautiful aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'dramatic volume eyelashes',
     category: 'Eyelashes',
     professionals: ['prof2'],
@@ -457,7 +447,7 @@ export const services: Service[] = [
     price: 250,
     originalPrice: 290,
     duration: 60,
-    image: await generateImageWithFallback('A before-and-after style shot showing an eye with a beautiful lash lift, making the eye look wider and more awake. Bright and enhancing aesthetic.'),
+    image: 'https://placehold.co/600x400.png',
     dataAiHint: 'eye with lash lift',
     category: 'Eyelashes',
     professionals: ['prof2', 'prof4'],
@@ -470,7 +460,7 @@ export const professionals: Professional[] = [
     id: 'prof1',
     name: 'Aisha Al Marzooqi',
     specialty: 'Lead Massage Therapist',
-    image: await generateImageWithFallback('Professional portrait of a friendly female massage therapist in a clean uniform, with a soft, out-of-focus spa background.'),
+    image: 'https://placehold.co/400x400.png',
     dataAiHint: 'professional therapist portrait',
     experience: 12,
     bio: 'Aisha is a master of therapeutic touch with over a decade of experience in prestigious Dubai spas. She specializes in relieving chronic pain and promoting deep relaxation, believing that massage is essential for both physical and mental harmony. Her intuitive approach ensures every client receives a truly personalized and healing experience.',
@@ -480,7 +470,7 @@ export const professionals: Professional[] = [
     id: 'prof2',
     name: 'Fatima Al Jaber',
     specialty: 'Lead Esthetician & Lash Artist',
-    image: await generateImageWithFallback('Professional portrait of a friendly female esthetician in a clean uniform, with a soft, out-of-focus beauty salon background.'),
+    image: 'https://placehold.co/400x400.png',
     dataAiHint: 'professional esthetician portrait',
     experience: 8,
     bio: 'Fatima combines her passion for skincare science and artistry to deliver transformative results. She is an expert in advanced facial treatments and meticulous lash artistry. Fatima is dedicated to helping clients achieve their skin goals and enhance their natural beauty with flawless, elegant lash designs.',
@@ -490,7 +480,7 @@ export const professionals: Professional[] = [
     id: 'prof4',
     name: 'Layla Al Shamsi',
     specialty: 'Holistic Skincare Specialist',
-    image: await generateImageWithFallback('Professional portrait of a friendly female skincare expert in a clean uniform, with a background of natural botanicals and soft light.'),
+    image: 'https://placehold.co/400x400.png',
     dataAiHint: 'professional skincare expert portrait',
     experience: 7,
     bio: 'Layla believes that radiant skin is a reflection of overall well-being. She takes a holistic approach, specializing in treatments that nourish the skin from the inside out. Her expertise lies in creating customized facials that address specific concerns while promoting a sense of peace and balance.',
@@ -500,7 +490,7 @@ export const professionals: Professional[] = [
     id: 'prof5',
     name: 'Noora Al Hashimi',
     specialty: 'Master Nail Technician',
-    image: await generateImageWithFallback('Professional portrait of a friendly female nail artist in a clean uniform, with a colorful display of nail polishes in the background.'),
+    image: 'https://placehold.co/400x400.png',
     dataAiHint: 'professional nail artist portrait',
     experience: 10,
     bio: 'Noora is a true artist in the world of nail care. With a decade of experience, she has perfected the art of creating durable, beautiful, and healthy nail enhancements. From flawless classic manicures to intricate nail art and extensions, Noora\'s precision and creativity are unmatched.',
@@ -515,6 +505,7 @@ export const packages: Package[] = [
         description: 'A 90-min luxury massage, customized facial, and luxury pedicure for full relaxation and a radiant glow.',
         price: 1200,
         originalPrice: 1350,
+        image: 'https://placehold.co/600x400.png',
         dataAiHint: 'royal spa treatment gold',
         services: [
           '90-min Luxury Full Body Massage (Thai, Swedish, or Aromatherapy)',
@@ -530,6 +521,7 @@ export const packages: Package[] = [
         description: 'Head-to-toe perfection with a 90-min massage, luxury mani-pedi, paraffin treatment, and facial.',
         price: 1500,
         originalPrice: 1700,
+        image: 'https://placehold.co/600x400.png',
         dataAiHint: 'queen throne luxury spa',
         services: [
           '90-min Full Body Massage (Lymphatic Drainage or Deep Tissue)',
@@ -545,6 +537,7 @@ export const packages: Package[] = [
         description: 'The complete VIP spa ritual. 120-min signature massage, anti-aging facial, luxury mani-pedi, hair treatment, and more.',
         price: 1800,
         originalPrice: 2100,
+        image: 'https://placehold.co/600x400.png',
         dataAiHint: 'ultimate bliss zen garden',
         services: [
           '120-min Full Body Signature Massage (Mix of Techniques)',

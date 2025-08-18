@@ -9,6 +9,26 @@ import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 import { Skeleton } from './ui/skeleton';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+
+async function ServiceImage({ service }: { service: Service }) {
+  let imageUrl;
+  try {
+    imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.category} service. Keywords: ${service.name}, ${service.dataAiHint}. Professional product photography, clean background, elegant aesthetic.`});
+  } catch (e) {
+    console.error(e);
+    imageUrl = service.image;
+  }
+  return (
+    <Image 
+        src={imageUrl} 
+        alt={service.name}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    />
+  );
+}
 
 interface ServiceCardProps {
   service: Service;
@@ -30,13 +50,7 @@ export function ServiceCard({ service, highlight = false, theme = 'spa' }: Servi
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
             <Suspense fallback={<Skeleton className='w-full h-full' />}>
-                <Image 
-                        src={service.image} 
-                        alt={service.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                <ServiceImage service={service} />
             </Suspense>
           {isDiscounted && (
             <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>

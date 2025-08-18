@@ -7,32 +7,26 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import Image from 'next/image';
 
 async function HeroImage() {
+    let imageUrl;
     try {
-        const imageUrl = await generateSimpleImage({
+        imageUrl = await generateSimpleImage({
             prompt:
             'Luxury Home Sanctuary: A beautiful and serene spa environment in a luxury home, soft lighting, orchids, and a sense of peace. The image should be bright and airy, with a luxury aesthetic.',
         });
-        return (
-            <Image
-            src={imageUrl}
-            alt="Serene luxury spa setting in a home"
-            fill
-            className="object-cover"
-            priority
-            />
-        );
     } catch (error) {
         console.error("Failed to generate hero image, falling back to placeholder.", error);
-        return (
-            <Image
-            src="https://placehold.co/1920x1080.png"
-            alt="Serene luxury spa setting in a home"
-            fill
-            className="object-cover"
-            priority
-            />
-        );
+        imageUrl = "https://placehold.co/1920x1080.png";
     }
+    
+    return (
+        <Image
+        src={imageUrl}
+        alt="Serene luxury spa setting in a home"
+        fill
+        className="object-cover"
+        priority
+        />
+    );
 }
 
 export function InteractiveHero() {

@@ -16,6 +16,7 @@ import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
+import { BlogPostContent } from './blog-post-content';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];

@@ -1,6 +1,4 @@
 
-'use client';
-
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import Image from 'next/image';
 import { Suspense } from 'react';
@@ -8,10 +6,16 @@ import { Skeleton } from '../ui/skeleton';
 
 
 async function AboutImage1() {
-  const imageUrl = await generateSimpleImage({
-    prompt:
-      'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic.',
-  });
+  let imageUrl;
+  try {
+    imageUrl = await generateSimpleImage({
+        prompt:
+        'A serene and luxurious home environment, with soft natural light, elegant furniture, and a sense of peace and tranquility. Bright and airy aesthetic.',
+    });
+  } catch(e) {
+    console.error(e);
+    imageUrl = 'https://placehold.co/600x400.png';
+  }
   return (
     <Image
       src={imageUrl}
@@ -23,10 +27,16 @@ async function AboutImage1() {
 }
 
 async function AboutImage2() {
-    const imageUrl = await generateSimpleImage({
-      prompt:
-        'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise.',
-    });
+    let imageUrl;
+    try {
+        imageUrl = await generateSimpleImage({
+        prompt:
+            'A professional and friendly wellness therapist with a warm smile, wearing a clean uniform. The background should be soft and out of focus, conveying trust and expertise.',
+        });
+    } catch(e) {
+        console.error(e);
+        imageUrl = 'https://placehold.co/600x400.png';
+    }
     return (
       <Image
         src={imageUrl}
