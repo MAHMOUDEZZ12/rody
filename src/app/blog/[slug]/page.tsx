@@ -5,6 +5,7 @@ import { BlogPostContent } from '@/components/page/blog-post-content';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
 type BlogPostPageProps = {
   params: {
