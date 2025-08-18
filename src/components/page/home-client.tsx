@@ -11,7 +11,6 @@ import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
 import { ServiceCard } from '../service-card';
 import { ReferralBanner } from '../referral-banner';
-import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
@@ -67,8 +66,6 @@ export function HomeClient() {
 
   return (
     <div className="flex flex-col">
-      <InteractiveHero />
-
       <SureBanner />
 
       <section id="services" className="py-16 md:py-24 bg-card/50">
