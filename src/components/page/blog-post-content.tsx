@@ -1,5 +1,4 @@
 
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type BlogPost } from '@/lib/blog';
@@ -33,12 +32,11 @@ type BlogPostClientProps = {
 }
 
 async function PostImage({ post }: { post: BlogPost }) {
-    let imageUrl;
+    let imageUrl = post.image;
     try {
         imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
     } catch (e) {
         console.error(e);
-        imageUrl = post.image;
     }
 
     return (

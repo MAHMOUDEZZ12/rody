@@ -1,26 +1,23 @@
 
-'use client'
-
-import { notFound, useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { professionals, services, type Professional } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Briefcase, Calendar, Star } from 'lucide-react';
+import { Briefcase, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ProfessionalClientActions, BookServiceButton } from '@/components/page/professional-client';
+import { Button } from '@/components/ui/button';
 
 async function ProfessionalImage({ professional }: { professional: Professional }) {
-    let imageUrl;
+    let imageUrl = professional.image;
     try {
         imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a professional. Keywords: ${professional.name}, ${professional.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.`});
     } catch (e) {
         console.error(e);
-        imageUrl = professional.image;
     }
 
     return (
@@ -33,7 +30,6 @@ async function ProfessionalImage({ professional }: { professional: Professional 
 }
 
 export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
-  const router = useRouter();
   const professional = professionals.find(p => p.id === params.id);
 
   if (!professional) {
@@ -44,10 +40,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
 
   return (
     <div className="container max-w-6xl px-4 py-12">
-      <Button variant="ghost" onClick={() => router.back()} className="mb-8">
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Back
-      </Button>
+      <ProfessionalClientActions />
 
       <div className="grid md:grid-cols-12 gap-8 md:gap-12">
         <div className="md:col-span-4 flex flex-col items-center text-center">
@@ -95,9 +88,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                 </CardHeader>
                 <CardContent>
                     <p className="text-muted-foreground mb-4">To view {professional.name.split(' ')[0]}'s real-time availability and book a session, please select a service below.</p>
-                     <Button asChild className="rounded-full">
-                      <Link href="/services">Explore Services to Book</Link>
-                    </Button>
+                     <BookServiceButton />
                 </CardContent>
             </Card>
         </div>

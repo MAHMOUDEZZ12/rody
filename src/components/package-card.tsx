@@ -12,12 +12,11 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 
 async function PackageImage({ pkg }: { pkg: Package }) {
-    let imageUrl;
+    let imageUrl = pkg.image;
     try {
         imageUrl = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay representing a spa package. Keywords: ${pkg.name}, ${pkg.dataAiHint}. Professional product photography, clean background, elegant aesthetic, high resolution.` });
     } catch(e) {
         console.error(e);
-        imageUrl = pkg.image;
     }
     return (
         <Image

@@ -1,5 +1,4 @@
 
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, type BlogPost } from '@/lib/blog';
@@ -11,12 +10,11 @@ import { Skeleton } from '../ui/skeleton';
 import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 async function PostImage({ post }: { post: BlogPost }) {
-    let imageUrl;
+    let imageUrl = post.image;
     try {
         imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
     } catch (e) {
         console.error(e);
-        imageUrl = post.image;
     }
 
     return (

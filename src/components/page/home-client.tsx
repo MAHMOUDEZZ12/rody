@@ -2,7 +2,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { testimonials, packages, services } from '@/lib/data';
 import { type BlogPost, blogPosts } from '@/lib/blog';
@@ -16,26 +15,7 @@ import { InteractiveHero } from './interactive-hero';
 import { SureBanner } from './sure-banner';
 import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
-
-async function BlogBannerImage({ post }: { post: BlogPost }) {
-    let imageUrl;
-    try {
-        imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. Keywords: ${post.title}, ${post.dataAiHint}. Professional photography, clean background, elegant aesthetic, high resolution.`});
-    } catch (e) {
-        console.error(e);
-        imageUrl = post.image;
-    }
-
-    return (
-         <Image 
-            src={imageUrl} 
-            alt={post.title} 
-            fill
-            className="object-cover"
-        />
-    )
-}
+import BlogBannerImage from './blog-banner-image';
 
 function BlogBanner() {
     const latestPost = blogPosts[0];
