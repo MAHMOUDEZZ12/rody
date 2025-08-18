@@ -27,7 +27,7 @@ const generateSimpleImageFlow = ai.defineFlow(
   async input => {
     if (!process.env.GEMINI_API_KEY) {
       console.error(
-        'GEMINI_API_KEY is not set. Please create a .env.local file and add your key to it.'
+        'GEMINI_API_KEY is not set. Please create a .env.local file for local development and add the secret to Secret Manager for production.'
       );
       // Return a placeholder if the API key is not set.
       return 'https://placehold.co/600x400.png';
@@ -41,9 +41,13 @@ const generateSimpleImageFlow = ai.defineFlow(
             responseModalities: ['TEXT', 'IMAGE'],
         },
         });
-        return media!.url;
+
+        if (!media?.url) {
+            throw new Error('No media URL returned from image generation.');
+        }
+        return media.url;
     } catch (e) {
-        console.error("Image generation failed.", e);
+        console.error("Image generation failed. This might be due to a missing API key in the production environment, safety settings, or an issue with the generation service. Falling back to placeholder.", e);
         return 'https://placehold.co/600x400.png';
     }
   }
