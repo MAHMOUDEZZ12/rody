@@ -11,20 +11,32 @@ import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
 async function HeroImage() {
-  const imageUrl = await generateSimpleImage({
-    prompt:
-      'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
-  });
-
-  return (
-    <Image
-      src={imageUrl}
-      alt="Elegant beauty treatment setting"
-      fill
-      className="object-cover z-0"
-      priority
-    />
-  );
+    try {
+        const imageUrl = await generateSimpleImage({
+            prompt:
+            'Artistry in Beauty: An elegant beauty treatment setting, with artistic pink background and splashes of color, a sense of luxury and professionalism. Bright and clean aesthetic.',
+        });
+        return (
+            <Image
+                src={imageUrl}
+                alt="Elegant beauty treatment setting"
+                fill
+                className="object-cover z-0"
+                priority
+            />
+        );
+    } catch (error) {
+        console.error("Failed to generate beauty hero image, falling back to placeholder.", error);
+        return (
+            <Image
+                src="https://placehold.co/1920x1080.png"
+                alt="Elegant beauty treatment setting"
+                fill
+                className="object-cover z-0"
+                priority
+            />
+        );
+    }
 }
 
 export function BeautyClient() {

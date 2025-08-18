@@ -11,20 +11,32 @@ import { Suspense } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
 async function HeroImage() {
-  const imageUrl = await generateSimpleImage({
-    prompt:
-      'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness.',
-  });
-
-  return (
-    <Image
-      src={imageUrl}
-      alt="Serene spa setting"
-      fill
-      className="object-cover z-0"
-      priority
-    />
-  );
+    try {
+        const imageUrl = await generateSimpleImage({
+            prompt:
+            'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with golden light, orchids and balanced stones, soft focus background. A sense of peace and wellness.',
+        });
+        return (
+            <Image
+            src={imageUrl}
+            alt="Serene spa setting"
+            fill
+            className="object-cover z-0"
+            priority
+            />
+        );
+    } catch (error) {
+        console.error("Failed to generate wellness hero image, falling back to placeholder.", error);
+        return (
+            <Image
+            src="https://placehold.co/1920x1080.png"
+            alt="Serene spa setting"
+            fill
+            className="object-cover z-0"
+            priority
+            />
+        );
+    }
 }
 
 export function WellnessAndSpaClient() {
