@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview A simple flow for generating images.
@@ -8,7 +9,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {unstable_cache as cache} from 'next/cache';
 import 'react';
 
 const GenerateSimpleImageInputSchema = z.object({
@@ -18,6 +18,7 @@ export type GenerateSimpleImageInput = z.infer<
   typeof GenerateSimpleImageInputSchema
 >;
 
+// This flow is now intended to be called by a build script, not directly by the app.
 const generateSimpleImageFlow = ai.defineFlow(
   {
     name: 'generateSimpleImageFlow',
@@ -53,8 +54,5 @@ const generateSimpleImageFlow = ai.defineFlow(
   }
 );
 
-export const generateSimpleImage = cache(
-  async (input: GenerateSimpleImageInput) => generateSimpleImageFlow(input),
-  ['generate-simple-image-v7'],
-  {revalidate: 3600 * 24} // Cache for 24 hours
-);
+// We export the flow directly now, without the Next.js cache wrapper.
+export const generateSimpleImage = generateSimpleImageFlow;

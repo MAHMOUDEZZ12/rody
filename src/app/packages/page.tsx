@@ -3,7 +3,6 @@ import { packages } from '@/lib/data';
 import { PackageCard } from '@/components/package-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionTitle } from '@/components/section-title';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
@@ -13,10 +12,10 @@ export const metadata: Metadata = {
   description: 'Indulge and save with our curated wellness packages. Each package combines our most popular at-home spa and beauty services at an exceptional value.',
 };
 
-export default async function PackagesPage() {
+export default function PackagesPage() {
   const packageImageUrls: Record<string, string> = {};
   for(const pkg of packages) {
-    packageImageUrls[pkg.id] = await generateSimpleImage({ prompt: `A beautiful and luxurious flatlay composition representing a spa package. The theme should reflect the package name: "${pkg.name}". Keywords: ${pkg.dataAiHint}. Use clean, bright lighting on a minimalist background. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.` });
+    packageImageUrls[pkg.id] = `/images/package-${pkg.id}.png`;
   }
 
   return (

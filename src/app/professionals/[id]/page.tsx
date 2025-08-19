@@ -6,25 +6,27 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Briefcase, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import Image from 'next/image';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ProfessionalClientActions } from '@/components/page/professional-client';
 import { Button } from '@/components/ui/button';
 
-async function ProfessionalImage({ professional }: { professional: Professional }) {
-    const imageUrl = await generateSimpleImage({prompt: `A warm and professional headshot of a female therapist. She should have a friendly and trustworthy expression. Name: ${professional.name}, Specialty: ${professional.specialty}. Keywords: ${professional.dataAiHint}. The background should be soft and professional. High-resolution, photorealistic portrait.`});
+function ProfessionalImage({ professional }: { professional: Professional }) {
+    const imageUrl = `/images/professional-${professional.id}.png`;
     
     return (
-        <AvatarImage 
+        <Image 
             src={imageUrl}
             alt={professional.name} 
             className="object-cover" 
+            fill
+            sizes="192px"
         />
     )
 }
 
-export default async function ProfessionalProfilePage({ params }: { params: { id: string } }) {
+export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const professional = professionals.find(p => p.id === params.id);
 
   if (!professional) {

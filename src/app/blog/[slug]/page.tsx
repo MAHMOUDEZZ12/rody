@@ -2,7 +2,6 @@
 import { notFound } from 'next/navigation';
 import { blogPosts } from '@/lib/blog';
 import { BlogPostContent } from '@/components/page/blog-post-content';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
@@ -13,7 +12,7 @@ type BlogPostPageProps = {
   };
 };
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
   
   if (!post) {
@@ -22,11 +21,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
-  const postImageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${post.category}. The mood should reflect the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography with a clean background, an elegant aesthetic, and high resolution.`});
+  const postImageUrl = `/images/blog-${post.slug}.png`;
   
   const relatedPostsImageUrls: Record<string, string> = {};
   for (const p of relatedPosts) {
-    relatedPostsImageUrls[p.slug] = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a blog post about ${p.category}. The mood should reflect the title: "${p.title}". Keywords: ${p.dataAiHint}. Use professional photography with a clean background, an elegant aesthetic, and high resolution.`});
+    relatedPostsImageUrls[p.slug] = `/images/blog-${p.slug}.png`;
   }
 
 

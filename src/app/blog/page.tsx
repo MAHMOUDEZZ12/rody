@@ -1,6 +1,5 @@
 
 import { BlogPageContent } from '@/components/page/blog-page-content';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { blogPosts } from '@/lib/blog';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -11,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Explore expert articles, tips, and insights on wellness, beauty, and self-care rituals from the specialists at Rody Wellness, your at-home spa in Dubai.',
 };
 
-export default async function BlogPage() {
+export default function BlogPage() {
   const imageUrls: Record<string, string> = {};
   for (const post of blogPosts) {
-    imageUrls[post.slug] = await generateSimpleImage({prompt: `An artistic and luxurious image for a blog post about ${post.category}. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`});
+    imageUrls[post.slug] = `/images/blog-${post.slug}.png`;
   }
 
   return (

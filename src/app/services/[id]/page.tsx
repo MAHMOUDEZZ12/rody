@@ -1,10 +1,10 @@
 
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { services, professionals as allProfessionals, timeSlots, type Addon, type Service } from '@/lib/data';
+import { services, professionals as allProfessionals, timeSlots, type Addon } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,26 +18,13 @@ import { ArrowLeft, CalendarIcon, Clock, CreditCard, CheckCircle, Gem, Gift, Spa
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { handleBooking as handleBookingAction } from '@/app/actions';
-import { Skeleton } from '@/components/ui/skeleton';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
-function ServiceImage({ service }: { service: Service }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useState(() => {
-    generateSimpleImage({
-      prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`,
-    }).then(setImageUrl);
-  });
-
-  if (!imageUrl) {
-    return <Skeleton className="absolute inset-0" />;
-  }
-
+function ServiceImage({ serviceId, serviceName }: { serviceId: string, serviceName: string }) {
+  const imageUrl = `/images/service-${serviceId}.png`;
   return (
     <Image
       src={imageUrl}
-      alt={service.name}
+      alt={serviceName}
       fill
       className="object-cover"
       sizes="(max-width: 768px) 100vw, 50vw"
@@ -168,9 +155,7 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       <div className="grid md:grid-cols-5 gap-8 md:gap-12">
         <div className="md:col-span-3">
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
-             <Suspense fallback={<Skeleton className="h-full w-full" />}>
-                <ServiceImage service={service} />
-             </Suspense>
+            <ServiceImage serviceId={service.id} serviceName={service.name} />
              {isSureMember && (
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3 bg-primary text-white">SURE OFFER</Badge>
             )}

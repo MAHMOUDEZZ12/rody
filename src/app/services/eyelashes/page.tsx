@@ -1,7 +1,6 @@
 
 import { services } from '@/lib/data';
 import { ServiceCard } from '@/components/service-card';
-import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
@@ -11,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Enhance your eyes with our professional eyelash services, including classic and Russian volume extensions, lash lifts, and tints.',
 };
 
-async function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
+function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
     const service = services.find(s => s.id === serviceId);
     if (!service) return null;
-    const imageUrl = await generateSimpleImage({prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`});
+    const imageUrl = `/images/service-${service.id}.png`;
     return <ServiceCard service={service} imageUrl={imageUrl} theme="beauty" />
 }
 
