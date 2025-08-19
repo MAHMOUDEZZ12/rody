@@ -10,8 +10,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    loader: 'custom',
-    loaderFile: './loader.js',
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
