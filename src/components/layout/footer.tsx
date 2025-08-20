@@ -36,7 +36,7 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Footer() {
   const whatsappUrl = "https://wa.me/message/S46XZJVEVAOJF1?text=Hello%20Rody%20Wellness!%20I'm%20interested%20in%20booking%20a%20service.";
-  const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/reodywellness.appspot.com/o/logo.png?alt=media&token=c13838a3-2646-455c-91ce-7153f3a55255';
+  const logoUrl = '/images/logo.png';
 
   return (
     <footer className="bg-primary text-primary-foreground">
