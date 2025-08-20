@@ -14,7 +14,7 @@ interface PackageCardProps {
 
 export function PackageCard({ pkg, imageUrl }: PackageCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 bg-white/80">
+    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
             <Image

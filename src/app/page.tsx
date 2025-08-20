@@ -52,11 +52,11 @@ async function HomePageData() {
 
   // Services
   const allFeaturedServices = [
-      ...services.filter(s => s.categories.includes('Massage')).slice(0, 3),
-      ...services.filter(s => s.categories.includes('Body Treatments')).slice(0, 1),
-      ...services.filter(s => s.categories.includes('Facials')).slice(0, 2),
-      ...services.filter(s => s.categories.includes('Nails')).slice(0, 2),
-      ...services.filter(s => s.categories.includes('Eyelashes')).slice(0, 2),
+      ...services.filter(s => s.categories.includes('Massage')),
+      ...services.filter(s => s.categories.includes('Body Treatments')),
+      ...services.filter(s => s.categories.includes('Facials')),
+      ...services.filter(s => s.categories.includes('Nails')),
+      ...services.filter(s => s.categories.includes('Eyelashes')),
   ];
   const serviceImagePromises = allFeaturedServices.map(service => generateSimpleImage({
     prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", featuring a client enjoying the treatment from a professional female therapist in an elegant uniform with a subtle brand emblem. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,

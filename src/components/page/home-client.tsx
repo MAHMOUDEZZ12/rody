@@ -2,10 +2,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Star, ArrowRight } from 'lucide-react';
-import { testimonials, packages, services, Service } from '@/lib/data';
-import { type BlogPost, blogPosts } from '@/lib/blog';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { services, packages, Service } from '@/lib/data';
+import { blogPosts } from '@/lib/blog';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { PackageCard } from '../package-card';
 import { Button } from '../ui/button';
 import { SectionTitle } from '../section-title';
@@ -29,7 +28,7 @@ function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
     if (!latestPost) return null;
 
     return (
-        <section id="blog-banner" className="py-16 md:py-24">
+        <section className="py-16 md:py-24 bg-card/50">
             <div className="container max-w-7xl px-4">
                 <SectionTitle title="From The Journal" />
                 <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
@@ -43,7 +42,7 @@ function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
                                     <BlogBannerImage imageUrl={latestPostImageUrl} alt={latestPost.title} />
                                 </Suspense>
                             </div>
-                            <div className="flex flex-col p-8 bg-card/80 backdrop-blur-sm">
+                            <div className="flex flex-col p-8">
                                 <CardHeader>
                                     <CardTitle className="font-headline text-3xl text-primary group-hover:underline">{latestPost.title}</CardTitle>
                                 </CardHeader>
@@ -67,72 +66,55 @@ function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
 }
 
 export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImageUrl }: HomeClientProps) {
-  const featuredMassages = services.filter(s => s.categories.includes('Massage')).slice(0, 3);
-  const featuredBodyTreatments = services.filter(s => s.categories.includes('Body Treatments')).slice(0, 1);
-  const featuredFacials = services.filter(s => s.categories.includes('Facials')).slice(0, 2);
-  const featuredNails = services.filter(s => s.categories.includes('Nails')).slice(0, 2);
-  const featuredEyelashes = services.filter(s => s.categories.includes('Eyelashes')).slice(0, 2);
+  const massageServices = services.filter(s => s.categories.includes('Massage'));
+  const bodyTreatments = services.filter(s => s.categories.includes('Body Treatments'));
+  const facialServices = services.filter(s => s.categories.includes('Facials'));
+  const nailServices = services.filter(s => s.categories.includes('Nails'));
+  const eyelashServices = services.filter(s => s.categories.includes('Eyelashes'));
 
   return (
     <>
       <section id="services" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
-          <SectionTitle title="Our Services" />
+          <SectionTitle title="Our Signature Services" />
           
-          <div className="mt-12 space-y-16">
+          <div className="mt-12 space-y-24">
+            
             {/* Wellness & SPA */}
-            <div>
+            <div id="wellness-spa">
               <div className="text-center mb-10">
-                <h3 className="font-headline text-3xl text-spa-primary">Wellness & SPA</h3>
-                <p className="text-muted-foreground mt-2">Restore your body’s balance and rejuvenate your spirit.</p>
+                <h3 className="font-headline text-4xl text-spa-primary">Wellness & SPA</h3>
+                <p className="text-muted-foreground mt-2 text-lg">Restore your body’s balance and rejuvenate your spirit.</p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {featuredMassages.map(service => (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {massageServices.map(service => (
                   <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
                 ))}
-                {featuredBodyTreatments.map(service => (
+                {bodyTreatments.map(service => (
                   <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
                 ))}
-              </div>
-              <div className="text-center mt-10">
-                <Button asChild variant="outline">
-                  <Link href="/services/wellness-and-spa">Explore All SPA Services</Link>
-                </Button>
               </div>
             </div>
 
             {/* Beauty & Nails */}
-            <div>
+            <div id="beauty-nails">
               <div className="text-center mb-10">
-                <h3 className="font-headline text-3xl text-beauty-primary">Beauty & Nails</h3>
-                <p className="text-muted-foreground mt-2">Enhance your natural radiance with our expert treatments.</p>
+                <h3 className="font-headline text-4xl text-beauty-primary">Beauty & Nails</h3>
+                <p className="text-muted-foreground mt-2 text-lg">Enhance your natural radiance with our expert treatments.</p>
               </div>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="space-y-8">
-                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Facials</h4>
-                    {featuredFacials.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
-                    ))}
-                </div>
-                 <div className="space-y-8">
-                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Nails</h4>
-                    {featuredNails.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
-                    ))}
-                </div>
-                 <div className="space-y-8">
-                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Eyelashes</h4>
-                    {featuredEyelashes.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
-                    ))}
-                </div>
-              </div>
-              <div className="text-center mt-10">
-                <Button asChild variant="outline">
-                  <Link href="/services/beauty">Explore All Beauty Services</Link>
-                </Button>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {facialServices.map(service => (
+                    <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                ))}
+                {nailServices.map(service => (
+                    <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                ))}
+                {eyelashServices.map(service => (
+                    <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                ))}
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -170,11 +152,7 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card/50">
-        <div className="container max-w-7xl px-4">
-            <ReferralBanner />
-        </div>
-      </section>
+      <ReferralBanner />
       
       <BlogBanner latestPostImageUrl={latestPostImageUrl} />
 
