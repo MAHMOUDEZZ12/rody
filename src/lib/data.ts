@@ -362,7 +362,7 @@ export const services: Service[] = [
     originalPrice: 230,
     duration: 95,
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'manicure pedicure set',
+    dataAiHint: 'woman receiving manicure pedicure',
     categories: ['Nails'],
     professionals: ['prof2', 'prof5'],
     addons: [],
