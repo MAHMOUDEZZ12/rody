@@ -25,7 +25,7 @@ export default function TestimonialsSection() {
             {isMobile ? (
                 <div className="space-y-4">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg">
+                        <Card key={index} className="text-center bg-white/80 shadow-lg">
                             <CardContent className="p-6">
                             <div className="flex justify-center mb-2">
                                 {[...Array(5)].map((_, i) => (
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
             ) : (
                 <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="text-center bg-white/80 backdrop-blur-sm shadow-lg break-inside-avoid">
+                        <Card key={index} className="text-center bg-white/80 shadow-lg break-inside-avoid">
                             <CardContent className="p-6">
                             <div className="flex justify-center mb-2">
                                 {[...Array(5)].map((_, i) => (

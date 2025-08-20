@@ -24,7 +24,7 @@ export function ServiceCard({ service, imageUrl, highlight = false, theme = 'spa
 
   return (
     <Card className={cn(
-        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-white/80 backdrop-blur-sm hover:shadow-lg",
+        "flex flex-col overflow-hidden h-full transition-all duration-300 bg-white/80 hover:shadow-lg",
         ringColorClass,
         highlight && "border-primary/30 shadow-lg ring-2 ring-primary/20 shadow-primary/10"
       )}>
