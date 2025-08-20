@@ -15,7 +15,7 @@ async function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string
     const service = services.find(s => s.id === serviceId);
     if (!service) return null;
     const imageUrl = await generateSimpleImage({
-      prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", possibly featuring a client with beautiful lashes or a therapist in a branded uniform performing the service. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`
+      prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", featuring a client with beautiful lashes after a treatment from a professional female therapist in an elegant uniform with a subtle brand emblem. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`
     });
     return <ServiceCard service={service} imageUrl={imageUrl} theme="beauty" />
 }
