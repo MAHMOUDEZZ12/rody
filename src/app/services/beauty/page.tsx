@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 async function BeautyPageData() {
   const heroImageUrl = await generateSimpleImage({
     prompt:
-      'Artistry in Beauty: An elegant, abstract beauty treatment setting, reflecting the Rody Wellness brand. Features artistic splashes of pink and gold on a clean white background, conveying a sense of luxury, creativity, and professionalism. The aesthetic should be bright, modern, and clean. High resolution, photorealistic render.',
+      'Artistry in Beauty: An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious setting, reflecting the Rody Wellness brand. The scene has artistic splashes of pink and gold, conveying luxury, creativity, and professionalism. The aesthetic should be bright, modern, and clean. High resolution, photorealistic.',
   });
 
   const beautyServices = services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails') || s.categories.includes('Eyelashes'));
   
   const imagePromises = beautyServices.map(service => generateSimpleImage({
-    prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service from Rody Wellness. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution. Include a subtly branded element, like a product bottle with a simple "R" logo.`
+    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", possibly featuring a client enjoying the treatment or a therapist in a branded uniform performing the service. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`
   }));
 
   const resolvedImageUrls = await Promise.all(imagePromises);

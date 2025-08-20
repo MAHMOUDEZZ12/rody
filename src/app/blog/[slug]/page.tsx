@@ -15,13 +15,13 @@ type BlogPostPageProps = {
 
 async function BlogPostImages({ post }: { post: (typeof blogPosts)[0]}) {
     const postImageUrl = await generateSimpleImage({
-        prompt: `An artistic and luxurious image for a blog post about ${post.category}, reflecting the Rody Wellness brand. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`,
+        prompt: `An artistic and luxurious lifestyle photograph for a blog post about ${post.category}, reflecting the Rody Wellness brand. The image should capture the essence of the title: "${post.title}". It can feature a person enjoying a serene moment related to the topic. Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`,
     });
 
     const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
 
     const relatedImagePromises = relatedPosts.map(p => generateSimpleImage({
-        prompt: `An artistic and luxurious image for a blog post about ${p.category}, reflecting the Rody Wellness brand. The image should capture the essence of the title: "${p.title}". Keywords: ${p.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`
+        prompt: `An artistic and luxurious lifestyle photograph for a blog post about ${p.category}, reflecting the Rody Wellness brand. The image should capture the essence of the title: "${p.title}". It can feature a person enjoying a serene moment related to the topic. Keywords: ${p.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`
     }));
 
     const relatedImageUrls = await Promise.all(relatedImagePromises);

@@ -17,7 +17,7 @@ async function HomePageData() {
   // Hero Image
   const heroImagePromise = generateSimpleImage({
     prompt:
-      'A breathtakingly serene and luxurious spa environment inside a modern Dubai villa, styled with the Rody Wellness brand aesthetic. Soft, natural sunlight streams through large windows, illuminating elegant orchids, minimalist decor with soft pink and gold accents, and a tranquil water feature. The aesthetic is bright, airy, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
+      'A breathtakingly serene image of a woman relaxing in a luxurious home spa setting in Dubai, reflecting the Rody Wellness brand. She could be receiving a massage or facial from a professional therapist in an elegant, branded uniform. Soft, natural sunlight streams through large windows, illuminating minimalist decor with soft pink and gold accents. The aesthetic is bright, peaceful, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
   });
 
   // Services
@@ -27,18 +27,18 @@ async function HomePageData() {
       ...services.filter(s => s.categories.includes('Treatment')).slice(0, 2)
   ];
   const serviceImagePromises = allFeaturedServices.map(service => generateSimpleImage({
-    prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service from Rody Wellness. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution. Include a subtly branded element, like a product bottle with a simple "R" logo.`,
+    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", possibly featuring a client enjoying the treatment or a therapist in a branded uniform performing the service. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,
   }));
 
   // Packages
   const packageImagePromises = packages.map(pkg => generateSimpleImage({
-    prompt: `A beautiful and luxurious flatlay composition representing a Rody Wellness spa package. The theme should reflect the package name: "${pkg.name}". Use clean, bright lighting on a minimalist background with brand colors of soft pink and gold. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.`,
+    prompt: `A beautiful and luxurious lifestyle photograph representing a Rody Wellness spa package experience. The theme should reflect the package name: "${pkg.name}". The image should feature a person in a state of serene relaxation, perhaps wearing a branded robe or enjoying a luxurious home-spa environment. Use clean, bright lighting with brand colors of soft pink and gold. The aesthetic should be elegant, aspirational, and high-end. Professional photography, high resolution.`,
   }));
   
   // Blog
   const latestPost = blogPosts[0];
   const latestPostImagePromise = latestPost ? generateSimpleImage({
-      prompt: `An artistic and luxurious image for a Rody Wellness blog post about ${latestPost.category}. The image should capture the essence of the title: "${latestPost.title}". Keywords: ${latestPost.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`,
+      prompt: `An artistic and luxurious lifestyle photograph for a Rody Wellness blog post about ${latestPost.category}. The image should capture the essence of the title: "${latestPost.title}". It can feature a person enjoying a serene moment related to the topic. Keywords: ${latestPost.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`,
     }) : Promise.resolve('');
 
 
