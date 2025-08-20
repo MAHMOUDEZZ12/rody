@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 async function WellnessPageData() {
   const heroImageUrl = await generateSimpleImage({
     prompt:
-      'Sanctuary for the Senses: A tranquil, bright, and airy spa setting with a soft, golden light. The image features orchids, perfectly balanced stones, and a soft-focus background that evokes peace and wellness. This is a photorealistic, high-resolution photograph.',
+      'Sanctuary for the Senses: A tranquil, bright, and airy spa setting reflecting the Rody Wellness brand. The image has a soft, golden light and features orchids, perfectly balanced stones, and a soft-focus background that evokes peace and wellness, with hints of the brand\'s pink and gold colors. This is a photorealistic, high-resolution photograph.',
   });
 
   const wellnessServices = services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments'));
   
   const imagePromises = wellnessServices.map(service => generateSimpleImage({
-    prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`
+    prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service from Rody Wellness. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution. Include a subtly branded element, like a massage oil bottle with a simple "R" logo.`
   }));
 
   const resolvedImageUrls = await Promise.all(imagePromises);

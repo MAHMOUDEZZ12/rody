@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 async function BlogImages() {
   const imagePromises = blogPosts.map(post => generateSimpleImage({
-    prompt: `An artistic and luxurious image for a blog post about ${post.category}. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`
+    prompt: `An artistic and luxurious image for a blog post about ${post.category}, reflecting the Rody Wellness brand. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`
   }));
   const resolvedImageUrls = await Promise.all(imagePromises);
 

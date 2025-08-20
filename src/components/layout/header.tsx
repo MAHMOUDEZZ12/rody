@@ -18,7 +18,7 @@ import Image from 'next/image';
 export function Header() {
   const { user, logout } = useAuth();
   const router = useRouter();
-  const logoUrl = '/images/logo.png';
+  const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/dubai-wellness-oasis.firebasestorage.app/o/Untitled-12.png?alt=media&token=dc488da7-096d-4d7b-aa98-a7ba8f36a650';
 
   const handleLogoutClick = () => {
     logout();
@@ -86,7 +86,7 @@ export function Header() {
                  <SheetClose asChild>
                     <Link href="/" className="mr-6 flex items-center space-x-2">
                       <Image src={logoUrl} alt="Rody Wellness Logo" width={180} height={60} />
-                    </Link>
+                    </Link> 
                 </SheetClose>
               </div>
               <div className="flex flex-col h-[calc(100vh-8rem)]">

@@ -26,7 +26,7 @@ function ServiceImage({ serviceId, serviceName, serviceCategory, serviceDataAiHi
 
   useState(() => {
     generateSimpleImage({
-        prompt: `A beautiful and luxurious image representing a ${serviceCategory} service. The image should be an artistic still-life that captures the essence of "${serviceName}". Keywords for the mood are: ${serviceDataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`,
+        prompt: `A beautiful and luxurious image representing a ${serviceCategory} service from Rody Wellness. The image should be an artistic still-life that captures the essence of "${serviceName}". Keywords for the mood are: ${serviceDataAiHint}. Use professional product photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution. Include a subtly branded element, like a product bottle with a simple "R" logo.`,
     }).then(url => setImageUrl(url));
   });
 

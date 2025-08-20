@@ -15,7 +15,7 @@ import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 async function ProfessionalImage({ professional }: { professional: Professional }) {
     const imageUrl = await generateSimpleImage({
-        prompt: `A warm and professional headshot of a female therapist. She should have a friendly and trustworthy expression. Name: ${professional.name}, Specialty: ${professional.specialty}. Keywords: ${professional.dataAiHint}. The background should be soft and professional. High-resolution, photorealistic portrait.`
+        prompt: `A warm and professional headshot of a female therapist for Rody Wellness. She should have a friendly and trustworthy expression. Name: ${professional.name}, Specialty: ${professional.specialty}. Keywords: ${professional.dataAiHint}. She is wearing an elegant, professional uniform with a subtle brand emblem. The background should be soft and professional, with hints of the brand's soft pink and gold color scheme. High-resolution, photorealistic portrait.`
     });
     
     return (

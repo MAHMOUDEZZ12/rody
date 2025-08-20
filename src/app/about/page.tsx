@@ -15,11 +15,11 @@ async function AboutImages() {
   const [imageUrl1, imageUrl2] = await Promise.all([
     generateSimpleImage({
       prompt:
-        'A photograph of a serene and luxurious home environment in Dubai, with soft natural light, elegant furniture, and a sense of peace and tranquility. The aesthetic is bright, airy, and modern. High resolution detail, photorealistic.',
+        'A photograph of a serene and luxurious home environment in Dubai, with soft natural light, elegant furniture, and a sense of peace and tranquility. The aesthetic is bright, airy, and modern, reflecting the Rody Wellness brand colors of soft pink and gold. High resolution detail, photorealistic.',
     }),
     generateSimpleImage({
       prompt:
-        'A professional and friendly female wellness therapist with a warm smile, wearing a clean, elegant uniform. The background should be a soft, out-of-focus luxury home interior, conveying trust and expertise. High resolution detail, photorealistic portrait.',
+        'A professional and friendly female wellness therapist with a warm smile, wearing a clean, elegant uniform with a subtle, abstract brand emblem on it. The background should be a soft, out-of-focus luxury home interior, conveying trust and expertise. High resolution detail, photorealistic portrait.',
     }),
   ]);
 
