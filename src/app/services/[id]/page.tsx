@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { services, professionals as allProfessionals, timeSlots, type Addon } from '@/lib/data';
@@ -18,9 +18,22 @@ import { ArrowLeft, CalendarIcon, Clock, CreditCard, CheckCircle, Gem, Gift, Spa
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { handleBooking as handleBookingAction } from '@/app/actions';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
+import { Skeleton } from '@/components/ui/skeleton';
 
-function ServiceImage({ serviceId, serviceName }: { serviceId: string, serviceName: string }) {
-  const imageUrl = `/images/service-${serviceId}.png`;
+function ServiceImage({ serviceId, serviceName, serviceCategory, serviceDataAiHint }: { serviceId: string, serviceName: string, serviceCategory: string, serviceDataAiHint: string }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useState(() => {
+    generateSimpleImage({
+        prompt: `A beautiful and luxurious image representing a ${serviceCategory} service. The image should be an artistic still-life that captures the essence of "${serviceName}". Keywords for the mood are: ${serviceDataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`,
+    }).then(url => setImageUrl(url));
+  });
+
+  if (!imageUrl) {
+    return <Skeleton className="w-full h-full" />;
+  }
+
   return (
     <Image
       src={imageUrl}
@@ -155,7 +168,9 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       <div className="grid md:grid-cols-5 gap-8 md:gap-12">
         <div className="md:col-span-3">
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
-            <ServiceImage serviceId={service.id} serviceName={service.name} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                <ServiceImage serviceId={service.id} serviceName={service.name} serviceCategory={service.categories[0]} serviceDataAiHint={service.dataAiHint} />
+            </Suspense>
              {isSureMember && (
               <Badge variant="destructive" className="absolute top-4 left-4 text-base py-1 px-3 bg-primary text-white">SURE OFFER</Badge>
             )}

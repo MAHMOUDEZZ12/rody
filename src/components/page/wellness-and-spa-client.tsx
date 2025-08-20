@@ -25,6 +25,7 @@ export function WellnessAndSpaClient({ heroImageUrl, serviceImageUrls }: Wellnes
             fill
             className="object-cover z-0"
             priority
+            unoptimized
         />
         <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="relative z-20 animate-fade-in-up">

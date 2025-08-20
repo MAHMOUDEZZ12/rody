@@ -4,22 +4,36 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 export const metadata: Metadata = {
   title: 'Our Story',
   description: 'Learn the story and philosophy behind Rody Wellness, Dubai\'s premier at-home luxury spa service, delivering a five-star sanctuary to your door.',
 };
 
-export default function AboutUsPage() {
-  const imageUrl1 = '/images/about-1.png';
-  const imageUrl2 = '/images/about-2.png';
+async function AboutImages() {
+  const [imageUrl1, imageUrl2] = await Promise.all([
+    generateSimpleImage({
+      prompt:
+        'A photograph of a serene and luxurious home environment in Dubai, with soft natural light, elegant furniture, and a sense of peace and tranquility. The aesthetic is bright, airy, and modern. High resolution detail, photorealistic.',
+    }),
+    generateSimpleImage({
+      prompt:
+        'A professional and friendly female wellness therapist with a warm smile, wearing a clean, elegant uniform. The background should be a soft, out-of-focus luxury home interior, conveying trust and expertise. High resolution detail, photorealistic portrait.',
+    }),
+  ]);
 
+  return <AboutClient imageUrl1={imageUrl1} imageUrl2={imageUrl2} />;
+}
+
+
+export default function AboutUsPage() {
   return (
     <div className="container max-w-5xl px-4 py-12">
         <Card className="bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
                 <Suspense fallback={<div className="space-y-4"><Skeleton className="h-96 w-full" /><Skeleton className="h-96 w-full" /></div>}>
-                    <AboutClient imageUrl1={imageUrl1} imageUrl2={imageUrl2} />
+                    <AboutImages />
                 </Suspense>
             </CardContent>
         </Card>

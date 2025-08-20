@@ -11,9 +11,12 @@ import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ProfessionalClientActions } from '@/components/page/professional-client';
 import { Button } from '@/components/ui/button';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
-function ProfessionalImage({ professional }: { professional: Professional }) {
-    const imageUrl = `/images/professional-${professional.id}.png`;
+async function ProfessionalImage({ professional }: { professional: Professional }) {
+    const imageUrl = await generateSimpleImage({
+        prompt: `A warm and professional headshot of a female therapist. She should have a friendly and trustworthy expression. Name: ${professional.name}, Specialty: ${professional.specialty}. Keywords: ${professional.dataAiHint}. The background should be soft and professional. High-resolution, photorealistic portrait.`
+    });
     
     return (
         <Image 

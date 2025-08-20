@@ -6,48 +6,82 @@ import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
 import { services, packages } from '@/lib/data';
 import { blogPosts } from '@/lib/blog';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 export const metadata: Metadata = {
   title: 'Sure by Rody | Premium At-Home Spa & Beauty in Dubai',
   description: 'Experience the ultimate luxury of at-home wellness. Rody Spa offers premium massage, beauty, and spa treatments delivered to your door in Dubai.',
 };
 
+async function HomePageData() {
+  // Hero Image
+  const heroImagePromise = generateSimpleImage({
+    prompt:
+      'A breathtakingly serene and luxurious spa environment inside a modern Dubai villa. Soft, natural sunlight streams through large windows, illuminating elegant orchids, minimalist decor, and a tranquil water feature. The aesthetic is bright, airy, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
+  });
 
-export default function Home() {
-  const heroImageUrl = '/images/hero-home.png';
-
+  // Services
   const allFeaturedServices = [
       ...services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments')).slice(0, 2),
       ...services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails')).slice(0, 2),
       ...services.filter(s => s.categories.includes('Treatment')).slice(0, 2)
   ];
+  const serviceImagePromises = allFeaturedServices.map(service => generateSimpleImage({
+    prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`,
+  }));
+
+  // Packages
+  const packageImagePromises = packages.map(pkg => generateSimpleImage({
+    prompt: `A beautiful and luxurious flatlay composition representing a spa package. The theme should reflect the package name: "${pkg.name}". Keywords: ${pkg.dataAiHint}. Use clean, bright lighting on a minimalist background. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.`,
+  }));
   
+  // Blog
+  const latestPost = blogPosts[0];
+  const latestPostImagePromise = latestPost ? generateSimpleImage({
+      prompt: `An artistic and luxurious image for a blog post about ${latestPost.category}. The image should capture the essence of the title: "${latestPost.title}". Keywords: ${latestPost.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`,
+    }) : Promise.resolve('');
+
+
+  const [
+    heroImageUrl, 
+    serviceImages, 
+    packageImages, 
+    latestPostImageUrl
+  ] = await Promise.all([
+    heroImagePromise, 
+    Promise.all(serviceImagePromises), 
+    Promise.all(packageImagePromises), 
+    latestPostImagePromise
+  ]);
+
   const serviceImageUrls: Record<string, string> = {};
-  for (const service of allFeaturedServices) {
-    serviceImageUrls[service.id] = `/images/service-${service.id}.png`;
-  }
+  allFeaturedServices.forEach((service, index) => {
+    serviceImageUrls[service.id] = serviceImages[index];
+  });
 
   const packageImageUrls: Record<string, string> = {};
-  for(const pkg of packages) {
-    packageImageUrls[pkg.id] = `/images/package-${pkg.id}.png`;
-  }
-
-  const latestPost = blogPosts[0];
-  const latestPostImageUrl = latestPost ? `/images/blog-${latestPost.slug}.png` : '';
+  packages.forEach((pkg, index) => {
+    packageImageUrls[pkg.id] = packageImages[index];
+  });
 
 
   return (
     <>
-      <Suspense fallback={<Skeleton className="h-[70vh] w-full" />}>
-        <InteractiveHero imageUrl={heroImageUrl} />
-      </Suspense>
-      <Suspense fallback={<div className="container"><Skeleton className="h-screen w-full" /></div>}>
-        <HomeClient 
-            serviceImageUrls={serviceImageUrls} 
-            packageImageUrls={packageImageUrls} 
-            latestPostImageUrl={latestPostImageUrl}
-        />
-      </Suspense>
+      <InteractiveHero imageUrl={heroImageUrl} />
+      <HomeClient 
+        serviceImageUrls={serviceImageUrls} 
+        packageImageUrls={packageImageUrls} 
+        latestPostImageUrl={latestPostImageUrl}
+      />
     </>
+  )
+}
+
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="container"><Skeleton className="h-screen w-full" /></div>}>
+      <HomePageData />
+    </Suspense>
   );
 }

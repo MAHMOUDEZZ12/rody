@@ -5,12 +5,35 @@ import { BlogPostContent } from '@/components/page/blog-post-content';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 type BlogPostPageProps = {
   params: {
     slug: string;
   };
 };
+
+async function BlogPostImages({ post }: { post: (typeof blogPosts)[0]}) {
+    const postImageUrl = await generateSimpleImage({
+        prompt: `An artistic and luxurious image for a blog post about ${post.category}. The image should capture the essence of the title: "${post.title}". Keywords: ${post.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`,
+    });
+
+    const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
+
+    const relatedImagePromises = relatedPosts.map(p => generateSimpleImage({
+        prompt: `An artistic and luxurious image for a blog post about ${p.category}. The image should capture the essence of the title: "${p.title}". Keywords: ${p.dataAiHint}. Use professional photography style, clean background, elegant aesthetic, and high resolution.`
+    }));
+
+    const relatedImageUrls = await Promise.all(relatedImagePromises);
+
+    const relatedPostsImageUrls: Record<string, string> = {};
+    relatedPosts.forEach((p, index) => {
+        relatedPostsImageUrls[p.slug] = relatedImageUrls[index];
+    });
+
+    return <BlogPostContent post={post} relatedPosts={relatedPosts} postImageUrl={postImageUrl} relatedPostsImageUrls={relatedPostsImageUrls} />
+}
+
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
@@ -19,19 +42,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const relatedPosts = blogPosts.filter(p => p.category === post?.category && p.slug !== post?.slug).slice(0, 2);
-
-  const postImageUrl = `/images/blog-${post.slug}.png`;
-  
-  const relatedPostsImageUrls: Record<string, string> = {};
-  for (const p of relatedPosts) {
-    relatedPostsImageUrls[p.slug] = `/images/blog-${p.slug}.png`;
-  }
-
-
   return (
     <Suspense fallback={<Skeleton className="h-screen w-full" />}>
-      <BlogPostContent post={post} relatedPosts={relatedPosts} postImageUrl={postImageUrl} relatedPostsImageUrls={relatedPostsImageUrls} />
+      <BlogPostImages post={post} />
     </Suspense>
   )
 }

@@ -4,16 +4,19 @@ import { ServiceCard } from '@/components/service-card';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
+import { generateSimpleImage } from '@/ai/flows/generate-simple-image-flow';
 
 export const metadata: Metadata = {
   title: 'Body Treatments | Rody Wellness',
   description: 'Indulge in our luxurious body treatments, including exfoliating scrubs that leave your skin feeling soft, smooth, and revitalized.',
 };
 
-function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
+async function ServiceImage({ serviceId, alt }: { serviceId: string; alt: string }) {
     const service = services.find(s => s.id === serviceId);
     if (!service) return null;
-    const imageUrl = `/images/service-${service.id}.png`;
+    const imageUrl = await generateSimpleImage({
+      prompt: `A beautiful and luxurious image representing a ${service.categories[0]} service. The image should be an artistic still-life that captures the essence of "${service.name}". Keywords for the mood are: ${service.dataAiHint}. Use professional product photography style with a clean, elegant background and bright lighting. High resolution.`
+    });
     return <ServiceCard service={service} imageUrl={imageUrl} theme="spa" />
 }
 
