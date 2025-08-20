@@ -67,65 +67,73 @@ function BlogBanner({ latestPostImageUrl }: { latestPostImageUrl: string}) {
 }
 
 export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImageUrl }: HomeClientProps) {
-  const featuredSpaServices = services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments')).slice(0, 2);
-  const featuredBeautyServices = services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails')).slice(0, 2);
-  const featuredTreatmentServices = services.filter(s => s.categories.includes('Treatment')).slice(0, 2);
+  const featuredMassages = services.filter(s => s.categories.includes('Massage')).slice(0, 3);
+  const featuredBodyTreatments = services.filter(s => s.categories.includes('Body Treatments')).slice(0, 1);
+  const featuredFacials = services.filter(s => s.categories.includes('Facials')).slice(0, 2);
+  const featuredNails = services.filter(s => s.categories.includes('Nails')).slice(0, 2);
+  const featuredEyelashes = services.filter(s => s.categories.includes('Eyelashes')).slice(0, 2);
 
   return (
     <>
       <section id="services" className="py-16 md:py-24">
         <div className="container max-w-7xl px-4">
           <SectionTitle title="Our Services" />
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
-                <div className="space-y-8">
-                    <div className="text-center">
-                        <h3 className="font-headline text-3xl text-spa-primary">Wellness & SPA</h3>
-                        <p className="text-muted-foreground mt-2">Restore your body’s balance and rejuvenate your spirit.</p>
-                    </div>
-                    <div className="grid gap-6">
-                      {featuredSpaServices.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
-                      ))}
-                    </div>
-                    <div className="text-center">
-                        <Button asChild variant="outline">
-                            <Link href="/services/wellness-and-spa">Explore All SPA Services</Link>
-                        </Button>
-                    </div>
-                </div>
-                <div className="space-y-8">
-                    <div className="text-center">
-                        <h3 className="font-headline text-3xl text-beauty-primary">Beauty & Nails</h3>
-                        <p className="text-muted-foreground mt-2">Enhance your natural radiance with our expert treatments.</p>
-                    </div>
-                    <div className="grid gap-6">
-                       {featuredBeautyServices.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
-                      ))}
-                    </div>
-                     <div className="text-center">
-                        <Button asChild variant="outline">
-                            <Link href="/services/beauty">Explore All Beauty Services</Link>
-                        </Button>
-                    </div>
-                </div>
-                 <div className="space-y-8 lg:col-span-1 md:col-span-2">
-                    <div className="text-center">
-                        <h3 className="font-headline text-3xl text-primary">Featured Treatments</h3>
-                        <p className="text-muted-foreground mt-2">Targeted solutions for corrective and therapeutic results.</p>
-                    </div>
-                    <div className="grid gap-6">
-                       {featuredTreatmentServices.map(service => (
-                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
-                      ))}
-                    </div>
-                     <div className="text-center">
-                        <Button asChild variant="outline">
-                            <Link href="/services/wellness-and-spa">Explore All Treatments</Link>
-                        </Button>
-                    </div>
-                </div>
+          
+          <div className="mt-12 space-y-16">
+            {/* Wellness & SPA */}
+            <div>
+              <div className="text-center mb-10">
+                <h3 className="font-headline text-3xl text-spa-primary">Wellness & SPA</h3>
+                <p className="text-muted-foreground mt-2">Restore your body’s balance and rejuvenate your spirit.</p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {featuredMassages.map(service => (
+                  <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
+                ))}
+                {featuredBodyTreatments.map(service => (
+                  <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="spa" />
+                ))}
+              </div>
+              <div className="text-center mt-10">
+                <Button asChild variant="outline">
+                  <Link href="/services/wellness-and-spa">Explore All SPA Services</Link>
+                </Button>
+              </div>
             </div>
+
+            {/* Beauty & Nails */}
+            <div>
+              <div className="text-center mb-10">
+                <h3 className="font-headline text-3xl text-beauty-primary">Beauty & Nails</h3>
+                <p className="text-muted-foreground mt-2">Enhance your natural radiance with our expert treatments.</p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="space-y-8">
+                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Facials</h4>
+                    {featuredFacials.map(service => (
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                    ))}
+                </div>
+                 <div className="space-y-8">
+                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Nails</h4>
+                    {featuredNails.map(service => (
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                    ))}
+                </div>
+                 <div className="space-y-8">
+                    <h4 className='font-headline text-2xl text-center text-beauty-primary'>Eyelashes</h4>
+                    {featuredEyelashes.map(service => (
+                        <ServiceCard key={service.id} service={service} imageUrl={serviceImageUrls[service.id]} theme="beauty" />
+                    ))}
+                </div>
+              </div>
+              <div className="text-center mt-10">
+                <Button asChild variant="outline">
+                  <Link href="/services/beauty">Explore All Beauty Services</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       

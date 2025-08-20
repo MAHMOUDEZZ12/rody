@@ -32,7 +32,7 @@ async function HomePageData() {
       title: 'Flawless from Fingertips to Toes',
       subtitle: 'Meticulous nail artistry in the comfort of your home.',
       prompt:
-        'An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious home setting in Dubai. The scene is bright, modern, and clean. A professional female therapist in a branded uniform with a subtle emblem is visible in the soft-focus background, organizing her tools. The focus is on the perfectly polished nails. High resolution, photorealistic.',
+        'An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious home setting in Dubai. A professional female therapist in a branded uniform with a subtle emblem is visible in the soft-focus background, organizing her tools. The focus is on the perfectly polished nails. High resolution, photorealistic.',
     },
     {
       title: 'Revitalize Your Body & Mind',
@@ -52,9 +52,11 @@ async function HomePageData() {
 
   // Services
   const allFeaturedServices = [
-      ...services.filter(s => s.categories.includes('Massage') || s.categories.includes('Body Treatments')).slice(0, 2),
-      ...services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails')).slice(0, 2),
-      ...services.filter(s => s.categories.includes('Treatment')).slice(0, 2)
+      ...services.filter(s => s.categories.includes('Massage')).slice(0, 3),
+      ...services.filter(s => s.categories.includes('Body Treatments')).slice(0, 1),
+      ...services.filter(s => s.categories.includes('Facials')).slice(0, 2),
+      ...services.filter(s => s.categories.includes('Nails')).slice(0, 2),
+      ...services.filter(s => s.categories.includes('Eyelashes')).slice(0, 2),
   ];
   const serviceImagePromises = allFeaturedServices.map(service => generateSimpleImage({
     prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", featuring a client enjoying the treatment from a professional female therapist in an elegant uniform with a subtle brand emblem. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,
