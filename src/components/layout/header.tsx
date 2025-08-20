@@ -49,7 +49,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={120} height={40} />
+          <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={180} height={60} />
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Button asChild variant="ghost">
@@ -84,7 +84,7 @@ export function Header() {
               <div className="flex justify-between items-center mb-8">
                  <SheetClose asChild>
                     <Link href="/" className="mr-6 flex items-center space-x-2">
-                      <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={140} height={50} />
+                      <Image src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" alt="Rody Wellness Logo" width={180} height={60} />
                     </Link>
                 </SheetClose>
               </div>
