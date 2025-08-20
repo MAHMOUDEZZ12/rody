@@ -26,7 +26,7 @@ const generateSimpleImageFlow = ai.defineFlow(
     inputSchema: GenerateSimpleImageInputSchema,
     outputSchema: z.string(),
   },
-  async input => {
+  async (input, GENTOOL_INTERNAL_flow) => {
     // If the API key is not set, immediately return a placeholder.
     // This prevents errors in development and production if the key is missing.
     if (!process.env.GEMINI_API_KEY) {
@@ -35,25 +35,36 @@ const generateSimpleImageFlow = ai.defineFlow(
       );
       return 'https://placehold.co/600x400.png';
     }
+    
+    const maxRetries = 3;
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            const {media} = await ai.generate({
+                model: 'googleai/gemini-2.0-flash-preview-image-generation',
+                prompt: input.prompt,
+                config: {
+                    responseModalities: ['TEXT', 'IMAGE'],
+                },
+            });
 
-    try {
-      const {media} = await ai.generate({
-        model: 'googleai/gemini-2.0-flash-preview-image-generation',
-        prompt: input.prompt,
-        config: {
-            responseModalities: ['TEXT', 'IMAGE'],
-        },
-      });
-
-      if (!media?.url) {
-        throw new Error('No media URL returned from image generation.');
-      }
-      return media.url;
-    } catch (e) {
-        console.error("Image generation failed. This might be due to a missing API key in the production environment, safety settings, or an issue with the generation service. Falling back to placeholder.", e);
-        // If any error occurs during generation, return a placeholder.
-        return 'https://placehold.co/600x400.png';
+            if (!media?.url) {
+                throw new Error('No media URL returned from image generation.');
+            }
+            return media.url;
+        } catch (e) {
+            const errorMessage = e instanceof Error ? e.message : String(e);
+            console.warn(`Image generation attempt ${i + 1} of ${maxRetries} failed. Retrying... Error: ${errorMessage}`);
+            if (i === maxRetries - 1) {
+                console.error("All image generation attempts failed. This might be due to a missing API key in the production environment, safety settings, or an issue with the generation service. Falling back to placeholder.", e);
+                // If all retries fail, return a placeholder.
+                return 'https://placehold.co/600x400.png';
+            }
+            // Wait for a short period before retrying
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
     }
+    // This line should be unreachable, but as a fallback, return placeholder.
+    return 'https://placehold.co/600x400.png';
   }
 );
 
