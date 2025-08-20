@@ -4,6 +4,8 @@ import { InteractiveHero } from '@/components/page/interactive-hero';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
+import { services, packages } from '@/lib/data';
+import { blogPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Sure by Rody | Premium At-Home Spa & Beauty in Dubai',
@@ -49,7 +51,3 @@ export default function Home() {
     </>
   );
 }
-
-// Re-importing data that was removed in the previous step
-import { services, packages } from '@/lib/data';
-import { blogPosts } from '@/lib/blog';
