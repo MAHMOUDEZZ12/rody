@@ -32,7 +32,7 @@ async function HomePageData() {
 
   // Packages
   const packageImagePromises = packages.map(pkg => generateSimpleImage({
-    prompt: `A beautiful and luxurious flatlay composition representing a Rody Wellness spa package. The theme should reflect the package name: "${pkg.name}". Keywords: ${pkg.dataAiHint}. Use clean, bright lighting on a minimalist background with brand colors of soft pink and gold. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution. Perhaps include a small, branded "Rody" tag on one of the items.`,
+    prompt: `A beautiful and luxurious flatlay composition representing a Rody Wellness spa package. The theme should reflect the package name: "${pkg.name}". Use clean, bright lighting on a minimalist background with brand colors of soft pink and gold. The aesthetic should be elegant, aspirational, and high-end. Professional product photography, high resolution.`,
   }));
   
   // Blog
