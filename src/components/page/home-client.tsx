@@ -107,7 +107,7 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
                 <h3 className="font-headline text-3xl text-beauty-primary">Beauty & Nails</h3>
                 <p className="text-muted-foreground mt-2">Enhance your natural radiance with our expert treatments.</p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-8">
                 <div className="space-y-8">
                     <h4 className='font-headline text-2xl text-center text-beauty-primary'>Facials</h4>
                     {featuredFacials.map(service => (
@@ -170,8 +170,10 @@ export function HomeClient({ serviceImageUrls, packageImageUrls, latestPostImage
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card/50 container max-w-7xl">
-        <ReferralBanner />
+      <section className="py-16 md:py-24 bg-card/50">
+        <div className="container max-w-7xl px-4">
+            <ReferralBanner />
+        </div>
       </section>
       
       <BlogBanner latestPostImageUrl={latestPostImageUrl} />
