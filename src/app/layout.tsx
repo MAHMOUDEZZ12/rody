@@ -10,7 +10,7 @@ import { MobileCtaBar } from '@/components/layout/mobile-cta-bar';
 
 const siteName = 'Sure by Rody | Premium At-Home Spa & Beauty in Dubai';
 const description = 'Experience the ultimate luxury of at-home wellness. Rody Spa offers premium massage, beauty, and spa treatments delivered to your door in Dubai.';
-const logoUrl = '/images/logo.png';
+const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/dubai-wellness-oasis.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=dee8858e-cfef-43aa-ab33-f900e34df57f';
 
 
 export const metadata: Metadata = {

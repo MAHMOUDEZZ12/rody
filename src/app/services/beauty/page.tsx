@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 async function BeautyPageData() {
   const heroImageUrl = await generateSimpleImage({
     prompt:
-      'Artistry in Beauty: An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious setting, reflecting the Rody Wellness brand. The scene has artistic splashes of pink and gold, conveying luxury, creativity, and professionalism. The aesthetic should be bright, modern, and clean. High resolution, photorealistic.',
+      'Artistry in Beauty: An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious home setting in Dubai. The scene is bright, modern, and clean, reflecting the Rody Wellness brand aesthetic. A professional female therapist in a branded uniform is visible in the soft-focus background, conveying luxury, creativity, and professionalism. High resolution, photorealistic.',
   });
 
   const beautyServices = services.filter(s => s.categories.includes('Facials') || s.categories.includes('Nails') || s.categories.includes('Eyelashes'));
   
   const imagePromises = beautyServices.map(service => generateSimpleImage({
-    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", possibly featuring a client enjoying the treatment or a therapist in a branded uniform performing the service. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`
+    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", featuring a client enjoying the treatment from a professional female therapist in an elegant uniform. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`
   }));
 
   const resolvedImageUrls = await Promise.all(imagePromises);

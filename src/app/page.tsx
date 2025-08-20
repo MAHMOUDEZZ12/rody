@@ -17,7 +17,7 @@ async function HomePageData() {
   // Hero Image
   const heroImagePromise = generateSimpleImage({
     prompt:
-      'A breathtakingly serene image of a woman relaxing in a luxurious home spa setting in Dubai, reflecting the Rody Wellness brand. She could be receiving a massage or facial from a professional therapist in an elegant, branded uniform. Soft, natural sunlight streams through large windows, illuminating minimalist decor with soft pink and gold accents. The aesthetic is bright, peaceful, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
+      'A breathtakingly serene image of a woman with her eyes closed, receiving a luxurious spa treatment in her beautiful Dubai home. A professional female therapist in an elegant, branded uniform is gently performing a facial. Soft, natural sunlight streams through large windows, illuminating minimalist decor with soft pink and gold accents. The aesthetic is bright, peaceful, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
   });
 
   // Services
@@ -27,7 +27,7 @@ async function HomePageData() {
       ...services.filter(s => s.categories.includes('Treatment')).slice(0, 2)
   ];
   const serviceImagePromises = allFeaturedServices.map(service => generateSimpleImage({
-    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", possibly featuring a client enjoying the treatment or a therapist in a branded uniform performing the service. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,
+    prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${service.categories[0]} service from Rody Wellness. The image should capture the essence of "${service.name}", featuring a client enjoying the treatment from a professional female therapist in an elegant uniform. Keywords for the mood are: ${service.dataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,
   }));
 
   // Packages
