@@ -1,6 +1,6 @@
 
 import { HomeClient } from '@/components/page/home-client';
-import { InteractiveHero } from '@/components/page/interactive-hero';
+import { HeroSlider } from '@/components/page/hero-slider';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Metadata } from 'next';
@@ -14,11 +14,41 @@ export const metadata: Metadata = {
 };
 
 async function HomePageData() {
-  // Hero Image
-  const heroImagePromise = generateSimpleImage({
-    prompt:
-      'A breathtakingly serene image of a woman with her eyes closed, receiving a luxurious spa treatment in her beautiful Dubai home. A professional female therapist in an elegant, branded uniform with a subtle logo emblem is gently performing a facial. Soft, natural sunlight streams through large windows, illuminating minimalist decor with soft pink and gold accents. Branded towels are neatly folded nearby. The aesthetic is bright, peaceful, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
-  });
+  // Hero Images for Slider
+  const heroImagePrompts = [
+    {
+      title: 'Your Sanctuary, Delivered.',
+      subtitle: 'Premium at-home wellness and beauty services in Dubai.',
+      prompt:
+        'A breathtakingly serene image of a woman with her eyes closed, receiving a luxurious massage in her beautiful Dubai home. A professional female therapist in an elegant, branded uniform with a subtle logo emblem is performing the treatment. Soft, natural sunlight streams through large windows, illuminating minimalist decor with soft pink and gold accents. Branded towels are neatly folded nearby. The aesthetic is bright, peaceful, and impeccably clean, evoking a sense of profound peace and high-end sanctuary. Ultra-realistic, high-resolution photography.',
+    },
+    {
+      title: 'Artistry in Beauty',
+      subtitle: 'Bespoke facials designed to reveal your natural radiance.',
+      prompt:
+        'A stunning close-up of a woman with glowing skin, enjoying a 24K Gold Facial. The therapist\'s hands, wearing nitrile gloves, are gently applying the gold leaf mask. The client is lying on a plush bed with branded, soft pink towels. The focus is on the luxurious texture of the gold and the client\'s blissful expression. High-end, professional photography.',
+    },
+    {
+      title: 'Flawless from Fingertips to Toes',
+      subtitle: 'Meticulous nail artistry in the comfort of your home.',
+      prompt:
+        'An elegant lifestyle photograph showing a woman admiring her flawless manicure in a luxurious home setting in Dubai. The scene is bright, modern, and clean. A professional female therapist in a branded uniform with a subtle emblem is visible in the soft-focus background, organizing her tools. The focus is on the perfectly polished nails. High resolution, photorealistic.',
+    },
+    {
+      title: 'Revitalize Your Body & Mind',
+      subtitle: 'Nourishing body treatments for silky smooth skin.',
+      prompt:
+        'A relaxing scene where a woman is lying on a massage table, having a Himalayan Salt Scrub applied to her back by a professional therapist in a branded uniform. The room is styled with orchids and soft lighting, creating a spa-like atmosphere. A branded towel is visible. The image evokes a sense of purification and renewal.',
+    },
+    {
+      title: 'Captivating Eyes, Effortless Mornings',
+      subtitle: 'Wake up beautiful with our stunning eyelash extensions.',
+      prompt:
+        'A close-up, artistic shot of a woman\'s eye, showcasing a perfect set of Russian Volume eyelash extensions. She is lying down comfortably, with a soft, branded headband keeping her hair back. The lighting is soft and flattering, highlighting the detail and artistry of the lash application.',
+    },
+  ];
+
+  const heroImagePromises = heroImagePrompts.map(item => generateSimpleImage({ prompt: item.prompt }));
 
   // Services
   const allFeaturedServices = [
@@ -43,16 +73,21 @@ async function HomePageData() {
 
 
   const [
-    heroImageUrl, 
+    heroImages, 
     serviceImages, 
     packageImages, 
     latestPostImageUrl
   ] = await Promise.all([
-    heroImagePromise, 
+    Promise.all(heroImagePromises), 
     Promise.all(serviceImagePromises), 
     Promise.all(packageImagePromises), 
     latestPostImagePromise
   ]);
+
+  const heroSlides = heroImagePrompts.map((item, index) => ({
+    ...item,
+    imageUrl: heroImages[index],
+  }));
 
   const serviceImageUrls: Record<string, string> = {};
   allFeaturedServices.forEach((service, index) => {
@@ -67,7 +102,7 @@ async function HomePageData() {
 
   return (
     <>
-      <InteractiveHero imageUrl={heroImageUrl} />
+      <HeroSlider slides={heroSlides} />
       <HomeClient 
         serviceImageUrls={serviceImageUrls} 
         packageImageUrls={packageImageUrls} 
