@@ -18,7 +18,6 @@ export function InteractiveHero({ imageUrl }: InteractiveHeroProps) {
         fill
         className="object-cover"
         priority
-        unoptimized
       />
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-t from-black/60 to-transparent text-center p-4">
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent" />

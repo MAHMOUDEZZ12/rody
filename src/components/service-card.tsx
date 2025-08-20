@@ -36,7 +36,6 @@ export function ServiceCard({ service, imageUrl, highlight = false, theme = 'spa
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                unoptimized
             />
           {isDiscounted && (
             <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3"/> SURE OFFER</Badge>

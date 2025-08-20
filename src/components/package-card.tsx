@@ -23,7 +23,6 @@ export function PackageCard({ pkg, imageUrl }: PackageCardProps) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                unoptimized
             />
           <Badge variant="destructive" className="absolute top-2 left-2 flex items-center gap-1"><Sparkles className="h-3 w-3" /> SURE OFFER</Badge>
           <Badge variant="secondary" className="absolute top-2 right-2">SAVE {Math.round(100 - (pkg.price / pkg.originalPrice) * 100)}%</Badge>

@@ -38,7 +38,6 @@ export function AboutClient({ imageUrl1, imageUrl2 }: AboutClientProps) {
                     alt="A serene and luxurious home environment"
                     fill
                     className="object-cover"
-                    unoptimized
                 />
             </div>
           </div>
@@ -86,7 +85,6 @@ export function AboutClient({ imageUrl1, imageUrl2 }: AboutClientProps) {
                     alt="A professional and friendly wellness therapist"
                     fill
                     className="object-cover"
-                    unoptimized
                 />
             </div>
           </div>

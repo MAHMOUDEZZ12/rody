@@ -60,7 +60,6 @@ export function BlogPostContent({ post, relatedPosts, postImageUrl, relatedPosts
             alt={post.title} 
             fill
             className="object-cover"
-            unoptimized
         />
       </div>
 
@@ -81,7 +80,6 @@ export function BlogPostContent({ post, relatedPosts, postImageUrl, relatedPosts
                                     alt={related.title} 
                                     fill
                                     className="object-cover"
-                                    unoptimized
                                 />
                             </div>
                             <CardContent className="p-4">

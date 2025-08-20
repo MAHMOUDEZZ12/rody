@@ -39,7 +39,6 @@ export function BlogPageContent({ posts, imageUrls }: BlogPageContentProps) {
                     alt={featuredPost.title} 
                     fill
                     className="object-cover"
-                    unoptimized
                 />
                 </div>
                 <div className="flex flex-col p-8">
@@ -74,7 +73,6 @@ export function BlogPageContent({ posts, imageUrls }: BlogPageContentProps) {
                         alt={post.title} 
                         fill
                         className="object-cover"
-                        unoptimized
                     />
                   </div>
                 </CardHeader>
