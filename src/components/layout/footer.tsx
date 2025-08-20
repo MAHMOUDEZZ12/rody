@@ -36,6 +36,7 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Footer() {
   const whatsappUrl = "https://wa.me/message/S46XZJVEVAOJF1?text=Hello%20Rody%20Wellness!%20I'm%20interested%20in%20booking%20a%20service.";
+  const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/reodywellness.appspot.com/o/logo.png?alt=media&token=c13838a3-2646-455c-91ce-7153f3a55255';
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -44,11 +45,10 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
              <Link href="/" className="flex items-center justify-center md:justify-start gap-2 mb-4 w-full">
                  <Image 
-                    src="https://firebasestorage.googleapis.com/v0/b/reodywellness.firebasestorage.app/o/Untitled-12%20(1).png?alt=media&token=6564953d-9d8c-4d60-a102-6ffd0c60ac9f" 
+                    src={logoUrl}
                     alt="Rody Wellness Logo" 
                     width={180} 
                     height={60}
-                    style={{ filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.7))' }}
                  />
             </Link>
             <p className="text-sm max-w-xs">Your Sanctuary, Delivered. Experience premium at-home wellness and beauty services in Dubai.</p>
