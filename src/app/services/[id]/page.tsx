@@ -336,4 +336,3 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
     </div>
   );
 }
-}
