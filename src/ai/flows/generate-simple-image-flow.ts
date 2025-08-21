@@ -26,7 +26,7 @@ const generateSimpleImageFlow = ai.defineFlow(
     inputSchema: GenerateSimpleImageInputSchema,
     outputSchema: z.string(),
   },
-  async (input, GENTOOL_INTERNAL_flow) => {
+  async (input) => {
     // If the API key is not set, immediately return a placeholder.
     // This prevents errors in development and production if the key is missing.
     if (!process.env.GEMINI_API_KEY) {
