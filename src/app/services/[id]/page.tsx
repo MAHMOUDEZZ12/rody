@@ -47,7 +47,7 @@ function ServiceImage({ serviceId, serviceName, serviceCategory, serviceDataAiHi
 }
 
 // This function generates the static paths for all services at build time.
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return services.map((service) => ({
     id: service.id,
   }));
@@ -342,5 +342,4 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       </div>
     </div>
   );
-
-    
+}
