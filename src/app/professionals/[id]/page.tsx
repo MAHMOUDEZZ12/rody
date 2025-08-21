@@ -1,4 +1,4 @@
-
+git s
 import { notFound } from 'next/navigation';
 import { professionals, services, type Professional } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
