@@ -26,7 +26,7 @@ function ServiceImage({ serviceId, serviceName, serviceCategory, serviceDataAiHi
 
   useState(() => {
     generateSimpleImage({
-        prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${serviceCategory} service from Rody Wellness. The image should capture the essence of "${serviceName}", possibly featuring a client enjoying the treatment or a therapist in a branded uniform with a subtle emblem performing the service. Keywords for the mood are: ${serviceDataAiHint}. Use professional photography style with a clean, elegant background featuring brand colors (soft pink, gold) and bright lighting. High resolution.`,
+        prompt: `A beautiful and luxurious lifestyle photograph showing the experience of a ${serviceCategory} service from Rody Wellness. The image should capture the essence of "${serviceName}", featuring a client enjoying the treatment from a professional female therapist in an elegant uniform with a subtle brand emblem. Keywords: ${serviceDataAiHint}. Use professional photography style, clean background, elegant aesthetic with hints of soft pink and gold, and high resolution.`,
     }).then(url => setImageUrl(url));
   });
 
@@ -46,6 +46,12 @@ function ServiceImage({ serviceId, serviceName, serviceCategory, serviceDataAiHi
   );
 }
 
+// This function generates the static paths for all services at build time.
+export function generateStaticParams() {
+  return services.map((service) => ({
+    id: service.id,
+  }));
+}
 
 export default function ServiceBookingPage({ params }: { params: { id:string } }) {
   const router = useRouter();
@@ -336,4 +342,5 @@ export default function ServiceBookingPage({ params }: { params: { id:string } }
       </div>
     </div>
   );
-}
+
+    
