@@ -29,6 +29,12 @@ async function ProfessionalImage({ professional }: { professional: Professional 
     )
 }
 
+export async function generateStaticParams() {
+  return professionals.map(p => ({
+    id: p.id,
+  }));
+}
+
 export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
   const professional = professionals.find(p => p.id === params.id);
 
